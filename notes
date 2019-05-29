@@ -1,0 +1,21 @@
+
+INFOS:
+
+L'interet:
+    Avoir un champion en asm en .s;
+        label : - va etre remplace par la valeur de l'adresse de l'instruction qui le suit (ex start)
+                - soit instruction est sur meme ligne, soit sur la ligne d'apres (instruction a voir sur gitlab)
+                - 3 types d'arguments : (1) registre : "variable" qui va permettre de charger(ld) (il y en a 16);
+                                        (2) direct : precede de DIR_CHAR, prend la valeur du truc qui suit
+                                                                (int, adresse memoire, label, etc)
+                                        (3) index : adresse relative au pc (?)
+                                                                        (pc = "tete" de lecture du champion)
+    Avoir un asm qui recupere le champion et le tranforme en binaire
+    Avoir une vm qui va lire le binaire genere par l'asm
+    Dans le binaire, il y a les instructions, le nom du champion, et le commentaire.
+
+ASM est un parceur qui va permettre d'envoyer des bonnes valeurs en binaire a la vm;
+IL FAUT FAIRE GAFFE A L'ASM /!\
+La VM va devoir checker la taille du champion (la taille du binaire)
+carry (instruction qui gere seulement si l'instruction precedente renvois 1)
+      ( a verifier a chaque instruction, espece de booleen qui renvoit 1 ou 0)
