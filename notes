@@ -3,7 +3,7 @@ INFOS:
 
 L'interet:
     Avoir un champion en asm en .s;
-        label : - va etre remplace par la valeur de l'adresse de l'instruction qui le suit (ex start)
+        label : - va etre remplace par la valeur de l'adresse de l'instruction qui le suit (ex start) (point de repere)
                 - soit instruction est sur meme ligne, soit sur la ligne d'apres (instruction a voir sur gitlab)
                 - 3 types d'arguments : (1) registre : "variable" qui va permettre de charger(ld) (il y en a 16);
                                         (2) direct : precede de DIR_CHAR, prend la valeur du truc qui suit
