@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_puttab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:19 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/30 13:36:48 by maginist          #+#    #+#             */
+/*   Updated: 2019/04/04 11:48:42 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	main(int ac, char **av)
+void	ft_puttab(char **tab)
 {
-	if (!(check_arg(ac, av)))
-		return (0);
-		
-	
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_putendl(tab[i]);
+		i++;
+	}
 }

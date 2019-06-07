@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tab3size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:19 by maginist         ###   ########.fr       */
+/*   Created: 2018/12/03 15:32:38 by maginist          #+#    #+#             */
+/*   Updated: 2019/04/04 11:55:19 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	main(int ac, char **av)
+size_t		ft_tab3size(void ***tab)
 {
-	if (!(check_arg(ac, av)))
-		return (0);
-		
-	
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

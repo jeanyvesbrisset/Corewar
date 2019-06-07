@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/05/31 12:05:14 by maginist         ###   ########.fr        #
+#    Updated: 2019/06/07 14:03:24 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME1 = asm
 NAME2 = corewar
 OBJ_PATH1 = ./obj_asm
-OBJ_PATH2 = ./obj_
+OBJ_PATH2 = ./obj_vm
 SRC_PATH1 = ./asm_src/
 SRC_PATH2 = ./vm_src
 
@@ -25,7 +25,7 @@ LIBFT =
 
 OBJ_NAME1 = $(SRCS1:.c=.o)
 OBJ_NAME2 = $(SRCS2:.c=.o)
-LIB = libft/
+LIB = libprintf/
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 INC = -I./includes
@@ -38,14 +38,14 @@ all: $(NAME1) $(NAME2)
 
 $(NAME1): $(OBJ_PATH1) $(OBJ1)
 	@make -C $(LIB) -j
-	@cp libft/libft.a ./
-	@$(CC) $(CFLAGS) -o $(NAME1) $(OBJ1) libft.a
+	@cp libprintf/libprintf.a ./
+	@$(CC) $(CFLAGS) -o $(NAME1) $(OBJ1) libprintf.a
 	@echo "\033[33;36m===  <ASM DONE> ===\033[00m"
 
 $(NAME2): $(OBJ_PATH2) $(OBJ2)
 	@make -C $(LIB) -j
-	@cp libft/libft.a ./
-	@$(CC) $(CFLAGS) -o $(NAME2) $(OBJ2) libft.a
+	@cp libprintf/libprintf.a ./
+	@$(CC) $(CFLAGS) -o $(NAME2) $(OBJ2) libprintf.a
 	@echo "\033[33;36m===  <COREWAR DONE> ===\033[00m"
 
 $(OBJ_PATH1)/%.o : $(SRC_PATH1)/%.c

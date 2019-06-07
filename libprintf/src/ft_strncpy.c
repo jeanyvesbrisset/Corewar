@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:19 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/12 11:20:21 by floblanc          #+#    #+#             */
+/*   Updated: 2019/04/04 11:53:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	main(int ac, char **av)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	if (!(check_arg(ac, av)))
-		return (0);
-		
-	
+	unsigned int	i;
+
+	i = 0;
+	while (src[i] != '\0' && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
 }

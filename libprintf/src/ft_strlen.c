@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:19 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/12 11:42:42 by floblanc          #+#    #+#             */
+/*   Updated: 2019/04/04 11:52:19 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	main(int ac, char **av)
+size_t		ft_strlen(const char *s)
 {
-	if (!(check_arg(ac, av)))
-		return (0);
-		
-	
+	unsigned int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gest_allnum.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:19 by maginist         ###   ########.fr       */
+/*   Created: 2018/12/29 14:57:46 by floblanc          #+#    #+#             */
+/*   Updated: 2019/04/04 11:56:10 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	main(int ac, char **av)
+void	gest_allnum(char *num, t_data *data)
 {
-	if (!(check_arg(ac, av)))
-		return (0);
-		
-	
+	if (data->moins == 0 && data->tdc > 0)
+		printdc(data->tdc);
+	write(1, num, ft_strlen(num));
+	free(num);
+	if (data->moins == 1 && data->tdc > 0)
+		printdc(data->tdc);
 }

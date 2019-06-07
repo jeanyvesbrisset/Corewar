@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/07 14:04:19 by maginist         ###   ########.fr       */
+/*   Created: 2018/11/13 11:06:14 by floblanc          #+#    #+#             */
+/*   Updated: 2019/04/04 11:53:39 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	main(int ac, char **av)
+char	*ft_strnew(size_t size)
 {
-	if (!(check_arg(ac, av)))
+	char			*mem;
+	unsigned int	i;
+
+	i = 0;
+	if (!(mem = (char*)malloc(sizeof(char) * (size + 1))))
 		return (0);
-		
-	
+	while (i < size + 1)
+		mem[i++] = 0;
+	return (mem);
 }
