@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/10 16:21:26 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:15:47 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ int	main(int ac, char **av)
 
 	begin = 0;
 	start = 0;
+	lab = 0;
 	if (ac < 2)
 	{
 		ft_printf("Usage: %s <sourcefile.s>\n", av[0]);
 		return (0);
 	}
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
-		create_cor(start);
+		create_cor(start, av[ac - 1]);
+	free_structs(&begin, &start, &lab);
 	return (0);
 }
