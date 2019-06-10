@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/10 16:21:26 by floblanc         ###   ########.fr       */
+/*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
+/*   Updated: 2019/06/10 15:59:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include"../includes/op.h"
 
-int	main(int ac, char **av)
+int     read_n_stock(char *file, t_stock **begin, t_data **start)
 {
-	t_stock *begin;
-    t_data  *start;
-	t_label	*lab;
+    int     fd;
+    int     ret;
+    char    *line;
+    
 
-	begin = 0;
-	start = 0;
-	if (ac < 2)
-	{
-		ft_printf("Usage: %s <sourcefile.s>\n", av[0]);
-		return (0);
-	}
-	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
-		create_cor(start);
-	return (0);
+    fd = open(file, R_ONLY);
+    line = 0;
+    while ((ret = get_next_line(fd, &line)) > 0)
+    {
+        stock_in_stock(begin, line);
+        if (!(line_is_correct(line, start))
+            return (0);
+        ft_strdel(&line);
+    }
+    return (1);
 }

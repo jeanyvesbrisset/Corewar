@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/31 15:40:34 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:25:05 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
  * **
  * */
 
+
 typedef char					t_arg_type;
 
 #define T_REG					1
@@ -75,3 +76,23 @@ typedef struct					s_header
 	unsigned int				prog_size;
 	char						comment[COMMENT_LENGTH + 1];
 }								t_header;
+
+typedef struct					s_stock
+{
+	char 						*str;
+	struct s_stock				*next;
+}								t_stock;
+
+typedef struct					s_data
+{
+	char 						*str;
+	struct s_data				*next;
+}								t_data;
+
+typedef struct					s_label
+{
+	char 						*name;
+	unsigned int				proto;
+	unsigned int				used;
+	struct s_label				*next;
+}								t_label;
