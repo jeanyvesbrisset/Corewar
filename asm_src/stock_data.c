@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/11 21:34:56 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/11 21:54:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ int     read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab)
     
 
     if (fd = open(file, R_ONLY) == -1)
-        return (ft_error(OPEN_ERROR));
+        return (ft_error(OPEN_ERROR)); // a faire (rapide en theorie)
     line = 0;
     while ((ret = get_next_line(fd, &line)) > 0)
     {
-        stock_in_stock(begin, line);
-        if (!(line_is_correct(line, start))
+        stock_in_stock(begin, line); // a faire
+        if (!(line_is_correct(line, start)) // a faire
             return (0);
         ft_strdel(&line);
     }
-    if (allabel_good(start, lab))
+    if (allabel_good(start, lab)) // a faire
         return (1);
     return (0);
 }
