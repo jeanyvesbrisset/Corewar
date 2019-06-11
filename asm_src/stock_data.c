@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/10 17:15:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/11 20:16:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int    create_cor(t_data *start, char *name)
         return (ft_error(OPEN_ERROR));
     while (current->next != start)
     {
-        write();
+        write(name, current->str, current->size);
+        current = current->next
     }
+    if (current && current->next == start)
+        write(fd, current->str, current->size);
     return (0);
 }
 
