@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/10 17:15:52 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/12 14:48:08 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct					s_stock
 
 typedef struct					s_data
 {
+	char						*label;
 	unsigned char				*str;
 	unsigned int				size;
 	struct s_data				*next;
