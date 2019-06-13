@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 12:29:19 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:37:44 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void     is_name(char **line, t_data **start, int ret, int *step)
 
 void    init_cor(t_data **start)
 {
-    t_data  *current;
-    t_data  *new;
+    t_data  *comment;
+    t_data  *command;
 
     if (!((*start) = (t_data*)malloc(sizeof(t_data) * 1))
             return ;
@@ -51,9 +51,20 @@ void    init_cor(t_data **start)
     (*start)->str[2] = 131;
     (*start)->str[3] = 243;
     (*start)->size = 4 + PROG_NAME_LENGTH;
-    if (!(current = (t_data*)malloc(sizeof(t_data) * 1))
+    (*start)->index = 1
+    if (!(comment = (t_data*)malloc(sizeof(t_data) * 1))
             return ;
-    ft_bzero(current->str, 4 + PROG_NAME_LENGTH);
+    ft_bzero(comment->str, 12 + COMMENT_LENGTH);
+    comment->size = 12 + COMMENT_LENGTH;
+    comment->index = 2;
+    if (!(command = (t_data*)malloc(sizeof(t_data) * 1))
+            return ;
+    ft_bzero(command->str, CHAMP_MAX_SIZE);
+    command->size = CHAMP_MAX_SIZE;
+    command->index = 3;
+    (*start)->next = comment;
+    comment->next = command;
+    command->next = *start;
 }
 
 int     line_is_correct(char **line, t_data **start, t_label **lab, int ret)
