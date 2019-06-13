@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 15:17:21 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/13 16:54:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void     is_comment(char **line, t_data **start, int *reader, int *step)
     i = 0;
     while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
         i++;
-    if (ft_strncmp(line + i, COMMENT_CMD_STRING, 8) != 0)
+    if (ft_strncmp(line + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) != 0)
         return ;
     i += 5;
     while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
@@ -46,7 +46,7 @@ void     is_name(char **line, t_data **start, int *reader, int *step)
     i = 0;
     while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
         i++;
-    if (ft_strncmp(line + i, NAME_CMD_STRING, 5) != 0)
+    if (ft_strncmp(line + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) != 0)
         return ;
     i += 5;
     while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
