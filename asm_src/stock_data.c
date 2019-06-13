@@ -6,19 +6,22 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/12 12:12:43 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/13 10:06:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void    stock_in_stock(t_stock **begin, char *line)
+void    stock_in_stock(t_stock **begin, char *line, int ret)
 {
     t_stock *new;
     t_stock *current;
 
     new = (t_stock*)malloc(sizeof(t_stock) * 1);
-    new->str = ft_strdup(line);
+    if (ret == 1)
+        new->str = ft_strjoin(line, "\n");
+    else if (ret == 2)
+        new->str = ft_strdup(line);
     if (!(*begin))
         *begin = new;
     else
@@ -78,10 +81,10 @@ int     read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab)
     if (fd = open(file, R_ONLY) == -1)
         return (ft_error(OPEN_ERROR)); // faire les define
     line = 0;
-    while ((ret = get_next_line(fd, &line)) > 0)
+    while ((ret = get_next_line_mod(fd, &line)) > 0)
     {
-        stock_in_stock(begin, line);
-        if (!(line_is_correct(line, start, lab)) // a faire
+        stock_in_stock(begin, line, ret);
+        if (!(line_is_correct(line, start, lab, ret)) // a faire
             return (0);
         ft_strdel(&line);
     }
