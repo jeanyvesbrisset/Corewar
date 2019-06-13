@@ -6,22 +6,21 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 15:00:55 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:12:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../includes/op.h"
 
-
 void   comment_stocker(char **line, int *i, t_data **start, int ret)
 {
     static int     diff;
 
-    if (!(diff)
-        diff = 4 - i;
+    if (!(diff))
+        diff = 4 - (*i);
     while ((*line)[*i] && (*line)[*i] != '"')
     {
-        ((*start)->next)->str[diff + i] = (*line)[*i];
+        ((*start)->next)->str[diff + (*i)] = (*line)[*i];
         (*i)++;
     }
     if (ret == 1 && (!(*line)[*i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 14:11:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:14:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ int    create_cor(t_data *start, char *name)
 
     current = start;
     name_cor(&name);
-    if (fd = open(name, O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1))
+    if ((fd = open(name, O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
         return (ft_error(OPEN_ERROR));
     while (current->next != start)
     {
         write(fd, current->str, current->size);
-        current = current->next
+        current = current->next;
     }
     if (current && current->next == start)
         write(fd, current->str, current->size);
@@ -77,15 +77,15 @@ int     read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab)
     int     *reader;
     char    *line;
     
-    if (reader = (int*)malloc(sizeof(int) * 2)
+    if (reader = (int*)malloc(sizeof(int) * 2))
         return (0);
     if (reader[0] = open(file, R_ONLY) == -1)
-        return (ft_error(OPEN_ERROR)); // faire les define
+        return (ft_error("OPEN_ERROR"));
     line = 0;
     while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
     {
         stock_in_stock(begin, line, reader[1]);
-        if (!(line_is_correct(line, start, lab, reader)) // a faire
+        if (!(line_is_correct(line, start, lab, reader))) // a faire
             return (free_reader(&reader));
         ft_strdel(&line);
     }

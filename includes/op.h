@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/13 14:38:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:15:49 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
  * ** Toutes les tailles sont en octets.
  * ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
  * */
+
+#include <unistd.h>
+#include <fcntl.h>
 
 #define IND_SIZE				2
 #define REG_SIZE				4
@@ -98,3 +101,11 @@ typedef struct					s_label
 	unsigned int				used;
 	struct s_label				*next;
 }								t_label;
+
+int								read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab);
+int								free_reader(int *reader);
+int								line_is_correct(char **line, t_data **start, t_label **lab, int *reader);
+int								gnl_find_mod(char **line, t_data **start, int *reader, char c_or_n);
+void							name_stocker(char **line, int *i, t_data **start, int ret);
+void							comment_stocker(char **line, int *i, t_data **start, int ret);
+int								ft_error(char *error);
