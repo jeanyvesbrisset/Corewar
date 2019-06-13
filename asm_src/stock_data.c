@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 10:06:43 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/13 14:11:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,22 @@ int    create_cor(t_data *start, char *name)
 int     read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab)
 {
     int     fd;
-    int     ret;
+    int     *reader;
     char    *line;
     
-
-    if (fd = open(file, R_ONLY) == -1)
+    if (reader = (int*)malloc(sizeof(int) * 2)
+        return (0);
+    if (reader[0] = open(file, R_ONLY) == -1)
         return (ft_error(OPEN_ERROR)); // faire les define
     line = 0;
-    while ((ret = get_next_line_mod(fd, &line)) > 0)
+    while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
     {
-        stock_in_stock(begin, line, ret);
-        if (!(line_is_correct(line, start, lab, ret)) // a faire
-            return (0);
+        stock_in_stock(begin, line, reader[1]);
+        if (!(line_is_correct(line, start, lab, reader)) // a faire
+            return (free_reader(&reader));
         ft_strdel(&line);
     }
+    free_reader(&reader);
     if (allabel_good(start, lab)) // a faire
         return (1);
     return (0);

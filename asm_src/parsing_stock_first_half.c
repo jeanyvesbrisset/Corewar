@@ -6,13 +6,13 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 12:37:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/13 14:38:51 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void     is_name(char **line, t_data **start, int ret, int *step)
+void     is_name(char **line, t_data **start, int *reader, int *step)
 {
     int i;
 
@@ -26,11 +26,11 @@ void     is_name(char **line, t_data **start, int ret, int *step)
         i++;
     if (!((*line)[i]) || (*line)[i] != '"')
         return ;
-    while ((*line)[i] && (*line)[i] != '"')
-        i++;
-    if (!((*line)[i]) && ret == 1)
+    i++;
+    name_stocker(line, &i, start, reader[1]);
+    if (!((*line)[i]) && reader[1] == 1)
     {
-        if (!(gnl_find_mod(line, start))
+        if (!(gnl_find_mod(line, start, reader))
             return ;
     }
     while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
@@ -67,7 +67,7 @@ void    init_cor(t_data **start)
     command->next = *start;
 }
 
-int     line_is_correct(char **line, t_data **start, t_label **lab, int ret)
+int     line_is_correct(char **line, t_data **start, t_label **lab, int *reader)
 {
     static int step;
 
@@ -79,7 +79,7 @@ int     line_is_correct(char **line, t_data **start, t_label **lab, int ret)
         init_cor(start);
     }
     if (step == 0)
-        is_name(line, start, ret, &step);
+        is_name(line, start, reader, &step);
     else if (is_comment(*line) && step == 1)
         stock_comment(start, *line, &step);
     else if (is_command(*line) && step == 2)
