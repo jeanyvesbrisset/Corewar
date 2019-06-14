@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 10:58:57 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/10 10:59:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/14 07:58:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_op    op_tab[17] =
 {
+	//"name", n_param, args_type, index, duree, entire_name, ?, ?
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
