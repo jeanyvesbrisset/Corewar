@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/14 07:57:41 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/14 11:32:36 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	is_command(char *line, t_data **start, t_label **lab)
 {
 	//reperer les LABEL_CHAR ':' -> si '%' avant c'est potentiellement un label parametre qu'on enregistre et on laisse un blanc dans la memoire, sinon si c'est le premier qu'on croise et qu'il est précédé par des LABEL_CHARS alors on enregistre le label et check si la suite est bien un opcode
+	// ajouter un int pos a la struc label (ou direct utiliser le l'int proto) qui reperera le label quand i parcourera le str des command
 	//compter le nombre de SEPARATOR_CHAR (',') pour connaitre le nombre de parametres - 1
 }
 
