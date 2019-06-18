@@ -3,36 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/18 17:26:32 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/18 18:30:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int		gest_lab(t_label **lab, char *str, char **line, int jump)
+int		gest_lab(t_label **lab, int	index, char **line, int *jump)
 {
-	t_label		*current;
-	int			i;
+	int		i;
+	char	*name;
 
-	i = 0;
-	current = 0;
-	while ((*line)[jump])
-	{
-		str[i] = (*line)[jump];
-		if ((*line)[jump] == ':' && (*line)[jump - 1] != '%')
-		{	
-			str[i] = '\0';
-			if (ft_charstr(str, LABEL_CHARS) == 0)
-				return (0);
-			if (!((current) = ft_strdup(str)))
-				return (0);
-			return (jump);
-		}
-		jump++;
+	i = *jump;
+	name = 0;
+	while ((*line)[i] && (*line)[i] != ':')
 		i++;
+	if (i > 0 && (*line)[i] && (*line)[i - 1] != '%')
+	{
+		(*line)[i] = 0;
+		if (ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
+			return (0);
+	}
+	name = ft_strdup((*line) + *jump);
+	(*line)[i] = ':';
+	if (!(add_to_lab(lab, &name, index))
+		return (0);
 	}
 	return (1);
 }
@@ -40,23 +38,17 @@ int		gest_lab(t_label **lab, char *str, char **line, int jump)
 void		stock_command(char **line, t_cdata **start, t_label **lab)
 {
 	int		i;
-	char 	*str;
-	int		diff;
 
 	i = 0;
 	str = 0;
 	while ((*line)[i] == '\t' || (*line)[i] == ' ')
 		i++;
-	if ((diff = gest_lab(lab, str, line, i)) == 0)
+	if (!(gest_lab(lab, line, &i))
 		return ;
-	if (diff > 1)
-		i = diff;
 	while ((*line)[i] == '\t' || (*line)[i] == ' ')
 		i++;
-	if ((*line)[i] == '\0')
+	if (!((*line)[i]) || !()
 		return ;
-	
-	
 }
 	//reperer les LABEL_CHAR ':' -> si '%' avant c'est potentiellement un label parametre qu'on enregistre et on laisse un blanc dans la memoire, sinon si c'est le premier qu'on croise et qu'il est précédé par des LABEL_CHARS alors on enregistre le label et check si la suite est bien un opcode
 	// ajouter un int pos a la struc label (ou direct utiliser le l'int proto) qui reperera le label quand i parcourera le str des command
