@@ -6,13 +6,11 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/18 17:17:48 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:26:32 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-void	
 
 int		gest_lab(t_label **lab, char *str, char **line, int jump)
 {

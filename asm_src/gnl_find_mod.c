@@ -6,31 +6,31 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/18 17:10:03 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:27:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../includes/op.h"
 
-void    ft_itoo(unsigned long long char **str, char *str_nb, unsigned long long int size)
+void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size)
 {
-    unsigned long long int nb
-    unsigned long long int i;
-    unsigned long long int div;
-	
-    i = size / 2;
-    div = 1;
-    nb = (9223372036854775807 + ft_atoll(str_nb)) % 9223372036854775807;
-    while (--i > 0)
-        div *= 65536;
-    nb %= div * 65536;
-    while (i < size * 2)
-    {
-        (*str)[i] = nb / div;
-        nb /= div;
-        div /= 256;
-        i++;
-    }
+	unsigned long long int nb;
+	unsigned long long int i;
+	unsigned long long int div;
+
+	i = size;
+	div = 1;
+	nb = (9223372036854775807 + ft_atoll(str_nb)) % 9223372036854775807;
+	while (--i > 0)
+		div *= 256;
+	nb %= div * 256;
+	while (i < size)
+	{
+		(*str)[i] = (unsigned char)(nb / div);
+		nb %= div;
+		div /= 256;
+		i++;
+	}
 }
 
 void   comment_stocker(char **line, int *i, t_cdata **start, int ret)
