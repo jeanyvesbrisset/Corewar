@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/04 12:06:01 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:14:28 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <stdio.h>
 # define BUFF_SIZE 32
 
 typedef struct		s_list
@@ -94,6 +93,7 @@ char				*fillbegin(char *num, t_data *data);
 void				gest_allnum(char *num, t_data *data);
 void				printpreci(int size);
 unsigned int		ft_abs(int nb);
+int					get_next_line_mod(const int fd, char **line);
 int					get_next_line(const int fd, char **line);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -160,5 +160,7 @@ void				ft_tabdel(char **tab);
 void				ft_puttab(char **tab);
 size_t				ft_tab3size(void ***tab);
 int					ft_strsearch(char *src, char c);
+int					ft_charstr(char *s1, char *s2);
+long				ft_atoll(const char *str);
 
 #endif

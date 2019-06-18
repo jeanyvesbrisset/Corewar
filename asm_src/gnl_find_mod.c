@@ -3,34 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/17 21:35:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:10:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../includes/op.h"
 
-void	ft_itoo(unsigned char **str, unsigned int nb, unsigned int size)
-{// ici nb == unsigned mais faut faire des test voir comment l'assembleur gere les long et voir aussi si on prendrai pas le truc de base en int pour le convertir ensuite
-	unsigned int i;
-	unsigned int div;
-
-	i = size;
-	div = 1;
-	while (--i > 0)
-		div *= 256;
-	while (i < size)
-	{
-		(*str)[i] = nb / div;
-		nb /= div;
-		div /= 256;
-		i++;
-	}
+void    ft_itoo(unsigned long long char **str, char *str_nb, unsigned long long int size)
+{
+    unsigned long long int nb
+    unsigned long long int i;
+    unsigned long long int div;
+	
+    i = size / 2;
+    div = 1;
+    nb = (9223372036854775807 + ft_atoll(str_nb)) % 9223372036854775807;
+    while (--i > 0)
+        div *= 65536;
+    nb %= div * 65536;
+    while (i < size * 2)
+    {
+        (*str)[i] = nb / div;
+        nb /= div;
+        div /= 256;
+        i++;
+    }
 }
 
-void   comment_stocker(char **line, int *i, t_data **start, int ret)
+void   comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int     diff;
 
@@ -50,7 +53,7 @@ void   comment_stocker(char **line, int *i, t_data **start, int ret)
 		diff += *i;
 }
 
-void    name_stocker(char **line, int *i, t_data **start, int ret)
+void    name_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int     diff;
 
@@ -70,7 +73,7 @@ void    name_stocker(char **line, int *i, t_data **start, int ret)
 		diff += *i;
 }
 
-int     gnl_find_mod(char **line, t_data **start, int *reader, char c_or_n)
+int     gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n)
 {
 	int i;
 
@@ -80,7 +83,7 @@ int     gnl_find_mod(char **line, t_data **start, int *reader, char c_or_n)
 		if (c_or_n == 'n')
 			name_stocker(line, &i, start, reader[1]);
 		else if (c_or_n == 'c')
-			comment_stocker(line, &i, start, reader);
+			comment_stocker(line, &i, start, reader[1]);
 		if ((*line)[i] == '"')
 			return (1);
 		ft_strdel(line);

@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/13 09:46:56 by maginist          #+#    #+#              #
-#    Updated: 2019/04/04 14:26:51 by maginist         ###   ########.fr        #
+#    Updated: 2019/06/18 17:16:22 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ FILES = add_pre_flgs.c\
 	  is_valide.c\
 	  ft_memset.c\
 	  ft_bzero.c\
+	  ft_charstr.c\
 	  ft_memcpy.c\
 	  ft_memccpy.c\
 	  ft_memmove.c\
@@ -76,6 +77,7 @@ FILES = add_pre_flgs.c\
 	  ft_strncmp.c\
 	  ft_atoi.c\
 	  ft_atol.c\
+	  ft_atoll.c\
 	  ft_isalpha.c\
 	  ft_isdigit.c\
 	  ft_isalnum.c\

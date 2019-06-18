@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 10:58:57 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/14 07:58:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/18 15:58:45 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/op.h"
+#include "../includes/op.h"
 
 t_op    op_tab[17] =
 {
-	//"name", n_param, args_type, index, duree, entire_name, ?, ?
+	//"name", n_param, args_type, index, duree, entire_name, carry (operation binaire)
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},

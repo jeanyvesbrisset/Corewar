@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 10:28:23 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/12 17:45:57 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:52:33 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_read_gnl(int fd, char **line, char **str)
 	return (ret);
 }
 
-int		get_next_line(const int fd, char **line)
+int		get_next_line_mod(const int fd, char **line)
 {
 	static char	*str;
 	int			ret;

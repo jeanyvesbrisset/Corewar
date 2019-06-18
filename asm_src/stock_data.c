@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/13 16:54:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:05:50 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ void    name_cor(char **name)
     name = &tmp;
 }
 
-int    create_cor(t_data *start, char *name)
+int    create_cor(t_cdata *start, char *name)
 {
-    t_data  *current;
+    t_cdata  *current;
     int     fd;
 
     current = start;
     name_cor(&name);
     if ((fd = open(name, O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
-        return (ft_error(OPEN_ERROR));
+        return (ft_error("OPEN_ERROR"));
     while (current->next != start)
     {
         write(fd, current->str, current->size);
@@ -71,21 +71,21 @@ int    create_cor(t_data *start, char *name)
     return (0);
 }
 
-int     read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab)
+int     read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 {
     int     fd;
     int     *reader;
     char    *line;
     
-    if (reader = (int*)malloc(sizeof(int) * 2))
+    if (!(reader = (int*)malloc(sizeof(int) * 2)))
         return (0);
-    if (reader[0] = open(file, R_ONLY) == -1)
+    if ((reader[0] = open(file, O_RDONLY)) == -1)
         return (ft_error("OPEN_ERROR"));
     line = 0;
     while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
     {
-        stock_in_stock(begin, line, reader[1]);
-        if (!(line_is_correct(line, start, lab, reader))) // a faire
+        stock_in_stock(beg, line, reader[1]);
+        if (!(line_is_correct(&line, start, lab, reader))) // a faire
             return (free_reader(&reader));
         ft_strdel(&line);
     }

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/13 16:54:14 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/18 16:55:15 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_stock *begin;
-    t_data  *start;
+    t_cdata  *start;
 	t_label	*lab;
 
 	begin = 0;

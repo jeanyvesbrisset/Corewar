@@ -6,22 +6,26 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/13 16:54:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/18 17:15:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#ifndef OP_H
+# define OP_H
 /*
  * ** Toutes les tailles sont en octets.
  * ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
  * */
 
-#include <unistd.h>
-#include <fcntl.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include "../libprintf/include/libprintf.h"
 
-#define IND_SIZE				2
-#define REG_SIZE				4
-#define DIR_SIZE				REG_SIZE
+
+# define IND_SIZE				2
+# define REG_SIZE				4
+# define DIR_SIZE				REG_SIZE
 
 
 # define REG_CODE				1
@@ -86,13 +90,13 @@ typedef struct					s_stock
 	struct s_stock				*next;
 }								t_stock;
 
-typedef struct					s_data
+typedef struct					s_cdata
 {
 	int							index;
 	unsigned char				*str;
 	unsigned int				size;
-	struct s_data				*next;
-}								t_data;
+	struct s_cdata				*next;
+}								t_cdata;
 
 typedef struct					s_label
 {
@@ -102,10 +106,14 @@ typedef struct					s_label
 	struct s_label				*next;
 }								t_label;
 
-int								read_n_stock(char *file, t_stock **begin, t_data **start, t_label **lab);
+int								read_n_stock(char *file, t_stock **begin, t_cdata **start, t_label **lab);
 int								free_reader(int *reader);
-int								line_is_correct(char **line, t_data **start, t_label **lab, int *reader);
-int								gnl_find_mod(char **line, t_data **start, int *reader, char c_or_n);
-void							name_stocker(char **line, int *i, t_data **start, int ret);
-void							comment_stocker(char **line, int *i, t_data **start, int ret);
+int								line_is_correct(char **line, t_cdata **start, t_label **lab, int *reader);
+int								gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n);
+void							name_stocker(char **line, int *i, t_cdata **start, int ret);
+void							comment_stocker(char **line, int *i, t_cdata **start, int ret);
 int								ft_error(char *error);
+void							free_structs(t_stock **begin, t_cdata **start, t_label **lab);
+int								create_cor(t_cdata *start, char *name);
+
+#endif

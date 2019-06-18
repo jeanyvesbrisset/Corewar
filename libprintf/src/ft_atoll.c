@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:44:59 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/18 14:42:56 by maginist         ###   ########.fr       */
+/*   Created: 2019/06/18 17:13:36 by maginist          #+#    #+#             */
+/*   Updated: 2019/06/18 17:13:41 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libprintf.h"
 
-long	ft_atol(const char *str)
+long	ft_atoll(const char *str)
 {
-	long int	i;
-	long int	res;
-	long int	neg;
+	long long int	i;
+	long long int	res;
+	long long int	neg;
 
 	i = 0;
 	res = 0;
