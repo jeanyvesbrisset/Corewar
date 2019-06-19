@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 14:59:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 16:20:47 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 	while (g_op_tab[tabi] && ft_strcmp(g_op_tab[tabi]->name, *line + i) != 0)
 		tabi++;
 	(*line)[size_name + i] = tmp;
-	if (g_f_tab[tabi](*line + i, start, lab, &index))
+	start_to_command(start);
+	if (tabi != 16 && g_f_tab[tabi].f(*line + i, start, lab, &index))
 		return (1);
 	return (0);
 }
@@ -104,7 +105,8 @@ int		is_comment(char **line, t_cdata **start, int *reader)
 	if (!((*line)[i]) || (*line)[i] != '"')
 		return (0);
 	i++;
-	comment_stocker(line, &i, start, reader[1]);
+	if (comment_stocker(line, &i, start, reader[1]) == 0)
+		return (0);
 	if (!((*line)[i]) && reader[1] == 1)
 	{
 		if (!(gnl_find_mod(line, start, reader, 'c')))
@@ -132,7 +134,8 @@ int		is_name(char **line, t_cdata **start, int *reader)
 	if (!((*line)[i]) || (*line)[i] != '"')
 		return (0);
 	i++;
-	name_stocker(line, &i, start, reader[1]);
+	if (name_stocker(line, &i, start, reader[1]) == 0)
+		return (0);
 	if (!((*line)[i]) && reader[1] == 1)
 	{
 		if (!(gnl_find_mod(line, start, reader, 'n')))

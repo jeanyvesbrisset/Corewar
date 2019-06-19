@@ -6,13 +6,34 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 10:58:57 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/19 14:23:46 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 15:35:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-t_op    g_op_tab[17] =
+t_f		g_f_tab[17] =
+{
+	{gest_live},
+	{gest_ld},
+	{gest_st},
+	{gest_add},
+	{gest_sub},
+	{gest_and},
+	{gest_or},
+	{gest_xor},
+	{gest_zjmp},
+	{gest_ldi},
+	{gest_sti},
+	{gest_fork},
+	{gest_lld},
+	{gest_lldi},
+	{gest_lfork},
+	{gest_aff},
+	{0}
+};
+
+t_op	g_op_tab[17] =
 {
 	//"name", n_param, args_type, index, duree, entire_name, carry (operation binaire)
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},

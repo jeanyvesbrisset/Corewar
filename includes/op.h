@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/19 14:23:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 16:29:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,13 @@ typedef struct					s_label
 	struct s_label				*next;
 }								t_label;
 
+typedef struct					s_f
+{
+	int							(*f)(char *str, t_cdata **start, t_label **lab
+	, int *index);
+}								t_f;
+
+
 typedef struct					s_op
 {
 	char						*name;
@@ -114,7 +121,7 @@ typedef struct					s_op
 	int							index;
 	int							cycles;
 	char						*full_name;
-	int							carry;
+	int							ocp;
 	int							direct_sizer;
 }								t_op;
 

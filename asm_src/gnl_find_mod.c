@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/18 17:27:53 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/19 16:04:22 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size)
 	}
 }
 
-void   comment_stocker(char **line, int *i, t_cdata **start, int ret)
+int   comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int     diff;
 
 	if (!(diff))
-		diff = 4 - (*i);
-	while ((*line)[*i] && (*line)[*i] != '"')//limiter le nombre de caracteres a COMMENT_LENGTH : 2048
+		diff = 8 - (*i);
+	while ((*line)[*i] && (*line)[*i] != '"')
 	{
+		if (diff + *i >= COMMENT_LENGTH)
+			return (0);
 		((*start)->next)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
 	}
@@ -51,6 +53,7 @@ void   comment_stocker(char **line, int *i, t_cdata **start, int ret)
 	}
 	else
 		diff += *i;
+	return (1);
 }
 
 void    name_stocker(char **line, int *i, t_cdata **start, int ret)
@@ -59,8 +62,10 @@ void    name_stocker(char **line, int *i, t_cdata **start, int ret)
 
 	if (!(diff))
 		diff = 4 - (*i);
-	while ((*line)[*i] && (*line)[*i] != '"')//limiter le nombre de caracteres a PROG_NAME_LENGTH : 128
+	while ((*line)[*i] && (*line)[*i] != '"')
 	{
+		if (diff + *i >= PROG_NAME_LENGTH)
+			return (0);
 		(*start)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
 	}
@@ -71,6 +76,7 @@ void    name_stocker(char **line, int *i, t_cdata **start, int ret)
 	}
 	else
 		diff += *i;
+	return (1);
 }
 
 int     gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n)
