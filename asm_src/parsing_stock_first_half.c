@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 16:20:47 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 17:36:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 		return (1);
 	return (0);
 }
-	//reperer les LABEL_CHAR ':' -> si '%' avant c'est potentiellement un label parametre qu'on enregistre et on laisse un blanc dans la memoire, sinon si c'est le premier qu'on croise et qu'il est précédé par des LABEL_CHARS alors on enregistre le label et check si la suite est bien un opcode
-	// ajouter un int pos a la struc label (ou direct utiliser le l'int proto) qui reperera le label quand i parcourera le str des command
+
 	//compter le nombre de SEPARATOR_CHAR (',') pour connaitre le nombre de parametres - 1
 
 int		is_comment(char **line, t_cdata **start, int *reader)
