@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/18 17:15:46 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/19 10:17:14 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef struct					s_label
 {
 	char 						*name;
 	unsigned int				proto;
-	unsigned int				used;
+	unsigned int				*used;
 	struct s_label				*next;
 }								t_label;
 
