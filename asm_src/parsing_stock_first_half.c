@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 11:24:34 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:01:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		gest_lab(t_label **lab, int	index, char **line, int *jump)
 	if (i > 0 && (*line)[i] && (*line)[i - 1] != '%')
 	{
 		(*line)[i] = 0;
-		if (ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
+		if (*line + *jump == 0 || ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
 			return (0);
 		name = ft_strdup((*line) + *jump);
 		(*line)[i] = ':';
@@ -58,28 +58,34 @@ int		gest_lab(t_label **lab, int	index, char **line, int *jump)
 	return (1);
 }
 
-void		stock_command(char **line, t_cdata **start, t_label **lab)
+int		stock_command(char **line, t_cdata **start, t_label **lab)
 {
 	int				i;
+	int				size_name;
 	static int		index;
+	static t_op		tab[17];
 
 	i = 0;
+	tab = 0;
+	init_op_tab(&tab);
 	if (!(index))
 		index = 0;
 	while ((*line)[i] == '\t' || (*line)[i] == ' ')
 		i++;
 	if (!(gest_lab(lab, index, line, &i)))
-		return ;
+		return (0);
 	while ((*line)[i] == '\t' || (*line)[i] == ' ')
 		i++;
-	if (!((*line)[i]) || !())
-		return ;
+	size_name = 0;
+	while ((*line)[size_name + i] && (*line)[size_name + i] != ' ')
+		size_name++;
+	while (*op_tab && ft_strncmp((*op_tab)->name), *line + i, size_name)
 }
 	//reperer les LABEL_CHAR ':' -> si '%' avant c'est potentiellement un label parametre qu'on enregistre et on laisse un blanc dans la memoire, sinon si c'est le premier qu'on croise et qu'il est précédé par des LABEL_CHARS alors on enregistre le label et check si la suite est bien un opcode
 	// ajouter un int pos a la struc label (ou direct utiliser le l'int proto) qui reperera le label quand i parcourera le str des command
 	//compter le nombre de SEPARATOR_CHAR (',') pour connaitre le nombre de parametres - 1
 
-void	is_comment(char **line, t_cdata **start, int *reader, int *step)
+int		is_comment(char **line, t_cdata **start, int *reader)
 {
 	int	i;
 
@@ -87,26 +93,27 @@ void	is_comment(char **line, t_cdata **start, int *reader, int *step)
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (ft_strncmp(*line + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) != 0)
-		return ;
+		return (0);
 	i += 5;
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (!((*line)[i]) || (*line)[i] != '"')
-		return ;
+		return (0);
 	i++;
 	comment_stocker(line, &i, start, reader[1]);
 	if (!((*line)[i]) && reader[1] == 1)
 	{
 		if (!(gnl_find_mod(line, start, reader, 'c')))
-			return ;
+			return (0);
 	}
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (!(line[i]))
-		*step = 2;
+		return (1);
+	return (0);
 }
 
-void	is_name(char **line, t_cdata **start, int *reader, int *step)
+int		is_name(char **line, t_cdata **start, int *reader)
 {
 	int	i;
 
@@ -114,23 +121,24 @@ void	is_name(char **line, t_cdata **start, int *reader, int *step)
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (ft_strncmp(*line + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) != 0)
-		return ;
+		return (0);
 	i += 5;
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (!((*line)[i]) || (*line)[i] != '"')
-		return ;
+		return (0);
 	i++;
 	name_stocker(line, &i, start, reader[1]);
 	if (!((*line)[i]) && reader[1] == 1)
 	{
 		if (!(gnl_find_mod(line, start, reader, 'n')))
-			return ;
+			return (0);
 	}
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (!(line[i]))
-		*step = 1;
+		return (1);
+	return (0);
 }
 
 void	init_cor(t_cdata **start)
@@ -172,12 +180,12 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		step = 0;
 		init_cor(sta);
 	}
-	if (step == 0)
-		is_name(line, sta, reader, &step);
-	else if (step == 1)
-		is_comment(line, sta, reader, &step);
-	else if (step == 2)
-		stock_command(line, sta, lab);
+	if (step == 0 && is_name(line, sta, reader))
+		step = 1;
+	else if (step == 1 && is_comment(line, sta, reader, &step))
+		step = 2;
+	else if (step == 2 && stock_command(line, sta, lab))
+		step = 2;
 	else if ((*line)[0] != COMMENT_CHAR && (*line)[0] != ';')
 	{
 		ft_strdel(line);

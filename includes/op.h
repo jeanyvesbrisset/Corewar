@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/19 10:17:14 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 13:52:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,18 @@ typedef struct					s_label
 	unsigned int				*used;
 	struct s_label				*next;
 }								t_label;
+
+typedef struct					s_op
+{
+	char						*name;
+	int							nb_arg;
+	int							*args;
+	int							index;
+	int							cycles;
+	char						*full_name;
+	int							carry;
+	int							direct_sizer;
+}								t_op;
 
 int								read_n_stock(char *file, t_stock **begin, t_cdata **start, t_label **lab);
 int								free_reader(int *reader);
