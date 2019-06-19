@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 14:01:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:59:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,29 @@ int		gest_lab(t_label **lab, int	index, char **line, int *jump)
 int		stock_command(char **line, t_cdata **start, t_label **lab)
 {
 	int				i;
+	int				tabi;
 	int				size_name;
-	static int		index;
-	static t_op		tab[17];
+	char			tmp;
+	static int		index = 0;
 
 	i = 0;
-	tab = 0;
-	init_op_tab(&tab);
-	if (!(index))
-		index = 0;
-	while ((*line)[i] == '\t' || (*line)[i] == ' ')
-		i++;
+	ft_jump_white_spaces(*line, &i);
 	if (!(gest_lab(lab, index, line, &i)))
 		return (0);
-	while ((*line)[i] == '\t' || (*line)[i] == ' ')
-		i++;
+	ft_jump_white_spaces(*line, &i);
 	size_name = 0;
-	while ((*line)[size_name + i] && (*line)[size_name + i] != ' ')
+	while ((*line)[size_name + i] && (*line)[size_name + i] != ' '
+		&& (*line)[size_name + i] != '\t')
 		size_name++;
-	while (*op_tab && ft_strncmp((*op_tab)->name), *line + i, size_name)
+	tabi = 0;
+	tmp = (*line)[size_name + i];
+	(*line)[size_name + i] = 0;
+	while (g_op_tab[tabi] && ft_strcmp(g_op_tab[tabi]->name, *line + i) != 0)
+		tabi++;
+	(*line)[size_name + i] = tmp;
+	if (g_f_tab[tabi](*line + i, start, lab, &index))
+		return (1);
+	return (0);
 }
 	//reperer les LABEL_CHAR ':' -> si '%' avant c'est potentiellement un label parametre qu'on enregistre et on laisse un blanc dans la memoire, sinon si c'est le premier qu'on croise et qu'il est précédé par des LABEL_CHARS alors on enregistre le label et check si la suite est bien un opcode
 	// ajouter un int pos a la struc label (ou direct utiliser le l'int proto) qui reperera le label quand i parcourera le str des command
