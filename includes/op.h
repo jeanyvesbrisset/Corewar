@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/20 14:42:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:46:18 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ int	read_n_stock(char *file, t_stock **begin, t_cdata **start, t_label **lab);
 int	free_reader(int *reader);
 int	line_is_correct(char **line, t_cdata **start ,t_label **lab, int *reader);
 int	gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n);
-void	name_stocker(char **line, int *i, t_cdata **start, int ret);
-void	comment_stocker(char **line, int *i, t_cdata **start, int ret);
+int	name_stocker(char **line, int *i, t_cdata **start, int ret);
+int	comment_stocker(char **line, int *i, t_cdata **start, int ret);
 int		ft_error(char *error);
 void	free_structs(t_stock **begin, t_cdata **start, t_label **lab);
 int		create_cor(t_cdata *start, char *name);

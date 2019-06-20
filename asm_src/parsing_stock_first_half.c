@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/20 14:41:35 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:47:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 	}
 	if (step == 0 && is_name(line, sta, reader))
 		step = 1;
-	else if (step == 1 && is_comment(line, sta, reader, &step))
+	else if (step == 1 && is_comment(line, sta, reader))
 		step = 2;
 	else if (step == 2 && stock_command(line, sta, lab))
 		step = 2;
