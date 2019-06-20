@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_two_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/20 11:38:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:40:06 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 		j++;
 	if (str[i + j] != 0)
 		return (0);
-	ft_itoo((*start)->str + index, str + i, 4);
+	ft_itoo((*start)->str + (*index), str + i, 4);
 	(*index) += 4;
 	return (1);
 }

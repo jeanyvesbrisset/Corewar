@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/20 10:39:05 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/20 14:41:35 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	add_to_lab(t_label **lab, char **name, int proto)
 		return ;
 	new->name = *name;
 	new->proto = proto;
-	new->used = 0;
+	if (!(new->used))
+		new->used = 0;
 	new->next = *lab;
 	current->next = new;
 }
@@ -83,7 +84,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 		s_name++;
 	tabi = 0;
 	tmp = (*line)[s_name + i];
-	(*line)[sizeme + i] = 0;
+	(*line)[s_name + i] = 0;
 	while (g_op_tab[tabi] && ft_strcmp(g_op_tab[tabi]->name, *line + i) != 0)
 		tabi++;
 	(*line)[s_name + i] = tmp;
