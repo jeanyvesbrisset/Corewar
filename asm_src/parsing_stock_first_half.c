@@ -6,11 +6,17 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 17:36:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/20 10:39:05 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+void	start_to_command(t_cdata **start)
+{
+	while ((*start)->index != 3)
+		*start = (*start)->next;
+}
 
 void	add_to_lab(t_label **lab, char **name, int proto)
 {
@@ -62,7 +68,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 {
 	int				i;
 	int				tabi;
-	int				size_name;
+	int				s_name;
 	char			tmp;
 	static int		index = 0;
 
@@ -71,18 +77,18 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 	if (!(gest_lab(lab, index, line, &i)))
 		return (0);
 	ft_jump_white_spaces(*line, &i);
-	size_name = 0;
-	while ((*line)[size_name + i] && (*line)[size_name + i] != ' '
-		&& (*line)[size_name + i] != '\t')
-		size_name++;
+	s_name = 0;
+	while ((*line)[s_name + i] && (*line)[s_name + i] != ' '
+		&& (*line)[s_name + i] != '\t')
+		s_name++;
 	tabi = 0;
-	tmp = (*line)[size_name + i];
-	(*line)[size_name + i] = 0;
+	tmp = (*line)[s_name + i];
+	(*line)[sizeme + i] = 0;
 	while (g_op_tab[tabi] && ft_strcmp(g_op_tab[tabi]->name, *line + i) != 0)
 		tabi++;
-	(*line)[size_name + i] = tmp;
+	(*line)[s_name + i] = tmp;
 	start_to_command(start);
-	if (tabi != 16 && g_f_tab[tabi].f(*line + i, start, lab, &index))
+	if (tabi != 16 && g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 16:04:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/20 11:23:01 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void    name_stocker(char **line, int *i, t_cdata **start, int ret)
 
 	if (!(diff))
 		diff = 4 - (*i);
-	while ((*line)[*i] && (*line)[*i] != '"')
+	while ((*line)[*i] && (*line)[*i] != '"');
 	{
 		if (diff + *i >= PROG_NAME_LENGTH)
 			return (0);
