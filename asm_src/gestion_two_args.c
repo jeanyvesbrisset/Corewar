@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 10:40:03 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 11:45:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 	if (str[i] == DIRECT_CHAR)
 	{
 		if ((res = is_direct(str + i + 1, &i, lab, index)) == 2)
-			ft_itoo((*start)->str + (*index), str + i + 1, 4);
+			ft_itoo((*start)->str + (*index), str + i, 4);
 		else if (res == 0)
 			return (0);
 	}
 	else if (is_index(str + i, &i))
-		ft_itoo((*start)->str + (*index), str + i + 1, 2);
+		ft_itoo((*start)->str + (*index), str + i, 2);
 	else
 		return (0);
 	if (!(ft_good_transi(str, &i)))
@@ -56,10 +56,10 @@ int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 	if (str[i] == 'r')
 	{
 		if (!((*start)->str[(*index)++] = is_register(str, &i)))
-		return (0);
+			return (0);
 	}
 	else if (is_index(str + i, &i))
-		ft_itoo((*start)->str + (*index), str + i + 1, 2);
+		ft_itoo((*start)->str + (*index), str + i, 2);
 	else
 		return (0);
 	return (end_gestion(str, &i));
@@ -78,12 +78,12 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 	if (str[i] == DIRECT_CHAR)
 	{
 		if ((res = is_direct(str + i + 1, &i, lab, index)) == 2)
-			ft_itoo((*start)->str + (*index), str + i + 1, 4);
+			ft_itoo((*start)->str + (*index), str + i, 4);
 		else if (res == 0)
 			return (0);
 	}
 	else if (is_index(str + i, &i))
-		ft_itoo((*start)->str + (*index), str + i + 1, 2);
+		ft_itoo((*start)->str + (*index), str + i, 2);
 	else
 		return (0);
 	if (!(ft_good_transi(str, &i)))
