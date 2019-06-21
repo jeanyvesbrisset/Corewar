@@ -6,14 +6,14 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 10:01:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 14:22:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../includes/op.h"
 
-void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size
-,int *index)
+void	ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
+		, int *index)
 {
 	unsigned long long int nb;
 	unsigned long long int i;
@@ -27,7 +27,7 @@ void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size
 	nb %= div * 256;
 	while (i < size)
 	{
-		(*str)[i] = (unsigned char)(nb / div);
+		str[i] = (unsigned char)(nb / div);
 		nb %= div;
 		div /= 256;
 		i++;
@@ -35,7 +35,7 @@ void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size
 	*index += (int)size;
 }
 
-int   comment_stocker(char **line, int *i, t_cdata **start, int ret)
+int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int     diff;
 
@@ -58,13 +58,13 @@ int   comment_stocker(char **line, int *i, t_cdata **start, int ret)
 	return (1);
 }
 
-void    name_stocker(char **line, int *i, t_cdata **start, int ret)
+int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int     diff;
 
 	if (!(diff))
 		diff = 4 - (*i);
-	while ((*line)[*i] && (*line)[*i] != '"');
+	while ((*line)[*i] && (*line)[*i] != '"')
 	{
 		if (diff + *i >= PROG_NAME_LENGTH)
 			return (0);
@@ -81,7 +81,7 @@ void    name_stocker(char **line, int *i, t_cdata **start, int ret)
 	return (1);
 }
 
-int     gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n)
+int		gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n)
 {
 	int i;
 

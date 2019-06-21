@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/20 14:40:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 14:29:30 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int		add_used_label(char **str, t_label **lab, int index)
 	t_label *cur;
 	int		size;
 
-	cur = (*lab)->name;
-	while (cur && cur->next != *lab && ft_strcmp(cur->name, str) != 0)
+	cur = (*lab);
+	while (cur && cur->next != *lab && ft_strcmp(cur->name, *str) != 0)
 		cur = cur->next;
-	if (ft_strcmp(cur->name, str) != 0)
+	if (ft_strcmp(cur->name, *str) != 0)
 	{
 		add_to_lab(lab, str, -1);
 		cur = cur->next;
@@ -58,11 +58,11 @@ int		is_index(char *str, int *i)
 	j = 0;
 	if (str[(*i) + j] == '-')
 		j++;
-   	if (!(is_digit(str[(*i) + j])))
+	if (!(ft_isdigit(str[(*i) + j])))
 		return (0);
 	while (str[(*i) + j] && ft_isdigit(str[(*i) + j]))
 		j++;
-	return (1);  
+	return (1);
 }
 
 int 	is_direct(char *str, int *i, t_label **lab, int index)
@@ -91,7 +91,7 @@ int 	is_direct(char *str, int *i, t_label **lab, int index)
 	}
 	else
 		return (is_index(str, i));
-	return (2);    
+	return (2);
 }
 
 int 	is_register(char *str, int *i)

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/20 14:47:13 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 14:05:40 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 		return (1);
 	return (0);
 }
-
-	//compter le nombre de SEPARATOR_CHAR (',') pour connaitre le nombre de parametres - 1
 
 int		is_comment(char **line, t_cdata **start, int *reader)
 {
@@ -202,7 +200,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 	else if ((*line)[0] != COMMENT_CHAR && (*line)[0] != ';')
 	{
 		ft_strdel(line);
-		return (ft_error(""));
+		return (ft_error("NOT A VALID INPUT"));
 	}
 	return (1);
 }

@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gestion_three_args1.c                              :+:      :+:    :+:   */
+/*   gestion_three_args2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 14:49:13 by maginist         ###   ########.fr       */
+/*   Created: 2019/06/21 14:11:01 by floblanc          #+#    #+#             */
+/*   Updated: 2019/06/21 14:55:20 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int		gest_add(char *str, t_cdata **start, t_label **lab, int *index)
+int		gest_ldi(char *str, t_cdata **start, t_label **lab, int *index)
 {
+	int		*tab[3];
 	int		i;
+	int		int_size;
 
+	int_size = 2;
 	i = 0;
-	(*start)->str[(*index)++] = 4;
+	tab[0] = &i;
+	tab[1] = index;
+	tab[2] = &int_size;
+	(*start)->str[(*index)++] = 10;
 	if (!(fct_separator(str, 2, index, 1)))
 		return (0);
 	ft_jump_white_spaces(str, &i);
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
+	if (!(ft_three_choices(str, tab, start, lab)))
 		return (0);
 	if (!(ft_good_transi(str, &i)))
 		return (0);
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
+	if (!(ft_two_choices(str, tab, start, lab)))
 		return (0);
 	if (!(ft_good_transi(str, &i)))
 		return (0);
@@ -34,68 +40,46 @@ int		gest_add(char *str, t_cdata **start, t_label **lab, int *index)
 	return (end_gestion(str, &i));
 }
 
-int		gest_sub(char *str, t_cdata **start, t_label **lab, int *index)
-{
-	int		i;
-
-	i = 0;	
-	(*start)->str[(*index)++] = 5;
-	if (!(fct_separator(str, 2, index, 1)))
-		return (0);
-	ft_jump_white_spaces(str, &i);
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
-		return (0);
-	return (end_gestion(str, &i));
-}
-
-int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
+int		gest_sti(char *str, t_cdata **start, t_label **lab, int *index)
 {
 	int		*tab[3];
 	int		i;
 	int		int_size;
 
 	i = 0;
-	int_size = 4;
+	int_size = 2;
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
-	(*start)->str[(*index)++] = 6;
+	(*start)->str[(*index)++] = 11;
 	if (!(fct_separator(str, 2, index, 1)))
 		return (0);
 	ft_jump_white_spaces(str, &i);
-	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
-	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
+		return (0);
+	if (!(ft_good_transi(str, &i)))
+		return (0);
+	if (!(ft_three_choices(str, tab, start, lab)))
+		return (0);
+	if (!(ft_good_transi(str, &i)))
+		return (0);
+	if (!(ft_two_choices(str, tab, start, lab)))
 		return (0);
 	return (end_gestion(str, &i));
 }
 
-int		gest_or(char *str, t_cdata **start, t_label **lab, int *index)
+int		gest_lldi(char *str, t_cdata **start, t_label **lab, int *index)
 {
 	int		*tab[3];
 	int		i;
 	int		int_size;
 
 	i = 0;
-	int_size = 4;
+	int_size = 2;
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
-	(*start)->str[(*index)++] = 7;
+	(*start)->str[(*index)++] = 14;
 	if (!(fct_separator(str, 2, index, 1)))
 		return (0);
 	ft_jump_white_spaces(str, &i);
@@ -103,35 +87,7 @@ int		gest_or(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);
 	if (!(ft_good_transi(str, &i)))
 		return (0);
-	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
-		return (0);
-	return (end_gestion(str, &i));
-}
-
-int		gest_xor(char *str, t_cdata **start, t_label **lab, int *index)
-{
-	int		*tab[3];
-	int		i;
-	int		int_size;
-
-	i = 0;
-	int_size = 4;
-	tab[0] = &i;
-	tab[1] = index;
-	tab[2] = &int_size;
-	(*start)->str[(*index)++] = 8;
-	if (!(fct_separator(str, 2, index, 1)))
-		return (0);
-	ft_jump_white_spaces(str, &i);
-	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
-	if (!(ft_three_choices(str, tab, start, lab)))
+	if (!(ft_two_choices(str, tab, start, lab)))
 		return (0);
 	if (!(ft_good_transi(str, &i)))
 		return (0);
