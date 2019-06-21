@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 16:18:51 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:39:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,14 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	{
 		stock_in_stock(beg, line, reader[1]);
 		if (!(line_is_correct(&line, start, lab, reader)))
-			return (free_reader(&reader));// a faire
+		{
+			free(reader);
+			return (0);
+		}
 		ft_strdel(&line);
 	}
-	free_reader(&reader);
-	if (all_abel_good(start, lab)) // a faire
+	free(reader);
+	if (all_label_good(start, lab))
 		return (1);
 	return (0);
 }
