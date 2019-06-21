@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 14:49:13 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:15:59 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		gest_sub(char *str, t_cdata **start, t_label **lab, int *index)
 {
 	int		i;
 
-	i = 0;	
+	i = 0;
 	(*start)->str[(*index)++] = 5;
 	if (!(fct_separator(str, 2, index, 1)))
 		return (0);

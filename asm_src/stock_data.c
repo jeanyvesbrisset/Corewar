@@ -6,13 +6,13 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 14:24:16 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:18:51 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void    stock_in_stock(t_stock **begin, char *line, int ret)
+void	stock_in_stock(t_stock **begin, char *line, int ret)
 {
 	t_stock *new;
 	t_stock *current;
@@ -36,8 +36,8 @@ void    stock_in_stock(t_stock **begin, char *line, int ret)
 
 void	name_cor(char **name)
 {
-	int     i;
-	char    *tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while ((*name)[i] && (*name)[i] != '.')
@@ -53,8 +53,8 @@ void	name_cor(char **name)
 
 int		create_cor(t_cdata *start, char *name)
 {
-	t_cdata  *current;
-	int     fd;
+	t_cdata	*current;
+	int		fd;
 
 	current = start;
 	name_cor(&name);
@@ -73,10 +73,10 @@ int		create_cor(t_cdata *start, char *name)
 
 int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 {
-	int     fd;
-	int     *reader;
-	char    *line;
-    
+	int		fd;
+	int		*reader;
+	char	*line;
+
 	if (!(reader = (int*)malloc(sizeof(int) * 2)))
 		return (0);
 	if ((reader[0] = open(file, O_RDONLY)) == -1)
@@ -85,8 +85,8 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
 	{
 		stock_in_stock(beg, line, reader[1]);
-		if (!(line_is_correct(&line, start, lab, reader))) // a faire
-			return (free_reader(&reader));
+		if (!(line_is_correct(&line, start, lab, reader)))
+			return (free_reader(&reader));// a faire
 		ft_strdel(&line);
 	}
 	free_reader(&reader);

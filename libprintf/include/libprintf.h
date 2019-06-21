@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/19 14:52:03 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:27:25 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,6 @@ size_t				ft_tab3size(void ***tab);
 int					ft_strsearch(char *src, char c);
 int					ft_charstr(char *s1, char *s2);
 long				ft_atoll(const char *str);
-void    			ft_jump_white_spaces(char *str, int *i);
+void				ft_jump_white_spaces(char *str, int *i);
 
 #endif

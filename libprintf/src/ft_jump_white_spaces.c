@@ -6,14 +6,14 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:48:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/19 14:51:17 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:25:57 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libprintf.h"
 
-void    ft_jump_white_spaces(char *str, int *i)
+void	ft_jump_white_spaces(char *str, int *i)
 {
-    while (str[*i] && str[*i] == ' ' || str[*i] == '\t')
+	while (str[*i] && str[*i] == ' ' || str[*i] == '\t')
 		(*i)++;
 }

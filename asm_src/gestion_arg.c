@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 14:29:30 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:12:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int		is_index(char *str, int *i)
 	return (1);
 }
 
-int 	is_direct(char *str, int *i, t_label **lab, int index)
+int		is_direct(char *str, int *i, t_label **lab, int index)
 {
-	int 	j;
+	int		j;
 	char	tmp;
 	char	*str_cpy;
 
@@ -94,7 +94,7 @@ int 	is_direct(char *str, int *i, t_label **lab, int index)
 	return (2);
 }
 
-int 	is_register(char *str, int *i)
+int		is_register(char *str, int *i)
 {
 	int j;
 	int res;

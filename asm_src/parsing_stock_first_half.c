@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 15:44:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:33:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		is_comment(char **line, t_cdata **start, int *reader)
 	i = 0;
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
-	if (ft_strncmp(*line + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) != 0)
+	if (ft_strncmp(*line + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)
+	!= 0))
 		return (0);
 	i += 5;
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
@@ -59,10 +60,8 @@ int		is_comment(char **line, t_cdata **start, int *reader)
 	if (comment_stocker(line, &i, start, reader[1]) == 0)
 		return (0);
 	if (!((*line)[i]) && reader[1] == 1)
-	{
 		if (!(gnl_find_mod(line, start, reader, 'c')))
 			return (0);
-	}
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (!(line[i]))
@@ -105,7 +104,7 @@ void	init_cor(t_cdata **start)
 	t_cdata	*command;
 
 	if (!((*start) = (t_cdata*)malloc(sizeof(t_cdata) * 1)))
-			return ;
+		return ;
 	ft_bzero((*start)->str, 4 + PROG_NAME_LENGTH);
 	(*start)->str[1] = 234;
 	(*start)->str[2] = 131;
@@ -118,7 +117,7 @@ void	init_cor(t_cdata **start)
 	comment->size = 12 + COMMENT_LENGTH;
 	comment->index = 2;
 	if (!(command = (t_cdata*)malloc(sizeof(t_cdata) * 1)))
-			return ;
+		return ;
 	ft_bzero(command->str, CHAMP_MAX_SIZE);
 	command->size = CHAMP_MAX_SIZE;
 	command->index = 3;

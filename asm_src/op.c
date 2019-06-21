@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 10:58:57 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/19 15:35:56 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:18:01 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_f		g_f_tab[17] =
 
 t_op	g_op_tab[17] =
 {
-	//"name", n_param, args_type, index, duree, entire_name, carry (operation binaire)
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},

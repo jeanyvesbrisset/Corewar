@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 15:53:51 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:17:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_error(char *error)
 
 int	main(int ac, char **av)
 {
-	t_stock *begin;
-    t_cdata  *start;
+	t_stock	*begin;
+	t_cdata	*start;
 	t_label	*lab;
 
 	begin = 0;
@@ -34,6 +34,6 @@ int	main(int ac, char **av)
 	}
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
 		create_cor(start, av[ac - 1]);
-	free_structs(&begin, &start, &lab); // a faire (rapide en theorie)
+	free_structs(&begin, &start, &lab);
 	return (0);
 }

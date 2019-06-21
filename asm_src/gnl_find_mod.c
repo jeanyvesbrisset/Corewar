@@ -6,11 +6,11 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 14:22:13 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:16:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../includes/op.h"
+#include "../includes/op.h"
 
 void	ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		, int *index)
@@ -37,7 +37,7 @@ void	ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
-	static int     diff;
+	static int	diff;
 
 	if (!(diff))
 		diff = 8 - (*i);
@@ -60,7 +60,7 @@ int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 
 int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 {
-	static int     diff;
+	static int	diff;
 
 	if (!(diff))
 		diff = 4 - (*i);

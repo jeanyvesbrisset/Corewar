@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 15:56:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 16:14:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,13 @@ int	fct_separator(char *str, int nb_sep, int *index, int ocp)
 	{
 		if (str[i] == SEPARATOR_CHAR)
 			count++;
-		i++;		
+		i++;
 	}
 	if (count != nb_sep)
 		return (0);
 	if (ocp)
 		(*index)++;
 	return (1);
-;
 }
 
 int	ft_good_transi(char *str, int *i)
