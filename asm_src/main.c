@@ -6,11 +6,17 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 14:26:51 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:53:51 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int	ft_error(char *error)
+{
+	ft_printf("%s\n", error);
+	return (0);
+}
 
 int	main(int ac, char **av)
 {

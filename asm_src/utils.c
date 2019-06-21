@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 14:44:04 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:56:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,6 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	else
 		return (0);
 	return (1);
-}
-
-
-int	ft_error(char *error)
-{
-	ft_printf("%s\n", error);
-	return (0);
 }
 
 int	fct_separator(char *str, int nb_sep, int *index, int ocp)
