@@ -6,13 +6,14 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/20 11:23:01 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/21 10:01:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../includes/op.h"
 
-void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size)
+void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size
+,int *index)
 {
 	unsigned long long int nb;
 	unsigned long long int i;
@@ -31,6 +32,7 @@ void    ft_itoo(unsigned char **str, char *str_nb, unsigned long long int size)
 		div /= 256;
 		i++;
 	}
+	*index += (int)size;
 }
 
 int   comment_stocker(char **line, int *i, t_cdata **start, int ret)
