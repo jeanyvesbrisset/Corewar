@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 16:16:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/22 18:16:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 
 	i = size;
 	div = 1;
+	if (*index + (int)size >= CHAMP_MAX_SIZE)
+		return (0);
 	nb = (9223372036854775807 + ft_atoll(str_nb)) % 9223372036854775807;
 	while (--i > 0)
 		div *= 256;
