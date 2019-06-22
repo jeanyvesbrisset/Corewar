@@ -6,12 +6,12 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 16:24:03 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/22 17:55:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
+// comment pour lire le commit important
 int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 {
 	int		i;
