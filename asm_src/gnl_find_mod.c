@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/22 18:16:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/24 11:43:01 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void	ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
+int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		, int *index)
 {
 	unsigned long long int nb;
@@ -35,6 +35,7 @@ void	ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		i++;
 	}
 	*index += (int)size;
+	return (1);
 }
 
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)

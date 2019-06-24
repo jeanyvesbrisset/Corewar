@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_one_arg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 14:23:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:22:45 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 2)
-		ft_itoo((*start)->str + (*index), str + i, 4, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
+			return (0);
+	}
 	else if (res == 0)
 		return (0);
 	ft_jump_white_spaces(str, &i);
@@ -47,7 +50,10 @@ int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 2)
-		ft_itoo((*start)->str + (*index), str + i, 2, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+			return (0);
+	}
 	else if (res == 0)
 		return (0);
 	ft_jump_white_spaces(str, &i);
@@ -69,7 +75,10 @@ int		gest_fork(char *str, t_cdata **start, t_label **lab, int *index)
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 2)
-		ft_itoo((*start)->str + (*index), str + i, 2, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+			return (0);
+	}
 	else if (res == 0)
 		return (0);
 	ft_jump_white_spaces(str, &i);
@@ -91,7 +100,10 @@ int		gest_lfork(char *str, t_cdata **start, t_label **lab, int *index)
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 2)
-		ft_itoo((*start)->str + (*index), str + i, 2, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+			return (0);
+	}
 	else if (res == 0)
 		return (0);
 	ft_jump_white_spaces(str, &i);

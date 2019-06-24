@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 16:39:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/24 15:01:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	if ((reader[0] = open(file, O_RDONLY)) == -1)
 		return (ft_error("OPEN_ERROR"));
 	line = 0;
-	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
+	while ((reader[1] = get_next_line(reader[0], &line)) > 0)
 	{
 		stock_in_stock(beg, line, reader[1]);
 		if (!(line_is_correct(&line, start, lab, reader)))

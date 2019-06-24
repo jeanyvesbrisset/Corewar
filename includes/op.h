@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 16:14:53 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/24 15:34:31 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include "asm.h"
 # include "../libprintf/include/libprintf.h"
 # define IND_SIZE			2
 # define REG_SIZE			4
@@ -98,9 +99,10 @@ typedef struct		s_op
 	int				direct_sizer;
 }					t_op;
 
+void				start_to_command(t_cdata **start);
+int					gest_lab(t_label **lab, int index, char **line, int *jump);
 int					read_n_stock(char *file, t_stock **begin, t_cdata **start
 	, t_label **lab);
-int					free_reader(int *reader);
 int					line_is_correct(char **line, t_cdata **start
 	, t_label **lab, int *reader);
 int					gnl_find_mod(char **line, t_cdata **start, int *reader
@@ -152,7 +154,7 @@ int					end_gestion(char *str, int *i);
 int					ft_good_transi(char *str, int *i);
 int					ft_three_choices(char *str, int **tab, t_cdata **start
 	, t_label **lab);
-void				ft_itoo(unsigned char *str, char *str_nb
+int					ft_itoo(unsigned char *str, char *str_nb
 	, unsigned long long int size, int *index);
 void				add_to_lab(t_label **lab, char **name, int proto);
 int					ft_two_choices(char *str, int **tab, t_cdata **start

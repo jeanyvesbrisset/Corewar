@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_two_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/22 17:55:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/24 12:23:33 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 	if (str[i] == DIRECT_CHAR)
 	{
 		if ((res = is_direct(str + i + 1, &i, lab, *index)) == 2)
-			ft_itoo((*start)->str + (*index), str + i, 4, index);
+		{
+			if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
+				return (0);
+		}
 		else if (res == 0)
 			return (0);
 	}
 	else if (is_index(str + i, &i))
-		ft_itoo((*start)->str + (*index), str + i, 2, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+			return (0);
+	}
 	else
 		return (0);
 	if (!(ft_good_transi(str, &i)))
@@ -59,7 +65,10 @@ int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 			return (0);
 	}
 	else if (is_index(str + i, &i))
-		ft_itoo((*start)->str + (*index), str + i, 2, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+			return (0);
+	}
 	else
 		return (0);
 	return (end_gestion(str, &i));
@@ -78,12 +87,18 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 	if (str[i] == DIRECT_CHAR)
 	{
 		if ((res = is_direct(str + i + 1, &i, lab, *index)) == 2)
-			ft_itoo((*start)->str + (*index), str + i, 4, index);
+		{
+			if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
+				return (0);
+		}
 		else if (res == 0)
 			return (0);
 	}
 	else if (is_index(str + i, &i))
-		ft_itoo((*start)->str + (*index), str + i, 2, index);
+	{
+		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+			return (0);
+	}
 	else
 		return (0);
 	if (!(ft_good_transi(str, &i)))

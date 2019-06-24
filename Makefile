@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/06/07 14:03:24 by maginist         ###   ########.fr        #
+#    Updated: 2019/06/24 15:35:19 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ SRC_PATH2 = ./vm_src
 SRCS1 =
 
 SRCS2 =
-
-LIBFT =
 
 OBJ_NAME1 = $(SRCS1:.c=.o)
 OBJ_NAME2 = $(SRCS2:.c=.o)

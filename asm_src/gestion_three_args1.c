@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 16:15:59 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/24 10:42:35 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,7 @@ int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if (!(ft_three_choices(str, tab, start, lab)))
 		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
 	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
 		return (0);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
@@ -101,11 +97,7 @@ int		gest_or(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if (!(ft_three_choices(str, tab, start, lab)))
 		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
 	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
 		return (0);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
@@ -129,11 +121,7 @@ int		gest_xor(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if (!(ft_three_choices(str, tab, start, lab)))
 		return (0);
-	if (!(ft_good_transi(str, &i)))
-		return (0);
 	if (!(ft_three_choices(str, tab, start, lab)))
-		return (0);
-	if (!(ft_good_transi(str, &i)))
 		return (0);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);

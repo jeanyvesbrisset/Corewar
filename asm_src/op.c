@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 10:58:57 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/22 00:45:26 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/24 14:41:35 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-t_f		g_f_tab[17] =
-{
-	{gest_live},
-	{gest_ld},
-	{gest_st},
-	{gest_add},
-	{gest_sub},
-	{gest_and},
-	{gest_or},
-	{gest_xor},
-	{gest_zjmp},
-	{gest_ldi},
-	{gest_sti},
-	{gest_fork},
-	{gest_lld},
-	{gest_lldi},
-	{gest_lfork},
-	{gest_aff},
-	{0}
-};
 
 t_op	g_op_tab[17] =
 {

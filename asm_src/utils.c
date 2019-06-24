@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 16:14:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/24 15:25:34 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int	ft_good_transi(char *str, int *i)
+{
+	ft_jump_white_spaces(str, i);
+	if (str[(*i)++] != SEPARATOR_CHAR)
+		return (0);
+	ft_jump_white_spaces(str, i);
+	return (1);
+}
 
 int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 {
@@ -19,8 +28,11 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	if (str[(*(tab[0]))] == DIRECT_CHAR)
 	{
 		if ((res = is_direct(str + *(tab[0]) + 1, tab[0], lab, *(tab[1]))) == 2)
-			ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), *(tab[2])
-			, tab[1]);
+		{
+			if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), *(tab[2])
+				, tab[1])))
+				return (0);
+		}
 		else if (res == 0)
 			return (0);
 	}
@@ -30,8 +42,13 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 			return (0);
 	}
 	else if (is_index(str + *(tab[0]), tab[0]))
-		ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2, tab[1]);
+	{
+		if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2, tab[1])))
+			return (0);
+	}
 	else
+		return (0);
+	if (!(ft_good_transi(str, tab[0])))
 		return (0);
 	return (1);
 }
@@ -43,7 +60,11 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	if (str[(*(tab[0]))] == DIRECT_CHAR)
 	{
 		if ((res = is_direct(str + *(tab[0]) + 1, tab[0], lab, *(tab[1]))) == 2)
-			ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2, tab[1]);
+		{
+			if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2
+				, tab[1])))
+				return (0);
+		}
 		else if (res == 0)
 			return (0);
 	}
@@ -74,15 +95,6 @@ int	fct_separator(char *str, int nb_sep, int *index, int ocp)
 		return (0);
 	if (ocp)
 		(*index)++;
-	return (1);
-}
-
-int	ft_good_transi(char *str, int *i)
-{
-	ft_jump_white_spaces(str, i);
-	if (str[(*i)++] != SEPARATOR_CHAR)
-		return (0);
-	ft_jump_white_spaces(str, i);
 	return (1);
 }
 
