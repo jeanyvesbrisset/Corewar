@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/25 13:36:57 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:39:31 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 
 	if (str[(*(tab[0]))] == DIRECT_CHAR)
 	{
-		if ((res = is_direct(str + *(tab[0]) + 1, tab[0], lab, *(tab[1]))) == 2)
+		if ((res = is_direct(str + *(tab[0]) + 1, tab[0], lab, *(tab[1]))) == 1)
 		{
 			if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), *(tab[2])
 				, tab[1])))
@@ -35,6 +35,11 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 		}
 		else if (res == 0)
 			return (0);
+		else
+		{
+			(*start)->str[*(tab[1])] = *(tab[2]);
+			(*(tab[1])) += *(tab[2]);
+		}	
 		ocp_adder(tab[3], DIR_CODE);
 	}
 	else if (str[(*(tab[0]))] == 'r')
@@ -64,7 +69,7 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 
 	if (str[(*(tab[0]))] == DIRECT_CHAR)
 	{
-		if ((res = is_direct(str + *(tab[0]) + 1, tab[0], lab, *(tab[1]))) == 2)
+		if ((res = is_direct(str + *(tab[0]) + 1, tab[0], lab, *(tab[1]))) == 1)
 		{
 			if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2
 				, tab[1])))
@@ -73,6 +78,11 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 		}
 		else if (res == 0)
 			return (0);
+		else
+		{
+			(*start)->str[*(tab[1])] = *(tab[2]);
+			(*(tab[1])) += *(tab[2]);
+		}	
 	}
 	else if (str[(*(tab[0]))] == 'r')
 	{

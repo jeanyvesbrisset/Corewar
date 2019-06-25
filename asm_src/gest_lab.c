@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   gest_lab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/21 16:10:17 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:01:02 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int		all_label_good(t_cdata **start, t_label **lab)
+{
+	t_label		*cur;
+	int			i;
+
+	cur = *lab;
+	while (cur->next != *lab)
+	{
+		if (cur->proto < 0)
+			return (0);
+		i = -1;
+		while (cur->used && cur->used[++i] != -1)
+			if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa((MEM_SIZE 
+			+ cur->used[i] - cur->proto) % MEM_SIZE)
+			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
+				return (0);
+		cur = cur->next;
+	}
+	if (cur->proto < 0)
+		return (0);
+	i = -1;
+	while (cur->used && cur->used[++i] != -1)
+		if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa((MEM_SIZE 
+		+ cur->used[i] - cur->proto) % MEM_SIZE), (*start)->str[cur->used[i]]
+		, cur->used[i])))
+			return (0);
+	return (1);
+}
 
 void	start_to_command(t_cdata **start)
 {
@@ -36,7 +65,8 @@ void	add_to_lab(t_label **lab, char **name, int proto)
 	if (!(new = (t_label*)malloc(sizeof(t_label) * 1)))
 		return ;
 	new->name = *name;
-	new->proto = proto;
+	if (proto >= 0)
+		new->proto = proto;
 	if (!(new->used))
 		new->used = 0;
 	new->next = *lab;

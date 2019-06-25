@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/24 15:34:31 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:05:51 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,5 +159,5 @@ int					ft_itoo(unsigned char *str, char *str_nb
 void				add_to_lab(t_label **lab, char **name, int proto);
 int					ft_two_choices(char *str, int **tab, t_cdata **start
 	, t_label **lab);
-
+int					all_label_good(t_cdata **start, t_label **lab);
 #endif

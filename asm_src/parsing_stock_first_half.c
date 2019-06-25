@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 13:19:43 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:53:37 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int		stock_command(char **line, t_cdata **start, t_label **lab)
+int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 {
 	int				i;
 	int				tabi;
 	int				s_name;
-	char			tmp;
 	static int		index = 0;
 
 	i = 0;
@@ -131,6 +130,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 {
 	static int	step;
 
+
 	if (!(*line))
 		return (1);
 	if (!(step))
@@ -142,7 +142,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		step = 1;
 	else if (step == 1 && is_comment(line, sta, reader))
 		step = 2;
-	else if (step == 2 && stock_command(line, sta, lab))
+	else if (step == 2 && stock_command(line, sta, lab, 0))
 		step = 2;
 	else if ((*line)[0] != COMMENT_CHAR && (*line)[0] != ';')
 	{
