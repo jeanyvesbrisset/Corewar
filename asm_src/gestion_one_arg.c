@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 16:06:15 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:18:29 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int		gest_aff(char *str, t_cdata **start, t_label **lab, int *index)
 	(*start)->str[(*index)++] = 16;
 	(*start)->str[(*index)++] = 64;
 	i = 0;
+	(void)lab;
 	while (str[i])
 		if (str[i++] == SEPARATOR_CHAR)
 			return (0);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 16:06:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:22:05 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void	ocp_adder(int *ocp, int value)
+void	ocp_adder(unsigned char *ocp, int value)
 {
 	*ocp += value;
 	*ocp <<= 2;

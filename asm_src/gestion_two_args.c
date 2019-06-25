@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 15:35:45 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:23:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	int		res;
-	int		*ocp;
+	int				i;
+	int				res;
+	unsigned char	*ocp;
 
 	i = 0;
 	(*start)->str[(*index)++] = 2;
@@ -60,10 +60,11 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	int		*ocp;
+	int				i;
+	unsigned char	*ocp;
 
 	i = 0;
+	(void)lab;
 	(*start)->str[(*index)++] = 3;
 	ocp = &((*start)->str[(*index)]);
 	if (!(fct_separator(str, 1, index, 1)))
@@ -95,9 +96,9 @@ int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	int		res;
-	int		*ocp;
+	int				i;
+	int				res;
+	unsigned char	*ocp;
 
 	i = 0;
 	(*start)->str[(*index)++] = 13;

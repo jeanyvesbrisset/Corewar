@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/06/24 15:35:19 by maginist         ###   ########.fr        #
+#    Updated: 2019/06/25 16:11:20 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,19 @@ OBJ_PATH2 = ./obj_vm
 SRC_PATH1 = ./asm_src/
 SRC_PATH2 = ./vm_src
 
-SRCS1 =
+SRCS1 = free_structs.c\
+		gest_lab.c\
+		gestion_arg.c\
+		gestion_one_arg.c\
+		gestion_two_args.c\
+		gestion_three_args1.c\
+		gestion_three_args2.c\
+		gnl_find_mod.c\
+		main.c\
+		more_utils.c\
+		parsing_stock_first.c\
+		stock_data.c\
+		utils.c
 
 SRCS2 =
 

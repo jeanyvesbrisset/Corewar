@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 16:01:02 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:18:01 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	while (cur->used && cur->used[++i] != -1)
 		if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa((MEM_SIZE 
 		+ cur->used[i] - cur->proto) % MEM_SIZE), (*start)->str[cur->used[i]]
-		, cur->used[i])))
+		, &(cur->used[i]))))
 			return (0);
 	return (1);
 }
