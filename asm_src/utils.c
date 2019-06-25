@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/24 15:25:34 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:36:57 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,21 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 		}
 		else if (res == 0)
 			return (0);
+		ocp_adder(tab[3], DIR_CODE);
 	}
 	else if (str[(*(tab[0]))] == 'r')
 	{
+		if (*(tab[1]) >= CHAMP_MAX_SIZE)
+			return (0);
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);
+		ocp_adder(tab[3], REG_CODE);
 	}
 	else if (is_index(str + *(tab[0]), tab[0]))
 	{
 		if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2, tab[1])))
 			return (0);
+		ocp_adder(tab[3], IND_CODE);
 	}
 	else
 		return (0);
@@ -64,14 +69,18 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 			if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2
 				, tab[1])))
 				return (0);
+			ocp_adder(tab[3], DIR_CODE);
 		}
 		else if (res == 0)
 			return (0);
 	}
 	else if (str[(*(tab[0]))] == 'r')
 	{
+		if (*(tab[1]) >= CHAMP_MAX_SIZE)
+			return (0);
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);
+		ocp_adder(tab[3], REG_CODE);
 	}
 	else
 		return (0);

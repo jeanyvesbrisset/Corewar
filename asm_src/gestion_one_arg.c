@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_one_arg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/24 12:22:45 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:33:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	int		i;
 	int		res;
 
+	if (*index + 5 >= CHAMP_MAX_SIZE)
+		return (0);
 	(*start)->str[(*index)++] = 1;
 	i = 0;
 	while (str[i])
@@ -117,6 +119,7 @@ int		gest_aff(char *str, t_cdata **start, t_label **lab, int *index)
 	int		i;
 
 	(*start)->str[(*index)++] = 16;
+	(*start)->str[(*index)++] = 64;
 	i = 0;
 	while (str[i])
 		if (str[i++] == SEPARATOR_CHAR)

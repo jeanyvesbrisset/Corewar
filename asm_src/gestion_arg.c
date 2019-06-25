@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 16:12:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/25 11:45:04 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		is_register(char *str, int *i)
 	while (str[(*i) + j] && ft_isdigit(str[(*i) + j]))
 		j++;
 	res = ft_atoll(str + (*i));
-	if (res < 1 || res > 16)
+	if (res < 1 || res > REG_NUMBER)
 		return (0);
 	(*i) += j;
 	return (res);

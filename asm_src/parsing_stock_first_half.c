@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/24 14:18:50 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:19:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		stock_command(char **line, t_cdata **start, t_label **lab)
 		tabi++;
 	(*line)[s_name + i] = tmp;
 	start_to_command(start);
-	if (tabi != 16 && g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
+	if (index + 3 < CHAMP_MAX_SIZE && tabi != 16
+	&& g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);
 	return (0);
 }
