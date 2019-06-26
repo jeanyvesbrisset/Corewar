@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
+#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/06/26 11:44:46 by floblanc         ###   ########.fr        #
+#    Updated: 2019/06/26 13:46:54 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,9 +66,9 @@ $(OBJ_PATH2)/%.o : $(SRC_PATH2)/%.c
 
 clean:
 	@make -C $(LIB) clean
-	@rm -rf ./obj_c
-	@rm -rf ./obj_ps
-	@rm -rf ./libft.a
+	@rm -rf ./obj_asm
+	@rm -rf ./obj_vm
+	@rm -rf ./libprintf.a
 	@echo "\033[33;11m===  <obj cleaned>  ===\033[00m"
 
 $(OBJ_PATH1):

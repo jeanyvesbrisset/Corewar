@@ -6,11 +6,12 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 13:53:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 13:44:28 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+#include "../includes/asm.h"
 
 int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 {
@@ -31,7 +32,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 	tabi = 0;
 	tmp = (*line)[s_name + i];
 	(*line)[s_name + i] = 0;
-	while (tabi < 17 && (ft_strcmp(g_op_tab[tabi].name, *line + i) != 0))
+	while (tabi < 16 && (ft_strcmp(g_f_tab[tabi].name, *line + i) != 0))
 		tabi++;
 	(*line)[s_name + i] = tmp;
 	start_to_command(start);
