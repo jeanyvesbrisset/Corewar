@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
+#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/13 09:46:56 by maginist          #+#    #+#              #
-#    Updated: 2019/06/19 14:53:21 by floblanc         ###   ########.fr        #
+#    Updated: 2019/06/26 15:41:55 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,7 +122,8 @@ FILES = add_pre_flgs.c\
 	  ft_abs.c\
 	  get_next_line.c\
 	  get_next_line_mod.c\
-	  ft_jump_white_spaces.c
+	  ft_jump_white_spaces.c\
+	  ft_memndup.c
 
 # Colors
 _RED = $'\033[31m$'

@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/26 14:24:45 by maginist         ###   ########.fr       */
+/*   Created: 2019/06/26 15:17:01 by floblanc          #+#    #+#             */
+/*   Updated: 2019/06/26 15:40:51 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../include/libprintf.h"
 
-int	ft_error(char *error)
+void	*ft_memndup(unsigned char *s, size_t n)
 {
-	ft_printf("%s\n", error);
-	return (0);
-}
+	size_t			i;
+	unsigned char	*dst;
 
-int	main(int ac, char **av)
-{
-	t_stock	*begin;
-	t_cdata	*start;
-	t_label	*lab;
-
-	begin = 0;
-	start = 0;
-	lab = 0;
-	if (ac < 2)
-	{
-		ft_printf("Usage: %s <sourcefile.s>\n", av[0]);
+	i = 0;
+	if (!(dst = (unsigned char*)malloc(sizeof(unsigned char) * (n))))
 		return (0);
+	while (s[i] && i < n)
+	{
+		dst[i] = s[i];
+		i++;
 	}
-	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
-		create_cor(start, av[ac - 1]);
-	//free_structs(&begin, &start, &lab);
-	return (0);
+	return (dst);
 }

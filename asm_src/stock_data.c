@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 12:02:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/26 15:47:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		create_cor(t_cdata *start, char *name)
 	current = start;
 	name_cor(&name);
 	if ((fd = open(name, O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
-		return (ft_error("OPEN_ERROR"));
+		return (ft_error("OPEN_ERROR2"));
 	while (current->next != start)
 	{
 		write(fd, current->str, current->size);
@@ -79,7 +79,7 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	if (!(reader = (int*)malloc(sizeof(int) * 2)))
 		return (0);
 	if ((reader[0] = open(file, O_RDONLY)) == -1)
-		return (ft_error("OPEN_ERROR"));
+		return (ft_error("OPEN_ERROR1"));
 	line = 0;
 	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
 	{
@@ -87,12 +87,15 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 		if (!(line_is_correct(&line, start, lab, reader)))
 		{
 			free(reader);
-			return (0);
+			return (ft_error("PROBLEM ON LINE"));
 		}
 		ft_strdel(&line);
 	}
 	free(reader);
 	if (all_label_good(start, lab))
+	{
+		put_champ_size(start);
 		return (1);
+	}
 	return (0);
 }

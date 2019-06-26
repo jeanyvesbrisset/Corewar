@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libprintf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/21 16:27:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/26 15:40:29 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,6 @@ int					ft_strsearch(char *src, char c);
 int					ft_charstr(char *s1, char *s2);
 long				ft_atoll(const char *str);
 void				ft_jump_white_spaces(char *str, int *i);
+void				*ft_memndup(unsigned char *s, size_t n);
 
 #endif

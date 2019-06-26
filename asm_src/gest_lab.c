@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 16:18:01 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 15:32:52 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ void	add_to_lab(t_label **lab, char **name, int proto)
 	new->name = *name;
 	if (proto >= 0)
 		new->proto = proto;
-	if (!(new->used))
-		new->used = 0;
+//	if (!(new->used))
+	new->used = 0;
 	new->next = *lab;
-	current->next = new;
+	if (current)
+		current->next = new;
 }
 
 int		gest_lab(t_label **lab, int index, char **line, int *jump)

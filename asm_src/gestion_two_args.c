@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 16:23:53 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 14:23:01 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if (str[i] == DIRECT_CHAR)
 	{
-		if ((res = is_direct(str + i + 1, &i, lab, *index)) == 1)
+		if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 		{
 			if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
 				return (0);
@@ -108,7 +108,7 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if (str[i] == DIRECT_CHAR)
 	{
-		if ((res = is_direct(str + i + 1, &i, lab, *index)) == 1)
+		if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 		{
 			if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
 				return (0);

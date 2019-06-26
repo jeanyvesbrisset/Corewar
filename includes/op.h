@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/26 13:40:29 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 15:47:29 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ int					ft_two_choices(char *str, int **tab, t_cdata **start
 	, t_label **lab);
 int					all_label_good(t_cdata **start, t_label **lab);
 void				ocp_adder(unsigned char *ocp, int value);
+void				put_champ_size(t_cdata **st);
 
 #endif
