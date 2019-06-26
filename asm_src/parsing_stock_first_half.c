@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 15:17:03 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 17:06:55 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,9 @@ void	init_cor(t_cdata **start)
 int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 {
 	static int	step = 0;
+	static int 	lol = 0;//debug laul
 
+	lol++;
 	if (!(*line))
 		return (1);
 	if (!(step))
@@ -145,9 +147,10 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 	else if ((*line)[0] && (*line)[0] != COMMENT_CHAR && (*line)[0] != ';')
 	{
 		ft_strdel(line);
-		ft_printf("%d\n", step);
+		ft_printf("ERROR LOL = %d\n", lol);
 		return (ft_error("NOT A VALID INPUT"));
 	}
-	ft_printf("line = %s\n", *line);
+	ft_printf("line_is_correct = %s\n", *line);
+	ft_printf("%d\n", lol);
 	return (1);
 }

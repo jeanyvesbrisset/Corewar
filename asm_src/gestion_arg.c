@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/25 11:45:04 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/26 17:59:52 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int		add_used_label(char **str, t_label **lab, int index)
 	cur = (*lab);
 	while (cur && cur->next != *lab && ft_strcmp(cur->name, *str) != 0)
 		cur = cur->next;
-	if (ft_strcmp(cur->name, *str) != 0)
+	if (!(cur) || ft_strcmp(cur->name, *str) != 0)
 	{
 		add_to_lab(lab, str, -1);
-		cur = cur->next;
+		cur = (*lab)->next;
 	}
 	if (!(cur->used))
 	{
@@ -55,12 +55,13 @@ int		is_index(char *str, int *i)
 {
 	int j;
 
+	(void)*i;
 	j = 0;
-	if (str[(*i) + j] == '-')
+	if (str[j] == '-')
 		j++;
-	if (!(ft_isdigit(str[(*i) + j])))
+	if (!(ft_isdigit(str[j])))
 		return (0);
-	while (str[(*i) + j] && ft_isdigit(str[(*i) + j]))
+	while (str[j] && ft_isdigit(str[j]))
 		j++;
 	return (1);
 }
@@ -72,25 +73,29 @@ int		is_direct(char *str, int *i, t_label **lab, int index)
 	char	*str_cpy;
 
 	j = 0;
-	if (str[(*i)++] != DIRECT_CHAR)
+	ft_printf("is_direct[%d] = %c\n", 0, str[0]);
+	if (str[j++] != DIRECT_CHAR)
 		return (0);
-	if (str[(*i) + (j)] == LABEL_CHAR)
+	ft_printf("is_direct1[%d] = %c\n", 0, str[j]);
+	if (str[j] == LABEL_CHAR)
 	{
-		(*i)++;
-		while (str[(*i) + j] && ft_strsearch(LABEL_CHARS, str[(*i) + j]))
+		j++;
+		while (str[j] && ft_strsearch(LABEL_CHARS, str[j]))
 			j++;
-		tmp = str[(*i) + j];
-		if (j == 0 || tmp == SEPARATOR_CHAR || tmp == ' ' || tmp == '\0'
-			|| tmp == '\t')
+		tmp = str[j];
+		ft_printf("is_direct2[%d] = %c\n", j, str[j]);
+		if (j == 2)
 			return (0);
-		str[(*i) + j] = 0;
-		str_cpy = ft_strdup(str + (*i));
+		str[j] = 0;
+		str_cpy = ft_strdup(str + 2);
+		ft_printf("is_direct3[%d] = %s\n", j, str_cpy);
 		if (!(add_used_label(&str_cpy, lab, index)))
-			return (0);
-		str[(*i) + j] = tmp;
+			return (ft_error("BAD_LABELLLLLLL"));
+		str[j] = tmp;
+		(*i) += j;
 	}
 	else
-		return (is_index(str, i));
+		return (is_index(str + 1, i));
 	return (2);
 }
 
@@ -102,9 +107,11 @@ int		is_register(char *str, int *i)
 	j = 0;
 	if (str[(*i)] != 'r')
 		return (0);
+	(*i)++;
 	while (str[(*i) + j] && ft_isdigit(str[(*i) + j]))
 		j++;
 	res = ft_atoll(str + (*i));
+	ft_printf("res = %d\n", res);
 	if (res < 1 || res > REG_NUMBER)
 		return (0);
 	(*i) += j;

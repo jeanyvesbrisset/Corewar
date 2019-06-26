@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 15:32:52 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 17:41:21 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,13 @@ void	add_to_lab(t_label **lab, char **name, int proto)
 	if (!(new = (t_label*)malloc(sizeof(t_label) * 1)))
 		return ;
 	new->name = *name;
+	ft_printf("is_at_to_lab = %s, %d\n", new->name, proto);	
 	if (proto >= 0)
 		new->proto = proto;
 //	if (!(new->used))
 	new->used = 0;
+	if (!(*lab))
+		*lab = new;
 	new->next = *lab;
 	if (current)
 		current->next = new;
@@ -86,7 +89,7 @@ int		gest_lab(t_label **lab, int index, char **line, int *jump)
 	if (i > 0 && (*line)[i] && (*line)[i - 1] != '%')
 	{
 		(*line)[i] = 0;
-		if (*line + *jump == 0 || ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
+		if ((*line)[(*jump)] == 0 || ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
 			return (0);
 		name = ft_strdup((*line) + *jump);
 		(*line)[i] = ':';
