@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 13:55:52 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 12:02:22 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int		create_cor(t_cdata *start, char *name)
 
 int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 {
-	int		fd;
 	int		*reader;
 	char	*line;
 
@@ -82,7 +81,7 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	if ((reader[0] = open(file, O_RDONLY)) == -1)
 		return (ft_error("OPEN_ERROR"));
 	line = 0;
-	while ((reader[1] = get_next_line(reader[0], &line)) > 0)
+	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
 	{
 		stock_in_stock(beg, line, reader[1]);
 		if (!(line_is_correct(&line, start, lab, reader)))

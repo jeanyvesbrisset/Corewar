@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
+#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/06/25 16:11:20 by maginist         ###   ########.fr        #
+#    Updated: 2019/06/26 11:44:46 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS1 = free_structs.c\
 		gnl_find_mod.c\
 		main.c\
 		more_utils.c\
-		parsing_stock_first.c\
+		parsing_stock_first_half.c\
 		stock_data.c\
 		utils.c
 
