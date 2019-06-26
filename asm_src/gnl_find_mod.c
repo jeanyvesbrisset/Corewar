@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/24 11:43:01 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/26 18:18:44 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		i++;
 	}
 	*index += (int)size;
-	return (1);
+	return (ft_strlen(str_nb));//ajout
 }
 
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
