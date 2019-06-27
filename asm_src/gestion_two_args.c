@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_two_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 14:23:01 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:27:25 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 	{
 		if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 		{
-			if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
-				return (0);
-			ocp_adder(ocp, DIR_CODE);
+			if ((res = ft_itoo((*start)->str + (*index), str + i, 4, index))
+			== 0)
+				return (ft_error("ITOO A CRASH"));
+			i += res;
 		}
 		else if (res == 0)
 			return (0);
@@ -38,7 +39,8 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 		{
 			(*start)->str[*index] = 4;
 			(*index) += 4;
-		}	
+		}
+		ocp_adder(ocp, DIR_CODE);
 	}
 	else if (is_index(str + i, &i))
 	{
@@ -110,9 +112,10 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 	{
 		if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 		{
-			if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
-				return (0);
-			ocp_adder(ocp, DIR_CODE);
+			if ((res = ft_itoo((*start)->str + (*index), str + i, 4, index))
+			== 0)
+			return (ft_error("ITOO A CRASH"));
+		i += res;
 		}
 		else if (res == 0)
 			return (0);
@@ -120,7 +123,8 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 		{
 			(*start)->str[*index] = 4;
 			(*index) += 4;
-		}	
+		}
+		ocp_adder(ocp, DIR_CODE);	
 	}
 	else if (is_index(str + i, &i))
 	{

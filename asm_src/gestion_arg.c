@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/26 17:59:52 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:53:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		is_index(char *str, int *i)
 	j = 0;
 	if (str[j] == '-')
 		j++;
+	ft_printf("is index str[%d] = %c\n", j, str[j]);
 	if (!(ft_isdigit(str[j])))
 		return (0);
 	while (str[j] && ft_isdigit(str[j]))
@@ -76,7 +77,7 @@ int		is_direct(char *str, int *i, t_label **lab, int index)
 	ft_printf("is_direct[%d] = %c\n", 0, str[0]);
 	if (str[j++] != DIRECT_CHAR)
 		return (0);
-	ft_printf("is_direct1[%d] = %c\n", 0, str[j]);
+	ft_printf("is_direct1[%d] = %c\n", j, str[j]);
 	if (str[j] == LABEL_CHAR)
 	{
 		j++;
@@ -95,7 +96,10 @@ int		is_direct(char *str, int *i, t_label **lab, int index)
 		(*i) += j;
 	}
 	else
+	{
+		(*i)++;
 		return (is_index(str + 1, i));
+	}
 	return (2);
 }
 

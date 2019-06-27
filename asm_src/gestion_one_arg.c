@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_one_arg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/25 16:18:29 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:23:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 4, index)))
-			return (0);
+		if ((res = ft_itoo((*start)->str + (*index), str + i, 4, index)) == 0)
+			return (ft_error("ITOO A CRASH"));
+		i += res;
 	}
 	else if (res == 0)
 		return (0);
@@ -53,8 +54,9 @@ int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
-			return (0);
+		if ((res = ft_itoo((*start)->str + (*index), str + i, 2, index)) == 0)
+			return (ft_error("ITOO A CRASH"));
+		i += res;
 	}
 	else if (res == 0)
 		return (0);
@@ -80,8 +82,9 @@ int		gest_fork(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
-			return (0);
+		if ((res = ft_itoo((*start)->str + (*index), str + i, 2, index)) == 0)
+			return (ft_error("ITOO A CRASH"));
+		i += res;
 	}
 	else if (res == 0)
 		return (0);
@@ -107,8 +110,9 @@ int		gest_lfork(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
-			return (0);
+		if ((res = ft_itoo((*start)->str + (*index), str + i, 2, index)) == 0)
+			return (ft_error("ITOO A CRASH"));
+		i += res;
 	}
 	else if (res == 0)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 11:42:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:38:33 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
-		return (0);
+		return (ft_error("BAD CHOICES 3 AND 2"));
 	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
 			return (0);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
