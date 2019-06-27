@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 15:31:05 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:20:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,26 @@ int	ocp_trad_size(int com, int ocp)
 	int		mult;
 	int		extract;
 
+	ft_printf("OCP = %d\n", ocp);
 	res = 0;
 	if (com == 10 || com == 11 || com == 14)
 		mult = 1;
 	else
 		mult = 2;
 	extract = ocp / 64;
+	ft_printf("extract = %d\n", extract);
 	if (extract == 2)
 		extract *= mult;
 	res += extract;
 	ocp -= extract * 64;
 	extract = ocp / 16;
+	ft_printf("extract = %d\n", extract);
 	if (extract == 2)
 		extract *= mult;
 	res += extract;
-	ocp -= extract * 32;
+	ocp -= extract * 16;
 	extract = ocp / 4;
+	ft_printf("extract = %d\n", extract);
 	if (extract == 2)
 		extract *= mult;
 	res += extract;
@@ -63,7 +67,7 @@ void	put_champ_size(t_cdata **st)
 	while (comment->index != 2)
 		comment = comment->next;
 	champ = comment->next;
-	while (champ->str[i])
+	while (i < CHAMP_MAX_SIZE && champ->str[i] != 0)
 	{
 		if ((*st)->str[i] == 9 || (*st)->str[i] == 12  || (*st)->str[i] == 15)
 			i += 3;
@@ -74,15 +78,18 @@ void	put_champ_size(t_cdata **st)
 	}
 	champ->size = i;
 	ft_printf("champ size = %d\n", champ->size);
-	nb = ft_itoa(i - 1);
+	nb = ft_itoa(champ->size);
+	ft_printf("nb = %s\n", nb);
 	tmp = ft_memndup(champ->str, i);
-	ft_itoo((comment)->str, nb, 4, &i);
+	ft_itoo((comment)->str + 4, nb, 4, &i);
 	ft_memdel((void**)(&(champ->str)));
 	champ->str = tmp;
 }
 
 void	ocp_adder(unsigned char *ocp, int value)
 {
-	*ocp += value;
-	*ocp <<= 2;
+	ft_printf("LE OCP %d et value = %d\n", (int)(*ocp), value);
+	(*ocp) += (unsigned char)value;
+	(*ocp) <<= 2;
+	ft_printf("LE OCP %d\n", (int)(*ocp));
 }

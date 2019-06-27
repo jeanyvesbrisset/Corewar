@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 13:39:49 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:55:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	div = 1;
 	if (*index + (int)size >= CHAMP_MAX_SIZE)
 		return (0);
-	nb = (9223372036854775807 + ft_atoll(str_nb)) % 9223372036854775807;
+	nb = (9223372036854775807 + ft_atoll(str_nb));
+	nb %= 9223372036854775807;
+	ft_printf("LE NB %llu\n", nb);
 	while (--i > 0)
 		div *= 256;
 	nb %= div * 256;
@@ -34,8 +36,9 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		div /= 256;
 		i++;
 	}
+	ft_printf("index = %d\n", *index);
 	*index += (int)size;
-//	ft_printf("ft_itoo str_nb = %s\n", str_nb);
+	ft_printf("ft_itoo str_nb = %s et size = %d\n", str_nb, (int)size);
 	return (len_digit(str_nb));//ajout
 }
 

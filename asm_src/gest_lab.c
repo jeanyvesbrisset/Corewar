@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gest_lab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 13:58:34 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:19:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 {
 	t_label		*cur;
 	int			i;
+	int 		res;
 
 	cur = *lab;
 //	ft_printf("coucou label\n");
@@ -38,23 +39,34 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		//ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
 		if (cur->proto < 0)
 			return (ft_error("proto < 0\n"));
-		i = -1;
-		while (cur->used && cur->used[++i] != -1)
-			if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa((MEM_SIZE 
-			+ cur->proto - cur->used[i]) % MEM_SIZE)
+		i = 0;
+		ft_printf("all label good name = %s\n\n", cur->name);
+		while (cur->used && cur->used[i] != -1)
+		{
+			res = (MEM_SIZE + cur->used[i] - cur->proto);
+			res %= MEM_SIZE;
+			ft_printf("THE RES = %d\n", res);
+			if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa(res)
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 				return (ft_error("BUG ITOO\n"));
+			i++;
+		}
 		cur = cur->next;
 	}
 	//ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
 	if (cur->proto < 0)
 		return (ft_error("Proto < 0 2\n"));
 	i = -1;
+	ft_printf("all label good name = %s\n\n", cur->name);
 	while (cur->used && cur->used[++i] != -1)
-		if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa((MEM_SIZE 
-		+ cur->used[i] - cur->proto) % MEM_SIZE), (*start)->str[cur->used[i]]
-		, &(cur->used[i]))))
-			return (ft_error("BUG ITOO 2\n"));
+	{
+		res = (MEM_SIZE + cur->used[i] - cur->proto);
+		res %= MEM_SIZE;
+		ft_printf("THE RES = %d\n", res);
+		if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa(res)
+			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
+			return (ft_error("BUG ITOO\n"));
+	}
 	return (1);
 }
 

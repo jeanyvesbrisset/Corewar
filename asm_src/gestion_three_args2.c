@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_three_args2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:11:01 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 18:08:27 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:41:06 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		gest_sti(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_printf("line[%d] = %c\n", i, str[i]);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (ft_error("BAD_REGISTER"));
+	ocp_adder(tab[3], REG_CODE);
 	if (!(ft_good_transi(str, &i)))
 		return (ft_error("BAD TRANSI"));
 	ft_printf("line[%d] = %c\n", i, str[i]);

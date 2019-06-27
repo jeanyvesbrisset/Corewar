@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/27 13:39:19 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:05:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 			return (0);
 		else
 		{
+			ft_printf("tab[1] = %d et tab[2] = %d\n", *tab[1], *tab[2]);
 			(*start)->str[*(tab[1])] = *(tab[2]);
-			(*(tab[1])) += *(tab[2]);
+			(*(tab[1])) += (*tab[2]);
+			ft_printf("tab[1] = %d et tab[2] = %d\n", *tab[1], *tab[2]);
 		}	
 		ocp_adder((unsigned char*)(tab[3]), DIR_CODE);
 	}
