@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 17:19:26 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/27 22:28:33 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	start_to_command(t_cdata **start)
 		*start = (*start)->next;
 }
 
-void	add_to_lab(t_label **lab, char **name, int proto)
+void	add_to_lab(t_label **lab, char **name, int proto) //modifier le proto en fonction de la distance au premier DIR
 {
 	t_label	*current;
 	t_label *new;

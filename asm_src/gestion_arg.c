@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/27 13:55:38 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 22:28:31 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		size_used_tab(int *tab)
 	return (i);
 }
 
-int		add_used_label(char **str, t_label **lab, int index)
+int		add_used_label(char **str, t_label **lab, int index) //ajouter la size du direct a l'index ou l'envoyer en 4eme element
 {
 	t_label *cur;
 	int		size;
