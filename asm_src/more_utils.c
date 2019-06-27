@@ -6,11 +6,21 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 15:45:29 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:31:05 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int		len_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+		i++;
+	return (i);
+}
 
 int	ocp_trad_size(int com, int ocp)
 {
@@ -62,6 +72,8 @@ void	put_champ_size(t_cdata **st)
 		else
 			i += ocp_trad_size((int)(*st)->str[i] , (int)(*st)->str[i + 1]);
 	}
+	champ->size = i;
+	ft_printf("champ size = %d\n", champ->size);
 	nb = ft_itoa(i - 1);
 	tmp = ft_memndup(champ->str, i);
 	ft_itoo((comment)->str, nb, 4, &i);

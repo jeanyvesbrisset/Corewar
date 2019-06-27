@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 17:06:55 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 13:45:17 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		return (1);
 	if (!(step))
 		init_cor(sta);
+	ft_printf("step = %d && line_is_correct = %s\n", lol, *line);
 	if (step == 0 && is_name(line, sta, reader))
 		step = 1;
 	else if (step == 1 && is_comment(line, sta, reader))
@@ -150,7 +151,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		ft_printf("ERROR LOL = %d\n", lol);
 		return (ft_error("NOT A VALID INPUT"));
 	}
-	ft_printf("line_is_correct = %s\n", *line);
-	ft_printf("%d\n", lol);
+	else
+		ft_printf("JUMP\n");	
 	return (1);
 }

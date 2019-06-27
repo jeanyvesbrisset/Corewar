@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/26 15:47:14 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:31:38 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,38 @@ void	name_cor(char **name)
 	int		i;
 	char	*tmp;
 
-	i = 0;
+	i = ft_strlen((*name)) - 1;
 	while ((*name)[i] && (*name)[i] != '.')
-		i++;
-	if (!(name[i]))
-		i = 0;
-	while ((*name)[i])
-		(*name)[i++] = 0;
+		i--;
+	if (i >= 0 && (*name)[i + 1]  && (*name)[i + 1] != '/')
+		(*name)[i] = 0;	
 	tmp = ft_strjoin(*name, ".cor");
-	ft_strdel(name);
-	name = &tmp;
+	//ft_strdel(name);
+	*name = tmp;
+	ft_printf("name = %s\n", *name);
 }
 
-int		create_cor(t_cdata *start, char *name)
+int		create_cor(t_cdata **start, char *name)
 {
+	ft_printf("coucou\n");
 	t_cdata	*current;
 	int		fd;
 
-	current = start;
+	while ((*start)->index != 1)
+		*start = (*start)->next;
 	name_cor(&name);
+	current = (*start);
 	if ((fd = open(name, O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
 		return (ft_error("OPEN_ERROR2"));
-	while (current->next != start)
+	while (current->next != *start)
 	{
 		write(fd, current->str, current->size);
 		current = current->next;
 	}
-	if (current && current->next == start)
+	if (current && current->next == *start)
 		write(fd, current->str, current->size);
-	ft_strdel(&name);
+//	ft_strdel(&name);
+	ft_printf("Writing output program to %s\n", name);
 	return (0);
 }
 
@@ -94,8 +97,9 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	free(reader);
 	if (all_label_good(start, lab))
 	{
+		ft_printf("YEEEEEES!\n");
 		put_champ_size(start);
 		return (1);
 	}
-	return (0);
+	return (ft_error("bite\n"));
 }

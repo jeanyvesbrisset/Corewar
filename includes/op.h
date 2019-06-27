@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/26 15:47:29 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/27 15:19:32 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					comment_stocker(char **line, int *i, t_cdata **start
 int					ft_error(char *error);
 void				free_structs(t_stock **begin, t_cdata **start
 	, t_label **lab);
-int					create_cor(t_cdata *start, char *name);
+int					create_cor(t_cdata **start, char *name);
 int					is_register(char *str, int *i);
 int					is_index(char *str, int *i);
 int					is_direct(char *str, int *i, t_label **lab, int index);
@@ -150,5 +150,8 @@ int					ft_two_choices(char *str, int **tab, t_cdata **start
 int					all_label_good(t_cdata **start, t_label **lab);
 void				ocp_adder(unsigned char *ocp, int value);
 void				put_champ_size(t_cdata **st);
+int					len_digit(char *str);
+void				add_by_used(t_label **lab, char **str, t_label **new
+	, t_label *current);
 
 #endif
