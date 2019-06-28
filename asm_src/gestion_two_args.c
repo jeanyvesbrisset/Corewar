@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 10:27:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 10:36:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 			if ((res = ft_itoo((*start)->str + (*index), str + i, 4, index))
 			== 0)
 			return (ft_error("ITOO A CRASH"));
-		i += res;
+			i += res;
 		}
 		else if (res == 0)
 			return (0);

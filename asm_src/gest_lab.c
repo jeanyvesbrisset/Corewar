@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 22:28:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 10:08:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,15 @@ int		gest_lab(t_label **lab, int index, char **line, int *jump)
 
 	i = *jump;
 	name = 0;
-	while ((*line)[i] && (*line)[i] != ':')
+	while ((*line)[i] && (*line)[i] != LABEL_CHAR)
 		i++;
-	if (i > 0 && (*line)[i] && (*line)[i - 1] != '%')
+	if (i > 0 && (*line)[i] && (*line)[i - 1] != DIRECT_CHAR)
 	{
 		(*line)[i] = 0;
 		if ((*line)[(*jump)] == 0 || ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
 			return (0);
 		name = ft_strdup((*line) + *jump);
-		(*line)[i] = ':';
+		(*line)[i] = LABEL_CHAR;
 		add_to_lab(lab, &name, index);
 		*jump = i + 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 22:16:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 10:15:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	put_champ_size(t_cdata **st)
 		else
 			i += ocp_trad_size((int)(*st)->str[i] , (int)(*st)->str[i + 1]);
 	}
-	champ->size = 23;
+	champ->size = i;
 	ft_printf("champ size = %d\n", champ->size);
 	nb = ft_itoa(champ->size);
 	ft_printf("nb = %s\n", nb);
