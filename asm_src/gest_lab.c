@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gest_lab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/28 10:08:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 11:55:47 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		{
 			res = (MEM_SIZE + cur->used[i] - cur->proto);
 			res %= MEM_SIZE;
-			ft_printf("THE RES = %d\n", res);
+	//		ft_printf("THE RES = %d\n", res);
 			if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa(res)
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 				return (ft_error("BUG ITOO\n"));
@@ -53,7 +53,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		}
 		cur = cur->next;
 	}
-	//ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
+	ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
 	if (cur->proto < 0)
 		return (ft_error("Proto < 0 2\n"));
 	i = -1;
@@ -62,7 +62,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	{
 		res = (MEM_SIZE + cur->used[i] - cur->proto);
 		res %= MEM_SIZE;
-		ft_printf("THE RES = %d\n", res);
+	//	ft_printf("THE RES = %d\n", res);
 		if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa(res)
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 			return (ft_error("BUG ITOO\n"));

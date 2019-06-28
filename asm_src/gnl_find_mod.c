@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/28 11:24:34 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 11:54:56 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	nb %= div * 256;
 	while (i < size)
 	{
-		ft_printf("str[%d] = %d\n", *index, nb/div);
+		ft_printf("str[%d] = %d\n", i, nb/div);
 		str[(*index)++] = (unsigned char)(nb / div);
 		nb %= div;
 		div /= 256;

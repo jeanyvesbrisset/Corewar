@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/27 22:28:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 11:42:54 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int		add_used_label(char **str, t_label **lab, int index) //ajouter la size du d
 	//ft_printf("add_used_label cur->name = %s && proto = %d\n", cur->name, cur->proto);
 	if (!(cur) || ft_strcmp(cur->name, *str) != 0)
 	{
-		ft_printf("OKKKKK->name = %s && proto = %d\n", cur->name, cur->proto);
+		//ft_printf("OKKKKK->name = %s && proto = %d\n", cur->name, cur->proto);
 		add_by_used(lab, str, &new, cur);
-		ft_printf("new->name = %s && proto = %d\n", new->name, new->proto);
+		//ft_printf("new->name = %s && proto = %d\n", new->name, new->proto);
 		cur = new;
 	}
 	if (!(cur->used))

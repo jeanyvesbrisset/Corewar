@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/28 10:15:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 12:08:17 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,19 @@ void	put_champ_size(t_cdata **st)
 			i += ocp_trad_size((int)(*st)->str[i] , (int)(*st)->str[i + 1]);
 	}
 	champ->size = i;
-	ft_printf("champ size = %d\n", champ->size);
+//	ft_printf("champ size = %d\n", champ->size);
 	nb = ft_itoa(champ->size);
-	ft_printf("nb = %s\n", nb);
+	//ft_printf("nb = %s\n", nb);
 	tmp = ft_memndup(champ->str, i);
-	ft_itoo((comment)->str + 4, nb, 4, &i);
+	i = 4;
+	ft_itoo((comment)->str, nb, 4, &i);
 	ft_memdel((void**)(&(champ->str)));
 	champ->str = tmp;
 }
 
 void	ocp_adder(unsigned char *ocp, int value)
 {
-	ft_printf("LE OCP %d et value = %d\n", (int)(*ocp), value);
+//	ft_printf("LE OCP %d et value = %d\n", (int)(*ocp), value);
 	(*ocp) += (unsigned char)value;
 	(*ocp) <<= 2;
 	ft_printf("LE OCP %d\n", (int)(*ocp));

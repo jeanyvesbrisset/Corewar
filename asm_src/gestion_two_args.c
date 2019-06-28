@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_two_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/28 10:36:24 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/28 12:06:31 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 	{
 		if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 		{
-			if ((res = ft_itoo((*start)->str + (*index), str + i, 4, index))
+			if ((res = ft_itoo((*start)->str, str + i, 4, index))
 			== 0)
 				return (ft_error("ITOO A CRASH"));
 			i += res;
@@ -44,7 +44,7 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 	}
 	else if (is_index(str + i, &i))
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+		if (!(ft_itoo((*start)->str, str + i, 2, index)))
 			return (0);
 		ocp_adder(ocp, IND_CODE);
 	}
@@ -87,7 +87,7 @@ int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 	}
 	else if (is_index(str + i, &i))
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+		if (!(ft_itoo((*start)->str, str + i, 2, index)))
 			return (0);
 		ocp_adder(ocp, IND_CODE);
 	}
@@ -112,7 +112,7 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 	{
 		if ((res = is_direct(str + i, &i, lab, *index)) == 1)
 		{
-			if ((res = ft_itoo((*start)->str + (*index), str + i, 4, index))
+			if ((res = ft_itoo((*start)->str, str + i, 4, index))
 			== 0)
 			return (ft_error("ITOO A CRASH"));
 			i += res;
@@ -128,7 +128,7 @@ int		gest_lld(char *str, t_cdata **start, t_label **lab, int *index)
 	}
 	else if (is_index(str + i, &i))
 	{
-		if (!(ft_itoo((*start)->str + (*index), str + i, 2, index)))
+		if (!(ft_itoo((*start)->str, str + i, 2, index)))
 			return (0);
 		ocp_adder(ocp, IND_CODE);
 	}
