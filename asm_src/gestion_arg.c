@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_arg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/28 11:42:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/30 15:10:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ int		add_used_label(char **str, t_label **lab, int index) //ajouter la size du d
 		return (1);
 	}
 	size = size_used_tab(cur->used);
-	if (!(cur->used = (int*)realloc(cur->used, sizeof(int) * (size + 1))))
+	if (!(cur->used = (int*)realloc(cur->used, sizeof(int) * (size + 2))))
 		return (ft_error("ERROR_REALLOC"));
-	cur->used[size - 1] = index;
-	cur->used[size] = -1;
+	ft_printf("used[%d] in add used = %d\n", size, index);
+	cur->used[size] = index;
+	cur->used[size + 1] = -1;
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/28 12:08:17 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/29 12:36:54 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	put_champ_size(t_cdata **st)
 		else
 			i += ocp_trad_size((int)(*st)->str[i] , (int)(*st)->str[i + 1]);
 	}
-	champ->size = i;
+	champ->size = 23;
 //	ft_printf("champ size = %d\n", champ->size);
 	nb = ft_itoa(champ->size);
 	//ft_printf("nb = %s\n", nb);

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/28 11:26:52 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/30 14:00:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	{
 		if ((res = is_direct(str + *(tab[0]), tab[0], lab, *(tab[1]))) == 1)
 		{
-			if ((res = ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2, tab[1])) == 0)
+			if ((res = ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])) == 0)
 				return (ft_error("ITOO A CRASH"));
 			//ft_printf("res = %d, *i = %d\n", res, *(tab[0]));
 			*(tab[0]) += res;
@@ -38,6 +38,7 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 			return (0);
 		else
 		{
+			ft_printf("used saved to = %d\n", *(tab[1]));
 			ft_printf("tab[1] = %d et tab[2] = %d\n", *tab[1], *tab[2]);
 			(*start)->str[*(tab[1])] = *(tab[2]);
 			(*(tab[1])) += (*tab[2]);
@@ -55,7 +56,7 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	}
 	else if (is_index(str + *(tab[0]), tab[0]))
 	{
-		if (!(ft_itoo((*start)->str + *(tab[1]), str + *(tab[0]), 2, tab[1])))
+		if (!(ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])))
 			return (0);
 		ocp_adder((unsigned char*)(tab[3]), IND_CODE);
 	}
@@ -89,7 +90,7 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 		}
 		else
 		{
-			//ft_printf("res2 = %d\n", res);
+			ft_printf("used saved to = %d\n", *(tab[1]));
 			(*start)->str[*(tab[1])] = *(tab[2]);
 			(*(tab[1])) += *(tab[2]);
 		}

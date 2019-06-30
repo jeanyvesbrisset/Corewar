@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/29 12:25:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/30 11:38:52 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 			res = (MEM_SIZE + cur->proto - (cur->used[i] + (*start)->str[cur->used[i]]));
 			res %= MEM_SIZE;
 			ft_printf("THE RES = %d to %d sized %d\n", res, cur->used[i], (*start)->str[cur->used[i]]);
-			if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa(res)
+			if (!(ft_itoo((*start)->str, ft_itoa(res)
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 				return (ft_error("BUG ITOO\n"));
 			i++;
@@ -60,10 +60,11 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	ft_printf("all label good name = %s\n\n", cur->name);
 	while (cur->used && cur->used[++i] != -1)
 	{
+		ft_printf("used[%d] = %d\n", i, cur->used[i]);
 		res = (MEM_SIZE + cur->proto - (cur->used[i] + (*start)->str[cur->used[i]]));
 		res %= MEM_SIZE;
-	//	ft_printf("THE RES = %d\n", res);
-		if (!(ft_itoo(&((*start)->str[cur->used[i]]), ft_itoa(res)
+		ft_printf("THE RES = %d to %d sized %d\n", res, cur->used[i], (*start)->str[cur->used[i]]);
+		if (!(ft_itoo((*start)->str, ft_itoa(res)
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 			return (ft_error("BUG ITOO\n"));
 	}
