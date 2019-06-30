@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 13:45:17 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/30 19:34:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 	static int		index = 0;
 
 	i = 0;
+	ft_printf("\nINDEX_WAY : line : %s && index = %d\n\n", *line, index);
 	ft_jump_white_spaces(*line, &i);
 	if (!(gest_lab(lab, index, line, &i)))
 		return (ft_error("NOT GEST LAB"));
@@ -36,6 +37,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 		tabi++;
 	(*line)[s_name + i] = tmp;
 	start_to_command(start);
+	ft_printf("le TABI pour lancer la fonction = %d\n", tabi);
 	if (index + 3 < CHAMP_MAX_SIZE && tabi != 16
 	&& g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);

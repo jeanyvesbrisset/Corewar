@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 10:38:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/06/30 19:34:33 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
+	ft_printf("AND : str[%d] = '6'\n", *index);
 	(*start)->str[(*index)++] = 6;
 	tab[3] = &((*start)->str[(*index)]);
 	if (!(fct_separator(str, 2, index, 1)))
