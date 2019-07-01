@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/30 16:33:13 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 10:22:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	int			i;
 	int 		res;
 
+	return (1);/////////////
 	cur = *lab;
 //	ft_printf("coucou label\n");
 	while (cur->next != *lab)

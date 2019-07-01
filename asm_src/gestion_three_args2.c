@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:11:01 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/27 16:41:06 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 11:35:04 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int		gest_sti(char *str, t_cdata **start, t_label **lab, int *index)
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (ft_error("BAD CHOICES 3"));
 	if (!(ft_two_choices(str, (int**)tab, start, lab)))
-		return (ft_error("BAD CHOICES 2"));	
+		return (ft_error("BAD CHOICES 2"));
+	ft_printf("verif du %%1 de sti str[%d] = %d str[%d] = %d\n", *index - 2, (*start)->str[*index - 2], *index - 1, (*start)->str[*index - 1]);
 	return (end_gestion(str, &i));
 }
 

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/30 12:54:32 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 11:27:04 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	nb %= div * 256;
 	while (i < size)
 	{
-		ft_printf("str[%d] = %d\n", *index, nb/div);
+		ft_printf("str[%d] = %d et i = %d/%d size\n", *index, nb/div, i, size);
 		str[(*index)++] = (unsigned char)(nb / div);
 		nb %= div;
 		div /= 256;

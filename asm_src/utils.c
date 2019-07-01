@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/30 14:00:21 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 11:32:55 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	{
 		if ((res = is_direct(str + *(tab[0]), tab[0], lab, *(tab[1]))) == 1)
 		{
-			if ((res = ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])) == 0)
+			if ((res = ft_itoo((*start)->str, str + *(tab[0]), *tab[2], tab[1])) == 0)
 				return (ft_error("ITOO A CRASH"));
 			//ft_printf("res = %d, *i = %d\n", res, *(tab[0]));
 			*(tab[0]) += res;
@@ -78,7 +78,7 @@ int	ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 		{
 		//	ft_printf("res = %d\n", res);
 			ft_printf("verif itoo  01 = %d index %d et %d\n", (int)((*start)->str + *(tab[1]))[0], *tab[1],  (int)((*start)->str + *(tab[1]) + 1)[0]);
-			if ((res = ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])) == 0)
+			if ((res = ft_itoo((*start)->str, str + *(tab[0]), *tab[2], tab[1])) == 0)
 				return (ft_error("ITOO A CRASH"));
 			ft_printf("verif itoo  01 = %d index %d et %d\n", (int)((*start)->str + *(tab[1]) - 2)[0], *tab[1] - 2, (int)((*start)->str + *(tab[1]) - 1)[0]);
 			*(tab[0]) += res;

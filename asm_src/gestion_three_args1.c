@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/30 19:34:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 11:35:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
 	ft_jump_white_spaces(str, &i);
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
+	ft_printf("and first r1 str[%d] = %d\n",*index - 1,  (*start)->str[*index - 1]);
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (ft_error("BAD CHOICES 3 AND 2"));
 	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
 			return (0);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
+	ft_printf("verif du r1 de and str[%d] = %d\n", *index - 1, (*start)->str[*index - 1]);
 	ocp_adder(tab[3], REG_CODE);
 	return (end_gestion(str, &i));
 }
