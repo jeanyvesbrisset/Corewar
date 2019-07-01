@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 14:54:22 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:30:31 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,6 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		return (ft_error("NOT A VALID INPUT"));
 	}
 	else
-		ft_printf("JUMP\n");
+		ft_printf("JUMP\n");	
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 15:11:53 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/01 18:51:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	i = size;
 	div = 1;
 	if (*index + (int)size >= CHAMP_MAX_SIZE)
-		return (ft_error("index + size > champ"));
-	nb = (9223372036854775807 + ft_atoll(str_nb));
+		return (0);
+	nb = (9223372036854775807 + (str_nb[0] == '-' ? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));
 	nb %= 9223372036854775807;
 	ft_printf("LE NB %llu\n", nb);
 	while (--i > 0)
@@ -38,9 +38,8 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		i++;
 	}
 	ft_printf("index ITOO= %d\n", *index);
-	//*index += (int)size;
-	ft_printf("ft_itoo str_nb = %s et size = %d && len_digit = %d\n", str_nb, (int)size, len_digit(str_nb));
-	return (len_digit(str_nb));//ajout
+	ft_printf("ft_itoo str_nb = %s et size = %d\n", str_nb, (int)size);
+	return (len_digit(str_nb));
 }
 
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)

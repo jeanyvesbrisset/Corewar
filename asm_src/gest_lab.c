@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gest_lab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 14:08:55 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:52:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	int 		res;
 
 	cur = *lab;
-//	ft_printf("coucou label\n");
+	ft_printf("coucou label\n");
 	while (cur->next != *lab)
 	{
 		//ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
@@ -43,7 +43,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		ft_printf("all label good name = %s\n\n", cur->name);
 		while (cur->used && cur->used[i] != -1)
 		{
-			res = (MEM_SIZE + cur->proto - (cur->used[i] + (*start)->str[cur->used[i]]));
+			res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
 			res %= MEM_SIZE;
 			ft_printf("THE RES = %d to %d sized %d\n", res, cur->used[i], (*start)->str[cur->used[i]]);
 			if (!(ft_itoo((*start)->str, ft_itoa(res)
@@ -61,7 +61,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	while (cur->used && cur->used[++i] != -1)
 	{
 		ft_printf("used[%d] = %d\n", i, cur->used[i]);
-		res = (MEM_SIZE + cur->proto - (cur->used[i] + (*start)->str[cur->used[i]]));
+		res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
 		res %= MEM_SIZE;
 		ft_printf("THE RES = %d to %d sized %d\n", res, cur->used[i], (*start)->str[cur->used[i]]);
 		if (!(ft_itoo((*start)->str, ft_itoa(res)

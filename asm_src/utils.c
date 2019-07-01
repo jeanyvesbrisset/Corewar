@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/01 14:59:48 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:58:46 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	{
 		if (!(res = ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])))
 			return (0);
-		*(tab[0]) += res;
+		(*tab[0]) += res;
 		ocp_adder((unsigned char*)(tab[3]), IND_CODE);
 	}
 	else
@@ -136,7 +136,7 @@ int	end_gestion(char *str, int *i)
 	ft_jump_white_spaces(str, i);
 	//ft_printf("end[str] = %s\n", str);
 	//ft_printf("end(str[%d])= %c\n", *i, str[*i - 1]);
-	if (str[(*i)] != 0)
+	if (str[(*i)] != 0 && str[(*i)] != COMMENT_CHAR && str[(*i)] != ';')
 		return (0);
 //	ft_printf("end gestion works\n");
 	return (1);

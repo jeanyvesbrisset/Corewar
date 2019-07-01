@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/29 12:32:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 18:05:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	{
 		(*start)->str[*index] = 4;
 		(*index) += 4;
-	}	
+	}
 	return (end_gestion(str, &i));
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 14:35:16 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:54:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,27 @@ void	put_champ_size(t_cdata **st)
 	//ft_printf("nb = %s\n", nb);
 	i = 4;
 	ft_itoo((comment)->str, nb, 4, &i);
+}
+
+int		used_s_begin(t_cdata **st, int used)
+{
+	int	i;
+	int	run;
+	i = 0;
+	run = 0;
+	while (i + run <= used)
+	{
+		i += run;
+		run = 0;
+		if ((*st)->str[i] == 9 || (*st)->str[i] == 12  || (*st)->str[i] == 15)
+			run = 3;
+		else if ((*st)->str[i] == 1)
+			run = 5;
+		else
+			run = ocp_trad_size((int)(*st)->str[i] , (int)(*st)->str[i + 1]);
+		ft_printf("dans le calcul de la size i = %d et next commande = %d\n", i, (*st)->str[i]);
+	}
+	return (i);
 }
 
 void	ocp_adder(unsigned char *ocp, int value)

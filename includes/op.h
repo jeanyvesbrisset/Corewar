@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/28 10:37:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:51:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define IND_CODE			3
 # define MAX_ARGS_NUMBER	4
 # define MAX_PLAYERS		4
-# define MEM_SIZE			(4*1024)
+# define MEM_SIZE			(64*1024)
 # define IDX_MOD			(MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
 # define COMMENT_CHAR		'#'
@@ -153,5 +153,7 @@ void				put_champ_size(t_cdata **st);
 int					len_digit(char *str);
 void				add_by_used(t_label **lab, char **str, t_label **new
 	, t_label *current);
+
+int					used_s_begin(t_cdata **st, int used);
 
 #endif
