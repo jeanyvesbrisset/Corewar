@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/01 11:32:55 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 14:59:48 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	}
 	else if (is_index(str + *(tab[0]), tab[0]))
 	{
-		if (!(ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])))
+		if (!(res = ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1])))
 			return (0);
+		*(tab[0]) += res;
 		ocp_adder((unsigned char*)(tab[3]), IND_CODE);
 	}
 	else

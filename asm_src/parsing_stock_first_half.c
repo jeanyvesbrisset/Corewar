@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/06/30 19:34:17 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/01 14:54:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 	if (!(gest_lab(lab, index, line, &i)))
 		return (ft_error("NOT GEST LAB"));
 	ft_jump_white_spaces(*line, &i);
+	if (!((*line)[i]))
+		return (1);
 	s_name = 0;
 	while ((*line)[s_name + i] && (*line)[s_name + i] != ' '
 		&& (*line)[s_name + i] != '\t')
@@ -154,6 +156,6 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		return (ft_error("NOT A VALID INPUT"));
 	}
 	else
-		ft_printf("JUMP\n");	
+		ft_printf("JUMP\n");
 	return (1);
 }
