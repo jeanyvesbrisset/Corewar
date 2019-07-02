@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/30 15:10:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:43:01 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,18 @@ int		is_direct(char *str, int *i, t_label **lab, int index)
 	char	*str_cpy;
 
 	j = 0;
-	//ft_printf("is_direct[%d] = %c\n", 0, str[0]);
 	if (str[j++] != DIRECT_CHAR)
 		return (0);
-	//ft_printf("is_direct1[%d] = %c\n", j, str[j]);
 	if (str[j] == LABEL_CHAR)
 	{
 		j++;
 		while (str[j] && ft_strsearch(LABEL_CHARS, str[j]))
 			j++;
 		tmp = str[j];
-		//ft_printf("is_direct2[%d] = %c\n", j, str[j]);
 		if (j == 2)
 			return (0);
 		str[j] = 0;
 		str_cpy = ft_strdup(str + 2);
-		//ft_printf("is_direct3[%d] = %s\n", j, str_cpy);
 		if (!(add_used_label(&str_cpy, lab, index)))
 			return (ft_error("BAD_LABELLLLLLL"));
 		str[j] = tmp;

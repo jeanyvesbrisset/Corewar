@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 18:05:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:28:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 	int		res;
 
 	(*start)->str[(*index)++] = 9;
-	i = 0;
-	while (str[i])
-		if (str[i++] == SEPARATOR_CHAR)
-			return (0);
+	if (!(fct_separator(str, 0, index, 0)))
+		return (0);;
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
@@ -74,10 +72,8 @@ int		gest_fork(char *str, t_cdata **start, t_label **lab, int *index)
 	int		res;
 
 	(*start)->str[(*index)++] = 12;
-	i = 0;
-	while (str[i])
-		if (str[i++] == SEPARATOR_CHAR)
-			return (0);
+	if (!(fct_separator(str, 0, index, 0)))
+		return (0);
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
@@ -102,10 +98,8 @@ int		gest_lfork(char *str, t_cdata **start, t_label **lab, int *index)
 	int		res;
 
 	(*start)->str[(*index)++] = 15;
-	i = 0;
-	while (str[i])
-		if (str[i++] == SEPARATOR_CHAR)
-			return (0);
+	if (!(fct_separator(str, 0, index, 0)))
+		return (0);;
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if ((res = is_direct(str + i, &i, lab, *index)) == 1)
@@ -130,11 +124,9 @@ int		gest_aff(char *str, t_cdata **start, t_label **lab, int *index)
 
 	(*start)->str[(*index)++] = 16;
 	(*start)->str[(*index)++] = 64;
-	i = 0;
 	(void)lab;
-	while (str[i])
-		if (str[i++] == SEPARATOR_CHAR)
-			return (0);
+	if (!(fct_separator(str, 0, index, 0)))
+		return (0);
 	i = 0;
 	ft_jump_white_spaces(str, &i);
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 14:26:59 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:27:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,15 +146,15 @@ void	init_cor(t_cdata **start)
 
 int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 {
-	static int	step = 0;
-	static int 	lol = 0;//debug laul
+	static int	step = -1;
 
-	lol++;
 	if (!(*line))
 		return (1);
-	if (!(step))
+	if (step == -1)
+	{
 		init_cor(sta);
-	ft_printf("step = %d && line_is_correct = %s\n", lol, *line);
+		step++;
+	}
 	if (step == 0 && is_name(line, sta, reader))
 		step = 1;
 	else if (step == 1 && is_comment(line, sta, reader))

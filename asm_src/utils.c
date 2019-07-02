@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/01 17:58:46 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:25:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	fct_separator(char *str, int nb_sep, int *index, int ocp)
 
 	count = 0;
 	i = 0;
-	while (str[i])
+	while (str[i] && str[i] != COMMENT_CHAR && str[i] != ';')
 	{
 		if (str[i] == SEPARATOR_CHAR)
 			count++;

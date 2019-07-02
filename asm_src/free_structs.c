@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 14:44:08 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 12:19:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:01:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	free_cdata(t_cdata **start)
 		ft_strdel((char**)&(before->str));
 		free(before);
 		before = 0;
-	}	
+	}
 }
 
 void	free_stock(t_stock **begin)
