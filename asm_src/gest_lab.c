@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 17:52:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 14:17:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,39 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	t_label		*cur;
 	int			i;
 	int 		res;
+	char		*res_str;
 
 	cur = *lab;
-	ft_printf("coucou label\n");
 	while (cur->next != *lab)
 	{
-		//ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
 		if (cur->proto < 0)
 			return (ft_error("proto < 0\n"));
 		i = 0;
-		ft_printf("all label good name = %s\n\n", cur->name);
 		while (cur->used && cur->used[i] != -1)
 		{
 			res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
 			res %= MEM_SIZE;
-			ft_printf("THE RES = %d to %d sized %d\n", res, cur->used[i], (*start)->str[cur->used[i]]);
-			if (!(ft_itoo((*start)->str, ft_itoa(res)
+			res_str = ft_itoa(res);
+			if (!(ft_itoo((*start)->str, res_str
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 				return (ft_error("BUG ITOO\n"));
+			ft_strdel(&res_str);
 			i++;
 		}
 		cur = cur->next;
 	}
-	ft_printf("cur->name = %s && proto = %d\n", cur->name, cur->proto);
 	if (cur->proto < 0)
 		return (ft_error("Proto < 0 2\n"));
 	i = -1;
-	ft_printf("all label good name = %s\n\n", cur->name);
 	while (cur->used && cur->used[++i] != -1)
 	{
-		ft_printf("used[%d] = %d\n", i, cur->used[i]);
 		res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
 		res %= MEM_SIZE;
-		ft_printf("THE RES = %d to %d sized %d\n", res, cur->used[i], (*start)->str[cur->used[i]]);
-		if (!(ft_itoo((*start)->str, ft_itoa(res)
+		res_str = ft_itoa(res);
+		if (!(ft_itoo((*start)->str, res_str
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
 			return (ft_error("BUG ITOO\n"));
+		ft_strdel(&res_str);
 	}
 	return (1);
 }
@@ -99,7 +96,7 @@ void	add_to_lab(t_label **lab, char **name, int proto) //modifier le proto en fo
 	}
 	if (!(new = (t_label*)malloc(sizeof(t_label) * 1)))
 		return ;
-	new->name = *name;
+	new->name = ft_strdup(*name);
 	//ft_printf("is_at_to_lab = %s, %d\n", new->name, proto);	
 	new->proto = proto;
 	new->used = 0;
@@ -127,6 +124,7 @@ int		gest_lab(t_label **lab, int index, char **line, int *jump)
 		name = ft_strdup((*line) + *jump);
 		(*line)[i] = LABEL_CHAR;
 		add_to_lab(lab, &name, index);
+		ft_strdel(&name);
 		*jump = i + 1;
 	}
 	return (1);

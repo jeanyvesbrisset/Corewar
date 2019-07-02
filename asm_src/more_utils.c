@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 17:54:59 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 13:31:10 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	put_champ_size(t_cdata **st)
 	//ft_printf("nb = %s\n", nb);
 	i = 4;
 	ft_itoo((comment)->str, nb, 4, &i);
+	ft_strdel(&nb);
 }
 
 int		used_s_begin(t_cdata **st, int used)

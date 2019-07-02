@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 11:41:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 13:55:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,26 @@ void	stock_in_stock(t_stock **begin, char *line, int ret)
 
 void	name_cor(char **name)
 {
-	int		i;
-	char	*tmp;
+	unsigned int	i;
 
-	i = ft_strlen((*name)) - 1;
-	while ((*name)[i] && (*name)[i] != '.')
-		i--;
-	if (i >= 0 && (*name)[i + 1]  && (*name)[i + 1] != '/')
-		(*name)[i] = 0;	
-	tmp = ft_strjoin(*name, ".cor");
-	*name = tmp;
+	i = ft_strlen((*name));
+	*name = realloc(*name, i + 3);
+	(*name)[i + 2] = 0;
+	(*name)[i + 1] = 'r';
+	(*name)[i] = 'o';
+	(*name)[i - 1] = 'c';
 }
 
-int		create_cor(t_cdata **start, char *name)
+int		create_cor(t_cdata **start, char **name)
 {
 	t_cdata	*current;
 	int		fd;
 
 	while ((*start)->index != 1)
 		*start = (*start)->next;
-	name_cor(&name);
+	name_cor(name);
 	current = (*start);
-	if ((fd = open(name, O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
+	if ((fd = open((*name), O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
 		return (ft_error("OPEN_ERROR2"));
 	while (current->next != *start)
 	{
@@ -66,7 +64,7 @@ int		create_cor(t_cdata **start, char *name)
 	}
 	if (current && current->next == *start)
 		write(fd, current->str, current->size);
-	ft_printf("Writing output program to %s\n", name); //a laisser
+	ft_printf("Writing output program to %s\n", *name); //a laisser
 	return (0);
 }
 

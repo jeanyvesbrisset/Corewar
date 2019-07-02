@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 11:43:46 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 13:55:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 		return (ft_error("File has not the good format, must end with .s\n"));
 	name = ft_strdup(av[ac - 1]);
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
-		create_cor(&start, name);
+		create_cor(&start, &name);
 	free_structs(&begin, &start, &lab);
 	free(name);
 	return (0);

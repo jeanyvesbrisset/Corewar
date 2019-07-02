@@ -6,12 +6,24 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 17:30:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 14:26:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/asm.h"
+
+int		is_commentary(char *line)
+{
+	int	i;
+
+	i = 0;
+	ft_jump_white_spaces(line, &i);
+	if ((!line[i]) || (line[i] == COMMENT_CHAR || line[i] == ';'))
+		return (1);
+	else
+		return (0);
+}
 
 int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 {
@@ -149,11 +161,10 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		step = 2;
 	else if (step >= 2 && stock_command(line, sta, lab, 0))
 		step += 1;
-	else if ((*line)[0] && (*line)[0] != COMMENT_CHAR && (*line)[0] != ';')
+	else if (!(is_commentary(*line)))
 	{
 		ft_strdel(line);
-		ft_printf("ERROR LOL = %d\n", lol);
-		return (ft_error("NOT A VALID INPUT"));
+		return (ft_error("NOT A VALID INPUT\n"));
 	}
 	else
 		ft_printf("JUMP\n");	

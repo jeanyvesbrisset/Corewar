@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/01 17:51:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 13:55:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					comment_stocker(char **line, int *i, t_cdata **start
 int					ft_error(char *error);
 void				free_structs(t_stock **begin, t_cdata **start
 	, t_label **lab);
-int					create_cor(t_cdata **start, char *name);
+int					create_cor(t_cdata **start, char **name);
 int					is_register(char *str, int *i);
 int					is_index(char *str, int *i);
 int					is_direct(char *str, int *i, t_label **lab, int index);
