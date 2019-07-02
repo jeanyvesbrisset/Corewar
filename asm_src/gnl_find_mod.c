@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 18:51:56 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 11:41:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	div = 1;
 	if (*index + (int)size >= CHAMP_MAX_SIZE)
 		return (0);
-	nb = (9223372036854775807 + (str_nb[0] == '-' ? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));
-	nb %= 9223372036854775807;
+	nb = (9223372036854775807 + (str_nb[0] == '-'
+	? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));
+	if (!(ft_atoll(str_nb) == -1))
+		nb %= 9223372036854775807;
 	ft_printf("LE NB %llu\n", nb);
 	while (--i > 0)
 		div *= 256;

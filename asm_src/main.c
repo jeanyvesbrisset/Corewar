@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/06/27 15:19:22 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/02 11:43:46 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_error(char *error)
 {
-	ft_printf("%s\n", error);
+	write(2, error, ft_strlen(error));
 	return (0);
 }
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 	t_cdata	*start;
 	t_label	*lab;
 	char	*name;
+	int		i;
 
 	begin = 0;
 	start = 0;
@@ -33,10 +34,13 @@ int	main(int ac, char **av)
 		ft_printf("Usage: %s <sourcefile.s>\n", av[0]);
 		return (0);
 	}
+	i = ft_strlen(av[ac - 1]);
+	if (i > 1 && !(av[ac - 1][i - 1] == 's' && av[ac - 1][i - 2] == '.'))
+		return (ft_error("File has not the good format, must end with .s\n"));
 	name = ft_strdup(av[ac - 1]);
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
 		create_cor(&start, name);
-	//free_structs(&begin, &start, &lab);
+	free_structs(&begin, &start, &lab);
 	free(name);
 	return (0);
 }

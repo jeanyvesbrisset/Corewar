@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/01 13:50:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 11:41:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,11 @@ void	name_cor(char **name)
 	if (i >= 0 && (*name)[i + 1]  && (*name)[i + 1] != '/')
 		(*name)[i] = 0;	
 	tmp = ft_strjoin(*name, ".cor");
-	//ft_strdel(name);
 	*name = tmp;
-	ft_printf("name = %s\n", *name);
 }
 
 int		create_cor(t_cdata **start, char *name)
 {
-	ft_printf("coucou\n");
 	t_cdata	*current;
 	int		fd;
 
@@ -69,8 +66,7 @@ int		create_cor(t_cdata **start, char *name)
 	}
 	if (current && current->next == *start)
 		write(fd, current->str, current->size);
-//	ft_strdel(&name);
-	ft_printf("Writing output program to %s\n", name);
+	ft_printf("Writing output program to %s\n", name); //a laisser
 	return (0);
 }
 
@@ -90,7 +86,7 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 		if (!(line_is_correct(&line, start, lab, reader)))
 		{
 			free(reader);
-			return (ft_error("PROBLEM ON LINE"));
+			return (ft_error("PROBLEM ON LINE \n"));
 		}
 		ft_strdel(&line);
 	}
