@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 15:43:01 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 18:12:19 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		size_used_tab(int *tab)
 	return (i);
 }
 
-int		add_used_label(char **str, t_label **lab, int index) //ajouter la size du direct a l'index ou l'envoyer en 4eme element
+int		add_used_label(char **str, t_label **lab, int index) 
 {
 	t_label *cur;
 	int		size;
@@ -32,12 +32,9 @@ int		add_used_label(char **str, t_label **lab, int index) //ajouter la size du d
 	new = 0;
 	while (cur && cur->next != *lab && ft_strcmp(cur->name, *str) != 0)
 		cur = cur->next;
-	//ft_printf("add_used_label cur->name = %s && proto = %d\n", cur->name, cur->proto);
 	if (!(cur) || ft_strcmp(cur->name, *str) != 0)
 	{
-		//ft_printf("OKKKKK->name = %s && proto = %d\n", cur->name, cur->proto);
 		add_by_used(lab, str, &new, cur);
-		//ft_printf("new->name = %s && proto = %d\n", new->name, new->proto);
 		cur = new;
 	}
 	if (!(cur->used))
@@ -51,17 +48,16 @@ int		add_used_label(char **str, t_label **lab, int index) //ajouter la size du d
 	size = size_used_tab(cur->used);
 	if (!(cur->used = (int*)realloc(cur->used, sizeof(int) * (size + 2))))
 		return (ft_error("ERROR_REALLOC"));
-	ft_printf("used[%d] in add used = %d\n", size, index);
 	cur->used[size] = index;
 	cur->used[size + 1] = -1;
 	return (1);
 }
 
-int		is_index(char *str, int *i)
+int		is_brut_num(char *str, int *i)
 {
 	int j;
 
-	(void)*i;
+	(*i)++;
 	j = 0;
 	if (str[j] == '-')
 		j++;
@@ -73,15 +69,13 @@ int		is_index(char *str, int *i)
 	return (1);
 }
 
-int		is_direct(char *str, int *i, t_label **lab, int index)
+int		is_index(char *str, int *i, t_label **lab, int index)
 {
 	int		j;
 	char	tmp;
 	char	*str_cpy;
 
 	j = 0;
-	if (str[j++] != DIRECT_CHAR)
-		return (0);
 	if (str[j] == LABEL_CHAR)
 	{
 		j++;
@@ -99,11 +93,19 @@ int		is_direct(char *str, int *i, t_label **lab, int index)
 		free(str_cpy);
 	}
 	else
-	{
-		(*i)++;
-		return (is_index(str + 1, i));
-	}
+		return (is_brut_num(str + 1, i));
 	return (2);
+}
+
+int		is_direct(char *str, int *i, t_label **lab, int index)
+{
+	int		j;
+
+	j = 0;
+	if (str[j++] != DIRECT_CHAR)
+		return (0);
+	(*i)++;
+	return (is_index(str + 1, i, lab, index));
 }
 
 int		is_register(char *str, int *i)
@@ -118,7 +120,6 @@ int		is_register(char *str, int *i)
 	while (str[(*i) + j] && ft_isdigit(str[(*i) + j]))
 		j++;
 	res = ft_atoll(str + (*i));
-	//ft_printf("res = %d\n", res);
 	if (res < 1 || res > REG_NUMBER)
 		return (0);
 	(*i) += j;

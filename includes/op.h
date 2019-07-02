@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 13:55:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/02 17:51:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void				free_structs(t_stock **begin, t_cdata **start
 	, t_label **lab);
 int					create_cor(t_cdata **start, char **name);
 int					is_register(char *str, int *i);
-int					is_index(char *str, int *i);
+int					is_index(char *str, int *i, t_label **lab, int index);
 int					is_direct(char *str, int *i, t_label **lab, int index);
 int					gest_live(char *str, t_cdata **start, t_label **lab
 	, int *index);
@@ -155,5 +155,10 @@ void				add_by_used(t_label **lab, char **str, t_label **new
 	, t_label *current);
 
 int					used_s_begin(t_cdata **st, int used);
+int					verif_index(char *str, int **tab, t_cdata **start
+	, t_label **lab);
+int					verif_direct(char *str, int **tab, t_cdata **start
+	, t_label **lab);
+
 
 #endif
