@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 17:47:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:05:44 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	cur = *lab;
 	while (cur->next != *lab)
 	{
+		//ft_printf("cur->name = %s et proto = %d\n",cur->name, cur->proto);
 		if (cur->proto < 0)
-			return (ft_error("proto < 0\n"));
+			return (0);
 		i = 0;
 		while (cur->used && cur->used[i] != -1)
 		{
@@ -52,8 +53,9 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		}
 		cur = cur->next;
 	}
+	//ft_printf("cur->name = %s et proto = %d\n",cur->name, cur->proto);
 	if (cur->proto < 0)
-		return (ft_error("Proto < 0 2\n"));
+		return (0);
 	i = -1;
 	while (cur->used && cur->used[++i] != -1)
 	{
@@ -62,7 +64,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		res_str = ft_itoa(res);
 		if (!(ft_itoo((*start)->str, res_str
 			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
-			return (ft_error("BUG ITOO\n"));
+			return (0);
 		ft_strdel(&res_str);
 	}
 	return (1);
@@ -107,7 +109,7 @@ void	add_to_lab(t_label **lab, char **name, int proto) //modifier le proto en fo
 		current->next = new;
 }
 
-int		gest_lab(t_label **lab, int index, char **line, int *jump)
+void	gest_lab(t_label **lab, int index, char **line, int *jump)
 {
 	int		i;
 	char	*name;
@@ -118,14 +120,18 @@ int		gest_lab(t_label **lab, int index, char **line, int *jump)
 		i++;
 	if (i > 0 && (*line)[i] && (*line)[i - 1] != DIRECT_CHAR)
 	{
+		//ft_printf("GEST_LAB : line[%d] = %c\n", i, (*line)[i]);
 		(*line)[i] = 0;
 		if ((*line)[(*jump)] == 0 || ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
-			return (0);
+		{
+			(*line)[i] = LABEL_CHAR;
+			return ;
+		}
 		name = ft_strdup((*line) + *jump);
 		(*line)[i] = LABEL_CHAR;
 		add_to_lab(lab, &name, index);
 		ft_strdel(&name);
 		*jump = i + 1;
 	}
-	return (1);
+	return ;
 }

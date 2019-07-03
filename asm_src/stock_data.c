@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 13:55:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:08:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ int		create_cor(t_cdata **start, char **name)
 
 int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 {
-	int		*reader;
-	char	*line;
+	int			*reader;
+	char		*line;
+	static	int	line_empty = 0;
 
 	if (!(reader = (int*)malloc(sizeof(int) * 2)))
 		return (0);
@@ -80,6 +81,7 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	line = 0;
 	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
 	{
+		line_empty = (reader[1] == 2 ? 0 : 1);
 		stock_in_stock(beg, line, reader[1]);
 		if (!(line_is_correct(&line, start, lab, reader)))
 		{
@@ -89,9 +91,9 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 		ft_strdel(&line);
 	}
 	free(reader);
-	if (all_label_good(start, lab))
+	if (line_empty && all_label_good(start, lab))
 	{
-		ft_printf("YEEEEEES!\n");
+		// ft_printf("YEEEEEES!\n");
 		put_champ_size(start);
 		return (1);
 	}

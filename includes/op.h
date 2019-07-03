@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 17:51:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 13:44:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct		s_f
 }					t_f;
 
 void				start_to_command(t_cdata **start);
-int					gest_lab(t_label **lab, int index, char **line, int *jump);
+void				gest_lab(t_label **lab, int index, char **line, int *jump);
 int					read_n_stock(char *file, t_stock **begin, t_cdata **start
 	, t_label **lab);
 int					line_is_correct(char **line, t_cdata **start

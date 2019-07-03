@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 13:31:10 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:08:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ocp_trad_size(int com, int ocp)
 	int		extract;
 	int		div;
 
-	ft_printf("OCP = %d\n", ocp);
+	// ft_printf("OCP = %d\n", ocp);
 	div = 256;
 	res = 2;
 	if (com == 10 || com == 11 || com == 14)
@@ -47,9 +47,9 @@ int	ocp_trad_size(int com, int ocp)
 		else if (extract == 3)
 			extract--;
 		res += extract;
-		ft_printf("res(%d) += extract(%d) -> %d\n", res - extract, extract, res);
+		// ft_printf("res(%d) += extract(%d) -> %d\n", res - extract, extract, res);
 	}
-	ft_printf("res de l'ocp calc = %d\n", res);
+	// ft_printf("res de l'ocp calc = %d\n", res);
 	return (res);
 }
 
@@ -73,12 +73,12 @@ void	put_champ_size(t_cdata **st)
 			i += 5;
 		else
 			i += ocp_trad_size((int)champ->str[i] , (int)champ->str[i + 1]);
-		ft_printf("dans le calcul de la size i = %d et next commande = %d\n", i, champ->str[i]);
+		// ft_printf("dans le calcul de la size i = %d et next commande = %d\n", i, champ->str[i]);
 	}
 	champ->size = i;
-	ft_printf("champ size = %d\n", champ->size);
+	// ft_printf("champ size = %d\n", champ->size);
 	nb = ft_itoa(champ->size);
-	//ft_printf("nb = %s\n", nb);
+	//// ft_printf("nb = %s\n", nb);
 	i = 4;
 	ft_itoo((comment)->str, nb, 4, &i);
 	ft_strdel(&nb);
@@ -100,15 +100,15 @@ int		used_s_begin(t_cdata **st, int used)
 			run = 5;
 		else
 			run = ocp_trad_size((int)(*st)->str[i] , (int)(*st)->str[i + 1]);
-		ft_printf("dans le calcul de la size i = %d et next commande = %d\n", i, (*st)->str[i]);
+		// ft_printf("dans le calcul de la size i = %d et next commande = %d\n", i, (*st)->str[i]);
 	}
 	return (i);
 }
 
 void	ocp_adder(unsigned char *ocp, int value)
 {
-//	ft_printf("LE OCP %d et value = %d\n", (int)(*ocp), value);
+	// ft_printf("LE OCP %d et value = %d\n", (int)(*ocp), value);
 	(*ocp) += (unsigned char)value;
 	(*ocp) <<= 2;
-	ft_printf("LE OCP %d\n", (int)(*ocp));
+	// ft_printf("LE OCP %d\n", (int)(*ocp));
 }

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 13:55:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:18:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	ft_error(char *error)
 {
+	ft_putstr("\033[31m]");
 	write(2, error, ft_strlen(error));
+	ft_putstr("\033[00m]");
 	return (0);
 }
 

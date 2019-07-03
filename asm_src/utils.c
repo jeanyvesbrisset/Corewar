@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 18:14:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:08:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		verif_index(char *str, int **tab, t_cdata **start, t_label **lab)
 {
 	int	res;
-
+	// ft_printf("VERIF INDEX : i = %d\n", (*tab[0]));
 	if ((res = is_index(str + *(tab[0]), tab[0], lab, *(tab[1]))) == 1)
 	{
 		if ((res = ft_itoo((*start)->str, str + *(tab[0]), 2, tab[1]))
@@ -37,7 +37,7 @@ int		verif_index(char *str, int **tab, t_cdata **start, t_label **lab)
 int		verif_direct(char *str, int **tab, t_cdata **start, t_label **lab)
 {
 	int	res;
-
+	// ft_printf("VERIF DIRECT : i = %d\n", (*tab[0]));
 	if ((res = is_direct(str + *(tab[0]), tab[0], lab, *(tab[1]))) == 1)
 	{
 		if ((res = ft_itoo((*start)->str, str + *(tab[0]), *tab[2], tab[1]))
@@ -46,21 +46,26 @@ int		verif_direct(char *str, int **tab, t_cdata **start, t_label **lab)
 		*(tab[0]) += res;
 	}
 	else if (res == 0)
+	{//////////
+		// ft_printf("verif_direct return 0\n");/////////
 		return (0);
+	}//////////
 	else
 	{
 		(*start)->str[*(tab[1])] = *(tab[2]);
 		(*(tab[1])) += (*tab[2]);
 	}
+	// ft_printf("VERIF DIRECT:  works\n");
 	return (1);
 }
 
 int	ft_good_transi(char *str, int *i)
 {
 	ft_jump_white_spaces(str, i);
-	ft_printf("transi, str[%d] = %c\n", *i, str[(*i)]);
+	// ft_printf("transi, str[%d] = %c\n", *i, str[(*i)]);
 	if (str[(*i)++] != SEPARATOR_CHAR)
 		return (0);
+	// ft_printf("transi, str[%d] = %c\n", *i, str[(*i)]);
 	ft_jump_white_spaces(str, i);
 	return (1);
 }

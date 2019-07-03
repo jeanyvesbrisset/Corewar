@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 17:52:54 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:11:06 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	int		int_size;
 
 	int_size = 4;
+	i = 0;
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
 	if (*index + 5 >= CHAMP_MAX_SIZE)
 		return (0);
 	(*start)->str[(*index)++] = 1;
-	i = 0;
 	if (!(fct_separator(str, 0, index, 0)))
 		return (0);
 	ft_jump_white_spaces(str, &i);
+	//ft_printf("LIVE : avant verif direct\n");
 	if (!(verif_direct(str, (int**)tab, start, lab)))
 		return (0);
+	//ft_printf("LIVE : apres verif direct avant end_gestion\n");
 	return (end_gestion(str, &i));
 }
 
@@ -49,8 +51,10 @@ int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);;
 	i = 0;
 	ft_jump_white_spaces(str, &i);
-	if (verif_direct(str, (int**)tab, start, lab))
+//	ft_printf("ZJUMP : before verif\n");
+	if (!(verif_direct(str, (int**)tab, start, lab)))
 		return (0);
+//	ft_printf("ZJUMP : after verif\n");
 	return (end_gestion(str, &i));
 }
 

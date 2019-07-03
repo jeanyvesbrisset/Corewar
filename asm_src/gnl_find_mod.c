@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 11:41:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:35:44 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	unsigned long long int i;
 	unsigned long long int div;
 
+	// ft_printf("ft_itoo : str_nb = %s\n", str_nb);
 	i = size;
 	div = 1;
 	if (*index + (int)size >= CHAMP_MAX_SIZE)
@@ -27,20 +28,20 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));
 	if (!(ft_atoll(str_nb) == -1))
 		nb %= 9223372036854775807;
-	ft_printf("LE NB %llu\n", nb);
+	// ft_printf("LE NB %llu\n", nb);
 	while (--i > 0)
 		div *= 256;
 	nb %= div * 256;
 	while (i < size)
 	{
-		ft_printf("str[%d] = %d et i = %d/%d size\n", *index, nb/div, i, size);
+		// ft_printf("str[%d] = %d et i = %d/%d size\n", *index, nb/div, i, size);
 		str[(*index)++] = (unsigned char)(nb / div);
 		nb %= div;
 		div /= 256;
 		i++;
 	}
-	ft_printf("index ITOO= %d\n", *index);
-	ft_printf("ft_itoo str_nb = %s et size = %d\n", str_nb, (int)size);
+	// ft_printf("index ITOO= %d\n", *index);
+	// ft_printf("ft_itoo str_nb = %s et size = %d\n", str_nb, (int)size);
 	return (len_digit(str_nb));
 }
 
@@ -49,7 +50,7 @@ int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 	static int	diff;
 
 	if (!(diff))
-		diff = 8 - (*i);
+		diff = (*i) +  8;
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
 		if (diff + *i >= COMMENT_LENGTH)

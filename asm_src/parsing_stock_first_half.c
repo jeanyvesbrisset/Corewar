@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/02 16:31:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:21:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 	static int		index = 0;
 
 	i = 0;
-	ft_printf("\nINDEX_WAY : line : %s && index = %d\n\n", *line, index);
+	// ft_printf("\nINDEX_WAY : line : %s && index = %d\n\n", *line, index);
 	ft_jump_white_spaces(*line, &i);
-	if (!(gest_lab(lab, index, line, &i)))
-		return (ft_error("NOT GEST LAB"));
+	gest_lab(lab, index, line, &i);
 	ft_jump_white_spaces(*line, &i);
 	if (!((*line)[i]))
 		return (1);
@@ -51,11 +50,11 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 		tabi++;
 	(*line)[s_name + i] = tmp;
 	start_to_command(start);
-	ft_printf("le TABI pour lancer la fonction = %d\n", tabi);
+	// ft_printf("le TABI pour lancer la fonction = %d\n", tabi);
 	if (index + 3 < CHAMP_MAX_SIZE && tabi != 16
 	&& g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);
-	return (ft_error("NOT COMMAND"));
+	return (0);
 }
 
 int		is_comment(char **line, t_cdata **start, int *reader)
@@ -94,7 +93,7 @@ int		is_name(char **line, t_cdata **start, int *reader)
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
 	if (ft_strncmp(*line + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) != 0)
-		return (ft_error("BUG NAME CMD"));
+		return (0);
 	i += 5;
 	while (((*line)[i] && (*line)[i] <= ' ') || (*line)[i] == 127)
 		i++;
@@ -166,7 +165,5 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 		ft_strdel(line);
 		return (ft_error("NOT A VALID INPUT\n"));
 	}
-	else
-		ft_printf("JUMP\n");	
 	return (1);
 }
