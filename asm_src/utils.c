@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/03 14:08:59 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ int	ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	{
 		if (*(tab[1]) >= CHAMP_MAX_SIZE)
 			return (0);
+		//ft_printf("Three choices bug\n");
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);
+		//ft_printf("XOR\n");
 		ocp_adder((unsigned char*)(tab[3]), REG_CODE);
 	}
 	else if (verif_index(str, tab, start, lab))

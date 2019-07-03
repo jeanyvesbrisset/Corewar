@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/03 14:06:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 17:52:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ int		add_used_label(char **str, t_label **lab, int index)
 	return (1);
 }
 
-int		is_brut_num(char *str, int *i)
+int		is_brut_num(char *str)
 {
 	int j;
 
-	(*i)--;//mdr
-	(*i)++;
 	j = 0;
 	if (str[j] == '-')
 		j++;
@@ -98,7 +96,7 @@ int		is_index(char *str, int *i, t_label **lab, int index)
 		free(str_cpy);
 	}
 	else
-		return (is_brut_num(str, i));
+		return (is_brut_num(str));
 	return (2);
 }
 
@@ -125,7 +123,7 @@ int		is_register(char *str, int *i)
 		j++;
 	//ft_printf("IS_REGISTER : le parcours isdigit est passe\n");
 	res = (int)(ft_atoll(str + (*i)));
-	//ft_printf("IS_REGISTER : atoll est passe\n");
+	//ft_printf("IS_REGISTER : atoll est passe res = %d\n", res);
 	if (res < 1 || res > REG_NUMBER)
 		return (0);
 	(*i) += j;

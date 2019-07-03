@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 14:05:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	int 		res;
 	char		*res_str;
 
+	if (!(lab && *lab))
+		return (1);
 	cur = *lab;
 	while (cur->next != *lab)
 	{

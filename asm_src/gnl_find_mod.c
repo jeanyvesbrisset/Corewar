@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 14:35:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int	diff;
-
+	
 	if (!(diff))
-		diff = (*i) +  8;
+		diff = 8 - (*i);
+	if (diff == -1)
+		return (0);
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
-		if (diff + *i >= COMMENT_LENGTH)
+		if (diff + *i >= COMMENT_LENGTH + 8)
 			return (0);
 		((*start)->next)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
@@ -64,7 +66,7 @@ int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 		diff += (*i) + 1;
 	}
 	else
-		diff += *i;
+		diff = -1;
 	return (1);
 }
 
@@ -74,9 +76,11 @@ int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 
 	if (!(diff))
 		diff = 4 - (*i);
+	if (diff == -1)
+		return (0);
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
-		if (diff + *i >= PROG_NAME_LENGTH)
+		if (diff + *i >= PROG_NAME_LENGTH + 4)
 			return (0);
 		(*start)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
@@ -87,7 +91,7 @@ int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 		diff += (*i) + 1;
 	}
 	else
-		diff += *i;
+		diff = -1;
 	return (1);
 }
 
@@ -103,8 +107,8 @@ int		gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n)
 		else if (c_or_n == 'c')
 			comment_stocker(line, &i, start, reader[1]);
 		if ((*line)[i] == '"')
-			return (1);
+			return (i);
 		ft_strdel(line);
 	}
-	return (0);
+	return (-1);
 }

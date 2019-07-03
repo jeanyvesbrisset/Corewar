@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 14:11:06 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/03 17:04:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 	void	*tab[3];
 	int		int_size;
 
+	//ft_printf("ZJUMP : str = %s\n", str);
 	int_size = 2;
 	tab[0] = &i;
 	tab[1] = index;

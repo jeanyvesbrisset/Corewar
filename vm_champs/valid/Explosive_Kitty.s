@@ -135,12 +135,13 @@ s3:
 	st r2, r6
 	ld 511, r1
 	zjmp %:go_erase
-s4:
+s4:	
 	st r15, -42
 	ld %511, r3
 	ld %496, r5
 	st r4, r2
 	st r4, r6				# 0f 0f 0f 0f
+	lld -1,r2
 	zjmp%:go_erase			#just for waiting 20 cycles
 go_erase:
 	sti r2, r3, r1
