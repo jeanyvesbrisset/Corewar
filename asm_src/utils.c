@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 17:30:05 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:12:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int		ft_good_transi(char *str, int *i)
 
 int		ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 {
+	static char	*error = "Champion size too long, Max length : ";
+
 	if (str[(*(tab[0]))] == DIRECT_CHAR)
 	{
 		if (verif_direct(str, tab, start, lab))
@@ -101,8 +103,7 @@ int		ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	else if (str[(*(tab[0]))] == 'r')
 	{
 		if (*(tab[1]) >= CHAMP_MAX_SIZE)
-			return (ft_error("Champion size too long, Max length : ", 0, 0
-				, CHAMP_MAX_SIZE));
+			return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);
 		ocp_adder((unsigned char*)(tab[3]), REG_CODE);
@@ -118,6 +119,8 @@ int		ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 
 int		ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 {
+	static char	*error = "Champion size too long, Max length : ";
+
 	if (str[(*(tab[0]))] == DIRECT_CHAR)
 	{
 		if (verif_direct(str, tab, start, lab))
@@ -126,8 +129,7 @@ int		ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	else if (str[(*(tab[0]))] == 'r')
 	{
 		if (*(tab[1]) >= CHAMP_MAX_SIZE)
-			return (ft_error("Champion size too long, Max length : ", 0, 0
-				, CHAMP_MAX_SIZE));
+			return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);
 		ocp_adder((unsigned char*)(tab[3]), REG_CODE);

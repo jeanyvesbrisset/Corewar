@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:11:04 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 		, int *index)
 {
-	unsigned long long int nb;
-	unsigned long long int i;
-	unsigned long long int div;
+	unsigned long long int	nb;
+	unsigned long long int	i;
+	unsigned long long int	div;
+	static char				*error = "Champion size too long, Max length : ";
 
 	i = size;
 	div = 1;
 	if (*index + (int)size >= CHAMP_MAX_SIZE)
-		return (ft_error("Champion size too long, Max length : ", 0, 0
-			, CHAMP_MAX_SIZE));
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	nb = (9223372036854775807 + (str_nb[0] == '-'
 	? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));
 	if (!(ft_atoll(str_nb) == -1))
@@ -44,6 +44,7 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int	diff;
+	static char	*error = "Champion comment too long, Max length : ";
 
 	if (!(diff))
 		diff = 8 - (*i);
@@ -52,8 +53,7 @@ int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
 		if ((diff + *i) >= (COMMENT_LENGTH + 7))
-			return (ft_error("Champion comment too long, Max length : ", 0, 0
-			, COMMENT_LENGTH));
+			return (ft_error(error, 0, 0, COMMENT_LENGTH));
 		((*start)->next)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
 	}
@@ -70,6 +70,7 @@ int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int	diff;
+	static char	*error = "Champion name too long, Max length : ";
 
 	if (!(diff))
 		diff = 4 - (*i);
@@ -78,8 +79,7 @@ int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
 		if ((diff + *i) >= (PROG_NAME_LENGTH + 4))
-			return (ft_error("Champion name too long, Max length : ", 0, 0
-			, PROG_NAME_LENGTH));
+			return (ft_error(error, 0, 0, PROG_NAME_LENGTH));
 		(*start)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
 	}

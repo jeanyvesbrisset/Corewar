@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:04:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		size_used_tab(int *tab)
 	return (i);
 }
 
-int		add_used_label(char **str, t_label **lab, int index) 
+int		add_used_label(char **str, t_label **lab, int index)
 {
 	t_label *cur;
 	int		size;

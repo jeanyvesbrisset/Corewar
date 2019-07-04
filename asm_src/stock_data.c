@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 18:01:54 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:16:36 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int		last_line_good(t_stock **begin, int line_empty)
 {
-	t_stock	*cur;
-	int		i;
+	t_stock		*cur;
+	int			i;
+	static char	*error = "Missing empty line at the end of the file\n";
 
 	if (line_empty)
 		return (1);
@@ -25,8 +26,7 @@ int		last_line_good(t_stock **begin, int line_empty)
 		cur = cur->next;
 	ft_jump_white_spaces(cur->str, &i);
 	if (cur->str[i] && cur->str[i] != COMMENT_CHAR && cur->str[i] != ';')
-		return (ft_error("Missing empty line at the end of the file\n"
-		, 0, 0, 0));
+		return (ft_error(error, 0, 0, 0));
 	return (1);
 }
 
@@ -87,7 +87,7 @@ int		create_cor(t_cdata **start, char **name)
 	return (0);
 }
 
-int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
+int		read_n_stock(char *file, t_stock **beg, t_cdata **st, t_label **lab)
 {
 	int			*reader;
 	char		*line;
@@ -102,14 +102,16 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	{
 		line_empty = (reader[1] == 2 ? 0 : 1);
 		stock_in_stock(beg, line, reader[1]);
-		if (!(line_is_correct(&line, start, lab, reader)))
-			return (ft_error("Error at line ", 0, (void**)&reader
-			, stock_len(beg, start)));
+		if (!(line_is_correct(&line, st, lab, reader)))
+		{
+			ft_error("Error at line ", 0, (void**)&reader, stock_len(beg, st));
+			return (0);
+		}
 		ft_strdel(&line);
 	}
 	free(reader);
-	if (champ_exist(start) && last_line_good(beg, line_empty)
-	&& all_label_good(start, lab))
-		return (put_champ_size(start));
+	if (champ_exist(st) && last_line_good(beg, line_empty)
+	&& all_label_good(st, lab))
+		return (put_champ_size(st));
 	return (0);
 }

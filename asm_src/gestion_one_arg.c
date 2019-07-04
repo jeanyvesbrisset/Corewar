@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:05:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	void	*tab[3];
-	int		int_size;
+	int			i;
+	void		*tab[3];
+	int			int_size;
+	static char	*error = "Champion size too long, Max length : ";
 
 	int_size = 4;
 	i = 0;
@@ -24,8 +25,7 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	tab[1] = index;
 	tab[2] = &int_size;
 	if (*index + 5 >= CHAMP_MAX_SIZE)
-		return (ft_error("Champion size too long, Max length : ", 0, 0
-			, CHAMP_MAX_SIZE));
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 1;
 	if (!(fct_separator(str, 0, index, 0)))
 		return (0);

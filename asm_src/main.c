@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 16:53:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:18:23 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ int	main(int ac, char **av)
 	}
 	i = ft_strlen(av[ac - 1]);
 	if (i > 1 && !(av[ac - 1][i - 1] == 's' && av[ac - 1][i - 2] == '.'))
-		return (ft_error("File has not the good format or does not exist.\n"
-		, 0, 0, 0));
+	{
+		ft_error("File has not the good format or does not exist.\n", 0, 0, 0);
+		return (0);
+	}
 	name = ft_strdup(av[ac - 1]);
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
 		create_cor(&start, &name);

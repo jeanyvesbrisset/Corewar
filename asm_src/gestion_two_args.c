@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 17:39:32 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:19:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int		gest_ld2(char *str, t_cdata **start, int **tab)
 {
+	static char	*error = "Champion size too long, Max length : ";
+
 	if (!(ft_good_transi(str, tab[0])))
 		return (0);
 	if ((*tab[1]) >= CHAMP_MAX_SIZE)
-			return (ft_error("Champion size too long, Max length : ", 0, 0
-			, CHAMP_MAX_SIZE));
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*tab[1])++] = is_register(str, tab[0])))
 		return (0);
 	ocp_adder((void*)(tab[3]), REG_CODE);
@@ -69,8 +70,9 @@ int		gest_st2(char *str, int **tab, t_cdata **start)
 
 int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int				i;
-	void			*tab[3];
+	int			i;
+	void		*tab[3];
+	static char	*error = "Champion size too long, Max length : ";
 
 	i = 0;
 	tab[0] = &i;
@@ -82,8 +84,7 @@ int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 	if (str[i] == 'r')
 	{
 		if ((*index) >= CHAMP_MAX_SIZE)
-			return (ft_error("Champion size too long, Max length : ", 0, 0
-			, CHAMP_MAX_SIZE));
+			return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 		if (!((*start)->str[(*index)++] = is_register(str, &i)))
 			return (0);
 		ocp_adder(tab[2], REG_CODE);
