@@ -6,13 +6,13 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 17:41:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:27:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void	add_by_used(t_label **lab, char **str, t_label **new, t_label *current)
+void	add_by_used(t_label **lab, char **str, t_label **new, t_label **current)
 {
 	if (!(*new = (t_label*)malloc(sizeof(t_label) * 1)))
 		return ;
@@ -21,9 +21,10 @@ void	add_by_used(t_label **lab, char **str, t_label **new, t_label *current)
 	(*new)->name = ft_strdup(*str);
 	if (!(*lab))
 		(*lab) = (*new);
-	else if (current)
-		current->next = (*new);
+	else if ((*current))
+		(*current)->next = (*new);
 	(*new)->next = (*lab);
+	*current = *new;
 }
 
 int		all_label_good(t_cdata **start, t_label **lab)

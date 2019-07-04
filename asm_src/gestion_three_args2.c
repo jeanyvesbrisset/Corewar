@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:11:01 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 19:20:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:33:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int		gest_ldi(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);
 	if (!(ft_good_transi(str, &i)))
 		return (0);
-	if (*((int*)(tab[1])) >= CHAMP_MAX_SIZE)
-		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
-	if (!((*start)->str[(*index)++] = is_register(str, &i)))
-		return (0);
+	if (*((int*)(tab[1])) >= CHAMP_MAX_SIZE)//	mettre cette condition --|
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));//et le ft_error	=|=||
+	if (!((*start)->str[(*index)++] = is_register(str, &i)))//	ici?  <--| ||
+		return (0);//				ici? <=================================||
 	ocp_adder(tab[3], REG_CODE);
 	return (end_gestion(str, &i));
 }

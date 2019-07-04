@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:27:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ int					put_champ_size(t_cdata **st);
 int					champ_exist(t_cdata **start);
 int					len_digit(char *str);
 void				add_by_used(t_label **lab, char **str, t_label **new
-	, t_label *current);
+	, t_label **current);
 
 int					used_s_begin(t_cdata **st, int used);
 int					verif_index(char *str, int **tab, t_cdata **start

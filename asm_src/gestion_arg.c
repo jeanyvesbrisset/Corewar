@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 19:04:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 19:27:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int		add_used_label(char **str, t_label **lab, int index)
 	while (cur && cur->next != *lab && ft_strcmp(cur->name, *str) != 0)
 		cur = cur->next;
 	if (!(cur) || ft_strcmp(cur->name, *str) != 0)
-	{
-		add_by_used(lab, str, &new, cur);
-		cur = new;
-	}
+		add_by_used(lab, str, &new, &cur);
 	if (!(cur->used))
 	{
 		if (!(cur->used = (int*)malloc(sizeof(int) * 2)))
