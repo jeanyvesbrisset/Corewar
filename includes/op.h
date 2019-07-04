@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/03 13:44:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int					gnl_find_mod(char **line, t_cdata **start, int *reader
 int					name_stocker(char **line, int *i, t_cdata **start, int ret);
 int					comment_stocker(char **line, int *i, t_cdata **start
 	, int ret);
-int					ft_error(char *error);
+int					ft_error(char *error, int ret, void **to_free, int line);
+int					stock_len(t_stock **beg, t_cdata **start);
 void				free_structs(t_stock **begin, t_cdata **start
 	, t_label **lab);
 int					create_cor(t_cdata **start, char **name);
@@ -149,7 +150,8 @@ int					ft_two_choices(char *str, int **tab, t_cdata **start
 	, t_label **lab);
 int					all_label_good(t_cdata **start, t_label **lab);
 void				ocp_adder(unsigned char *ocp, int value);
-void				put_champ_size(t_cdata **st);
+int					put_champ_size(t_cdata **st);
+int					champ_exist(t_cdata **start);
 int					len_digit(char *str);
 void				add_by_used(t_label **lab, char **str, t_label **new
 	, t_label *current);
@@ -159,6 +161,6 @@ int					verif_index(char *str, int **tab, t_cdata **start
 	, t_label **lab);
 int					verif_direct(char *str, int **tab, t_cdata **start
 	, t_label **lab);
-
+int					stock_len(t_stock **beg, t_cdata **start);
 
 #endif

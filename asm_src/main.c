@@ -6,18 +6,29 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 16:53:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int	ft_error(char *error)
+int	ft_error(char *error, int ret, void **to_free, int line)
 {
-	ft_putstr("\033[31m]");
+	char *nb;
+
+	if (to_free && *to_free)
+		free(*to_free);
+	ft_putstr("\033[31m");
 	write(2, error, ft_strlen(error));
-	ft_putstr("\033[00m]");
-	return (0);
+	if (line > 0)
+	{
+		nb = ft_itoa(line);
+		write(2, nb, ft_strlen(nb));
+		write(2, "\n", 1);
+		free(nb);
+	}
+	ft_putstr("\033[00m");
+	return (ret);
 }
 
 int	main(int ac, char **av)
@@ -33,12 +44,14 @@ int	main(int ac, char **av)
 	lab = 0;
 	if (ac < 2)
 	{
-		ft_printf("Usage: %s <sourcefile.s>\n", av[0]);
-		return (0);
+		write(2, "Not enougth arguments.\nUsage: ", 30);
+		write(2, av[0], ft_strlen(av[0]));
+		return (ft_error(" <sourcefile.s>\n", 0, 0, 0));
 	}
 	i = ft_strlen(av[ac - 1]);
 	if (i > 1 && !(av[ac - 1][i - 1] == 's' && av[ac - 1][i - 2] == '.'))
-		return (ft_error("File has not the good format, must end with .s\n"));
+		return (ft_error("File has not the good format or does not exist.\n"
+		, 0, 0, 0));
 	name = ft_strdup(av[ac - 1]);
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
 		create_cor(&start, &name);

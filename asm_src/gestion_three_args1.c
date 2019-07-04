@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 18:02:44 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		gest_add(char *str, t_cdata **start, t_label **lab, int *index)
 	i = 0;
 	(void)lab;
 	if (*index + 5 >= CHAMP_MAX_SIZE)
-		return (0);
+		return (ft_error("Champion size too long, Max length : ", 0, 0,
+		CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 4;
 	(*start)->str[(*index)] = 84;
 	if (!(fct_separator(str, 2, index, 1)))
@@ -45,7 +46,8 @@ int		gest_sub(char *str, t_cdata **start, t_label **lab, int *index)
 	i = 0;
 	(void)lab;
 	if (*index + 5 >= CHAMP_MAX_SIZE)
-		return (0);
+		return (ft_error("Champion size too long, Max length : ", 0, 0
+			, CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 5;
 	(*start)->str[(*index)] = 84;
 	if (!(fct_separator(str, 2, index, 1)))
@@ -85,7 +87,8 @@ int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
 	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
-			return (0);
+			return (ft_error("Champion size too long, Max length : ", 0, 0
+			, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
 	ocp_adder(tab[3], REG_CODE);
@@ -113,7 +116,8 @@ int		gest_or(char *str, t_cdata **start, t_label **lab, int *index)
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
 	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
-			return (0);
+			return (ft_error("Champion size too long, Max length : ", 0, 0
+			, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
 	ocp_adder(tab[3], REG_CODE);
@@ -133,23 +137,18 @@ int		gest_xor(char *str, t_cdata **start, t_label **lab, int *index)
 	tab[2] = &int_size;
 	(*start)->str[(*index)++] = 8;
 	tab[3] = &((*start)->str[(*index)]);
-	//ft_printf("XOR\n");
 	if (!(fct_separator(str, 2, index, 1)))
 		return (0);
 	ft_jump_white_spaces(str, &i);
-	//ft_printf("XOR 2\n");
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
-	//ft_printf("threechoices 1\n");
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
-	//ft_printf("threechoices 2\n");
 	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
-			return (0);
-	//ft_printf("good_size\n");
+			return (ft_error("Champion size too long, Max length : ", 0, 0
+			, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
-	//ft_printf("register ok\n");
 	ocp_adder(tab[3], REG_CODE);
 	return (end_gestion(str, &i));
 }

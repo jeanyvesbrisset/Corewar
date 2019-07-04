@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 14:44:08 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/02 15:01:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	free_label(t_label **lab)
 {
 	t_label *current;
 	t_label	*before;
-	
+
 	before = *lab;
 	while (before->next != *lab)
 		before = before->next;
@@ -37,14 +37,14 @@ void	free_label(t_label **lab)
 		free(before->used);
 		free(before);
 		before = 0;
-	}		
+	}
 }
 
 void	free_cdata(t_cdata **start)
 {
 	t_cdata *current;
 	t_cdata	*before;
-	
+
 	before = *start;
 	while (before->next != *start)
 		before = before->next;
@@ -70,7 +70,7 @@ void	free_stock(t_stock **begin)
 {
 	t_stock	*current;
 	t_stock	*before;
-	
+
 	before = *begin;
 	while (before->next != *begin)
 		before = before->next;

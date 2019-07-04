@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 18:02:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,41 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 	unsigned long long int i;
 	unsigned long long int div;
 
-	// ft_printf("ft_itoo : str_nb = %s\n", str_nb);
 	i = size;
 	div = 1;
 	if (*index + (int)size >= CHAMP_MAX_SIZE)
-		return (0);
+		return (ft_error("Champion size too long, Max length : ", 0, 0
+			, CHAMP_MAX_SIZE));
 	nb = (9223372036854775807 + (str_nb[0] == '-'
 	? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));
 	if (!(ft_atoll(str_nb) == -1))
 		nb %= 9223372036854775807;
-	// ft_printf("LE NB %llu\n", nb);
 	while (--i > 0)
 		div *= 256;
 	nb %= div * 256;
 	while (i < size)
 	{
-		// ft_printf("str[%d] = %d et i = %d/%d size\n", *index, nb/div, i, size);
 		str[(*index)++] = (unsigned char)(nb / div);
 		nb %= div;
 		div /= 256;
 		i++;
 	}
-	// ft_printf("index ITOO= %d\n", *index);
-	// ft_printf("ft_itoo str_nb = %s et size = %d\n", str_nb, (int)size);
 	return (len_digit(str_nb));
 }
 
 int		comment_stocker(char **line, int *i, t_cdata **start, int ret)
 {
 	static int	diff;
-	
+
 	if (!(diff))
 		diff = 8 - (*i);
 	if (diff == -1)
-		return (0);
+		return (ft_error("Too many .comment\n", 0, 0, 0));
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
-		if (diff + *i >= COMMENT_LENGTH + 8)
-			return (0);
+		if ((diff + *i) >= (COMMENT_LENGTH + 7))
+			return (ft_error("Champion comment too long, Max length : ", 0, 0
+			, COMMENT_LENGTH));
 		((*start)->next)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
 	}
@@ -77,11 +74,12 @@ int		name_stocker(char **line, int *i, t_cdata **start, int ret)
 	if (!(diff))
 		diff = 4 - (*i);
 	if (diff == -1)
-		return (0);
+		return (ft_error("Too many .name\n", 0, 0, 0));
 	while ((*line)[*i] && (*line)[*i] != '"')
 	{
-		if (diff + *i >= PROG_NAME_LENGTH + 4)
-			return (0);
+		if ((diff + *i) >= (PROG_NAME_LENGTH + 4))
+			return (ft_error("Champion name too long, Max length : ", 0, 0
+			, PROG_NAME_LENGTH));
 		(*start)->str[diff + (*i)] = (*line)[*i];
 		(*i)++;
 	}
@@ -99,16 +97,25 @@ int		gnl_find_mod(char **line, t_cdata **start, int *reader, char c_or_n)
 {
 	int i;
 
+	ft_strdel(line);
 	while ((reader[1] = get_next_line_mod(reader[0], line)) > 0)
 	{
 		i = 0;
 		if (c_or_n == 'n')
-			name_stocker(line, &i, start, reader[1]);
+		{
+			if (!(name_stocker(line, &i, start, reader[1])))
+				return (-1);
+		}
 		else if (c_or_n == 'c')
-			comment_stocker(line, &i, start, reader[1]);
+		{
+			if (!(comment_stocker(line, &i, start, reader[1])))
+				return (-1);
+		}
 		if ((*line)[i] == '"')
+		{
 			return (i);
+		}
 		ft_strdel(line);
 	}
-	return (-1);
+	return (ft_error("Name & comment must finish with '\"'\n", -1, 0, 0));
 }

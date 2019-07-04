@@ -6,24 +6,27 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 17:17:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 18:01:54 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int		last_line_good(t_stock **begin)
+int		last_line_good(t_stock **begin, int line_empty)
 {
 	t_stock	*cur;
 	int		i;
 
+	if (line_empty)
+		return (1);
 	i = 0;
 	cur = (*begin)->next;
 	while (cur && cur->next != (*begin))
 		cur = cur->next;
 	ft_jump_white_spaces(cur->str, &i);
 	if (cur->str[i] && cur->str[i] != COMMENT_CHAR && cur->str[i] != ';')
-		return (0);
+		return (ft_error("Missing empty line at the end of the file\n"
+		, 0, 0, 0));
 	return (1);
 }
 
@@ -70,8 +73,9 @@ int		create_cor(t_cdata **start, char **name)
 		*start = (*start)->next;
 	name_cor(name);
 	current = (*start);
-	if ((fd = open((*name), O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755)) == -1)
-		return (ft_error("OPEN_ERROR2"));
+	if ((fd = open((*name), O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00755))
+		== -1)
+		return (0);
 	while (current->next != *start)
 	{
 		write(fd, current->str, current->size);
@@ -79,7 +83,7 @@ int		create_cor(t_cdata **start, char **name)
 	}
 	if (current && current->next == *start)
 		write(fd, current->str, current->size);
-	ft_printf("Writing output program to %s\n", *name); //a laisser
+	ft_printf("Writing output program to %s\n", *name);
 	return (0);
 }
 
@@ -92,24 +96,20 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **start, t_label **lab)
 	if (!(reader = (int*)malloc(sizeof(int) * 2)))
 		return (0);
 	if ((reader[0] = open(file, O_RDONLY)) == -1)
-		return (ft_error("OPEN_ERROR1"));
+		return (0);
 	line = 0;
 	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
 	{
 		line_empty = (reader[1] == 2 ? 0 : 1);
 		stock_in_stock(beg, line, reader[1]);
 		if (!(line_is_correct(&line, start, lab, reader)))
-		{
-			free(reader);
-			return (ft_error("PROBLEM ON LINE \n"));
-		}
+			return (ft_error("Error at line ", 0, (void**)&reader
+			, stock_len(beg, start)));
 		ft_strdel(&line);
 	}
 	free(reader);
-	if ((line_empty || last_line_good(beg)) && all_label_good(start, lab))
-	{
-		put_champ_size(start);
-		return (1);
-	}
-	return (ft_error("bite\n"));
+	if (champ_exist(start) && last_line_good(beg, line_empty)
+	&& all_label_good(start, lab))
+		return (put_champ_size(start));
+	return (0);
 }

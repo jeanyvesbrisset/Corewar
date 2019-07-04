@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/03 18:00:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/04 17:41:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 {
 	t_label		*cur;
 	int			i;
-	int 		res;
+	int			res;
 	char		*res_str;
 
 	if (!(lab && *lab))
@@ -38,9 +38,12 @@ int		all_label_good(t_cdata **start, t_label **lab)
 	cur = *lab;
 	while (cur->next != *lab)
 	{
-		//ft_printf("cur->name = %s et proto = %d\n",cur->name, cur->proto);
 		if (cur->proto < 0)
-			return (0);
+		{
+			write(2, "This label doesn't exist : ", 27);
+			write(2, cur->name, ft_strlen(cur->name));
+			return (ft_error("\n", 0, 0, 0));
+		}
 		i = 0;
 		while (cur->used && cur->used[i] != -1)
 		{
@@ -48,14 +51,13 @@ int		all_label_good(t_cdata **start, t_label **lab)
 			res %= MEM_SIZE;
 			res_str = ft_itoa(res);
 			if (!(ft_itoo((*start)->str, res_str
-			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
-				return (ft_error("BUG ITOO\n"));
+			, (*start)->str[cur->used[i]], &(cur->used[i]))))
+				return (0);
 			ft_strdel(&res_str);
 			i++;
 		}
 		cur = cur->next;
 	}
-	//ft_printf("cur->name = %s et proto = %d\n",cur->name, cur->proto);
 	if (cur->proto < 0)
 		return (0);
 	i = -1;
@@ -65,7 +67,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		res %= MEM_SIZE;
 		res_str = ft_itoa(res);
 		if (!(ft_itoo((*start)->str, res_str
-			, (*start)->str[cur->used[i]] , &(cur->used[i]))))
+			, (*start)->str[cur->used[i]], &(cur->used[i]))))
 			return (0);
 		ft_strdel(&res_str);
 	}
@@ -78,7 +80,7 @@ void	start_to_command(t_cdata **start)
 		*start = (*start)->next;
 }
 
-void	add_to_lab(t_label **lab, char **name, int proto) //modifier le proto en fonction de la distance au premier DIR 
+void	add_to_lab(t_label **lab, char **name, int proto)
 {
 	t_label	*current;
 	t_label *new;
@@ -87,13 +89,10 @@ void	add_to_lab(t_label **lab, char **name, int proto) //modifier le proto en fo
 	if (*lab)
 		while (current->next != *lab && ft_strcmp(current->name, *name) != 0)
 			current = current->next;
-	//ft_printf("is_at_t %d\n", proto);	
 	if (current && ft_strcmp(current->name, *name) == 0)
 	{
-		//ft_printf("is_at_to_lab = %s, %d\n", current->name, proto);	
-		if ((ft_strcmp(current->name, *name) == 0) && current->proto < 0) 
+		if ((ft_strcmp(current->name, *name) == 0) && current->proto < 0)
 		{
-		//	ft_printf("is_at_to_lab = %s, %d\n", current->name, proto);	
 			current->proto = proto;
 		}
 		return ;
@@ -101,7 +100,6 @@ void	add_to_lab(t_label **lab, char **name, int proto) //modifier le proto en fo
 	if (!(new = (t_label*)malloc(sizeof(t_label) * 1)))
 		return ;
 	new->name = ft_strdup(*name);
-	//ft_printf("is_at_to_lab = %s, %d\n", new->name, proto);	
 	new->proto = proto;
 	new->used = 0;
 	if (!(*lab))
@@ -122,9 +120,9 @@ void	gest_lab(t_label **lab, int index, char **line, int *jump)
 		i++;
 	if (i > 0 && (*line)[i] && (*line)[i - 1] != DIRECT_CHAR)
 	{
-		//ft_printf("GEST_LAB : line[%d] = %c\n", i, (*line)[i]);
 		(*line)[i] = 0;
-		if ((*line)[(*jump)] == 0 || ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
+		if ((*line)[(*jump)] == 0
+			|| ft_charstr((*line) + *jump, LABEL_CHARS) == 0)
 		{
 			(*line)[i] = LABEL_CHAR;
 			return ;
