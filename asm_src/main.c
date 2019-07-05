@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 19:18:23 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/05 10:11:31 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ int	main(int ac, char **av)
 	i = ft_strlen(av[ac - 1]);
 	if (i > 1 && !(av[ac - 1][i - 1] == 's' && av[ac - 1][i - 2] == '.'))
 	{
-		ft_error("File has not the good format or does not exist.\n", 0, 0, 0);
-		return (0);
+		ft_error("File has not the good format or does not exist.\n", 0, 0, 0);//raccourcir la phrase en "Not a valid file"? (ptdr l'idee est pas vraiment de moi c'est le meme retour d'erreur que la norminette quand tu met un fichier invalide)
+		//ou alors "Can't read source file" (retour d'erreur de l'asm basic)
+		return (0);//et mettre le ft_error raccourcis dans le return, on cut le "{}" et hop get normed
 	}
 	name = ft_strdup(av[ac - 1]);
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))
