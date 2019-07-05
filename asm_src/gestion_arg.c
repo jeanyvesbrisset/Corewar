@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 19:27:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/05 11:25:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,6 @@ int		size_used_tab(int *tab)
 	while (tab[i] != -1)
 		i++;
 	return (i);
-}
-
-int		add_used_label(char **str, t_label **lab, int index)
-{
-	t_label *cur;
-	int		size;
-	t_label *new;
-
-	cur = (*lab);
-	new = 0;
-	while (cur && cur->next != *lab && ft_strcmp(cur->name, *str) != 0)
-		cur = cur->next;
-	if (!(cur) || ft_strcmp(cur->name, *str) != 0)
-		add_by_used(lab, str, &new, &cur);
-	if (!(cur->used))
-	{
-		if (!(cur->used = (int*)malloc(sizeof(int) * 2)))
-			return (ft_error("ERROR_MALLOC\n", 0, 0, 0));
-		cur->used[0] = index;
-		cur->used[1] = -1;
-		return (1);
-	}
-	size = size_used_tab(cur->used);
-	if (!(cur->used = (int*)realloc(cur->used, sizeof(int) * (size + 2))))
-		return (ft_error("ERROR_REALLOC\n", 0, 0, 0));
-	cur->used[size] = index;
-	cur->used[size + 1] = -1;
-	return (1);
 }
 
 int		is_brut_num(char *str)

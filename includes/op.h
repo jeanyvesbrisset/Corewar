@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/04 19:27:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/05 11:43:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,10 @@ int					verif_index(char *str, int **tab, t_cdata **start
 int					verif_direct(char *str, int **tab, t_cdata **start
 	, t_label **lab);
 int					stock_len(t_stock **beg, t_cdata **start);
+int					ocp_trad_size(int com, int ocp);
+int					size_used_tab(int *tab);
+int					add_used_label(char **str, t_label **lab, int index);
+int					is_commentary(char *line);
+void				check_s_name_len(char **line, int *s_name, int i);
 
 #endif

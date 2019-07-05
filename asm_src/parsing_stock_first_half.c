@@ -6,37 +6,12 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/05 10:32:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/05 11:35:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/asm.h"
-
-int		is_commentary(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (!(line))
-		return (0);
-	ft_jump_white_spaces(line, &i);
-	if ((!line[i]) || (line[i] == COMMENT_CHAR || line[i] == ';'))
-		return (1);
-	else
-		return (0);
-}
-
-void	check_s_name_len(char **line, int *s_name, int i)
-{
-	while ((*line)[(*s_name) + i] && (*line)[(*s_name) + i] != ' '
-		&& (*line)[(*s_name) + i] != '\t' && (*line)[(*s_name) + i]
-		!= DIRECT_CHAR && (*line)[(*s_name) + i] != LABEL_CHAR
-		&& (*line)[(*s_name) + i] != '-' && (*line)[(*s_name) + i]
-		!= ft_isdigit((*line)[(*s_name) + i]) && ((*line)[(*s_name) + i]
-		!= 'r' || (*line)[(*s_name) + i - 1] == 'o'))
-		(*s_name)++;
-}
 
 int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 {

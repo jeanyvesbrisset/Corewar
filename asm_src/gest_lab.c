@@ -6,51 +6,36 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/05 10:26:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/05 11:25:33 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void	add_by_used(t_label **lab, char **str, t_label **new, t_label **current)
-{
-	if (!(*new = (t_label*)malloc(sizeof(t_label) * 1)))
-		return ;
-	(*new)->proto = -1;
-	(*new)->used = 0;
-	(*new)->name = ft_strdup(*str);
-	if (!(*lab))
-		(*lab) = (*new);
-	else if ((*current))
-		(*current)->next = (*new);
-	(*new)->next = (*lab);
-	*current = *new;
-}
-
 int		all_label_good2(t_label *cur, t_cdata **start)
-{	
-	int	i;
-	int	res;
-	char		*res_str;
+{
+	int		i;
+	int		res;
+	char	*res_str;
 
 	if (cur->proto < 0)
-		{
-			write(2, "This label doesn't exist : ", 27);
-			write(2, cur->name, ft_strlen(cur->name));
-			return (ft_error("\n", 0, 0, 0));
-		}
-		i = 0;
-		while (cur->used && cur->used[i] != -1)
-		{
-			res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
-			res %= MEM_SIZE;
-			res_str = ft_itoa(res);
-			if (!(ft_itoo((*start)->str, res_str
+	{
+		write(2, "This label doesn't exist : ", 27);
+		write(2, cur->name, ft_strlen(cur->name));
+		return (ft_error("\n", 0, 0, 0));
+	}
+	i = 0;
+	while (cur->used && cur->used[i] != -1)
+	{
+		res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
+		res %= MEM_SIZE;
+		res_str = ft_itoa(res);
+		if (!(ft_itoo((*start)->str, res_str
 			, (*start)->str[cur->used[i]], &(cur->used[i]))))
-				return (0);
-			ft_strdel(&res_str);
-			i++;
-		}
+			return (0);
+		ft_strdel(&res_str);
+		i++;
+	}
 	return (1);
 }
 
@@ -68,7 +53,7 @@ int		all_label_good(t_cdata **start, t_label **lab)
 		cur = cur->next;
 	}
 	if (!(all_label_good2(cur, start)))
-			return (0);
+		return (0);
 	return (1);
 }
 

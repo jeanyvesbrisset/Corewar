@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
+#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/06/26 14:25:42 by maginist         ###   ########.fr        #
+#    Updated: 2019/07/05 11:44:07 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ OBJ_PATH2 = ./obj_vm
 SRC_PATH1 = ./asm_src/
 SRC_PATH2 = ./vm_src
 
-SRCS1 = free_structs.c\
+SRCS1 = fct_for_used_lab.c\
+		free_structs.c\
 		gest_lab.c\
 		gestion_arg.c\
 		gestion_one_arg.c\
@@ -27,6 +28,7 @@ SRCS1 = free_structs.c\
 		gnl_find_mod.c\
 		main.c\
 		more_utils.c\
+		parsing_annexe_fct.c\
 		parsing_stock_first_half.c\
 		stock_data.c\
 		utils.c

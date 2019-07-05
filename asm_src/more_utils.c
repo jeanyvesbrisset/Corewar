@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 11:24:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 17:44:08 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/05 11:25:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,6 @@ int		put_champ_size(t_cdata **st)
 	ft_itoo((comment)->str, nb, 4, &i);
 	ft_strdel(&nb);
 	return (1);
-}
-
-int		used_s_begin(t_cdata **st, int used)
-{
-	int	i;
-	int	run;
-
-	i = 0;
-	run = 0;
-	while (i + run <= used)
-	{
-		i += run;
-		run = 0;
-		if ((*st)->str[i] == 9 || (*st)->str[i] == 12 || (*st)->str[i] == 15)
-			run = 3;
-		else if ((*st)->str[i] == 1)
-			run = 5;
-		else
-			run = ocp_trad_size((int)(*st)->str[i], (int)(*st)->str[i + 1]);
-	}
-	return (i);
 }
 
 void	ocp_adder(unsigned char *ocp, int value)
