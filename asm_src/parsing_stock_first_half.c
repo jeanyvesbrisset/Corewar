@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/05 11:35:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:08:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 	if (index + 3 < CHAMP_MAX_SIZE && tabi != 16
 		&& g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);
-	return (ft_error("Problem with instuction or label\n", 0, 0, 0));// enlever le "or label" car c'est implicite dans "instruction" ?
+	return (ft_error("Problem with instuction \n", 0, 0, 0));
 }
 
 int		is_comment(char **line, t_cdata **start, int *reader)
