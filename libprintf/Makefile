@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/13 09:46:56 by maginist          #+#    #+#              #
-#    Updated: 2019/06/26 15:41:55 by maginist         ###   ########.fr        #
+#    Updated: 2019/07/11 14:10:03 by ndelhomm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,8 @@ FILES = add_pre_flgs.c\
 	  get_next_line.c\
 	  get_next_line_mod.c\
 	  ft_jump_white_spaces.c\
-	  ft_memndup.c
+	  ft_memndup.c\
+	  ft_strnchr.c\
 
 # Colors
 _RED = $'\033[31m$'

@@ -12,6 +12,20 @@
 
 #include "../includes/op.h"
 
+int		ft_strnchr(const char *s, int c)
+{
+	int i;
+
+	i = 0;
+	while (*s)
+	{
+		if (*s == c)
+			i++;
+		s++;
+	}
+	return (i);
+}
+
 int	ft_usage(char **av)
 {
 	/*(faire un ft_Dprintf(gerer la sortie avec le fd?))*/
@@ -23,10 +37,49 @@ int	ft_usage(char **av)
 	return (0);
 }
 
+/*
+**	Returns 0 if the parameters is written 
+*/
+
+int	is_dot_cor(char *av)
+{
+	if (ft_strnchr(av, '.') != 1)
+		return (0);
+	if (*av != '.' && !ft_strcmp(ft_strchr(av, '.'), ".cor"))
+		return (1);
+	return (0);
+}
+
 int main(int ac, char **av)
 {
-	if (ac < 3)
+	int i;
+	
+	i = 0;
+	if (ac < 3) //faux, tu peux jouer tout seul, cest plutot if ac == 1, ft_usage
 		return (ft_usage(av));
+	while (i < ac)
+	{
+		if (!ft_strcmp(av[i], "-n") || !ft_strcmp(av[i], "-d"))
+		{
+			ft_printf("gestion des flags\n");
+		// gerer les flags
+		}	
+		if (is_dot_cor(av[i]))
+		{
+			ft_printf("tout va bien il y a un parametre de type player.cor\n");
+		}
+			
+
+		//si flag n && flag d, alors ignore flag d
+		//flag n marche nimporte quel endroit une fois mis apres l'exec
+		//flag d est ignore si le nombre de cycles est negatif
+		//si le nombre de cycle envoye est un float ? est ce qu'on fait une troncature ou un arrondi comme la vm du sujet ou on renvoie vers ft_usage ?
+		// le nombre de cycles doit etre le prochain argumnt qui suit -d, sinon error
+		// s;il y a plus d'un -d, ft usage
+		// si -d nest pas suivi du nombre de cycle ? est-ce quon fait un ft_usage ou on considere que nb cycle = 0 et on display le programme
+		i++;
+	}	
+	
 	/*
 			1) verifier les arguments (-dump nbr_cycles) (-n) champ.cor champ.cor
 				* -d nbr_cycles copie la mémoire ecrite pendant le cycle demandé en arretant le programme et en l'affichant sur la sortie standart
