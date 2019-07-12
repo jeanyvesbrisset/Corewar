@@ -12,18 +12,25 @@
 
 #include "../includes/op.h"
 
-int		ft_strnchr(const char *s, int c)
+void		create_player()
 {
-	int i;
+	//enregistrer la position du joueur dans la structure
+}
 
-	i = 0;
-	while (*s)
-	{
-		if (*s == c)
-			i++;
-		s++;
-	}
-	return (i);
+void		cycle_number(char *cycle)
+{
+	int cycle_nb;
+	
+	cycle_nb = ft_atoi(cycle);
+	ft_printf("il y a %d cycles\n", cycle_nb);
+	//verifier que le nombre de cycle est un entier, positif ou nul
+	//mettre le flag dump a 1 dans la structure
+	//mettre cycle_nb dans la structure
+}
+
+void		handle_cycles(char *cycle)
+{
+	cycle_number(cycle); //fonction qui recupere le nombre de cycles apres le flag -d
 }
 
 int	ft_usage(char **av)
@@ -38,7 +45,7 @@ int	ft_usage(char **av)
 }
 
 /*
-**	Returns 0 if the parameters is written 
+**	Returns 0 if the parameters is written badly (.cor  player.cor.player player.cor.cor cor. ...)
 */
 
 int	is_dot_cor(char *av)
@@ -54,19 +61,27 @@ int main(int ac, char **av)
 {
 	int i;
 	
-	i = 0;
+	i = 1;
 	if (ac < 3) //faux, tu peux jouer tout seul, cest plutot if ac == 1, ft_usage
 		return (ft_usage(av));
 	while (i < ac)
 	{
-		if (!ft_strcmp(av[i], "-n") || !ft_strcmp(av[i], "-d"))
+		if (!ft_strcmp(av[i], "-n"))
 		{
-			ft_printf("gestion des flags\n");
+			ft_printf("flag -n\n");
+		}
+		if (!ft_strcmp(av[i], "-d"))
+		{
+			ft_printf("flag -d\n");
+			handle_cycles(av[i + 1]);
 		// gerer les flags
 		}	
 		if (is_dot_cor(av[i]))
 		{
-			ft_printf("tout va bien il y a un parametre de type player.cor\n");
+			create_player();
+			//incementer dans la structure le flag players
+			//si players > 4, renvoyer error
+			ft_printf("le joueur %s a ete enregistre a la %deme position\n", av[i], i);
 		}
 			
 
