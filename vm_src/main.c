@@ -12,36 +12,10 @@
 
 #include "../includes/op.h"
 
-void		create_player()
+void		create_player(char *file)
 {
+	(void)file;
 	//enregistrer la position du joueur dans la structure
-}
-
-void		cycle_number(char *cycle)
-{
-	int cycle_nb;
-	
-	cycle_nb = ft_atoi(cycle);
-	ft_printf("il y a %d cycles\n", cycle_nb);
-	//verifier que le nombre de cycle est un entier, positif ou nul
-	//mettre le flag dump a 1 dans la structure
-	//mettre cycle_nb dans la structure
-}
-
-void		handle_cycles(char *cycle)
-{
-	cycle_number(cycle); //fonction qui recupere le nombre de cycles apres le flag -d
-}
-
-int	ft_usage(char **av)
-{
-	/*(faire un ft_Dprintf(gerer la sortie avec le fd?))*/
-	write(2, "Not enougth arguments.\nUsage: ", 30);
-	write(2, av[0], ft_strlen(av[0]));
-	//ecrire les différents flags
-	write(2, " <champion1.cor> <...>\n", 23);
-	//ajouter usage pour flags choisi
-	return (0);
 }
 
 /*
@@ -57,6 +31,53 @@ int	is_dot_cor(char *av)
 	return (0);
 }
 
+int		cycle_number(char *cycle)
+{
+	int cycle_nb;
+	int i;
+
+	i = 0;
+	if (is_dot_cor(cycle))
+	{
+		cycle_nb = 0;
+		ft_printf("il y a %d cycles\n", cycle_nb);
+		return (1);
+	}
+	while (cycle[i])
+	{
+		if (!ft_isdigit(cycle[i]))
+		{
+			ft_printf("number of cycles badly written\n");
+			return (0);
+		}
+		i++;
+	}
+	cycle_nb = ft_atoi(cycle);
+	ft_printf("il y a %d cycles\n", cycle_nb);
+	return (1);
+	//verifier que le nombre de cycle est un entier, positif ou nul
+	//mettre le flag dump a 1 dans la structure
+	//mettre cycle_nb dans la structure
+}
+
+int		is_cycle(char *cycle)
+{
+	cycle_number(cycle); //fonction qui recupere le nombre de cycles apres le flag -d
+	return (1);
+}
+
+int	ft_usage(char **av)
+{
+	/*(faire un ft_Dprintf(gerer la sortie avec le fd?))*/
+	write(2, "Not enougth arguments.\nUsage: ", 30);
+	write(2, av[0], ft_strlen(av[0]));
+	//ecrire les différents flags
+	write(2, " <champion1.cor> <...>\n", 23);
+	//ajouter usage pour flags choisi
+	return (0);
+}
+
+
 int main(int ac, char **av)
 {
 	int i;
@@ -70,18 +91,16 @@ int main(int ac, char **av)
 		{
 			ft_printf("flag -n\n");
 		}
-		if (!ft_strcmp(av[i], "-d"))
+		if (!ft_strcmp(av[i], "-d") && is_cycle(av[i + 1]))
 		{
 			ft_printf("flag -d\n");
-			handle_cycles(av[i + 1]);
-		// gerer les flags
 		}	
 		if (is_dot_cor(av[i]))
 		{
-			create_player();
+			create_player(av[i]);
 			//incementer dans la structure le flag players
 			//si players > 4, renvoyer error
-			ft_printf("le joueur %s a ete enregistre a la %deme position\n", av[i], i);
+			ft_printf("le joueur %s a ete enregistre\n", av[i]);
 		}
 			
 
