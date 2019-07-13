@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/09 14:08:13 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/13 19:14:55 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,12 @@ void	init_cor(t_cdata **start, int *step)
 	if (!((*start) = (t_cdata*)malloc(sizeof(t_cdata) * 1)))
 		return ;
 	(*start)->str = ft_memalloc(4 + PROG_NAME_LENGTH);
-	(*start)->str[1] = 234;
+	(*start)->str[1] = 234;// fonction a laquelle on envoi le start, le COREWAR_EXEC_MAGIC et qui l'ecrit au debut (aussi con que ca et en plus on economise 3 lignes)
+	/* if (!(write_the_magic(start, COREWAR_EXEC_MAGIC))
+		return (ft_error("Wrong magic number format", 0, 0 ,0));
+	 je le laisse comme ca car faut se mettre d'accord sur les formes possibles du magic num dans le define et sur les retours possibles
+	 Faudra aussi passer le init_cor en int et prevoir un retour
+	*/
 	(*start)->str[2] = 131;
 	(*start)->str[3] = 243;
 	(*start)->size = 4 + PROG_NAME_LENGTH;
