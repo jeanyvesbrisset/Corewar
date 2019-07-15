@@ -6,12 +6,25 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/13 19:14:55 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 12:16:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/asm.h"
+
+int		write_the_magic(t_cdata **start, int nb)
+{
+	int		unused;
+	char	*str;
+
+	unused = 0;
+	str = ft_itoa(nb);
+	if (!(ft_itoo((*start)->str, str, 4, &unused)))
+		return (0);
+	ft_strdel(&str);
+	return (1);
+}
 
 int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 {
@@ -98,31 +111,25 @@ int		is_name(char **line, t_cdata **start, int *reader)
 	return (-1);
 }
 
-void	init_cor(t_cdata **start, int *step)
+int	init_cor(t_cdata **start, int *step)
 {
 	t_cdata	*comment;
 	t_cdata	*command;
 
 	if (!((*start) = (t_cdata*)malloc(sizeof(t_cdata) * 1)))
-		return ;
+		return (0);
 	(*start)->str = ft_memalloc(4 + PROG_NAME_LENGTH);
-	(*start)->str[1] = 234;// fonction a laquelle on envoi le start, le COREWAR_EXEC_MAGIC et qui l'ecrit au debut (aussi con que ca et en plus on economise 3 lignes)
-	/* if (!(write_the_magic(start, COREWAR_EXEC_MAGIC))
+	if (!(write_the_magic(start, COREWAR_EXEC_MAGIC)))
 		return (ft_error("Wrong magic number format", 0, 0 ,0));
-	 je le laisse comme ca car faut se mettre d'accord sur les formes possibles du magic num dans le define et sur les retours possibles
-	 Faudra aussi passer le init_cor en int et prevoir un retour
-	*/
-	(*start)->str[2] = 131;
-	(*start)->str[3] = 243;
 	(*start)->size = 4 + PROG_NAME_LENGTH;
 	(*start)->index = 1;
 	if (!(comment = (t_cdata*)malloc(sizeof(t_cdata) * 1)))
-		return ;
+		return (0);
 	comment->str = ft_memalloc(12 + COMMENT_LENGTH);
 	comment->size = 12 + COMMENT_LENGTH;
 	comment->index = 2;
 	if (!(command = (t_cdata*)malloc(sizeof(t_cdata) * 1)))
-		return ;
+		return (0);
 	command->str = ft_memalloc(CHAMP_MAX_SIZE);
 	command->size = CHAMP_MAX_SIZE;
 	command->index = 3;
@@ -130,6 +137,7 @@ void	init_cor(t_cdata **start, int *step)
 	comment->next = command;
 	command->next = *start;
 	(*step)++;
+	return (1);
 }
 
 int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
