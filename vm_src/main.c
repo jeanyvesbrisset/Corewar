@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 11:30:01 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:01:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ int main(int ac, char **av)
 	int i;
 	
 	i = 1;
-	if (ac < 3) //faux, tu peux jouer tout seul, cest plutot if ac == 1, ft_usage
-		return (ft_usage(av));
 	while (i < ac)
 	{
 		if (!ft_strcmp(av[i], "-n"))
@@ -120,6 +118,8 @@ int main(int ac, char **av)
 		// si -d nest pas suivi du nombre de cycle ? est-ce quon fait un ft_usage ou on considere que nb cycle = 0 et on display le programme
 		i++;
 	}
+	return (0);
+}
 	/*
 			1) verifier les arguments (-dump nbr_cycles) (-n) champ.cor champ.cor
 				* -d nbr_cycles copie la mémoire ecrite pendant le cycle demandé en arretant le programme et en l'affichant sur la sortie standart
@@ -147,5 +147,3 @@ int main(int ac, char **av)
 			7) detecter les "LIVE" et arret si gagnant
 			8) gestion de sortie(free et gestion erreur).
 	*/
-   return (0);           
-}

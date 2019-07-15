@@ -6,25 +6,12 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/15 12:16:17 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:31:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/asm.h"
-
-int		write_the_magic(t_cdata **start, int nb)
-{
-	int		unused;
-	char	*str;
-
-	unused = 0;
-	str = ft_itoa(nb);
-	if (!(ft_itoo((*start)->str, str, 4, &unused)))
-		return (0);
-	ft_strdel(&str);
-	return (1);
-}
 
 int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 {

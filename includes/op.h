@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 12:16:13 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:20:55 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,28 @@ typedef struct		s_f
 	int				(*f)(char *str, t_cdata **start, t_label **lab
 		, int *index);
 }					t_f;
+
+typedef	struct		s_champ
+{
+	int				pos;
+	int				size;
+	int				reader;
+	unsigned char	*name;
+	unsigned char	*comment;
+	unsigned char	*bytecode;
+	int				*r;//16 registres par champion, a mettre dans ce tableau
+	int				carry;//egal a 0 ou 1 en fonction de l'instruction realisee
+	struct s_champ	*next;
+}					t_champ;
+
+typedef	struct 		s_core
+{
+	int				flag_n;//0 ou 1
+	int				flag_d;//-1 s'il n'y en a pas, sinon nombre de cycle
+	int				champ_nb;
+	t_champ			*champ;
+}					t_core;
+
 
 void				start_to_command(t_cdata **start);
 void				gest_lab(t_label **lab, int index, char **line, int *jump);
@@ -167,5 +189,6 @@ int					size_used_tab(int *tab);
 int					add_used_label(char **str, t_label **lab, int index);
 int					is_commentary(char *line);
 void				check_s_name_len(char **line, int *s_name, int i);
+int					write_the_magic(t_cdata **start, int nb);
 
 #endif

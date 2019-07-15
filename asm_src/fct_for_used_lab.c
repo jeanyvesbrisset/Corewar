@@ -6,11 +6,24 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 11:23:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/05 11:26:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:43:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int		write_the_magic(t_cdata **start, int nb)
+{
+	int		unused;
+	char	*str;
+
+	unused = 0;
+	str = ft_itoa(nb);
+	if (!(ft_itoo((*start)->str, str, 4, &unused)))
+		return (0);
+	ft_strdel(&str);
+	return (1);
+}
 
 void	add_by_used(t_label **lab, char **str, t_label **new, t_label **current)
 {
