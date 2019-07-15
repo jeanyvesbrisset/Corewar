@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 14:01:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:36:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ int main(int ac, char **av)
 			//si players > 4, renvoyer error
 			ft_printf("le joueur %s a ete enregistre\n", av[i]);
 		}
-			
-
 		//si flag n && flag d, alors ignore flag d
 		//flag n marche nimporte quel endroit une fois mis apres l'exec
 		//flag d est ignore si le nombre de cycles est negatif

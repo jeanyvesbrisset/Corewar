@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 15:43:46 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/05 11:25:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:57:05 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int		all_label_good2(t_label *cur, t_cdata **start)
 	i = 0;
 	while (cur->used && cur->used[i] != -1)
 	{
-		res = (MEM_SIZE + cur->proto - used_s_begin(start, cur->used[i]));
-		res %= MEM_SIZE;
+		res = (65536 + cur->proto - used_s_begin(start, cur->used[i]));
+		res %= 65536;
 		res_str = ft_itoa(res);
 		if (!(ft_itoo((*start)->str, res_str
 			, (*start)->str[cur->used[i]], &(cur->used[i]))))

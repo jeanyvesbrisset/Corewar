@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 14:20:55 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:52:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define IND_CODE			3
 # define MAX_ARGS_NUMBER	4
 # define MAX_PLAYERS		4
-# define MEM_SIZE			(4*1024)
+# define MEM_SIZE			(64*1024)
 # define IDX_MOD			(MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
 # define COMMENT_CHAR		'#'
@@ -87,16 +87,22 @@ typedef struct		s_f
 		, int *index);
 }					t_f;
 
+typedef struct 		s_proces
+{
+	int				r[16];//16 registres par process, a mettre dans ce tableau
+	int				carry;
+	int				pc;
+	struct s_proces	*next;
+}					t_proces;
+
 typedef	struct		s_champ
 {
 	int				pos;
 	int				size;
-	int				reader;
 	unsigned char	*name;
 	unsigned char	*comment;
 	unsigned char	*bytecode;
-	int				*r;//16 registres par champion, a mettre dans ce tableau
-	int				carry;//egal a 0 ou 1 en fonction de l'instruction realisee
+	t_proces		*proces;
 	struct s_champ	*next;
 }					t_champ;
 
@@ -105,7 +111,8 @@ typedef	struct 		s_core
 	int				flag_n;//0 ou 1
 	int				flag_d;//-1 s'il n'y en a pas, sinon nombre de cycle
 	int				champ_nb;
-	t_champ			*champ;
+	t_champ			*champs;
+	char			arena[MEM_SIZE];
 }					t_core;
 
 
