@@ -77,6 +77,12 @@ int	ft_usage(char **av)
 	return (0);
 }
 
+void	player_order(char *order_nb)
+{
+	int	player_nb;
+
+	player_nb = ft_atoi(order_nb);
+}
 
 int main(int ac, char **av)
 {
@@ -89,6 +95,7 @@ int main(int ac, char **av)
 	{
 		if (!ft_strcmp(av[i], "-n"))
 		{
+			player_order(av[i + 1]);
 			ft_printf("flag -n\n");
 		}
 		if (!ft_strcmp(av[i], "-d") && is_cycle(av[i + 1]))
