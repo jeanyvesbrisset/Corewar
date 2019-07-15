@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 16:36:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:27:18 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ void		create_player(char *file)
 /*
 **	Returns 0 if the parameters is written badly (.cor  player.cor.player player.cor.cor cor. ...)
 */
-
-int	is_dot_cor(char *av)
-{
-	if (ft_strnchr(av, '.') != 1)
-		return (0);
-	if (*av != '.' && !ft_strcmp(ft_strchr(av, '.'), ".cor"))
-		return (1);
-	return (0);
-}
 
 int		cycle_number(char *cycle)
 {
@@ -66,57 +57,16 @@ int		is_cycle(char *cycle)
 	return (1);
 }
 
-int	ft_usage(char **av)
-{
-	/*(faire un ft_Dprintf(gerer la sortie avec le fd?))*/
-	write(2, "Not enougth arguments.\nUsage: ", 30);
-	write(2, av[0], ft_strlen(av[0]));
-	//ecrire les différents flags
-	write(2, " <champion1.cor> <...>\n", 23);
-	//ajouter usage pour flags choisi
-	return (0);
-}
-
-void	player_order(char *order_nb)
-{
-	int	player_nb;
-
-	player_nb = ft_atoi(order_nb);
-}
-
 int main(int ac, char **av)
 {
-	int i;
-	
-	i = 1;
-	while (i < ac)
-	{
-		if (!ft_strcmp(av[i], "-n"))
-		{
-			player_order(av[i + 1]);
-			ft_printf("flag -n\n");
-		}
-		if (!ft_strcmp(av[i], "-d") && is_cycle(av[i + 1]))
-		{
-			ft_printf("flag -d\n");
-		}	
-		if (is_dot_cor(av[i]))
-		{
-			create_player(av[i]);
-			//incementer dans la structure le flag players
-			//si players > 4, renvoyer error
-			ft_printf("le joueur %s a ete enregistre\n", av[i]);
-		}
-		//si flag n && flag d, alors ignore flag d
-		//flag n marche nimporte quel endroit une fois mis apres l'exec
-		//flag d est ignore si le nombre de cycles est negatif
-		//si le nombre de cycle envoye est un float ? est ce qu'on fait une troncature ou un arrondi comme la vm du sujet ou on renvoie vers ft_usage ?
-		// le nombre de cycles doit etre le prochain argumnt qui suit -d, sinon error
-		// s;il y a plus d'un -d, ft usage
-		// si -d nest pas suivi du nombre de cycle ? est-ce quon fait un ft_usage ou on considere que nb cycle = 0 et on display le programme
-		i++;
-	}
-	return (0);
+	t_core *core;
+
+	core = 0;
+	core->flag_d = -1;
+	core->flag_v = 0;
+	core->champ_nb = 0;
+	if (!(parcing_args(ac, av, core)))
+		return (0);
 }
 	/*
 			1) verifier les arguments (-dump nbr_cycles) (-n) champ.cor champ.cor
