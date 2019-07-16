@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 18:41:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,18 @@ typedef struct		s_f
 		, int *index);
 }					t_f;
 
+typedef struct s_fvm
+{
+	unsigned char	*op;
+	//ajouter pointeur sur fonction
+	
+}				t_fvm;
+
+
 typedef struct 		s_proces
 {
-	int				champ;
+	int				champ;//1, 2,3 ou 4
+	int				proces_nb;//le combientieme proess dont ilest question
 	int				r[16]; //16 registres par process, a mettre dans ce tableau
 	int				carry;
 	int				pc;
@@ -98,7 +107,8 @@ typedef struct 		s_proces
 
 typedef	struct		s_champ
 {
-	int				pos;
+	int				pos;//1, 2, 3 ou 4
+	int				tmp_n;
 	int				size;
 	unsigned char	*name;
 	unsigned char	*comment;
@@ -201,5 +211,6 @@ int					is_commentary(char *line);
 void				check_s_name_len(char **line, int *s_name, int i);
 int					write_the_magic(t_cdata **start, int nb);
 int					parcing_args(int ac, char **av, t_core *core);
+int					stock_champ(int ac, char **av, t_core *core);
 
 #endif

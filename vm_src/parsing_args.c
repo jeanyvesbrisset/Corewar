@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 18:41:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 int	is_dot_cor(char *av)
 {
-	if (ft_strnchr(av, '.') != 1)
+	int i;
+
+	i = 0;
+	if (ft_isdigit(av[i]))
 		return (0);
-	if (*av != '.' && !ft_strcmp(ft_strchr(av, '.'), ".cor"))
-		return (1);
-	return (0);
+	while (ft_isalnum(av[i]) || av[i] == '-' || av[i] == '_')
+		i++;
+	if (ft_strcmp(av, ".cor") != 0)
+		return (0);
+	return (1);
 }
 
 int	is_order_n(char **av, int i, t_core *core)
@@ -30,13 +35,13 @@ int	is_order_n(char **av, int i, t_core *core)
 	if (!(ft_isdigit(av[i + 1])))
 		return (0);
 	champ_n = ft_atoi(av[i + 1]);
+	if (!(champ_n <= 4 && champ_n > 0))
+		return (0);
 	if (is_dot_cor(av[i + 2]))
-	{
-		if (!(stock_champ(core, av, i, champ_n)))
-			return (0);
-	}
+		(core->champ_nb)++;
 	else
 		return (0);
+	return (1);
 }
 
 int	write_help(char *str)
@@ -72,23 +77,14 @@ int	parcing_args(int ac, char **av, t_core *core)
 		else if (!(core->flag_v) && !(ft_strcmp(av[i], "-v")))
 			core->flag_v = 1;
 		else if (is_dot_cor(av[i]))
-		{
-			if (!(stock_champ(core, av, i, 0)))
-				return (0);
-		}
+			(core->champ_nb)++;
 		else if (is_order_n(av, i, core))
 			i += 2;
 		else
 			return (0);
-	
-		//si flag n && flag d, alors ignore flag d
-		//flag n marche nimporte quel endroit une fois mis apres l'exec
-		//flag d est ignore si le nombre de cycles est negatif
-		//si le nombre de cycle envoye est un float ? est ce qu'on fait une troncature ou un arrondi comme la vm du sujet ou on renvoie vers ft_usage ?
-		// le nombre de cycles doit etre le prochain argumnt qui suit -d, sinon error
-		// s;il y a plus d'un -d, ft usage
-		// si -d nest pas suivi du nombre de cycle ? est-ce quon fait un ft_usage ou on considere que nb cycle = 0 et on display le programme
 		i++;
 	}
+	if (core->champ_nb < 2)
+		return (0);
 	return (1);
 }

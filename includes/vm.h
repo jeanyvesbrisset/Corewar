@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 13:38:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
+/*   Created: 2019/06/26 13:38:38 by ndelhomm          #+#    #+#             */
+/*   Updated: 2019/07/16 17:03:22 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#ifndef VM_H
+# define VM_H
 # include "op.h"
 
-t_f		g_f_tab[] =
+t_fvm		g_fvm_tab[] =
 {
-	{"live", &gest_live},
-	{"ld", &gest_ld},
-	{"st", &gest_st},
-	{"add", &gest_add},
-	{"sub", &gest_sub},
-	{"and", &gest_and},
-	{"or", &gest_or},
-	{"xor", &gest_xor},
-	{"zjmp", &gest_zjmp},
-	{"ldi", &gest_ldi},
-	{"sti", &gest_sti},
-	{"fork", &gest_fork},
-	{"lld", &gest_lld},
-	{"lldi", &gest_lldi},
-	{"lfork", &gest_lfork},
-	{"aff", &gest_aff}
+	{"0x01", &vm_live},
+	{"0x02", &vm_ld},
+	{"0x03", &vm_st},
+	{"0x04", &vm_add},
+	{"0x05", &vm_sub},
+	{"0x06", &vm_and},
+	{"0x07", &vm_or},
+	{"0x08", &vm_xor},
+	{"0x09", &vm_zjmp},
+	{"0x0a", &vm_ldi},
+	{"0x0b", &vm_sti},
+	{"0x0c", &vm_fork},
+	{"0x0d", &vm_lld},
+	{"0x0e", &vm_lldi},
+	{"0x0f", &vm_lfork},
+	{"0x10", &vm_aff}
 };
 
 #endif

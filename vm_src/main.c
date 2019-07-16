@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/15 18:27:18 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ int main(int ac, char **av)
 	core->flag_d = -1;
 	core->flag_v = 0;
 	core->champ_nb = 0;
+	core->champs = 0;
+	core->proces = 0;
 	if (!(parcing_args(ac, av, core)))
+		return (0);
+	if (!(stock_champ(ac, av, core)))
 		return (0);
 }
 	/*
