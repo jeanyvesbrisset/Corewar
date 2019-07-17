@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:27:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,20 @@ void	init_vm(t_core *core)
 	}
 	ft_bzero(core->arena, MEM_SIZE);
 	cpy_champs(core);
+	core->cycle_to_die = CYCLE_TO_DIE;
 }
 
-void	run_champ(t_core *core,t_champ *champ)
-{
-	core->arena[]
-}
+
 
 void	run_vm(t_core *core)
 {
-	t_champ	*champ;
-
-	champ = core->champs;
-	while (run_champ(core, champ))
+	while (run_cycles_to_die(core))
 	{
-		champ = champ->next;
+		if (check_alives(core) > 1)
+			break ;
+		else if (core->nbr_live > NBR_LIVE)
+			core->cycle_to_die -= CYCLE_DELTA;
+		core->tmp_cycle = 0;
 	}
 }
 

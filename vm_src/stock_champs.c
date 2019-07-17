@@ -6,11 +6,18 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/17 11:46:10 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:30:46 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int		trad_big_to_lit(unsigned char *str)
+{
+	int i;
+
+	i = 0;
+}
 
 int		pos_in_list(t_core *core, t_champ *to_find)
 {
@@ -160,7 +167,7 @@ int		read_champ(t_champ *champ, char *file)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if (ft_atoi((char*)str) != COREWAR_EXEC_MAGIC)
+	if (trad_big_to_lit(str) != COREWAR_EXEC_MAGIC)
 		return (0);
 	if (!(champ->name = (unsigned char*)malloc(PROG_NAME_LENGTH)))
 		return (0);
@@ -170,7 +177,7 @@ int		read_champ(t_champ *champ, char *file)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if ((champ->size = ft_atoi((char*)str)) > CHAMP_MAX_SIZE)
+	if ((champ->size = trad_big_to_lit(str)) > CHAMP_MAX_SIZE)
 		return (0);
 	if (!(champ->comment = (unsigned char*)malloc(COMMENT_LENGTH)))
 		return (0);
@@ -183,6 +190,8 @@ int		add_champ_list(t_core *core, t_champ **champ, char *file)
 
 	current = core->champs;
 	if (!(read_champ(*champ, file)))
+		return (0);
+	if ((*champ)->tmp_n != 0 && (*champ)->tmp_n > core->champ_nb)
 		return (0);
 	while (current && current->pos != (*champ)->pos)
 		current = current->next;
