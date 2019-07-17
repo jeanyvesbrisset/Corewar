@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 11:46:10 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ajust_champ_pos(t_core *core)
 	ajust_champ_pos2(core);
 }
 
-void	sort_champ_list(t_champ **champ, int champ_n)
+void	sort_champ_list(t_champ **champ)
 {
 	t_champ *current;
 	t_champ *before;
@@ -123,6 +123,8 @@ int		init_process(t_proces **proce, int champ_nb, int pc, int *sum_process)
 	pro->champ = champ_nb;
 	pro->proces_nb = champ_nb;
 	pro->carry = 0;
+	pro->pc = pc;
+	pro->alive = 1;
 	i = 0;
 	while (i < 16)
 		pro->r[i++] = 0;
@@ -148,17 +150,17 @@ int		read_champ2(t_champ *champ, int fd)
 	return (1);
 }
 
-int		read_champ(t_champ *champ)
+int		read_champ(t_champ *champ, char *file)
 {
 	int	fd;
 	int	ret;
 	unsigned char str[4];
 	
-	if ((fd = open(champ->name, O_RDONLY)) == -1)
+	if ((fd = open(file, O_RDONLY)) == -1)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if (ft_atoi(str) != COREWAR_EXEC_MAGIC)
+	if (ft_atoi((char*)str) != COREWAR_EXEC_MAGIC)
 		return (0);
 	if (!(champ->name = (unsigned char*)malloc(PROG_NAME_LENGTH)))
 		return (0);
@@ -175,12 +177,12 @@ int		read_champ(t_champ *champ)
 	return (read_champ2(champ, fd));
 }
 
-int		add_champ_list(t_core *core, t_champ **champ)
+int		add_champ_list(t_core *core, t_champ **champ, char *file)
 {
 	t_champ	*current;
 
 	current = core->champs;
-	if (!(read_champ(*champ)))
+	if (!(read_champ(*champ, file)))
 		return (0);
 	while (current && current->pos != (*champ)->pos)
 		current = current->next;
@@ -208,7 +210,7 @@ int		init_champ(t_core *core, char *name, int *i, int n)
 	}
 	else
 		n_champ->pos = champ_order;
-	if (!(add_champ_list(core, &n_champ)))
+	if (!(add_champ_list(core, &n_champ, name)))
 		return (0);
 	return (1);
 }
@@ -232,7 +234,7 @@ int		stock_champ(int ac, char **av, t_core *core)
 		}
 	}
 	ajust_champ_pos(core);
-	sort_champ_list(&(core->champs), core->champ_nb);
+	sort_champ_list(&(core->champs));
 	i = 0;
 	while (++i <= core->champ_nb)
 		if (!(init_process(&(core->proces), i, 0

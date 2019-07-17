@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 11:23:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,21 @@ int main(int ac, char **av)
 {
 	t_core *core;
 
-	core = 0;
+	if (!(core = (t_core*)malloc(sizeof(t_core) *1)))
+		return (0);
 	core->flag_d = -1;
 	core->flag_v = 0;
 	core->champ_nb = 0;
 	core->champs = 0;
 	core->proces = 0;
+	ft_printf("on commence\n");
 	if (!(parcing_args(ac, av, core)))
 		return (0);
+	ft_printf("parcing good\n");
 	if (!(stock_champ(ac, av, core)))
 		return (0);
+	ft_printf("all good\n");
+	return (1);
 }
 	/*
 			1) verifier les arguments (-dump nbr_cycles) (-n) champ.cor champ.cor

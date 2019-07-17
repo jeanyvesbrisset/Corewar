@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
+#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/07/09 16:08:30 by maginist         ###   ########.fr        #
+#    Updated: 2019/07/17 11:10:35 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ SRCS1 = fct_for_used_lab.c\
 		stock_data.c\
 		utils.c
 
-SRCS2 =	main.c
+SRCS2 =	main.c\
+		parsing_args.c\
+		stock_champs.c\
 
 
 OBJ_NAME1 = $(SRCS1:.c=.o)

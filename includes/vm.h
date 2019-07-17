@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 13:38:38 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/16 17:03:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 10:29:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_fvm		g_fvm_tab[] =
 	{"0x0d", &vm_lld},
 	{"0x0e", &vm_lldi},
 	{"0x0f", &vm_lfork},
-	{"0x10", &vm_aff}
+	{"0x10", &gest_aff}
 };
 
 #endif

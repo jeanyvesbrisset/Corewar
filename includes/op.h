@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/16 18:03:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 12:23:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,10 @@ typedef struct s_fvm
 typedef struct 		s_proces
 {
 	int				champ;//1, 2,3 ou 4
-	int				proces_nb;//le combientieme proess dont ilest question
+	int				proces_nb;//le combientieme process dont il est question
 	int				r[16]; //16 registres par process, a mettre dans ce tableau
 	int				carry;
+	int				alive;//0 ou 1
 	int				pc;
 	struct s_proces	*next;
 }					t_proces;
@@ -123,6 +124,8 @@ typedef	struct 		s_core
 	int				flag_d; //-1 s'il n'y en a pas, sinon nombre de cycle
 	int				champ_nb;
 	int				sum_process;
+	int				cycle;
+	int				cycle_to_die;
 	t_champ			*champs; // trié par ordre inverse
 	t_proces		*proces;  // trié au depart, par ordre inverse
 	unsigned char	arena[MEM_SIZE];
@@ -212,5 +215,6 @@ void				check_s_name_len(char **line, int *s_name, int i);
 int					write_the_magic(t_cdata **start, int nb);
 int					parcing_args(int ac, char **av, t_core *core);
 int					stock_champ(int ac, char **av, t_core *core);
+int					is_dot_cor(char *av);
 
 #endif
