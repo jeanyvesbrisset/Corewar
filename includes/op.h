@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/17 12:23:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:48:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct		s_f
 
 typedef struct s_fvm
 {
-	unsigned char	*op;
+	unsigned char	op;
 	//ajouter pointeur sur fonction
 	
 }				t_fvm;
@@ -124,8 +124,10 @@ typedef	struct 		s_core
 	int				flag_d; //-1 s'il n'y en a pas, sinon nombre de cycle
 	int				champ_nb;
 	int				sum_process;
-	int				cycle;
+	int				total_cycle;
+	int				tmp_cycle;;
 	int				cycle_to_die;
+	int				nbr_live;
 	t_champ			*champs; // trié par ordre inverse
 	t_proces		*proces;  // trié au depart, par ordre inverse
 	unsigned char	arena[MEM_SIZE];

@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 19:16:36 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:30:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		create_cor(t_cdata **start, char **name)
 	if (current && current->next == *start)
 		write(fd, current->str, current->size);
 	ft_printf("Writing output program to %s\n", *name);
+	close(fd);
 	return (0);
 }
 
