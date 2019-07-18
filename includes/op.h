@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/18 10:42:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:47:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct		s_f
 typedef struct s_fvm
 {
 	unsigned char	op;
+	int				cycle_delay;
 	//ajouter pointeur sur fonction
 	
 }				t_fvm;
@@ -103,6 +104,8 @@ typedef struct 		s_proces
 	int				carry;
 	int				alive;//0 ou 1
 	int				pc;
+	int				wait;
+	int				params[4];
 	struct s_proces	*next;
 }					t_proces;
 
@@ -111,6 +114,7 @@ typedef	struct		s_champ
 	int				pos;//1, 2, 3 ou 4
 	int				tmp_n;
 	int				size;
+	int				last_live; // cycle absolu
 	unsigned char	*name;
 	unsigned char	*comment;
 	unsigned char	*bytecode;
@@ -218,5 +222,12 @@ int					write_the_magic(t_cdata **start, int nb);
 int					parcing_args(int ac, char **av, t_core *core);
 int					stock_champ(int ac, char **av, t_core *core);
 int					is_dot_cor(char *av);
+
+/*
+** vm
+*/
+
+void	init_vm(t_core *core);
+
 
 #endif

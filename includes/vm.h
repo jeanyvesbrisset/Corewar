@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 13:38:38 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/18 10:42:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:20:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 
 t_fvm		g_fvm_tab[] =
 {
-	{1, &vm_live},
-	{2, &vm_ld},
-	{3, &vm_st},
-	{4, &vm_add},
-	{5, &vm_sub},
-	{6, &vm_and},
-	{7, &vm_or},
-	{8, &vm_xor},
-	{9, &vm_zjmp},
-	{10, &vm_ldi},
-	{11, &vm_sti},
-	{12, &vm_fork},
-	{13, &vm_lld},
-	{14, &vm_lldi},
-	{15, &vm_lfork},
-	{16, &gest_aff}
+	{1, 10, &vm_live},
+	{2, 5, &vm_ld},
+	{3, 5, &vm_st},
+	{4, 10, &vm_add},
+	{5, 10, &vm_sub},
+	{6, 6, &vm_and},
+	{7, 6, &vm_or},
+	{8, 6, &vm_xor},
+	{9, 20, &vm_zjmp},
+	{10, 25, &vm_ldi},
+	{11, 25, &vm_sti},
+	{12, 800, &vm_fork},
+	{13, 10, &vm_lld},
+	{14, 50, &vm_lldi},
+	{15, 1000, &vm_lfork},
+	{16, 2, &vm_aff}
 };
 
 #endif

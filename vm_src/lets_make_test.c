@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 14:40:13 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/18 10:42:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/18 11:00:14 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int		main(int ac, char **av)
 	if ((ret = read(fd, str, size)) <= 0)
 		return (printf("read failed\n"));
 	str[atoi(av[3])] = (unsigned char)atoi(av[2]);
-	if ((fd2 = open("test", O_WRONLY | O_CREAT)) == -1)
+	if ((fd2 = open("test", O_WRONLY | O_CREAT | O_TRUNC)) == -1)
 		return (printf(" failed\n"));
-	write(fd2, str, size);
+	write(fd2, str, ret);
 	close(fd);
 	close(fd2);
 	return (0);

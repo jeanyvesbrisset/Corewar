@@ -6,76 +6,67 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/17 15:27:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:47:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+#include "../includes/vm.h"
 
-void	cpy_champs(t_core *core)
+
+void	handle_proces(t_core *core, t_proces *pr)
 {
-	t_champ	*champ;
-	int		i;
-	int		j;
+	unsigned char op;
+	unsigned char ocp;
 
-	champ = core->champs;
-	while (champ)
-	{
-		i = champ->byte_start;
-		j = 0;
-		while (j < champ->size)
-			core->arena[i++] = champ->bytecode[j++];
-		champ = champ->next;
-	}
+	op = core->arena[pr->pc];
+	ocp = 0;
+	if (op != 1 && op != 9 && op != 12 && op != 15)
+		ocp = core->arena[pr->pc + 1];
+	read_ocp(core, ocp);
 }
 
-void	init_pc( t_core *core, t_champ *champ)
+void	read_op(t_core *core, t_proces *pr)
 {
-	t_proces	*proces;
+	unsigned char op;
 
-	proces = core->proces;
-	while (proces)
+	op = core->arena[pr->pc];
+	if (op < 1 || op > 16)
+		return ; // to do, prendre en compte cette erreur
+	pr->wait = core->cycle_to_die + g_fvm_tab[op - 1].cycle_delay;
+}
+
+int		run_cycles_to_die(t_core *core)
+{
+	t_proces *pr;
+
+	pr = core->proces;
+	while (core->tmp_cycle++ < core->cycle_to_die)
 	{
-		if (proces->champ == champ->pos)
+		if (!pr->wait || pr->wait == core->total_cycle - 1)
+			read_op(core, pr);
+		if (pr->wait == core->total_cycle)
+			handle_proces(core, pr);
+		if (pr->next)
+			pr = pr->next;
+		else
 		{
-			proces->pc = champ->byte_start;
-			return ;
+			pr = core->proces;
+			core->total_cycle++;
 		}
-		proces = proces->next;
 	}
 }
-
-void	init_vm(t_core *core)
-{
-	t_champ	*champ;
-	int		gap;
-
-	champ = core->champs;
-	gap = MEM_SIZE / core->champ_nb;
-	champ->byte_start = MEM_SIZE - gap;
-	while (champ)
-	{
-		if (champ->next)
-			champ->next->byte_start = champ->byte_start - gap;
-		init_pc(core, champ);
-		champ = champ->next;
-	}
-	ft_bzero(core->arena, MEM_SIZE);
-	cpy_champs(core);
-	core->cycle_to_die = CYCLE_TO_DIE;
-}
-
-
 
 void	run_vm(t_core *core)
 {
 	while (run_cycles_to_die(core))
 	{
-		if (check_alives(core) > 1)
+		if (!check_lives(core))
 			break ;
 		else if (core->nbr_live > NBR_LIVE)
 			core->cycle_to_die -= CYCLE_DELTA;
 		core->tmp_cycle = 0;
+		core->nbr_live = 0;
 	}
 }
 
