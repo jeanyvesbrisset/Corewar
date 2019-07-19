@@ -6,14 +6,14 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/17 15:48:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/19 11:32:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
 int		trad_big_to_lit(unsigned char *str)
-{
+{//cf ft_otoi dans le main
 	int i;
 
 	i = 0;
