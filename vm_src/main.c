@@ -6,11 +6,32 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/17 11:23:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/19 11:30:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int		ft_otoi(unsigned char *nb_str, int size)
+{//fonction pour recuperer une valeur stockee sur plusieurs octets
+//pour le nb_str soit on lui envoie arena + <index du nombre sur la memoire>
+// soit on lui envoi l'index a part dans les parametres mais il faudra faire "nb_str[pos + i++]" ligne  30
+	int	i;
+	int	res;
+	int	div;
+
+	div = 1;
+	res = 0;
+	i = size - 1;
+	while (i-- > 0)
+		div *= 256;
+	while (i < size)
+	{
+		res += ((int)(nb_str[i++]) * div);
+		div /= 256;
+	}
+	return (res);
+}
 
 void		create_player(char *file)
 {
