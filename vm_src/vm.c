@@ -14,6 +14,27 @@
 #include "../includes/vm.h"
 
 
+void	read_ocp(t_core *core, t_proces *pr, int op, int ocp)
+{
+	int	exp;
+    int	extract;
+	int	i;
+
+	exp = 256;
+	i = 0;
+	while ((exp /= 4) != 1)
+	{
+		extract = ocp / exp;
+		ocp -= extract * exp;
+		if (extract == 0 || extract == REG_CODE ||
+			extract == DIR_CODE || extract == IND_CODE)
+			pr->params[i] = extract;
+		i++;
+	}
+	while (i < 4)
+		pr->params[i++] = 0;
+}
+
 void	handle_proces(t_core *core, t_proces *pr)
 {
 	unsigned char op;
@@ -23,7 +44,8 @@ void	handle_proces(t_core *core, t_proces *pr)
 	ocp = 0;
 	if (op != 1 && op != 9 && op != 12 && op != 15)
 		ocp = core->arena[pr->pc + 1];
-	read_ocp(core, ocp);
+	if (ocp)
+		read_ocp(core, pr, op, ocp);
 }
 
 void	read_op(t_core *core, t_proces *pr)
