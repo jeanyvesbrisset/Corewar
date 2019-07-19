@@ -13,8 +13,7 @@
 #include "../includes/op.h"
 #include "../includes/vm.h"
 
-
-void	read_ocp(t_core *core, t_proces *pr, int op, int ocp)
+void	read_ocp(t_proces *pr, int ocp)
 {
 	int	exp;
     int	extract;
@@ -45,7 +44,9 @@ void	handle_proces(t_core *core, t_proces *pr)
 	if (op != 1 && op != 9 && op != 12 && op != 15)
 		ocp = core->arena[pr->pc + 1];
 	if (ocp)
-		read_ocp(core, pr, op, ocp);
+		read_ocp(pr, ocp);
+	g_fvm_tab[op - 1].f(core, pr);
+	
 }
 
 void	read_op(t_core *core, t_proces *pr)

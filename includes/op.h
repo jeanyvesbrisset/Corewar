@@ -91,8 +91,9 @@ typedef struct s_fvm
 {
 	unsigned char	op;
 	int				cycle_delay;
-	//ajouter pointeur sur fonction
-	
+	int				param_nb;
+	int				direct_size;
+	int				(*f)(t_core *core, t_proces *pr);	
 }				t_fvm;
 
 
@@ -105,7 +106,7 @@ typedef struct 		s_proces
 	int				alive;//0 ou 1
 	int				pc;
 	int				wait;
-	int				params[4];
+	int				params[4]; // 1 = 01 = reg, 2 = 10 = dir, 3 = 11 = indir, 0 = 00 = NULL
 	struct s_proces	*next;
 }					t_proces;
 
