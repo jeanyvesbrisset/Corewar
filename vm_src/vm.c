@@ -47,7 +47,9 @@ void	read_ocp(t_proces *pr, int ocp)
 
 	exp = 256;
 	i = 0;
-	while ((exp /= 4) != 1)
+	if (!ocp)
+		pr->params[i++] = DIR_CODE;
+	while ((exp /= 4) != 1 && ocp)
 	{
 		extract = ocp / exp;
 		ocp -= extract * exp;
@@ -67,13 +69,11 @@ void	handle_proces(t_core *core, t_proces *pr)
 
 	op = core->arena[pr->pc];
 	ocp = 0;
-	if (op != 1 && op != 9 && op != 12 && op != 15)
+	if (g_fvm_tab[op - 1].ocp)
 		ocp = core->arena[pr->pc + 1];
-	if (ocp)
-		read_ocp(pr, ocp);
+	read_ocp(pr, ocp);
 	g_fvm_tab[op - 1].f(core, pr);//fonctions respectives a chaque instruction a coder
 	pr->pc += get_pr_length(core, pr, op);
-	
 }
 
 void	read_op(t_core *core, t_proces *pr)
