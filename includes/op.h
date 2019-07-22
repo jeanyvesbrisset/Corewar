@@ -90,6 +90,7 @@ typedef struct		s_f
 typedef struct s_fvm
 {
 	unsigned char	op;
+	int				ocp;//if ocp exists : 1, else : 0
 	int				cycle_delay;
 	int				param_nb;
 	int				direct_size;

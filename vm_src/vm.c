@@ -13,6 +13,32 @@
 #include "../includes/op.h"
 #include "../includes/vm.h"
 
+int		get_pr_length(t_core *core, t_proces *pr, int op)
+{
+	int	param_nb;
+	int	i;
+	int	len;
+	
+	i = 0;
+	len = 1;
+	if (g_fvm_tab[op - 1].ocp == 1)
+		len++;
+	param_nb = g_fvm_tab[op - 1].param_nb;
+	while (i < param_nb)
+	{
+		if (pr->params[i] == REG_CODE)
+			len++;
+		else if (pr->params[i] == IND_CODE || 
+			(pr->params[i] == DIR_CODE && g_fvm_tab[op - 1].direct_size == 2))
+			len += 2;
+		else if (pr->params[i] == DIR_CODE &&
+			g_fvm_tab[op - 1].direct_size == 4)
+			len += 4;
+		i++;
+	}
+	return (len);
+}
+
 void	read_ocp(t_proces *pr, int ocp)
 {
 	int	exp;
@@ -36,8 +62,8 @@ void	read_ocp(t_proces *pr, int ocp)
 
 void	handle_proces(t_core *core, t_proces *pr)
 {
-	unsigned char op;
-	unsigned char ocp;
+	unsigned char	op;
+	unsigned char	ocp;
 
 	op = core->arena[pr->pc];
 	ocp = 0;
@@ -45,7 +71,8 @@ void	handle_proces(t_core *core, t_proces *pr)
 		ocp = core->arena[pr->pc + 1];
 	if (ocp)
 		read_ocp(pr, ocp);
-	g_fvm_tab[op - 1].f(core, pr);
+	g_fvm_tab[op - 1].f(core, pr);//fonctions respectives a chaque instruction a coder
+	pr->pc += get_pr_length(core, pr, op);
 	
 }
 
@@ -68,16 +95,54 @@ int		run_cycles_to_die(t_core *core)
 	{
 		if (!pr->wait || pr->wait == core->total_cycle - 1)
 			read_op(core, pr);
-		if (pr->wait == core->total_cycle)
+		else if (pr->wait == core->total_cycle)
 			handle_proces(core, pr);
-		if (pr->next)
-			pr = pr->next;
 		else
 		{
-			pr = core->proces;
-			core->total_cycle++;
+			if (pr->next)
+				pr = pr->next;
+			else
+			{
+				pr = core->proces;
+				core->total_cycle++;
+			}
 		}
 	}
+	return (1);
+}
+
+void	del_process(t_proces **prev ,t_proces **pr)
+{
+	t_proces *tmp;
+
+	tmp = *pr;
+	if (*prev)
+		(*prev)->next = (*pr)->next;
+	*pr = (*pr)->next;
+	free(tmp);
+}
+
+int		check_lives(t_core *core)
+{
+	t_proces	*pr;
+	t_proces	*prev;
+	int			res;
+
+	pr = core->proces;
+	prev = NULL;
+	res = 0;
+	while (pr)
+	{
+		if (!pr->alive)
+			del_process(&prev, &pr);
+		else
+		{
+			res++;
+			prev = pr;
+			pr = pr->next;
+		}
+	}
+	return (res);
 }
 
 void	run_vm(t_core *core)
