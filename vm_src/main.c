@@ -3,19 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/19 11:30:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:29:58 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
+int	ft_error(char *error, int ret, void **to_free, int line)
+{
+	char *nb;
+
+	if (to_free && *to_free)
+		free(*to_free);
+	ft_putstr("\033[31m");
+	write(2, error, ft_strlen(error));
+	if (line > 0)
+	{
+		nb = ft_itoa(line);
+		write(2, nb, ft_strlen(nb));
+		write(2, "\n", 1);
+		free(nb);
+	}
+	ft_putstr("\033[00m");
+	return (ret);
+}
+
 int		ft_otoi(unsigned char *nb_str, int size)
 {//fonction pour recuperer une valeur stockee sur plusieurs octets
 //pour le nb_str soit on lui envoie arena + <index du nombre sur la memoire>
-// soit on lui envoi l'index a part dans les parametres mais il faudra faire "nb_str[pos + i++]" ligne  30
+// soit on lui envoie l'index a part dans les parametres mais il faudra faire "nb_str[pos + i++]" ligne  30
 	int	i;
 	int	res;
 	int	div;
@@ -25,11 +44,14 @@ int		ft_otoi(unsigned char *nb_str, int size)
 	i = size - 1;
 	while (i-- > 0)
 		div *= 256;
-	while (i < size)
+	while (++i < size)
 	{
-		res += ((int)(nb_str[i++]) * div);
+		ft_printf("res (%d) += nb_str[%d] (%d) * div (%d)((%d))\n", res, i, (int)(nb_str[i]), div, div * (int)nb_str[i]);
+		res += ((int)(nb_str[i]) * div);
 		div /= 256;
+		ft_printf("pouet\n");
 	}
+	ft_printf("res = %d, COREWAR = %d\n", res, COREWAR_EXEC_MAGIC);
 	return (res);
 }
 
@@ -81,7 +103,27 @@ int		is_cycle(char *cycle)
 int main(int ac, char **av)
 {
 	t_core *core;
+	int	i = 0;
 
+	if (ac > 2)
+	{
+		initscr();
+		mvprintw(5, 159, "COREWAR");
+		WINDOW * win = newwin(66, 195, 7, 30);
+		WINDOW * win2 = newwin(66, 100, 7, 226);
+		refresh();
+		box(win, 0, 0);
+		box(win2, 0, 0);
+		while (i < 12288)
+		{
+			mvwprintw(win, 1 + (i / 192), 2 + (i % 192), "00");
+			mvwprintw(win, 1 + (i / 192), 4 + (i % 192) , " ");
+			i += 3;
+		}
+		wrefresh(win);
+		wrefresh(win2);
+		endwin();
+	}	
 	if (!(core = (t_core*)malloc(sizeof(t_core) *1)))
 		return (0);
 	core->flag_d = -1;

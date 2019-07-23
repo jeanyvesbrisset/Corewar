@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/18 16:47:20 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:29:58 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <ncurses.h>
 # include "../libprintf/include/libprintf.h"
 # define IND_SIZE			2
 # define REG_SIZE			4
@@ -87,17 +88,6 @@ typedef struct		s_f
 		, int *index);
 }					t_f;
 
-typedef struct s_fvm
-{
-	unsigned char	op;
-	int				ocp;//if ocp exists : 1, else : 0
-	int				cycle_delay;
-	int				param_nb;
-	int				direct_size;
-	int				(*f)(t_core *core, t_proces *pr);	
-}				t_fvm;
-
-
 typedef struct 		s_proces
 {
 	int				champ;//1, 2,3 ou 4
@@ -116,7 +106,8 @@ typedef	struct		s_champ
 	int				pos;//1, 2, 3 ou 4
 	int				tmp_n;
 	int				size;
-	int				last_live; // cycle absolu
+	int				last_live; // a quel cycle le joueur a ete declare en vie 
+	int				process_live;// quel processus a declare en vie le champion 
 	unsigned char	*name;
 	unsigned char	*comment;
 	unsigned char	*bytecode;
@@ -139,6 +130,15 @@ typedef	struct 		s_core
 	unsigned char	arena[MEM_SIZE];
 }					t_core;
 
+typedef struct		 s_fvm
+{
+	unsigned char	op;
+	int				ocp;//if ocp exists : 1, else : 0
+	int				cycle_delay;
+	int				param_nb;
+	int				direct_size;
+	int				(*f)(t_core *core, t_proces *pr);	
+}					t_fvm;
 
 void				start_to_command(t_cdata **start);
 void				gest_lab(t_label **lab, int index, char **line, int *jump);
@@ -229,7 +229,24 @@ int					is_dot_cor(char *av);
 ** vm
 */
 
-void	init_vm(t_core *core);
+void				init_vm(t_core *core);
+int					ft_otoi(unsigned char *nb_str, int size);
+void				run_vm(t_core *core);
+
+/*
+** vm util
+*/
+
+int					get_pr_length(t_core *core, t_proces *pr, int op);
+void				del_process(t_proces **prev ,t_proces **pr);
+int					check_lives(t_core *core);
+void				reinit_cycle_lives(t_core *core);
+
+/*
+** vm visual
+*/
+
+void				init_visual(t_core *core);
 
 
 #endif

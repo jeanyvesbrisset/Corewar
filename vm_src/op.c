@@ -1,42 +1,120 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.c                                               :+:      :+:    :+:   */
+/*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/18 16:47:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:47:27 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/vm.h"
 
-void	vm_live(t_core *core, t_proces *pr)
+t_champ	*get_champ(t_core *core, int pos)
 {
-	
+	t_champ *champ;
+
+	champ = core->champs;
+	while (champ)
+	{
+		if (champ->pos == pos)
+			return (champ);
+		champ = champ->next;
+	}
+	return (NULL);
 }
 
-
-t_op    op_tab[17] =
+void	vm_live(t_core *core, t_proces *pr)
 {
-	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
-	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
-	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
-	{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
-	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
-	{"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, "et (and  r1, r2, r3   r1&r2 -> r3", 1, 0},
-	{"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, "ou  (or   r1, r2, r3   r1 | r2 -> r3", 1, 0},
-	{"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, "ou (xor , r1, r2, r3   r1^r2 -> r3", 1, 0},
-	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
-	{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25, "load index", 1, 1},
-	{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25, "store index", 1, 1},
-	{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
-	{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
-	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50, "long load index", 1, 1},
-	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{0, 0, {0}, 0, 0, 0, 0, 0}
-};
+	t_champ *champ;
+	int	champ_nb;
 
+	champ_nb = ft_otoi(core->arena[pr->pc + 1], 4);
+	champ = get_champ(core, champ_nb);
+	pr->alive = 1;
+	if (champ)
+	{
+		champ->last_live = core->total_cycle;
+		champ->process_live = pr->proces_nb;
+		ft_printf("un processus dit que le joueur %d(%s) est en vie", 
+		champ_nb, champ->name);
+	}
+}
+
+/*
+** Loads the value of the first param into the second param which is a reg. 
+*/
+
+void	vm_ld(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	p2_index;
+
+	p2_index = (int)(core->arena[pr->pc + 5]);
+	if (p2_index > 0 && p2_index <= REG_NUMBER)
+	{
+		param_1 = ft_otoi(core->arena[pr->pc + 3], pr->params[0]);
+		pr->r[p2_index - 1] = param_1;
+		pr->carry = 1;
+	}
+}
+
+void	vm_st(t_core *core, t_proces *pr)
+{
+ 
+}
+
+void	vm_sti(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	param_3;
+	int addr;
+
+	param_1 = pr->r[0];
+	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
+	param_3 = ft_otoi(core->arena[pr->pc + (3 + pr->params[1])], pr->params[2]);
+	addr = param_2 + param_3;
+	pr->pc + addr = param_1;
+
+	//TO DO :gerer l'oveflow si addr > ffff
+}
+
+/*
+** additionne les deux oremiers params et stocke le resultat dans le 3eme param qui est un registre.
+*/ 
+
+void	vm_and(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	param_3;
+	int res;
+
+	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
+	res = param_1 + param_2;
+	param_3 = res;
+	if (res == 0)
+		pr->carry = 1;
+	//TO DO : verifier si quand il est ecrit modifie le carry, il faut le mettre a 1, ou sil faut le mettre a 1 ou 0
+}
+
+/*
+** saute a l'adresse passee en param 1 si le carry est a 1
+*/
+void	vm_zjmp(t_core *core, t_proces *pr)
+{
+	int	jump;
+	int	param_1;
+
+	param_1 = ft_otoi(core->arena[pr->pc + 1], pr->params[0]);
+	jump = pr->pc + param_1;
+	if (pr->carry)
+		pr->pc += jump; 
+
+	//TO DO :gerer l'oveflow si jump > ffff
+}

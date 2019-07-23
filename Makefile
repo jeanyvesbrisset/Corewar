@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
+#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/07/17 11:10:35 by floblanc         ###   ########.fr        #
+#    Updated: 2019/07/23 16:02:33 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ $(NAME1): $(OBJ_PATH1) $(OBJ1)
 $(NAME2): $(OBJ_PATH2) $(OBJ2)
 	@make -C $(LIB) -j
 	@cp libprintf/libprintf.a ./
-	@$(CC) $(CFLAGS) -o $(NAME2) $(OBJ2) libprintf.a
+	@$(CC) $(CFLAGS) -o $(NAME2) $(OBJ2) libprintf.a -lncurses
 	@echo "\033[33;36m===  <COREWAR DONE> ===\033[00m"
 
 $(OBJ_PATH1)/%.o : $(SRC_PATH1)/%.c

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/11 14:12:25 by ndelhomm         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:40:21 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void				gest_g(t_data *data, va_list ap);
 void				gest_b(t_data *data, va_list ap);
 void				gest_r(t_data *data, va_list ap);
 void				gest_pc(t_data *data, va_list ap);
-
 void				init_struct(t_data *data, char *s, int pos_sym);
 void				add_pre_flgs(t_data *data, char *s, int *i, int j);
 int					stock_digit(char *s, int *i, int j, va_list ap);
@@ -120,6 +119,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 long				ft_atol(const char *str);
+char				*ft_itoa_base(char *value, int base);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   stock_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/19 11:32:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:02:33 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int		trad_big_to_lit(unsigned char *str)
+/*int		trad_big_to_lit(unsigned char *str)
 {//cf ft_otoi dans le main
 	int i;
 
 	i = 0;
 }
-
+*/
 int		pos_in_list(t_core *core, t_champ *to_find)
 {
 	t_champ	*current;
@@ -167,17 +167,19 @@ int		read_champ(t_champ *champ, char *file)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if (trad_big_to_lit(str) != COREWAR_EXEC_MAGIC)
-		return (0);
+	ft_printf("read_good\n");
+	if (ft_otoi(str, 4) != COREWAR_EXEC_MAGIC)
+		return (ft_error("COREWAR EXEC MAGIC PLANTE\n", 0, 0, 0));
 	if (!(champ->name = (unsigned char*)malloc(PROG_NAME_LENGTH)))
 		return (0);
+	ft_printf("malloc_prog_name\n");
 	if ((ret = read(fd, champ->name, PROG_NAME_LENGTH)) != PROG_NAME_LENGTH)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if ((champ->size = trad_big_to_lit(str)) > CHAMP_MAX_SIZE)
+	if ((champ->size = ft_otoi(str, 4)) > CHAMP_MAX_SIZE)
 		return (0);
 	if (!(champ->comment = (unsigned char*)malloc(COMMENT_LENGTH)))
 		return (0);

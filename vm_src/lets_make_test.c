@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lets_make_test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 14:40:13 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/18 11:00:14 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/23 13:33:56 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/uio.h>
+#include <ncurses.h>
 
 int		main(int ac, char **av)
 {
@@ -40,5 +41,10 @@ int		main(int ac, char **av)
 	write(fd2, str, ret);
 	close(fd);
 	close(fd2);
+	initscr();
+	printw("This is a test :)\n");
+	refresh();
+	getch();
+	endwin();
 	return (0);
 }
