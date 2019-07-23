@@ -6,13 +6,33 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/23 16:29:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:11:26 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/vm.h"
 
+void		ft_itoo_vm(unsigned char *str, unsigned long long int nb 
+	, unsigned long long int size)
+{
+	unsigned long long int	i;
+	unsigned long long int	div;
+
+	i = size;
+	div = 1;
+	nb %= 9223372036854775807;
+	while (--i > 0)
+		div *= 256;
+	nb %= div * 256;
+	while (i < size)
+	{
+		str[i] = nb / div;
+		nb %= div;
+		div /= 256;
+		i++;
+	}
+}
 int		get_pr_length(t_core *core, t_proces *pr, int op)
 {
 	int	param_nb;

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/23 16:29:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:13:19 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,12 +241,13 @@ int					get_pr_length(t_core *core, t_proces *pr, int op);
 void				del_process(t_proces **prev ,t_proces **pr);
 int					check_lives(t_core *core);
 void				reinit_cycle_lives(t_core *core);
+void				ft_itoo_vm(unsigned char *str, unsigned long long int nb
+	, unsigned long long int size);
 
 /*
 ** vm visual
 */
 
 void				init_visual(t_core *core);
-
 
 #endif

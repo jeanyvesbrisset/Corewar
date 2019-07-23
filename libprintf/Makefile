@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/13 09:46:56 by maginist          #+#    #+#              #
-#    Updated: 2019/07/11 14:10:03 by ndelhomm         ###   ########.fr        #
+#    Updated: 2019/07/23 18:10:00 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ FILES = add_pre_flgs.c\
 	  is_valide.c\
 	  ft_memset.c\
 	  ft_bzero.c\
+	  ft_itoa_base.c\
 	  ft_charstr.c\
 	  ft_memcpy.c\
 	  ft_memccpy.c\

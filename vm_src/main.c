@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/23 16:29:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:34:37 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,9 @@ int main(int ac, char **av)
 		WINDOW * win2 = newwin(66, 100, 7, 226);
 		refresh();
 		box(win, 0, 0);
+		mvvline(7, 225, 0, 66);
 		box(win2, 0, 0);
+		curs_set(0);
 		while (i < 12288)
 		{
 			mvwprintw(win, 1 + (i / 192), 2 + (i % 192), "00");
@@ -122,6 +124,7 @@ int main(int ac, char **av)
 		}
 		wrefresh(win);
 		wrefresh(win2);
+		getch();
 		endwin();
 	}	
 	if (!(core = (t_core*)malloc(sizeof(t_core) *1)))

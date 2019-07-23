@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/23 16:47:27 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:13:12 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	vm_sti(t_core *core, t_proces *pr)
 	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
 	param_3 = ft_otoi(core->arena[pr->pc + (3 + pr->params[1])], pr->params[2]);
 	addr = param_2 + param_3;
-	pr->pc + addr = param_1;
+	(pr->pc + addr) = param_1;//ft_itoo
 
 	//TO DO :gerer l'oveflow si addr > ffff
 }
