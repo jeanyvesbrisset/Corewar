@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   stock_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/23 16:02:33 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/24 15:15:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-/*int		trad_big_to_lit(unsigned char *str)
-{//cf ft_otoi dans le main
-	int i;
-
-	i = 0;
-}
-*/
 int		pos_in_list(t_core *core, t_champ *to_find)
 {
 	t_champ	*current;
@@ -150,6 +143,8 @@ int		read_champ2(t_champ *champ, int fd)
 		return (0);
 	if (!(champ->bytecode = (unsigned char*)malloc(champ->size)))
 		return (0);
+	if ((ret = read(fd, str, 4) != 4))
+		return (0);
 	if ((ret = read(fd, champ->bytecode, champ->size)) != champ->size)
 		return (0);
 	if (champ->size == CHAMP_MAX_SIZE && (ret = read(fd, str, 4)) != -1)
@@ -167,12 +162,10 @@ int		read_champ(t_champ *champ, char *file)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	ft_printf("read_good\n");
 	if (ft_otoi(str, 4) != COREWAR_EXEC_MAGIC)
-		return (ft_error("COREWAR EXEC MAGIC PLANTE\n", 0, 0, 0));
+		return (ft_error("Not the right magic number\n", 0, 0, 0));
 	if (!(champ->name = (unsigned char*)malloc(PROG_NAME_LENGTH)))
 		return (0);
-	ft_printf("malloc_prog_name\n");
 	if ((ret = read(fd, champ->name, PROG_NAME_LENGTH)) != PROG_NAME_LENGTH)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
@@ -238,7 +231,7 @@ int		stock_champ(int ac, char **av, t_core *core)
 			if (!(init_champ(core, av[i], &i, 0)))
 				return (0);
 		}
-		else if ((ft_strcmp(av[i], "-n")))
+		else if (!(ft_strcmp(av[i], "-n")))
 		{
 			if (!(init_champ(core, av[i], &i, ft_atoi(av[i + 1]))))
 				return (0);

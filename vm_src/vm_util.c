@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   vm_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/23 18:11:26 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/24 17:53:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/vm.h"
 
-void		ft_itoo_vm(unsigned char *str, unsigned long long int nb 
-	, unsigned long long int size)
+void		ft_itoo_vm(t_core *core, int pos, unsigned long long int nb, unsigned long long int size)
 {
 	unsigned long long int	i;
 	unsigned long long int	div;
@@ -27,12 +26,13 @@ void		ft_itoo_vm(unsigned char *str, unsigned long long int nb
 	nb %= div * 256;
 	while (i < size)
 	{
-		str[i] = nb / div;
+		core->arena[(pos + i) % MEM_SIZE] = nb / div;
 		nb %= div;
 		div /= 256;
 		i++;
 	}
 }
+
 int		get_pr_length(t_core *core, t_proces *pr, int op)
 {
 	int	param_nb;

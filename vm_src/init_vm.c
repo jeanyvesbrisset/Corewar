@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/18 16:46:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/24 15:04:54 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ void	init_vm(t_core *core)
 	while (champ)
 	{
 		if (champ->next)
-			champ->next->byte_start = champ->byte_start - gap;
+		{
+			if (core->champ_nb == 3 && champ == core->champs)
+				champ->next->byte_start = champ->byte_start - gap - 1;
+			else
+				champ->next->byte_start = champ->byte_start - gap;			
+		}
 		init_pc(core, champ);
 		champ = champ->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/23 17:13:19 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/24 17:53:40 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define IND_CODE			3
 # define MAX_ARGS_NUMBER	4
 # define MAX_PLAYERS		4
-# define MEM_SIZE			(64*1024)
+# define MEM_SIZE			(4*1024)
 # define IDX_MOD			(MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
 # define COMMENT_CHAR		'#'
@@ -115,6 +115,14 @@ typedef	struct		s_champ
 	struct s_champ	*next;
 }					t_champ;
 
+typedef	struct		s_visu
+{
+	WINDOW			*arena;
+	WINDOW			*hud;
+	int				ch;
+	char			*str;
+}					t_visu;
+
 typedef	struct 		s_core
 {
 	int				flag_v; //0 ou 1
@@ -127,6 +135,7 @@ typedef	struct 		s_core
 	int				nbr_live;
 	t_champ			*champs; // trié par ordre inverse
 	t_proces		*proces;  // trié au depart, par ordre inverse
+	t_visu			*visu;
 	unsigned char	arena[MEM_SIZE];
 }					t_core;
 

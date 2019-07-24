@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/23 16:02:33 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/24 15:19:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	is_order_n(char **av, int i, t_core *core)
 int	write_help(char *str)
 {
 	ft_printf("Usage: %s -v -d/-dump N [[-n N] <champion1.cor>] ", str);
-	ft_printf("<...>\n\t-v\t: visualisation\n");
+	ft_printf("<...>\n\t-v\t\t: visualisation\n");
 	ft_printf("\t-d/-dump N\t: Dumps memory after N(int >= 0) cycles then");
-	ft_printf("exit the program\n");
-	ft_printf("\t-n N\t: Give to champion(s) N(int > 0) player number\n");
+	ft_printf(" exit the program\n");
+	ft_printf("\t-n N\t\t: Give to champion(s) N(int > 0) player number\n");
 	return (0);
 }
 
@@ -66,10 +66,8 @@ int	is_d_dump(char **av, int i)
 
 	d_or_dump = 0;
 	j = 0;
-	ft_printf("av[%d] = %s\n", i, av[i]);
 	if (ft_strcmp(av[i], "-d") && ft_strcmp(av[i], "-dump"))
 		return (0);
-	ft_printf("av[%d][%d] = %c\n", i, j, av[i][j]);
 	while (av[i + 1][j])
 		if (!(ft_isdigit(av[i + 1][j++])))
 			return (0);
