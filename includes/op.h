@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/24 17:53:40 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:21:54 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <ncurses.h>
+XXXX include <ncurses.h>
 # include "../libprintf/include/libprintf.h"
 # define IND_SIZE			2
 # define REG_SIZE			4
@@ -90,6 +90,7 @@ typedef struct		s_f
 
 typedef struct 		s_proces
 {
+	unsigned char	op;
 	int				champ;//1, 2,3 ou 4
 	int				proces_nb;//le combientieme process dont il est question
 	int				r[16]; //16 registres par process, a mettre dans ce tableau
@@ -97,6 +98,7 @@ typedef struct 		s_proces
 	int				alive;//0 ou 1
 	int				pc;
 	int				wait;
+	int				pc_jump;
 	int				params[4]; // 1 = 01 = reg, 2 = 10 = dir, 3 = 11 = indir, 0 = 00 = NULL
 	struct s_proces	*next;
 }					t_proces;
@@ -107,7 +109,8 @@ typedef	struct		s_champ
 	int				tmp_n;
 	int				size;
 	int				last_live; // a quel cycle le joueur a ete declare en vie 
-	int				process_live;// quel processus a declare en vie le champion 
+	int				process_live;// quel processus a declare en vie le champion
+	int				live_by_ctd;
 	unsigned char	*name;
 	unsigned char	*comment;
 	unsigned char	*bytecode;
@@ -120,6 +123,8 @@ typedef	struct		s_visu
 	WINDOW			*arena;
 	WINDOW			*hud;
 	int				ch;
+	int				cps;
+	int				live_bd[3];
 	char			*str;
 }					t_visu;
 
@@ -130,8 +135,9 @@ typedef	struct 		s_core
 	int				champ_nb;
 	int				sum_process;
 	int				total_cycle;
-	int				tmp_cycle;;
+	int				tmp_cycle;
 	int				cycle_to_die;
+	int				max_checks;
 	int				nbr_live;
 	t_champ			*champs; // trié par ordre inverse
 	t_proces		*proces;  // trié au depart, par ordre inverse
@@ -230,10 +236,18 @@ int					add_used_label(char **str, t_label **lab, int index);
 int					is_commentary(char *line);
 void				check_s_name_len(char **line, int *s_name, int i);
 int					write_the_magic(t_cdata **start, int nb);
+
+/*
+** parsing vm
+*/
+
 int					parcing_args(int ac, char **av, t_core *core);
 int					stock_champ(int ac, char **av, t_core *core);
 int					is_dot_cor(char *av);
-
+int					init_process(t_proces **proce, int champ_nb, int pc
+	, int *sum_process);
+void				sort_champ_list(t_champ **champ);
+void				ajust_champ_pos(t_core *core);
 /*
 ** vm
 */
@@ -241,6 +255,8 @@ int					is_dot_cor(char *av);
 void				init_vm(t_core *core);
 int					ft_otoi(unsigned char *nb_str, int size);
 void				run_vm(t_core *core);
+int					get_size(int op, int type);
+int 				get_param(t_core *core, t_proces *pr, int type, int cursor);
 
 /*
 ** vm util
@@ -250,8 +266,8 @@ int					get_pr_length(t_core *core, t_proces *pr, int op);
 void				del_process(t_proces **prev ,t_proces **pr);
 int					check_lives(t_core *core);
 void				reinit_cycle_lives(t_core *core);
-void				ft_itoo_vm(unsigned char *str, unsigned long long int nb
-	, unsigned long long int size);
+void				ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
+	,unsigned long long int size);
 
 /*
 ** vm visual

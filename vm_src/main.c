@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/24 17:53:39 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:52:55 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ int main(int ac, char **av)
 	init_vm(core);
 	if (core->flag_v)
 		init_visual(core);
+	//free_core(core);
 	return (1);
 }

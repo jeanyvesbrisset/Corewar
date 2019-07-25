@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   vm_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/24 17:53:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:18:50 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 #include "../includes/vm.h"
 
-void		ft_itoo_vm(t_core *core, int pos, unsigned long long int nb, unsigned long long int size)
+void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
+	, unsigned long long int size)
 {
 	unsigned long long int	i;
 	unsigned long long int	div;
@@ -38,7 +39,7 @@ int		get_pr_length(t_core *core, t_proces *pr, int op)
 	int	param_nb;
 	int	i;
 	int	len;
-	
+
 	i = 0;
 	len = 1;
 	if (g_fvm_tab[op - 1].ocp == 1)
@@ -48,8 +49,9 @@ int		get_pr_length(t_core *core, t_proces *pr, int op)
 	{
 		if (pr->params[i] == REG_CODE)
 			len++;
-		else if (pr->params[i] == IND_CODE || 
-			(pr->params[i] == DIR_CODE && g_fvm_tab[op - 1].direct_size == 2))
+		else if (pr->params[i] == IND_CODE
+			|| (pr->params[i] == DIR_CODE
+				&& g_fvm_tab[op - 1].direct_size == 2))
 			len += 2;
 		else if (pr->params[i] == DIR_CODE &&
 			g_fvm_tab[op - 1].direct_size == 4)
@@ -59,7 +61,7 @@ int		get_pr_length(t_core *core, t_proces *pr, int op)
 	return (len);
 }
 
-void	del_process(t_proces **prev ,t_proces **pr)
+void	del_process(t_proces **prev, t_proces **pr)
 {
 	t_proces *tmp;
 

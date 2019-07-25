@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/07/24 15:07:28 by maginist         ###   ########.fr        #
+#    Updated: 2019/07/25 16:43:31 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS2 =	main.c\
 		parsing_args.c\
 		stock_champs.c\
 		init_vm.c\
+		gest_champ.c\
 		visual.c
 
 

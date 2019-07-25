@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/24 17:53:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:39:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ t_champ	*get_champ(t_core *core, int pos)
 
 void	vm_live(t_core *core, t_proces *pr)
 {
-	t_champ *champ;
-	int	champ_nb;
+	t_champ	*champ;
+	int		champ_nb;
 
-	champ_nb = ft_otoi(core->arena[pr->pc + 1], 4);
+	champ_nb = get_param(core, pr, DIR_CODE, pr->pc + 1);
 	champ = get_champ(core, champ_nb);
 	pr->alive = 1;
 	if (champ)
 	{
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
-		ft_printf("un processus dit que le joueur %d(%s) est en vie", 
-		champ_nb, champ->name);
+		ft_printf("un processus dit que le joueur %d(%s) est en vie",
+			champ_nb, champ->name);
 	}
 }
 
@@ -52,13 +52,9 @@ void	vm_live(t_core *core, t_proces *pr)
 void	vm_ld(t_core *core, t_proces *pr)
 {
 	int	param_1;
-	int	param_2;
 	int	p2_index;
 
-	if (pr->params[0] == IND_CODE)	
-		param_1 = pr->pc + (ft_otoi(core->arena[pr->pc + 2], 2) % IDX_MOD);
-	else if (pr->params[0] == DIR_CODE)
-		param_1 = ft_otoi(core->arena[pr->pc + 2], 2);
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	p2_index = (int)(core->arena[pr->pc + 4]);
 	if (p2_index > 0 && p2_index <= REG_NUMBER)
 	{
@@ -69,22 +65,26 @@ void	vm_ld(t_core *core, t_proces *pr)
 
 // Transfert direct Registre > RAM / Registre. 
 // Charge le contenu du registre passé en premier parametre dans le second parametre. 
-// Si la valeur du premier parametre est egale a zero, alors le carry passe a l'etat un, sinon a l'etat zero.
 
 void	vm_st(t_core *core, t_proces *pr)
 {
 	int	param_1;
 	int	param_2;
-	int	p1_index;
-	// todo:verifier reg number
-	p1_index = (int)(core->arena[pr->pc + 2]);
-	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
-	if (p1_index > 0 && p1_index <= REG_NUMBER)
+	int	p2_index;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
+	p2_index = (int)(core->arena[pr->pc + 3]);
+	if (p2_index > 0 && p2_index <= REG_NUMBER || pr->params[0] != REG_CODE
+			|| pr->params[1] != REG_CODE || pr->params[1] != IND_CODE)
+		return ;
+	if (pr->params[1] == REG_CODE)
 	{
-		param_1 = pr->r[p1_index - 1];
-		pr->carry = (!param_1 ? 1 : 0);
-		core->arena[pr->pc + (param_2 % IDX_MOD)] = param_1;
+		p2_index = (int)(core->arena[pr->pc + 3]);
+		pr->r[p2_index - 1] = param_1;
 	}
+	else if (pr->params[1] == IND_CODE)
+		ft_itoo_vm(core, pr->pc + (param_2 % IDX_MOD), param_1, 4);
 }
 
 /*
@@ -93,20 +93,25 @@ void	vm_st(t_core *core, t_proces *pr)
 
 void	vm_add(t_core *core, t_proces *pr)
 {
-	int params[2];
+	int value[2];
 	int	p_index;
 	int	i;
 	int	sum;
 
 	i = 2;
+	// verif opc
 	while (i < 4)
 	{
 		p_index = (int)(core->arena[pr->pc + i]);
-		params[i - 2] = pr->r[p_index - 1];
+		if (p_index < 1 && p_index > REG_NUMBER)
+			return ;
+		value[i - 2] = pr->r[p_index - 1];
 		i++;
 	}
 	p_index = (int)(core->arena[pr->pc + 4]);
-	sum = params[0] + params[1];
+	if (p_index < 1 && p_index > REG_NUMBER)
+		return ;
+	sum = value[0] + value[1];
 	pr->r[p_index - 1] = sum;
 	pr->carry = (!sum ? 1 : 0);
 }
@@ -117,94 +122,64 @@ void	vm_add(t_core *core, t_proces *pr)
 
 void	vm_sub(t_core *core, t_proces *pr)
 {
-	int params[2];
+	int value[2];
 	int	p_index;
 	int	i;
 	int	sub;
 
 	i = 2;
+	//verif ocp?
 	while (i < 4)
 	{
 		p_index = (int)(core->arena[pr->pc + i]);
-		params[i - 2] = pr->r[p_index - 1];
+		if (p_index < 1 && p_index > REG_NUMBER)
+			return ;
+		value[i - 2] = pr->r[p_index - 1];
 		i++;
 	}
 	p_index = (int)(core->arena[pr->pc + 4]);
-	sub = params[0] - params[1];
+	if (p_index < 1 && p_index > REG_NUMBER)
+		return ;
+	sub = value[0] - value[1];
 	pr->r[p_index - 1] = sub;
 	pr->carry = (!sub ? 1 : 0);
 }
 
-void	vm_sti(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	param_3;
-	int addr;
-
-	param_1 = pr->r[0];
-	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
-	param_3 = ft_otoi(core->arena[pr->pc + (3 + pr->params[1])], pr->params[2]);
-	addr = param_2 + param_3;
-	(pr->pc) + addr = param_1;//ft_itoo
-
-	//TO DO :gerer l'oveflow si addr > ffff
-}
 
 /*
 ** additionne les deux oremiers params et stocke le resultat dans le 3eme param qui est un registre.
 */ 
 
-void	vm_and(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	param_3;
-	int res;
+// void	vm_and(t_core *core, t_proces *pr)
+// {
+// 	int	param_1;
+// 	int	param_2;
+// 	int	param_3;
+// 	int res;
 
-	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
-	res = param_1 + param_2;
-	param_3 = res;
-	if (res == 0)
-		pr->carry = 1;
-	//TO DO : verifier si quand il est ecrit modifie le carry, il faut le mettre a 1, ou sil faut le mettre a 1 ou 0
-}
+// 	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
+// 	res = param_1 + param_2;
+// 	param_3 = res;
+// 	if (res == 0)
+// 		pr->carry = 1;
+// 	//TO DO : verifier si quand il est ecrit modifie le carry, il faut le mettre a 1, ou sil faut le mettre a 1 ou 0
+// }
 
 /*
 ** saute a l'adresse passee en param 1 si le carry est a 1
 */
+
 void	vm_zjmp(t_core *core, t_proces *pr)
 {
 	int	jump;
 	int	param_1;
 
-	param_1 = ft_otoi(core->arena[pr->pc + 1], pr->params[0]);
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
 	jump = pr->pc + param_1;
-	if (pr->carry)
-		pr->pc += jump; 
-
-	//TO DO :gerer l'oveflow si jump > ffff
-}
-
-
-int		get_indirect(t_core *core, int pc, int index)
-{
-	int param;
-
-	param = pc + (ft_otoi(core->arena[pc + index], 2) % IDX_MOD);
-	return (param);
-}
-
-int		get_reg(t_core *core, t_proces *pr, int cursor)
-{
-	int p_index;
-	int param;
-
-	param = 0;
-	p_index = (int)(core->arena[cursor]);
-	if (p_index > 0 && p_index <= REG_NUMBER)
-		param = pr->r[p_index - 1];
-	return (param);
+	if (pr->carry && pr->params[0] == DIR_CODE)
+		pr->pc += jump;
+	pr->pc %= MEM_SIZE;// overflow done <------|
+	//TO DO :gerer l'OVERFLOW si jump > ffff --|
 }
 
 /*
@@ -219,26 +194,38 @@ void	vm_ldi(t_core *core, t_proces *pr)
 	int	r_index;
 	int sum;
 
-	if (pr->params[0] == IND_CODE)	
-		param_1 = pr->pc + (ft_otoi(core->arena[pr->pc + 2], 2) % IDX_MOD);
-	else if (pr->params[0] == DIR_CODE)
-		param_1 = ft_otoi(core->arena[pr->pc + 2], 2);
-	else if (pr->params[0] == REG_CODE)
-	{
-		if (!(param_1 = get_reg(core, pr, pr->pc + 2)))
-			return ; //TODO GESTION D"ERREUR
-	}
-	if (pr->params[1] == DIR_CODE)	
-		param_2 = ft_otoi(core->arena[pr->pc + 2 + pr->params[0]], 2);
-	else if (pr->params[1] == REG_CODE)
-	{
-		if (!(param_2 = get_reg(core, pr, pr->pc + 2 + pr->params[0])))
-			return ; //TODO GESTION D"ERREUR
-	}
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[1], pr-> pc + 2 + get_size(pr->op
+		, pr->params[0]));
+	if (pr->params[0] < 1 || pr->params[0] > 3
+		|| pr->params[1] != DIR_CODE || pr->params[1] != REG_CODE
+		|| pr->params[2] != REG_CODE)
+		return ;
 	sum = param_1 + param_2;
 	pr->carry = (!sum ? 1 : 0);
-	r_index = core->arena[pr->pc + 2 + pr->params[0] + pr->params[1]];
-	pr->r[r_index - 1] = pr->pc + (sum % IDX_MOD);
+	r_index = core->arena[pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[0])];
+	if (r_index > 0 && r_index >= REG_SIZE)
+		pr->r[r_index - 1] = pr->pc + (sum % IDX_MOD);
+}
+
+void	vm_sti(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	param_3;
+	int addr;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
+	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
+		, pr->params[1]));
+	addr = param_2 + param_3;
+	if (pr->params[0] == REG_CODE &&
+		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
+		 || pr->params[1] == IND_CODE)
+		&& (pr->params[2] == REG_CODE || pr->params[2] == DIR_CODE))
+		ft_itoo_vm(core, addr, param_1, 4);
 }
 
 /*
@@ -247,20 +234,7 @@ void	vm_ldi(t_core *core, t_proces *pr)
 
 void	vm_lld(t_core *core, t_proces *pr)
 {
-	int	param_1;
-	int	param_2;
-	int	p2_index;
-
-	if (pr->params[0] == IND_CODE)	
-		param_1 = pr->pc + ft_otoi(core->arena[pr->pc + 2], 2);
-	else if (pr->params[0] == DIR_CODE)
-		param_1 = ft_otoi(core->arena[pr->pc + 2], 2);
-	p2_index = (int)(core->arena[pr->pc + 4]);
-	if (p2_index > 0 && p2_index <= REG_NUMBER)
-	{
-		pr->r[p2_index - 1] = param_1;
-		pr->carry = (!param_1 ? 1 : 0);
-	}
+	vm_ld(core, pr);
 }
 
 /*
@@ -269,32 +243,7 @@ void	vm_lld(t_core *core, t_proces *pr)
 
 void	vm_lldi(t_core *core, t_proces *pr)
 {
-	int param_1;
-	int param_2;
-	int p_index;
-	int	r_index;
-	int sum;
-
-	if (pr->params[0] == IND_CODE)	
-		param_1 = pr->pc + ft_otoi(core->arena[pr->pc + 2], 2);
-	else if (pr->params[0] == DIR_CODE)
-		param_1 = ft_otoi(core->arena[pr->pc + 2], 2);
-	else if (pr->params[0] == REG_CODE)
-	{
-		if (!(param_1 = get_reg(core, pr, pr->pc + 2)))
-			return ; //TODO GESTION D"ERREUR
-	}
-	if (pr->params[1] == DIR_CODE)	
-		param_2 = ft_otoi(core->arena[pr->pc + 2 + pr->params[0]], 2);
-	else if (pr->params[1] == REG_CODE)
-	{
-		if (!(param_2 = get_reg(core, pr, pr->pc + 2 + pr->params[0])))
-			return ; //TODO GESTION D"ERREUR
-	}
-	sum = param_1 + param_2;
-	pr->carry = (!sum ? 1 : 0);
-	r_index = core->arena[pr->pc + 2 + pr->params[0] + pr->params[1]];
-	pr->r[r_index - 1] = pr->pc + sum;
+	vm_ldi(core, pr);
 }
 
 /*
@@ -305,8 +254,41 @@ void	vm_aff(t_core *core, t_proces *pr)
 {
 	int param;
 
-	if (!(param = get_reg(core, pr, pr->pc + 2)))
+	param = get_param(core, pr, pr->params[0], pr->pc + 2);
+	if (pr->params[0] != REG_CODE)
 		return ;
 	param %= 256;
 	ft_printf("%c\n", param);
+}
+
+void	vm_sub_fork(t_core *core, t_proces *pr, int l)
+{
+	int	param_1;
+	int	i;
+	t_proces *new;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	new = (t_proces*)malloc(sizeof(t_proces));
+	new->champ = pr->champ;
+	new->proces_nb = core->proces->proces_nb + 1;
+	i = 0;
+	while (i < REG_SIZE)
+		new->r[i] = pr->r[i++];
+	new->carry = pr->carry;
+	if (!l)
+		new->pc = pr->pc + (param_1 % IDX_MOD);
+	else
+		new->pc = pr->pc + param_1;
+	new->next = core->proces;
+	core->proces = new;
+}
+
+void	vm_fork(t_core *core, t_proces *pr)
+{
+	vm_sub_fork(core, pr, 0);
+}
+
+void	vm_lfork(t_core *core, t_proces *pr)
+{
+	vm_sub_fork(core, pr, 1);
 }

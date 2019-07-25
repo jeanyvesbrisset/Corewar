@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/24 15:19:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:55:51 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_dot_cor(char *av)
 {
-	int i;
+	int	i;
 	int	len;
 
 	len = ft_strlen(av);
@@ -75,7 +75,7 @@ int	is_d_dump(char **av, int i)
 }
 
 int	parcing_args(int ac, char **av, t_core *core)
-{	
+{
 	int i;
 
 	i = 1;

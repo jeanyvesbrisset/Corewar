@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/15 18:27:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:47:47 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		is_name(char **line, t_cdata **start, int *reader)
 	return (-1);
 }
 
-int	init_cor(t_cdata **start, int *step)
+int		init_cor(t_cdata **start, int *step)
 {
 	t_cdata	*comment;
 	t_cdata	*command;
@@ -107,7 +107,7 @@ int	init_cor(t_cdata **start, int *step)
 		return (0);
 	(*start)->str = ft_memalloc(4 + PROG_NAME_LENGTH);
 	if (!(write_the_magic(start, COREWAR_EXEC_MAGIC)))
-		return (ft_error("Wrong magic number format", 0, 0 ,0));
+		return (ft_error("Wrong magic number format", 0, 0, 0));
 	(*start)->size = 4 + PROG_NAME_LENGTH;
 	(*start)->index = 1;
 	if (!(comment = (t_cdata*)malloc(sizeof(t_cdata) * 1)))

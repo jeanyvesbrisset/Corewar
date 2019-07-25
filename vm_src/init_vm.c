@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_vm.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/24 15:04:54 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:59:08 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-#include "../includes/vm.h"
 
 static void	cpy_champs(t_core *core)
 {
@@ -30,7 +29,7 @@ static void	cpy_champs(t_core *core)
 	}
 }
 
-static void	init_pc( t_core *core, t_champ *champ)
+static void	init_pc(t_core *core, t_champ *champ)
 {
 	t_proces	*proces;
 
@@ -47,7 +46,7 @@ static void	init_pc( t_core *core, t_champ *champ)
 	}
 }
 
-void	init_vm(t_core *core)
+void		init_vm(t_core *core)
 {
 	t_champ	*champ;
 	int		gap;
@@ -62,7 +61,7 @@ void	init_vm(t_core *core)
 			if (core->champ_nb == 3 && champ == core->champs)
 				champ->next->byte_start = champ->byte_start - gap - 1;
 			else
-				champ->next->byte_start = champ->byte_start - gap;			
+				champ->next->byte_start = champ->byte_start - gap;
 		}
 		init_pc(core, champ);
 		champ = champ->next;
@@ -70,4 +69,5 @@ void	init_vm(t_core *core)
 	ft_bzero(core->arena, MEM_SIZE);
 	cpy_champs(core);
 	core->cycle_to_die = CYCLE_TO_DIE;
+	core->max_checks = 0;
 }
