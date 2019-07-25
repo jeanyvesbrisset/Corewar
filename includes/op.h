@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/25 17:21:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:48:07 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-XXXX include <ncurses.h>
+# include <ncurses.h>
 # include "../libprintf/include/libprintf.h"
 # define IND_SIZE			2
 # define REG_SIZE			4
