@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/25 17:25:15 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 11:40:30 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//TODO : IL FAUT DELETE CA
 #include "../includes/op.h"
 
 void	vm_live(char *op, t_core *core)

@@ -6,12 +6,11 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/25 17:39:09 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 14:43:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-#include "../includes/vm.h"
 
 t_champ	*get_champ(t_core *core, int pos)
 {
@@ -35,7 +34,7 @@ void	vm_live(t_core *core, t_proces *pr)
 	champ_nb = get_param(core, pr, DIR_CODE, pr->pc + 1);
 	champ = get_champ(core, champ_nb);
 	pr->alive = 1;
-	if (champ)
+	if (champ && pr->params[0] == DIR_CODE)
 	{
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
@@ -56,7 +55,9 @@ void	vm_ld(t_core *core, t_proces *pr)
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	p2_index = (int)(core->arena[pr->pc + 4]);
-	if (p2_index > 0 && p2_index <= REG_NUMBER)
+	if ((p2_index > 0 && p2_index <= REG_NUMBER) &&
+		(pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
+		(pr->params[1] == REG_CODE))
 	{
 		pr->r[p2_index - 1] = param_1;
 		pr->carry = (!param_1 ? 1 : 0);
@@ -75,7 +76,7 @@ void	vm_st(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	p2_index = (int)(core->arena[pr->pc + 3]);
-	if (p2_index > 0 && p2_index <= REG_NUMBER || pr->params[0] != REG_CODE
+	if ((p2_index > 0 && p2_index <= REG_NUMBER) || pr->params[0] != REG_CODE
 			|| pr->params[1] != REG_CODE || pr->params[1] != IND_CODE)
 		return ;
 	if (pr->params[1] == REG_CODE)
@@ -99,21 +100,23 @@ void	vm_add(t_core *core, t_proces *pr)
 	int	sum;
 
 	i = 2;
-	// verif opc
-	while (i < 4)
+	if (pr->op + 1 == 132)
 	{
+		while (i < 4)
+		{
 		p_index = (int)(core->arena[pr->pc + i]);
 		if (p_index < 1 && p_index > REG_NUMBER)
 			return ;
 		value[i - 2] = pr->r[p_index - 1];
 		i++;
+		}
+		p_index = (int)(core->arena[pr->pc + 4]);
+		if (p_index < 1 && p_index > REG_NUMBER)
+			return ;
+		sum = value[0] + value[1];
+		pr->r[p_index - 1] = sum;
+		pr->carry = (!sum ? 1 : 0);
 	}
-	p_index = (int)(core->arena[pr->pc + 4]);
-	if (p_index < 1 && p_index > REG_NUMBER)
-		return ;
-	sum = value[0] + value[1];
-	pr->r[p_index - 1] = sum;
-	pr->carry = (!sum ? 1 : 0);
 }
 
 /*
@@ -128,42 +131,24 @@ void	vm_sub(t_core *core, t_proces *pr)
 	int	sub;
 
 	i = 2;
-	//verif ocp?
-	while (i < 4)
+	if (pr->op + 1 == 132)
 	{
-		p_index = (int)(core->arena[pr->pc + i]);
+		while (i < 4)
+		{
+			p_index = (int)(core->arena[pr->pc + i]);
+			if (p_index < 1 && p_index > REG_NUMBER)
+				return ;
+			value[i - 2] = pr->r[p_index - 1];
+			i++;
+		}
+		p_index = (int)(core->arena[pr->pc + 4]);
 		if (p_index < 1 && p_index > REG_NUMBER)
 			return ;
-		value[i - 2] = pr->r[p_index - 1];
-		i++;
+		sub = value[0] - value[1];
+		pr->r[p_index - 1] = sub;
+		pr->carry = (!sub ? 1 : 0);
 	}
-	p_index = (int)(core->arena[pr->pc + 4]);
-	if (p_index < 1 && p_index > REG_NUMBER)
-		return ;
-	sub = value[0] - value[1];
-	pr->r[p_index - 1] = sub;
-	pr->carry = (!sub ? 1 : 0);
 }
-
-
-/*
-** additionne les deux oremiers params et stocke le resultat dans le 3eme param qui est un registre.
-*/ 
-
-// void	vm_and(t_core *core, t_proces *pr)
-// {
-// 	int	param_1;
-// 	int	param_2;
-// 	int	param_3;
-// 	int res;
-
-// 	param_2 = ft_otoi(core->arena[pr->pc + 3], pr->params[1]);
-// 	res = param_1 + param_2;
-// 	param_3 = res;
-// 	if (res == 0)
-// 		pr->carry = 1;
-// 	//TO DO : verifier si quand il est ecrit modifie le carry, il faut le mettre a 1, ou sil faut le mettre a 1 ou 0
-// }
 
 /*
 ** saute a l'adresse passee en param 1 si le carry est a 1
@@ -190,7 +175,6 @@ void	vm_ldi(t_core *core, t_proces *pr)
 {
 	int param_1;
 	int param_2;
-	int p_index;
 	int	r_index;
 	int sum;
 
@@ -271,9 +255,9 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	new = (t_proces*)malloc(sizeof(t_proces));
 	new->champ = pr->champ;
 	new->proces_nb = core->proces->proces_nb + 1;
-	i = 0;
-	while (i < REG_SIZE)
-		new->r[i] = pr->r[i++];
+	i = -1;
+	while (++i < REG_SIZE)
+		new->r[i] = pr->r[i];
 	new->carry = pr->carry;
 	if (!l)
 		new->pc = pr->pc + (param_1 % IDX_MOD);
@@ -291,4 +275,55 @@ void	vm_fork(t_core *core, t_proces *pr)
 void	vm_lfork(t_core *core, t_proces *pr)
 {
 	vm_sub_fork(core, pr, 1);
+}
+
+void	vm_and(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	index_3;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+		, pr->params[0]));
+	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[1]));
+	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
+		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
+		pr->params[2] == REG_CODE)
+		pr->r[index_3 - 1] = param_1 & param_2;
+}
+
+void	vm_or(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	index_3;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+		, pr->params[0]));
+	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[1]));
+	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
+		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
+		pr->params[2] == REG_CODE)
+		pr->r[index_3 - 1] = param_1 | param_2;
+}
+
+void	vm_xor(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	index_3;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
+		, pr->params[0]));
+	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[1]));
+	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
+		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
+		pr->params[2] == REG_CODE)
+		pr->r[index_3 - 1] = param_1 ^ param_2;
 }

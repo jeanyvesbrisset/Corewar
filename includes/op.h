@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 09:49:39 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 14:53:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,11 @@ typedef	struct 		s_core
 typedef struct		 s_fvm
 {
 	unsigned char	op;
-	int				ocp;//if ocp exists : 1, else : 0
+	int				ocp;
 	int				cycle_delay;
 	int				param_nb;
 	int				direct_size;
-	int				(*f)(t_core *core, t_proces *pr);	
+	void			(*f)(t_core *core, t_proces *pr);	
 }					t_fvm;
 
 void				start_to_command(t_cdata **start);
@@ -251,28 +251,70 @@ void				ajust_champ_pos(t_core *core);
 /*
 ** vm
 */
-int					vm(t_core *core);
+void				vm(t_core *core);
 void				init_vm(t_core *core);
 int					ft_otoi(unsigned char *nb_str, int size);
 void				run_vm(t_core *core);
 int					get_size(int op, int type);
 int 				get_param(t_core *core, t_proces *pr, int type, int cursor);
+void				read_ocp(t_proces *pr, int ocp);
 
 /*
 ** vm util
 */
 
-int					get_pr_length(t_core *core, t_proces *pr, int op);
+int					get_pr_length(t_proces *pr, int op);
 void				del_process(t_proces **prev ,t_proces **pr);
 int					check_lives(t_core *core);
 void				reinit_cycle_lives(t_core *core);
 void				ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 	,unsigned long long int size);
+void				handle_proces(t_core *core, t_proces *pr);
+int					read_op(t_core *core, t_proces *pr);
+int					get_direct(t_core *core, t_proces *pr, int cursor);
+int					get_indirect(t_core *core, t_proces *pr, int cursor);
 
 /*
 ** vm visual
 */
 
 void				init_visual(t_core *core);
+
+/*
+** op vm
+*/
+
+t_champ				*get_champ(t_core *core, int pos);
+void				vm_live(t_core *core, t_proces *pr);
+void				vm_ld(t_core *core, t_proces *pr);
+void				vm_st(t_core *core, t_proces *pr);
+void				vm_add(t_core *core, t_proces *pr);
+void				vm_sub(t_core *core, t_proces *pr);
+void				vm_and(t_core *core, t_proces *pr);
+void				vm_or(t_core *core, t_proces *pr);
+void				vm_xor(t_core *core, t_proces *pr);
+void				vm_zjmp(t_core *core, t_proces *pr);
+void				vm_ldi(t_core *core, t_proces *pr);
+void				vm_sti(t_core *core, t_proces *pr);
+void				vm_lld(t_core *core, t_proces *pr);
+void				vm_lldi(t_core *core, t_proces *pr);
+void				vm_aff(t_core *core, t_proces *pr);
+void				vm_sub_fork(t_core *core, t_proces *pr, int l);
+void				vm_fork(t_core *core, t_proces *pr);
+void				vm_lfork(t_core *core, t_proces *pr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif

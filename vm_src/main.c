@@ -6,13 +6,64 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 09:45:03 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 14:56:20 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-int	ft_error(char *error, int ret, void **to_free, int line)
+void	free_proces(t_core *core)
+{
+	t_proces *current;
+	t_proces *before;
+
+	if (!(core->proces))
+		return ;
+	before = core->proces;
+	core->proces = 0;
+	current = before->next;
+	before->next = 0;
+	free(before);
+	while (current)
+	{
+		before = current;
+		current = current->next;
+		before->next = 0;
+		free(before);
+	}
+}
+
+void	free_core(t_core *core)
+{
+	t_champ *current;
+	t_champ	*before;
+
+	if (!(core->champs))
+		return ;
+	before = core->champs;	
+	current = before->next;
+	core->champs = 0;
+	before->next = 0;
+	ft_strdel((char**)(&((before->name))));
+	ft_strdel((char**)(&(before->bytecode)));
+	ft_strdel((char**)(&(before->comment)));
+	free(before);
+	while (current)
+	{
+		before = current;
+		current = current->next;
+		before->next = 0;
+		ft_strdel((char**)(&((before->name))));
+		ft_strdel((char**)(&(before->bytecode)));
+		ft_strdel((char**)(&(before->comment)));
+		free(before);
+		before = 0;
+	}
+	free_proces(core);
+	free(core);
+}
+
+int		ft_error(char *error, int ret, void **to_free, int line)
 {
 	char *nb;
 
@@ -91,12 +142,6 @@ int		cycle_number(char *cycle)
 	//mettre cycle_nb dans la structure
 }
 
-int		is_cycle(char *cycle)
-{
-	cycle_number(cycle); //fonction qui recupere le nombre de cycles apres le flag -d
-	return (1);
-}
-
 int main(int ac, char **av)
 {
 	t_core *core;
@@ -116,6 +161,9 @@ int main(int ac, char **av)
 	if (!(stock_champ(ac, av, core)))
 		return (0);
 	ft_printf("stockage good\n");
+	init_vm(core);
+	//if (core->flag_v)
+		//init_visual(core);
 	vm(core);
 	//free_core(core);
 	return (1);
