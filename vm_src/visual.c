@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 15:23:45 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 17:20:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/29 18:50:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	visu_refresh_ctd(t_core *core)
 	, "--------------------------------------------------]");
 	wattron(core->visu->hud, A_BOLD);
 	core->visu->str = ft_itoa(core->cycle_to_die);
-	mvwprintw(core->visu->hud, 26 + (core->champ_nb * 4), 5, "CYCLE TO DIE :");
 	mvwprintw(core->visu->hud, 26 + (core->champ_nb * 4), 20, core->visu->str);
 	ft_strdel(&(core->visu->str));
 	core->visu->str = ft_itoa(core->sum_process);
@@ -273,7 +272,6 @@ void	init_visual(t_core *core)
 	init_visual_hud(core);
 	getch();
 	endwin();
-	init_color(COLOR_WHITE, 1000, 1000, 1000);
 }
 
 void	refresh_vm_arena(t_core *core)
@@ -301,6 +299,7 @@ void	refresh_vm_arena(t_core *core)
 		pr = pr->next;
 	}
 	refresh_vm_hud(core);
-	getch();
+	wrefresh(core->visu->hud);
+//	getch();
 	usleep(100000);
 }
