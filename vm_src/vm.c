@@ -39,7 +39,7 @@ void	vm(t_core *core)
 	init_vm(core);
 	run_vm(core);
 	winner = get_winner(core);
-	ft_printf("le joueur %d(%s) à gagné", winner->pos, winner->name);
+	ft_printf("le joueur %d(%s) à gagné\n", winner->pos, winner->name);
 }
 
 /*

@@ -165,7 +165,7 @@ int main(int ac, char **av)
 	//if (core->flag_v)
 		//init_visual(core);
 	vm(core);
-	ft_printf("core->truc : %d\n", core->cycle_to_die);
+	ft_printf("core->total cycle : %d\n", core->total_cycle);
 	//free_core(core);
 	return (1);
 }

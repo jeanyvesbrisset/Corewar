@@ -43,6 +43,7 @@ void	handle_proces(t_core *core, t_proces *pr)
 	pr->pc_jump = get_pr_length(pr, pr->op);
 	g_fvm_tab[pr->op - 1].f(core, pr);//fonctions respectives a chaque instruction a coder
 	pr->pc += pr->pc_jump;
+	ft_printf("jump = %d, new pc = %d\n", pr->pc_jump, pr->pc);
 }
 
 int		read_op(t_core *core, t_proces *pr)

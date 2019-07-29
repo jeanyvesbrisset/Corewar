@@ -42,16 +42,15 @@ int		run_cycles_to_die(t_core *core)
 	pr = core->proces;
 	while (core->tmp_cycle < core->cycle_to_die)
 	{
-		ft_printf("_______________________\n");
 		if (!pr->wait || pr->wait == core->total_cycle - 1)
 		{
-			ft_printf("READ OP : pr = %d && cycle = %d\n", pr->proces_nb,core->total_cycle);
+			ft_printf("READ OP : pr = %d(%s) - cycle = %d\n", pr->proces_nb, get_champ(core, pr->champ)->name, core->total_cycle);
 			if (!read_op(core, pr))
 				pr->pc++;
 		}
 		else if (pr->wait == core->total_cycle)
 		{
-			ft_printf("HANDLE PROCESS pr = %d && cycle = %d\n", pr->proces_nb, core->total_cycle);
+			ft_printf("PROCESS = %d,  pr = %d(%s) - cycle = %d\n", pr->op, pr->proces_nb, get_champ(core, pr->champ)->name, core->total_cycle);
 			handle_proces(core, pr);
 		}
 		if (pr->next)
