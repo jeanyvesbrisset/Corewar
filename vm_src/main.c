@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 14:56:20 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:41:20 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int main(int ac, char **av)
 	//if (core->flag_v)
 		//init_visual(core);
 	vm(core);
+	ft_printf("core->truc : %d\n", core->cycle_to_die);
 	//free_core(core);
 	return (1);
 }

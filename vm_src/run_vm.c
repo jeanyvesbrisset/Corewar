@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 15:03:34 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:59:05 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,18 @@ int		run_cycles_to_die(t_core *core)
 	pr = core->proces;
 	while (core->tmp_cycle < core->cycle_to_die)
 	{
+		ft_printf("_______________________\n");
 		if (!pr->wait || pr->wait == core->total_cycle - 1)
 		{
+			ft_printf("READ OP : pr = %d && cycle = %d\n", pr->proces_nb,core->total_cycle);
 			if (!read_op(core, pr))
 				pr->pc++;
 		}
 		else if (pr->wait == core->total_cycle)
+		{
+			ft_printf("HANDLE PROCESS pr = %d && cycle = %d\n", pr->proces_nb, core->total_cycle);
 			handle_proces(core, pr);
+		}
 		if (pr->next)
 			pr = pr->next;
 		else
@@ -68,7 +73,10 @@ void	run_vm(t_core *core)
 	while (run_cycles_to_die(core) && core->cycle_to_die > 0)
 	{
 		if (!check_lives(core))
+		{
+			ft_printf("tout le monde est mort\n");
 			break ;
+		}
 		else if (core->nbr_live > NBR_LIVE || core->max_checks == MAX_CHECKS)
 		{
 			core->cycle_to_die -= CYCLE_DELTA;

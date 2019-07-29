@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 14:45:12 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 14:48:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:57:16 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int		read_op(t_core *core, t_proces *pr)
 	pr->op = core->arena[pr->pc];
 	if (pr->op < 1 || pr->op > 16)
 		return (0); // to do, prendre en compte cette erreur
-	pr->wait = core->cycle_to_die + g_fvm_tab[pr->op - 1].cycle_delay;
-	return (1);
+	pr->wait = core->total_cycle + g_fvm_tab[pr->op - 1].cycle_delay;
+	ft_printf("pr = %d , WAIT UNTIL = %d\n", pr->proces_nb, pr->wait);
+    return (1);
 }
 
 int		get_pr_length(t_proces *pr, int op)

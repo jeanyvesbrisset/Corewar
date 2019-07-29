@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 14:43:09 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:54:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	vm_live(t_core *core, t_proces *pr)
 	{
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
-		ft_printf("un processus dit que le joueur %d(%s) est en vie",
+		ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
 			champ_nb, champ->name);
 	}
 }
