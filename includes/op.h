@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 14:53:46 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 17:20:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,6 +279,8 @@ int					get_indirect(t_core *core, t_proces *pr, int cursor);
 */
 
 void				init_visual(t_core *core);
+void				colorize_and_refresh_hud(t_core *core, int i, int j
+	, t_champ *current);
 
 /*
 ** op vm

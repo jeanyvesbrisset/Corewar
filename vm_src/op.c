@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 15:54:09 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 17:01:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	vm_live(t_core *core, t_proces *pr)
 		champ->process_live = pr->proces_nb;
 		ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
 			champ_nb, champ->name);
+		if (core->flag_v)
+			colorize_and_refresh_hud(core, 0, 0, 0);
 	}
 }
 
@@ -266,6 +268,12 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 		new->pc = pr->pc + param_1;
 	new->next = core->proces;
 	core->proces = new;
+	wattron(core->visu->hud, A_BOLD);
+	core->visu->str = ft_itoa(core->sum_process);
+	mvwprintw(core->visu->hud, 15, 17, core->visu->str);
+	mvwprintw(core->visu->hud, 15, 17 + ft_strlen(core->visu->str), "       ");
+	ft_strdel(&(core->visu->str));
+	wattroff(core->visu->hud, A_BOLD);
 }
 
 void	vm_fork(t_core *core, t_proces *pr)
