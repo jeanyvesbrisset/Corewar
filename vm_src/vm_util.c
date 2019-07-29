@@ -59,6 +59,7 @@ int		check_lives(t_core *core)
 		{
 			ft_printf("alive = %d\n", pr->alive);
 			del_process(&prev, &pr);
+			core->sum_process--;
 		}
 		else
 		{

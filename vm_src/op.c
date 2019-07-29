@@ -255,6 +255,7 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	new = (t_proces*)malloc(sizeof(t_proces));
 	new->champ = pr->champ;
 	new->proces_nb = core->proces->proces_nb + 1;
+	core->sum_process++;
 	i = -1;
 	while (++i < REG_SIZE)
 		new->r[i] = pr->r[i];
