@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/25 16:52:55 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 09:45:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,8 @@ int main(int ac, char **av)
 	ft_printf("parcing good\n");
 	if (!(stock_champ(ac, av, core)))
 		return (0);
-	ft_printf("all good\n");
-	init_vm(core);
-	if (core->flag_v)
-		init_visual(core);
+	ft_printf("stockage good\n");
+	vm(core);
 	//free_core(core);
 	return (1);
 }

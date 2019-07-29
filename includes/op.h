@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/25 17:48:07 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 09:49:39 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ void				ajust_champ_pos(t_core *core);
 /*
 ** vm
 */
-
+int					vm(t_core *core);
 void				init_vm(t_core *core);
 int					ft_otoi(unsigned char *nb_str, int size);
 void				run_vm(t_core *core);

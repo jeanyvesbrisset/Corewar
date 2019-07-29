@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/23 16:02:33 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/29 10:03:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		vm(t_core *core)
 	init_vm(core);
 	run_vm(core);
 	winner = get_winner(core);
-	ft_printf("le joueur %d(%s) a gagne", winner->pos, winner->name);
+	ft_printf("le joueur %d(%s) à gagné", winner->pos, winner->name);
 }
 
 /*
