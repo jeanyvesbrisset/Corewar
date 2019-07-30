@@ -164,8 +164,7 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 	int	param_1;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
-	jump = pr->pc + param_1;
-	ft_printf("carry dans le zjmp = %d\n", pr->carry);
+	jump = param_1;
 	if (pr->carry && pr->params[0] == DIR_CODE)
 		pr->pc = (pr->pc + jump) % MEM_SIZE;
 }
