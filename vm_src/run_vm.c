@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_vm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 17:07:03 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:38:54 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	run_vm(t_core *core)
 //			visu_refresh_ctd(core);
 		reinit_cycle_lives(core);
 	}
+	check_lives(core);
 }
