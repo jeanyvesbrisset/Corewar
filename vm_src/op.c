@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 12:21:23 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 16:45:00 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	vm_live(t_core *core, t_proces *pr)
 	{
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
-		ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
-			champ_nb, champ->name);
+		//ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
+		//	champ_nb, champ->name);
 		core->nbr_live++;
 		champ->live_by_ctd++;
 		if (core->flag_v)
@@ -77,6 +77,7 @@ void	vm_st(t_core *core, t_proces *pr)
 	int	param_2;
 	int	p2_index;
 
+	ft_printf("\nST\n");
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	p2_index = (int)(core->arena[pr->pc + 3]);
@@ -90,6 +91,8 @@ void	vm_st(t_core *core, t_proces *pr)
 	}
 	else if (pr->params[1] == IND_CODE)
 		ft_itoo_vm(core, pr->pc + (param_2 % IDX_MOD), param_1, 4);
+	ft_printf("st wrote : %d, at %d\n", *((int *)(&(core->arena[pr->pc + (param_2 % IDX_MOD)]))), pr->pc + (param_2 % IDX_MOD));
+	ft_printf("ST END\n");
 }
 
 /*
@@ -202,18 +205,21 @@ void	vm_sti(t_core *core, t_proces *pr)
 	int	param_3;
 	int addr;
 
+	ft_printf("\nST\n");
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
-	addr = param_2 + param_3;
+	addr = param_2 + param_3; // + pr->pc le tout % MEM_SIZE ?
 	ft_printf("ADDR: %d\n", addr);
-	exit(1);
+	//exit(1);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
 		 || pr->params[1] == IND_CODE)
 		&& (pr->params[2] == REG_CODE || pr->params[2] == DIR_CODE))
 		ft_itoo_vm(core, addr, param_1, 4);
+	ft_printf("sti wrote : %d, at %d\n", *((int *)(&(core->arena[addr]))), addr);
+	ft_printf("STI END\n");
 }
 
 /*
