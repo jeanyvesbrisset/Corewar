@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 18:32:32 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 10:21:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		run_cycles_to_die(t_core *core)
 			pr = pr->next;
 		else
 		{
-			refresh_vm_arena(core);
+			if (core->flag_v)
+				refresh_vm_arena(core);
 			pr = core->proces;
 			core->total_cycle++;
 			core->tmp_cycle++;
@@ -84,7 +85,8 @@ void	run_vm(t_core *core)
 		}
 		else
 			core->max_checks++;
-		visu_refresh_ctd(core);
+		if (core->flag_v)
+			visu_refresh_ctd(core);
 		reinit_cycle_lives(core);
 	}
 }
