@@ -324,7 +324,10 @@ void	vm_or(t_core *core, t_proces *pr)
 	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
+	{
 		pr->r[index_3 - 1] = param_1 | param_2;
+		pr->carry = (!pr->carry ? 1 : 0);
+	}
 }
 
 void	vm_xor(t_core *core, t_proces *pr)
@@ -341,5 +344,8 @@ void	vm_xor(t_core *core, t_proces *pr)
 	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
+	{
 		pr->r[index_3 - 1] = param_1 ^ param_2;
+		pr->carry = (!pr->carry ? 1 : 0);
+	}
 }
