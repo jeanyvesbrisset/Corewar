@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/30 10:23:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 10:40:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ int main(int ac, char **av)
 	if (!(stock_champ(ac, av, core)))
 		return (0);
 	ft_printf("stockage good\n");
-	init_vm(core);
 	//if (core->flag_v)
 		//init_visual(core);
 	vm(core);

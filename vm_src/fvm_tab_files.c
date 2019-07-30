@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fvm_tab_files.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 14:45:12 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/29 15:57:16 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/30 11:49:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,20 @@ void	handle_proces(t_core *core, t_proces *pr)
 	read_ocp(pr, ocp);
 	pr->pc_jump = get_pr_length(pr, pr->op);
 	g_fvm_tab[pr->op - 1].f(core, pr);//fonctions respectives a chaque instruction a coder
-	pr->pc += pr->pc_jump;
-	ft_printf("jump = %d, new pc = %d\n", pr->pc_jump, pr->pc);
+	pr->pc = (pr->pc + pr->pc_jump) % MEM_SIZE;
+	// ft_printf("jump = %d, new pc = %d\n", pr->pc_jump, pr->pc);
 }
 
 int		read_op(t_core *core, t_proces *pr)
 {
 	pr->op = core->arena[pr->pc];
 	if (pr->op < 1 || pr->op > 16)
+	{
+		// ft_printf("INVALID op\n");	
 		return (0); // to do, prendre en compte cette erreur
+	}
 	pr->wait = core->total_cycle + g_fvm_tab[pr->op - 1].cycle_delay;
-	ft_printf("pr = %d , WAIT UNTIL = %d\n", pr->proces_nb, pr->wait);
+	// ft_printf("op = %d, wait until = %d\n", pr->op, pr->wait);
     return (1);
 }
 

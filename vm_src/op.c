@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 18:33:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 12:21:23 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	vm_live(t_core *core, t_proces *pr)
 		champ->process_live = pr->proces_nb;
 		ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
 			champ_nb, champ->name);
+		core->nbr_live++;
+		champ->live_by_ctd++;
 		if (core->flag_v)
 			colorize_and_refresh_hud(core, 0, 0, 0);
 	}
@@ -163,10 +165,9 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
 	jump = pr->pc + param_1;
+	ft_printf("carry dans le zjmp = %d\n", pr->carry);
 	if (pr->carry && pr->params[0] == DIR_CODE)
-		pr->pc += jump;
-	pr->pc %= MEM_SIZE;// overflow done <------|
-	//TO DO :gerer l'OVERFLOW si jump > ffff --|
+		pr->pc = (pr->pc + jump) % MEM_SIZE;
 }
 
 /*
@@ -303,7 +304,10 @@ void	vm_and(t_core *core, t_proces *pr)
 	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
+	{
 		pr->r[index_3 - 1] = param_1 & param_2;
+		pr->carry = (!pr->carry ? 1 : 0);
+	}
 }
 
 void	vm_or(t_core *core, t_proces *pr)

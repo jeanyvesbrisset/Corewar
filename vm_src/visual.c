@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 15:23:45 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/30 10:27:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 10:44:14 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,6 @@ void	refresh_vm_arena(t_core *core)
 	}
 	refresh_vm_hud(core);
 	wrefresh(core->visu->hud);
-//	getch();
-	usleep(100000);
+	getch();
+//	usleep(100000);
 }

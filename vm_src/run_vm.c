@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 10:21:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 12:11:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ int		run_cycles_to_die(t_core *core)
 	pr = core->proces;
 	while (core->tmp_cycle < core->cycle_to_die)
 	{
-		if (!pr->wait || pr->wait == core->total_cycle - 1)
+		if (!pr->wait || pr->wait < core->total_cycle)
 		{
-			ft_printf("READ OP : pr = %d(%s) - cycle = %d\n", pr->proces_nb, get_champ(core, pr->champ)->name, core->total_cycle);
+			// ft_printf("____________\n(%d)READ at %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
 			if (!read_op(core, pr))
-				pr->pc++;
+				pr->pc = (pr->pc + 1) % MEM_SIZE;
 		}
 		else if (pr->wait == core->total_cycle)
 		{
-			ft_printf("PROCESS = %d,  pr = %d(%s) - cycle = %d\n", pr->op, pr->proces_nb, get_champ(core, pr->champ)->name, core->total_cycle);
+			// ft_printf("____________\n(%d)PROCESS: %s(%d) does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->op);
 			handle_proces(core, pr);
 		}
 		if (pr->next)
@@ -64,6 +64,7 @@ int		run_cycles_to_die(t_core *core)
 			core->tmp_cycle++;
 		}
 	}
+	ft_printf("cycle to die %d done\n", core->tmp_cycle);
 	return (1);
 }
 
@@ -78,7 +79,7 @@ void	run_vm(t_core *core)
 			ft_printf("tout le monde est mort\n");
 			break ;
 		}
-		else if (core->nbr_live > NBR_LIVE || core->max_checks == MAX_CHECKS)
+		else if (core->nbr_live >= NBR_LIVE || core->max_checks >= MAX_CHECKS)
 		{
 			core->cycle_to_die -= CYCLE_DELTA;
 			core->max_checks = 0;
