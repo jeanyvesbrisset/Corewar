@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 16:45:00 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:07:35 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	vm_live(t_core *core, t_proces *pr)
 		//	champ_nb, champ->name);
 		core->nbr_live++;
 		champ->live_by_ctd++;
-		if (core->flag_v)
-			colorize_and_refresh_hud(core, 0, 0, 0);
+	//	if (core->flag_v)
+	//		colorize_and_refresh_hud(core, 0, 0, 0);
 	}
 }
 

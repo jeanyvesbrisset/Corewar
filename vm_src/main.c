@@ -6,32 +6,11 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/30 10:40:34 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/07/30 17:13:34 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-void	free_proces(t_core *core)
-{
-	t_proces *current;
-	t_proces *before;
-
-	if (!(core->proces))
-		return ;
-	before = core->proces;
-	core->proces = 0;
-	current = before->next;
-	before->next = 0;
-	free(before);
-	while (current)
-	{
-		before = current;
-		current = current->next;
-		before->next = 0;
-		free(before);
-	}
-}
 
 void	free_core(t_core *core)
 {
@@ -40,7 +19,7 @@ void	free_core(t_core *core)
 
 	if (!(core->champs))
 		return ;
-	before = core->champs;	
+	before = core->champs;
 	current = before->next;
 	core->champs = 0;
 	before->next = 0;
@@ -59,7 +38,6 @@ void	free_core(t_core *core)
 		free(before);
 		before = 0;
 	}
-	free_proces(core);
 	free(core);
 }
 
@@ -146,7 +124,7 @@ int main(int ac, char **av)
 {
 	t_core *core;
 
-	if (!(core = (t_core*)malloc(sizeof(t_core) *1)))
+	if (!(core = (t_core*)malloc(sizeof(t_core) * 1)))
 		return (0);
 	core->flag_d = -1;
 	core->flag_v = 0;
