@@ -207,6 +207,8 @@ void	vm_sti(t_core *core, t_proces *pr)
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
 	addr = param_2 + param_3;
+	ft_printf("ADDR: %d\n", addr);
+	exit(1);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
 		 || pr->params[1] == IND_CODE)
