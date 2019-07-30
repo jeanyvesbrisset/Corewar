@@ -297,7 +297,7 @@ void	vm_and(t_core *core, t_proces *pr)
 	int	index_3;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]));
 	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]) + get_size(pr->op, pr->params[1]));
@@ -317,7 +317,7 @@ void	vm_or(t_core *core, t_proces *pr)
 	int	index_3;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]));
 	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]) + get_size(pr->op, pr->params[1]));
