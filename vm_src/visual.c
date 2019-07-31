@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:51:33 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 12:51:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/01 01:40:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	init_champ_in_visu(t_core *core, int k)
 
 	while (k < 4096 * 3)
 	{
+		core->visu->color_arena[k / 3] = 0;
 		core->visu->str = get_hexa(core->arena[k / 3]);
 		mvwprintw(core->visu->arena, 1 + (k / 192), 2 + (k % 192)
 		, core->visu->str);
@@ -141,6 +142,7 @@ void	init_champ_in_visu(t_core *core, int k)
 		k = -1;
 		while (++k < current->size)
 		{
+			core->visu->color_arena[i / 3] = current->pos;
 			mvwchgat(core->visu->arena, 1 + (i / 192), 2 + (i % 192)
 				, 2, 0, (current->pos * 2) - 1, 0);
 			i += 3;
@@ -152,7 +154,7 @@ void	init_champ_in_visu(t_core *core, int k)
 void	init_color_vm(void)
 {
 	start_color();
-	init_color(COLOR_WHITE, 300, 300, 300);
+	init_color(COLOR_WHITE, 300, 300, 300);// a virer et initialiser les 0 a A_DIM (et c'est tout ca marche)
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
 	init_pair(2, COLOR_WHITE, COLOR_CYAN);
 	init_pair(3, COLOR_RED, COLOR_BLACK);

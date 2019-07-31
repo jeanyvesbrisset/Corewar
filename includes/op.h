@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 12:51:06 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/01 01:29:58 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef	struct		s_visu
 	int				cps;
 	int				live_bd[3];
 	char			*str;
+	unsigned char 	*color_arena[MEM_SIZE];
 }					t_visu;
 
 typedef	struct 		s_core

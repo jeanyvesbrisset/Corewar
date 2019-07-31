@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 18:44:23 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/01 01:42:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)
 	i = 0;
 	while (i < size)
 	{
+		core->visu->color_arena[pos + i] = pr->champ;
 		core->visu->str = get_hexa(core->arena[pos + i]);
 		wmove(core->visu->arena, 1 + ((3 * (pos + i)) / 192)
 		, 2 + ((3 * (pos + i)) % 192));
@@ -169,7 +170,8 @@ void	visual_every_cycle(t_core *core)
 	while (pr)
 	{
 		mvwchgat(core->visu->arena, 1 + ((pr->pc * 3) / 192)
-		, 2 + ((pr->pc * 3) % 192), 2, A_REVERSE, (pr->champ * 2) - 1, 0);
+		, 2 + ((pr->pc * 3) % 192), 2, A_REVERSE
+		, COLOR_PAIRS((core->visu->color_arena[pr->pc] * 2) - 1), 0);
 		pr = pr->next;
 	}
 	wrefresh(core->visu->arena);
@@ -177,7 +179,8 @@ void	visual_every_cycle(t_core *core)
 	while (pr)
 	{
 		mvwchgat(core->visu->arena, 1 + ((pr->pc * 3) / 192)
-		, 2 + ((pr->pc * 3) % 192), 2, A_NORMAL, (pr->champ * 2) - 1, 0);
+		, 2 + ((pr->pc * 3) % 192), 2, A_NORMAL
+		, COLOR_PAIRS((core->visu->color_arena[pr->pc] * 2) - 1), 0);
 		pr = pr->next;
 	}
 	wattron(core->visu->hud, A_BOLD);
