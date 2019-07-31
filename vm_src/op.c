@@ -137,14 +137,12 @@ void	vm_sub(t_core *core, t_proces *pr)
 
 void	vm_zjmp(t_core *core, t_proces *pr)
 {
-	int	jump;
 	int	param_1;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
-	jump = param_1;
 	if (pr->carry && pr->params[0] == DIR_CODE)
 	{
-		pr->pc = (pr->pc + jump) % MEM_SIZE;
+		pr->pc = (pr->pc + param_1) % MEM_SIZE;
 		ft_printf("ZJMP execution\n");
 	}
 }
@@ -197,6 +195,7 @@ void	vm_st(t_core *core, t_proces *pr)
 	else if (pr->params[1] == IND_CODE)
 	{
 		ft_itoo_vm(core, pr->pc + (param_2 % IDX_MOD), param_1, 4);
+		ft_printf("st ecrit ici : %d et il ecrit ca %d\n", pr->pc + (param_2 % IDX_MOD), param_1);
 		if (core->flag_v)
 			visu_sti_st(core, pr, pr->pc + (param_2 % IDX_MOD), 4);
 	}
