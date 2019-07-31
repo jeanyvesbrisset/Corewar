@@ -45,14 +45,14 @@ int		run_cycles_to_die(t_core *core)
 		if (!pr->wait || pr->wait < core->total_cycle)
 		{
 			// if (pr->champ == 1)
-				ft_printf("____________\n(%d)READ at %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
+				ft_printf("____________\n(cycle %d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
 			if (!read_op(core, pr))
 				pr->pc = (pr->pc + 1) % MEM_SIZE;
 		}
 		else if (pr->wait == core->total_cycle)
 		{
 			// if (pr->champ == 1)
-			ft_printf("____________\n(%d)PROCESS: %s(%d) does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->op);
+			ft_printf("____________\n(cycle %d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
 			handle_proces(core, pr);
 		}
 		if (pr->next)

@@ -44,7 +44,7 @@ void	vm_live(t_core *core, t_proces *pr)
 		champ->live_by_ctd++;
 		if (core->flag_v)
 			refresh_live(core);
-	}
+	}	
 }
 
 /*
@@ -58,13 +58,13 @@ void	vm_ld(t_core *core, t_proces *pr)
 	int	p2_index;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	p2_index = (int)(core->arena[pr->pc + 4]);
+	p2_index = (int)(core->arena[pr->pc + 2 + get_size(pr->op, pr->params[0])]);
 	if ((p2_index > 0 && p2_index <= REG_NUMBER) &&
 		(pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE))
 	{
 		pr->r[p2_index - 1] = param_1;
-		pr->carry = (!param_1 ? 1 : 0);
+		pr->carry = (!pr->carry ? 1 : 0);
 	}
 }
 
@@ -96,7 +96,7 @@ void	vm_add(t_core *core, t_proces *pr)
 			return ;
 		sum = value[0] + value[1];
 		pr->r[p_index - 1] = sum;
-		pr->carry = (!sum ? 1 : 0);
+		pr->carry = (!pr->carry ? 1 : 0);
 	}
 }
 
@@ -127,7 +127,7 @@ void	vm_sub(t_core *core, t_proces *pr)
 			return ;
 		sub = value[0] - value[1];
 		pr->r[p_index - 1] = sub;
-		pr->carry = (!sub ? 1 : 0);
+		pr->carry = (!pr->carry ? 1 : 0);
 	}
 }
 
@@ -143,7 +143,10 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
 	jump = param_1;
 	if (pr->carry && pr->params[0] == DIR_CODE)
+	{
 		pr->pc = (pr->pc + jump) % MEM_SIZE;
+		ft_printf("ZJMP execution\n");
+	}
 }
 
 /*
@@ -165,7 +168,6 @@ void	vm_ldi(t_core *core, t_proces *pr)
 		|| pr->params[2] != REG_CODE)
 		return ;
 	sum = param_1 + param_2;
-	pr->carry = (!sum ? 1 : 0);
 	r_index = core->arena[pr->pc + 2 + get_size(pr->op
 		, pr->params[0]) + get_size(pr->op, pr->params[0])];
 	if (r_index > 0 && r_index >= REG_SIZE)
@@ -239,6 +241,7 @@ void	vm_lld(t_core *core, t_proces *pr)
 void	vm_lldi(t_core *core, t_proces *pr)
 {
 	vm_ldi(core, pr);
+	pr->carry = (!pr->carry ? 1 : 0);
 }
 
 /*
@@ -306,6 +309,7 @@ void	vm_and(t_core *core, t_proces *pr)
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
 	{
+		ft_printf("ZORK EST DANS AND\n");
 		pr->r[index_3 - 1] = param_1 & param_2;
 		pr->carry = (!pr->carry ? 1 : 0);
 	}
