@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_visual.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 17:51:29 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 18:44:23 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)
 		i++;
 	}
 	wrefresh(core->visu->arena);
-	getch();
-	usleep(100000);
+//getch();
 	i = 0;
 	while (i < size)
 	{
@@ -191,5 +190,6 @@ void	visual_every_cycle(t_core *core)
 	ft_strdel(&(core->visu->str));
 	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
-	getch();
+	usleep(20000);
+	//getch();
 }
