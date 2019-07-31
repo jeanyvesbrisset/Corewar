@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 12:52:32 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 16:38:52 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	write_visu(t_core *core, WINDOW *win, int attr, int color)
 {
-	if (color)
-		attron(COLOR_PAIR(color));
 	if (attr & (1 == 1))
 		attron(A_BOLD);
 	if (attr & (2 == 2))
@@ -26,40 +24,46 @@ void	write_visu(t_core *core, WINDOW *win, int attr, int color)
 		attron(A_REVERSE);
 	if (attr & (16 == 16))
 		attron(A_NORMAL);
+	if (color)
+		attron(COLOR_PAIR(color));
 	wprintw(win, core->visu->str);
 	ft_strdel(&(core->visu->str));
 	attrset(0);
-	attrset(A_BOLD);
+//	attrset(A_BOLD);
 	wattrset(win, 0);
-	wattrset(win, A_BOLD);
+	//wattrset(win, A_BOLD);
 }
 void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)
 {
 	int	i;
 
 	i = 0;
-	while (i < size * 3)
+	while (i < size)
 	{
-		core->visu->str = get_hexa((int)(core->arena[pos + i]));
-		wmove(core->visu->arena, 1 + ((pos + i) / 192), 2 + ((pos + i) % 192));
-		write_visu(core, core->visu->arena, 2, (pr->champ * 2) - 1);
-		i += 3;
+		core->visu->str = get_hexa(core->arena[pos + i]);
+		wmove(core->visu->arena, 1 + ((3 * (pos + i)) / 192)
+		, 2 + ((3 * (pos + i)) % 192));
+		write_visu(core, core->visu->arena, 1, (pr->champ * 2) - 1);
+		i++;
 	}
 	wrefresh(core->visu->arena);
+	getch();
 	usleep(100000);
 	i = 0;
-	while (i < size * 3)
+	while (i < size)
 	{
-		mvwchgat(core->visu->arena, 1 + ((pos + i) / 192), 2 + ((pos + i) / 192)
-				, 2, 0, (pr->champ * 2) - 1, 0);
-		i += 3;
+		mvwchgat(core->visu->arena, 1 + ((3 * (pos + i)) / 192)
+		, 2 +  ((3 * (pos + i)) % 192), 2, A_NORMAL, (pr->champ * 2) - 1, 0);
+		i++;
 	}
 }
 
 void	refresh_process(t_core *core)
 {
+	wattron(core->visu->hud, A_BOLD);
 	core->visu->str = ft_itoa(core->sum_process);
-	mvwprintw(core->visu->hud, 15, 18, core->visu->str);
+	mvwprintw(core->visu->hud, 15, 17, core->visu->str);
+	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
 	ft_strdel(&(core->visu->str));
 }
@@ -78,26 +82,26 @@ void	refresh_live(t_core *core)
 		current = core->champs;
 		while (current->pos != i + 1)
 			current = current->next;
-		mvwprintw(core->visu->hud, 19 + (i * 4), 25, "/t/tby process ");
+		mvwprintw(core->visu->hud, 19 + (i * 4), 47, "by process ");
 		core->visu->str = ft_itoa(current->last_live);
-		mvwprintw(core->visu->hud, 19 + (i * 4), 25, core->visu->str);
+		mvwprintw(core->visu->hud, 19 + (i * 4), 40, core->visu->str);
 		ft_strdel(&(core->visu->str));
 		core->visu->str = ft_itoa(current->process_live);
-		mvwprintw(core->visu->hud, 19 + (i * 4), 47, core->visu->str);
+		mvwprintw(core->visu->hud, 19 + (i * 4), 59, core->visu->str);
 		ft_strdel(&(core->visu->str));
 		core->visu->str = ft_itoa(current->live_by_ctd);
-		mvwprintw(core->visu->hud, 20 + (i * 4), 41 , core->visu->str);
+		mvwprintw(core->visu->hud, 20 + (i * 4), 40 , core->visu->str);
 		ft_strdel(&(core->visu->str));
 		wattron(core->visu->hud, COLOR_PAIR(((i + 1) * 2) - 1));
 		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100) 
-				/ core->nbr_live)
-			mvwprintw(core->visu->hud, 20 + (i * 4), 6 + j++, "-");
+				/ core->nbr_live && j < 100)
+			mvwprintw(core->visu->hud, 20 + (core->champ_nb * 4), 6 + j++, "-");
 		if ((((current->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
 			&& j < 100)
-			mvwprintw(core->visu->hud, 20 + (i * 4), 6 + j++, "-");
+			mvwprintw(core->visu->hud, 20 + (core->champ_nb * 4), 6 + j++, "-");
 		if (i == core->champ_nb - 1)
 			while (j < 100)
-				mvwprintw(core->visu->hud, 20 + (i * 4), 6 + j++, "-");
+				mvwprintw(core->visu->hud, 20 + (core->champ_nb * 4), 6 + j++, "-");
 		wattroff(core->visu->hud, COLOR_PAIR(((i + 1) * 2) - 1));
 		i++;
 		core->visu->live_bd[i] = j;
@@ -134,14 +138,15 @@ void	refresh_live_ctd(t_core *core)
 		wattroff(core->visu->hud, A_BOLD);
 		wattron(core->visu->hud, COLOR_PAIR(((i + 1) * 2) - 1));
 		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100) 
-				/ core->nbr_live)
-			mvwprintw(core->visu->hud, 23 + (i * 4), 6 + j++, "-");
+				/ core->nbr_live && j < 100)
+			mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + j++, "-");
 		if ((((current->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
 			&& j < 100)
-			mvwprintw(core->visu->hud, 23 + (i * 4), 6 + j++, "-");
+			mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + j++, "-");
 		if (i == core->champ_nb - 1)
 			while (j < 100)
-				mvwprintw(core->visu->hud, 23 + (i * 4), 6 + j++, "-");
+				mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + j++
+				, "-");
 		wattroff(core->visu->hud, COLOR_PAIR(((i + 1) * 2) - 1));
 		i++;
 		core->visu->live_bd[i] = j;
@@ -161,7 +166,7 @@ void	visual_every_cycle(t_core *core)
 	while (pr)
 	{
 		mvwchgat(core->visu->arena, 1 + ((pr->pc * 3) / 192)
-		, 2 + ((pr->pc * 3) / 192), 2, A_REVERSE, 0, 0);
+		, 2 + ((pr->pc * 3) % 192), 2, A_REVERSE, (pr->champ * 2) - 1, 0);
 		pr = pr->next;
 	}
 	wrefresh(core->visu->arena);
@@ -169,7 +174,7 @@ void	visual_every_cycle(t_core *core)
 	while (pr)
 	{
 		mvwchgat(core->visu->arena, 1 + ((pr->pc * 3) / 192)
-		, 2 + ((pr->pc * 3) / 192), 2, A_REVERSE, 0, 0);
+		, 2 + ((pr->pc * 3) % 192), 2, A_NORMAL, (pr->champ * 2) - 1, 0);
 		pr = pr->next;
 	}
 	core->visu->str = ft_itoa(core->visu->cps);
@@ -180,4 +185,5 @@ void	visual_every_cycle(t_core *core)
 	mvwprintw(core->visu->hud, 13, 13, core->visu->str);
 	ft_strdel(&(core->visu->str));
 	wrefresh(core->visu->hud);
+	getch();
 }
