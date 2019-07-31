@@ -210,7 +210,7 @@ void	vm_sti(t_core *core, t_proces *pr)
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
-	addr = param_2 + param_3; // + pr->pc le tout % MEM_SIZE ?
+	addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
 	ft_printf("ADDR: %d\n", addr);
 	//exit(1);
 	if (pr->params[0] == REG_CODE &&
