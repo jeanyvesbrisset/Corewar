@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 17:07:35 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:51:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	vm_live(t_core *core, t_proces *pr)
 	{
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
-		//ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
-		//	champ_nb, champ->name);
+		ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
+			champ_nb, champ->name);
 		core->nbr_live++;
 		champ->live_by_ctd++;
-	//	if (core->flag_v)
-	//		colorize_and_refresh_hud(core, 0, 0, 0);
+		if (core->flag_v)
+			refresh_live(core);
 	}
 }
 
@@ -68,32 +68,6 @@ void	vm_ld(t_core *core, t_proces *pr)
 	}
 }
 
-// Transfert direct Registre > RAM / Registre. 
-// Charge le contenu du registre passé en premier parametre dans le second parametre. 
-
-void	vm_st(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	p2_index;
-
-	ft_printf("\nST\n");
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
-	p2_index = (int)(core->arena[pr->pc + 3]);
-	if ((p2_index > 0 && p2_index <= REG_NUMBER) || pr->params[0] != REG_CODE
-			|| pr->params[1] != REG_CODE || pr->params[1] != IND_CODE)
-		return ;
-	if (pr->params[1] == REG_CODE)
-	{
-		p2_index = (int)(core->arena[pr->pc + 3]);
-		pr->r[p2_index - 1] = param_1;
-	}
-	else if (pr->params[1] == IND_CODE)
-		ft_itoo_vm(core, pr->pc + (param_2 % IDX_MOD), param_1, 4);
-	ft_printf("st wrote : %d, at %d\n", *((int *)(&(core->arena[pr->pc + (param_2 % IDX_MOD)]))), pr->pc + (param_2 % IDX_MOD));
-	ft_printf("ST END\n");
-}
 
 /*
 ** Adds the value of the first and the second param (which are both registers) and loads this sum into the third params (which is also a register)
@@ -198,6 +172,34 @@ void	vm_ldi(t_core *core, t_proces *pr)
 		pr->r[r_index - 1] = pr->pc + (sum % IDX_MOD);
 }
 
+// Transfert direct Registre > RAM / Registre. 
+// Charge le contenu du registre passé en premier parametre dans le second parametre. 
+
+void	vm_st(t_core *core, t_proces *pr)
+{
+	int	param_1;
+	int	param_2;
+	int	p2_index;
+
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
+	if (pr->params[0] != REG_CODE
+		&& (pr->params[1] != REG_CODE || pr->params[1] != IND_CODE))
+		return ;
+	if (pr->params[1] == REG_CODE)
+	{
+		p2_index = (int)(core->arena[pr->pc + 3]);
+		if (p2_index > 0 && p2_index <= REG_NUMBER)
+			pr->r[p2_index - 1] = param_1;
+	}
+	else if (pr->params[1] == IND_CODE)
+	{
+		ft_itoo_vm(core, pr->pc + (param_2 % IDX_MOD), param_1, 4);
+		if (core->flag_v)
+			visu_sti_st(core, pr, pr->pc + (param_2 % IDX_MOD), 4);
+	}
+}
+
 void	vm_sti(t_core *core, t_proces *pr)
 {
 	int	param_1;
@@ -205,21 +207,20 @@ void	vm_sti(t_core *core, t_proces *pr)
 	int	param_3;
 	int addr;
 
-	ft_printf("\nST\n");
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
 	addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
-	ft_printf("ADDR: %d\n", addr);
-	//exit(1);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
 		 || pr->params[1] == IND_CODE)
 		&& (pr->params[2] == REG_CODE || pr->params[2] == DIR_CODE))
+	{
 		ft_itoo_vm(core, addr, param_1, 4);
-	ft_printf("sti wrote : %d, at %d\n", *((int *)(&(core->arena[addr]))), addr);
-	ft_printf("STI END\n");
+		if (core->flag_v)
+			visu_sti_st(core, pr, addr, 4);
+	}
 }
 
 /*
@@ -277,14 +278,7 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	new->next = core->proces;
 	core->proces = new;
 	if (core->flag_v)
-	{
-		wattron(core->visu->hud, A_BOLD);
-		core->visu->str = ft_itoa(core->sum_process);
-		mvwprintw(core->visu->hud, 15, 17, core->visu->str);
-		mvwprintw(core->visu->hud, 15, 17 + ft_strlen(core->visu->str), "    ");
-		ft_strdel(&(core->visu->str));
-		wattroff(core->visu->hud, A_BOLD);
-	}
+		refresh_process(core);
 }
 
 void	vm_fork(t_core *core, t_proces *pr)

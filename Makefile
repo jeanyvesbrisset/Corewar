@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/07/29 14:50:09 by maginist         ###   ########.fr        #
+#    Updated: 2019/07/31 12:51:55 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS2 =	main.c\
 		stock_champs.c\
 		init_vm.c\
 		gest_champ.c\
+		refresh_visual.c\
 		visual.c\
 		vm.c\
 		run_vm.c\

@@ -1,0 +1,648 @@
+on commence
+parcing good
+stockage good
+____________
+(0)READ at 0: bigzork(1), ____________
+(5)PROCESS: bigzork(1) does op 2 then ____________
+(6)READ at 7: bigzork(1), ____________
+(11)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(12)READ at 12: bigzork(1), ____________
+(17)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(18)READ at 17: bigzork(1), ____________
+(23)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(24)READ at 22: bigzork(1), 
+ST
+ADDR: 2064
+sti wrote : 33554432, at 2064
+STI END
+____________
+(29)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(30)READ at 27: bigzork(1), ____________
+(35)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(36)READ at 32: bigzork(1), ____________
+(41)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(42)READ at 37: bigzork(1), ____________
+(47)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(48)READ at 42: bigzork(1), ____________
+(53)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(54)READ at 47: bigzork(1), ____________
+(59)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(60)READ at 52: bigzork(1), ____________
+(65)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(66)READ at 57: bigzork(1), ____________
+(71)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(72)READ at 62: bigzork(1), ____________
+(77)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(78)READ at 67: bigzork(1), ____________
+(83)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(84)READ at 72: bigzork(1), ____________
+(89)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(90)READ at 77: bigzork(1), ____________
+(95)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(96)READ at 82: bigzork(1), ____________
+(101)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(102)READ at 87: bigzork(1), ____________
+(107)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(108)READ at 92: bigzork(1), ____________
+(113)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(114)READ at 97: bigzork(1), ____________
+(119)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(120)READ at 102: bigzork(1), ____________
+(125)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(126)READ at 107: bigzork(1), ____________
+(131)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(132)READ at 112: bigzork(1), ____________
+(137)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(138)READ at 117: bigzork(1), ____________
+(143)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(144)READ at 122: bigzork(1), ____________
+(149)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(150)READ at 127: bigzork(1), ____________
+(155)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(156)READ at 132: bigzork(1), ____________
+(161)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(162)READ at 137: bigzork(1), ____________
+(167)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(168)READ at 142: bigzork(1), ____________
+(173)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(174)READ at 147: bigzork(1), ____________
+(179)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(180)READ at 152: bigzork(1), ____________
+(185)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(186)READ at 157: bigzork(1), ____________
+(191)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(192)READ at 162: bigzork(1), ____________
+(197)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(198)READ at 167: bigzork(1), ____________
+(203)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(204)READ at 172: bigzork(1), ____________
+(209)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(210)READ at 177: bigzork(1), ____________
+(215)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(216)READ at 182: bigzork(1), ____________
+(221)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(222)READ at 187: bigzork(1), ____________
+(227)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(228)READ at 192: bigzork(1), ____________
+(233)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(234)READ at 197: bigzork(1), ____________
+(239)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(240)READ at 202: bigzork(1), ____________
+(245)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(246)READ at 207: bigzork(1), ____________
+(251)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(252)READ at 212: bigzork(1), ____________
+(257)PROCESS: bigzork(1) does op 3 then 
+ST
+____________
+(258)READ at 217: bigzork(1), ____________
+(268)PROCESS: bigzork(1) does op 1 then ____________
+(269)READ at 222: bigzork(1), ____________
+(279)PROCESS: bigzork(1) does op 1 then ____________
+(280)READ at 227: bigzork(1), ____________
+(290)PROCESS: bigzork(1) does op 1 then ____________
+(291)READ at 232: bigzork(1), ____________
+(301)PROCESS: bigzork(1) does op 1 then ____________
+(302)READ at 237: bigzork(1), ____________
+(312)PROCESS: bigzork(1) does op 1 then ____________
+(313)READ at 242: bigzork(1), ____________
+(323)PROCESS: bigzork(1) does op 1 then ____________
+(324)READ at 247: bigzork(1), ____________
+(334)PROCESS: bigzork(1) does op 1 then ____________
+(335)READ at 252: bigzork(1), ____________
+(345)PROCESS: bigzork(1) does op 1 then ____________
+(346)READ at 257: bigzork(1), ____________
+(356)PROCESS: bigzork(1) does op 1 then ____________
+(357)READ at 262: bigzork(1), ____________
+(367)PROCESS: bigzork(1) does op 1 then ____________
+(368)READ at 267: bigzork(1), ____________
+(378)PROCESS: bigzork(1) does op 1 then ____________
+(379)READ at 272: bigzork(1), ____________
+(389)PROCESS: bigzork(1) does op 1 then ____________
+(390)READ at 277: bigzork(1), ____________
+(400)PROCESS: bigzork(1) does op 1 then ____________
+(401)READ at 282: bigzork(1), ____________
+(411)PROCESS: bigzork(1) does op 1 then ____________
+(412)READ at 287: bigzork(1), ____________
+(422)PROCESS: bigzork(1) does op 1 then ____________
+(423)READ at 292: bigzork(1), ____________
+(433)PROCESS: bigzork(1) does op 1 then ____________
+(434)READ at 297: bigzork(1), ____________
+(444)PROCESS: bigzork(1) does op 1 then ____________
+(445)READ at 302: bigzork(1), ____________
+(455)PROCESS: bigzork(1) does op 1 then ____________
+(456)READ at 307: bigzork(1), ____________
+(466)PROCESS: bigzork(1) does op 1 then ____________
+(467)READ at 312: bigzork(1), ____________
+(477)PROCESS: bigzork(1) does op 1 then ____________
+(478)READ at 317: bigzork(1), ____________
+(488)PROCESS: bigzork(1) does op 1 then ____________
+(489)READ at 322: bigzork(1), ____________
+(499)PROCESS: bigzork(1) does op 1 then ____________
+(500)READ at 327: bigzork(1), ____________
+(510)PROCESS: bigzork(1) does op 1 then ____________
+(511)READ at 332: bigzork(1), ____________
+(521)PROCESS: bigzork(1) does op 1 then ____________
+(522)READ at 337: bigzork(1), ____________
+(532)PROCESS: bigzork(1) does op 1 then ____________
+(533)READ at 342: bigzork(1), ____________
+(543)PROCESS: bigzork(1) does op 1 then ____________
+(544)READ at 347: bigzork(1), ____________
+(554)PROCESS: bigzork(1) does op 1 then ____________
+(555)READ at 352: bigzork(1), ____________
+(565)PROCESS: bigzork(1) does op 1 then ____________
+(566)READ at 357: bigzork(1), ____________
+(576)PROCESS: bigzork(1) does op 1 then ____________
+(577)READ at 362: bigzork(1), ____________
+(587)PROCESS: bigzork(1) does op 1 then ____________
+(588)READ at 367: bigzork(1), ____________
+(598)PROCESS: bigzork(1) does op 1 then ____________
+(599)READ at 372: bigzork(1), ____________
+(609)PROCESS: bigzork(1) does op 1 then ____________
+(610)READ at 377: bigzork(1), ____________
+(620)PROCESS: bigzork(1) does op 1 then ____________
+(621)READ at 382: bigzork(1), ____________
+(631)PROCESS: bigzork(1) does op 1 then ____________
+(632)READ at 387: bigzork(1), ____________
+(642)PROCESS: bigzork(1) does op 1 then ____________
+(643)READ at 392: bigzork(1), ____________
+(653)PROCESS: bigzork(1) does op 1 then ____________
+(654)READ at 397: bigzork(1), ____________
+(664)PROCESS: bigzork(1) does op 1 then ____________
+(665)READ at 402: bigzork(1), ____________
+(675)PROCESS: bigzork(1) does op 1 then ____________
+(676)READ at 407: bigzork(1), ____________
+(686)PROCESS: bigzork(1) does op 1 then ____________
+(687)READ at 412: bigzork(1), ____________
+(697)PROCESS: bigzork(1) does op 1 then ____________
+(698)READ at 417: bigzork(1), ____________
+(708)PROCESS: bigzork(1) does op 1 then ____________
+(709)READ at 422: bigzork(1), ____________
+(719)PROCESS: bigzork(1) does op 1 then ____________
+(720)READ at 427: bigzork(1), ____________
+(740)PROCESS: bigzork(1) does op 9 then ____________
+(741)READ at 427: bigzork(1), ____________
+(761)PROCESS: bigzork(1) does op 9 then ____________
+(762)READ at 427: bigzork(1), ____________
+(782)PROCESS: bigzork(1) does op 9 then ____________
+(783)READ at 427: bigzork(1), ____________
+(803)PROCESS: bigzork(1) does op 9 then ____________
+(804)READ at 427: bigzork(1), ____________
+(824)PROCESS: bigzork(1) does op 9 then ____________
+(825)READ at 427: bigzork(1), ____________
+(845)PROCESS: bigzork(1) does op 9 then ____________
+(846)READ at 427: bigzork(1), ____________
+(866)PROCESS: bigzork(1) does op 9 then ____________
+(867)READ at 427: bigzork(1), ____________
+(887)PROCESS: bigzork(1) does op 9 then ____________
+(888)READ at 427: bigzork(1), ____________
+(908)PROCESS: bigzork(1) does op 9 then ____________
+(909)READ at 427: bigzork(1), ____________
+(929)PROCESS: bigzork(1) does op 9 then ____________
+(930)READ at 427: bigzork(1), ____________
+(950)PROCESS: bigzork(1) does op 9 then ____________
+(951)READ at 427: bigzork(1), ____________
+(971)PROCESS: bigzork(1) does op 9 then ____________
+(972)READ at 427: bigzork(1), ____________
+(992)PROCESS: bigzork(1) does op 9 then ____________
+(993)READ at 427: bigzork(1), ____________
+(1013)PROCESS: bigzork(1) does op 9 then ____________
+(1014)READ at 427: bigzork(1), ____________
+(1034)PROCESS: bigzork(1) does op 9 then ____________
+(1035)READ at 427: bigzork(1), ____________
+(1055)PROCESS: bigzork(1) does op 9 then ____________
+(1056)READ at 427: bigzork(1), ____________
+(1076)PROCESS: bigzork(1) does op 9 then ____________
+(1077)READ at 427: bigzork(1), ____________
+(1097)PROCESS: bigzork(1) does op 9 then ____________
+(1098)READ at 427: bigzork(1), ____________
+(1118)PROCESS: bigzork(1) does op 9 then ____________
+(1119)READ at 427: bigzork(1), ____________
+(1139)PROCESS: bigzork(1) does op 9 then ____________
+(1140)READ at 427: bigzork(1), ____________
+(1160)PROCESS: bigzork(1) does op 9 then ____________
+(1161)READ at 427: bigzork(1), ____________
+(1181)PROCESS: bigzork(1) does op 9 then ____________
+(1182)READ at 427: bigzork(1), ____________
+(1202)PROCESS: bigzork(1) does op 9 then ____________
+(1203)READ at 427: bigzork(1), ____________
+(1223)PROCESS: bigzork(1) does op 9 then ____________
+(1224)READ at 427: bigzork(1), ____________
+(1244)PROCESS: bigzork(1) does op 9 then ____________
+(1245)READ at 427: bigzork(1), ____________
+(1265)PROCESS: bigzork(1) does op 9 then ____________
+(1266)READ at 427: bigzork(1), ____________
+(1286)PROCESS: bigzork(1) does op 9 then ____________
+(1287)READ at 427: bigzork(1), ____________
+(1307)PROCESS: bigzork(1) does op 9 then ____________
+(1308)READ at 427: bigzork(1), ____________
+(1328)PROCESS: bigzork(1) does op 9 then ____________
+(1329)READ at 427: bigzork(1), ____________
+(1349)PROCESS: bigzork(1) does op 9 then ____________
+(1350)READ at 427: bigzork(1), ____________
+(1370)PROCESS: bigzork(1) does op 9 then ____________
+(1371)READ at 427: bigzork(1), ____________
+(1391)PROCESS: bigzork(1) does op 9 then ____________
+(1392)READ at 427: bigzork(1), ____________
+(1412)PROCESS: bigzork(1) does op 9 then ____________
+(1413)READ at 427: bigzork(1), ____________
+(1433)PROCESS: bigzork(1) does op 9 then ____________
+(1434)READ at 427: bigzork(1), ____________
+(1454)PROCESS: bigzork(1) does op 9 then ____________
+(1455)READ at 427: bigzork(1), ____________
+(1475)PROCESS: bigzork(1) does op 9 then ____________
+(1476)READ at 427: bigzork(1), ____________
+(1496)PROCESS: bigzork(1) does op 9 then ____________
+(1497)READ at 427: bigzork(1), ____________
+(1517)PROCESS: bigzork(1) does op 9 then ____________
+(1518)READ at 427: bigzork(1), cycle to die 1536 done
+____________
+(1538)PROCESS: bigzork(1) does op 9 then ____________
+(1539)READ at 427: bigzork(1), ____________
+(1559)PROCESS: bigzork(1) does op 9 then ____________
+(1560)READ at 427: bigzork(1), ____________
+(1580)PROCESS: bigzork(1) does op 9 then ____________
+(1581)READ at 427: bigzork(1), ____________
+(1601)PROCESS: bigzork(1) does op 9 then ____________
+(1602)READ at 427: bigzork(1), ____________
+(1622)PROCESS: bigzork(1) does op 9 then ____________
+(1623)READ at 427: bigzork(1), ____________
+(1643)PROCESS: bigzork(1) does op 9 then ____________
+(1644)READ at 427: bigzork(1), ____________
+(1664)PROCESS: bigzork(1) does op 9 then ____________
+(1665)READ at 427: bigzork(1), ____________
+(1685)PROCESS: bigzork(1) does op 9 then ____________
+(1686)READ at 427: bigzork(1), ____________
+(1706)PROCESS: bigzork(1) does op 9 then ____________
+(1707)READ at 427: bigzork(1), ____________
+(1727)PROCESS: bigzork(1) does op 9 then ____________
+(1728)READ at 427: bigzork(1), ____________
+(1748)PROCESS: bigzork(1) does op 9 then ____________
+(1749)READ at 427: bigzork(1), ____________
+(1769)PROCESS: bigzork(1) does op 9 then ____________
+(1770)READ at 427: bigzork(1), ____________
+(1790)PROCESS: bigzork(1) does op 9 then ____________
+(1791)READ at 427: bigzork(1), ____________
+(1811)PROCESS: bigzork(1) does op 9 then ____________
+(1812)READ at 427: bigzork(1), ____________
+(1832)PROCESS: bigzork(1) does op 9 then ____________
+(1833)READ at 427: bigzork(1), ____________
+(1853)PROCESS: bigzork(1) does op 9 then ____________
+(1854)READ at 427: bigzork(1), ____________
+(1874)PROCESS: bigzork(1) does op 9 then ____________
+(1875)READ at 427: bigzork(1), ____________
+(1895)PROCESS: bigzork(1) does op 9 then ____________
+(1896)READ at 427: bigzork(1), ____________
+(1916)PROCESS: bigzork(1) does op 9 then ____________
+(1917)READ at 427: bigzork(1), ____________
+(1937)PROCESS: bigzork(1) does op 9 then ____________
+(1938)READ at 427: bigzork(1), ____________
+(1958)PROCESS: bigzork(1) does op 9 then ____________
+(1959)READ at 427: bigzork(1), ____________
+(1979)PROCESS: bigzork(1) does op 9 then ____________
+(1980)READ at 427: bigzork(1), ____________
+(2000)PROCESS: bigzork(1) does op 9 then ____________
+(2001)READ at 427: bigzork(1), ____________
+(2021)PROCESS: bigzork(1) does op 9 then ____________
+(2022)READ at 427: bigzork(1), ____________
+(2042)PROCESS: bigzork(1) does op 9 then ____________
+(2043)READ at 427: bigzork(1), ____________
+(2063)PROCESS: bigzork(1) does op 9 then ____________
+(2064)READ at 427: bigzork(1), ____________
+(2084)PROCESS: bigzork(1) does op 9 then ____________
+(2085)READ at 427: bigzork(1), ____________
+(2105)PROCESS: bigzork(1) does op 9 then ____________
+(2106)READ at 427: bigzork(1), ____________
+(2126)PROCESS: bigzork(1) does op 9 then ____________
+(2127)READ at 427: bigzork(1), ____________
+(2147)PROCESS: bigzork(1) does op 9 then ____________
+(2148)READ at 427: bigzork(1), ____________
+(2168)PROCESS: bigzork(1) does op 9 then ____________
+(2169)READ at 427: bigzork(1), ____________
+(2189)PROCESS: bigzork(1) does op 9 then ____________
+(2190)READ at 427: bigzork(1), ____________
+(2210)PROCESS: bigzork(1) does op 9 then ____________
+(2211)READ at 427: bigzork(1), ____________
+(2231)PROCESS: bigzork(1) does op 9 then ____________
+(2232)READ at 427: bigzork(1), ____________
+(2252)PROCESS: bigzork(1) does op 9 then ____________
+(2253)READ at 427: bigzork(1), ____________
+(2273)PROCESS: bigzork(1) does op 9 then ____________
+(2274)READ at 427: bigzork(1), ____________
+(2294)PROCESS: bigzork(1) does op 9 then ____________
+(2295)READ at 427: bigzork(1), ____________
+(2315)PROCESS: bigzork(1) does op 9 then ____________
+(2316)READ at 427: bigzork(1), ____________
+(2336)PROCESS: bigzork(1) does op 9 then ____________
+(2337)READ at 427: bigzork(1), ____________
+(2357)PROCESS: bigzork(1) does op 9 then ____________
+(2358)READ at 427: bigzork(1), ____________
+(2378)PROCESS: bigzork(1) does op 9 then ____________
+(2379)READ at 427: bigzork(1), ____________
+(2399)PROCESS: bigzork(1) does op 9 then ____________
+(2400)READ at 427: bigzork(1), ____________
+(2420)PROCESS: bigzork(1) does op 9 then ____________
+(2421)READ at 427: bigzork(1), ____________
+(2441)PROCESS: bigzork(1) does op 9 then ____________
+(2442)READ at 427: bigzork(1), ____________
+(2462)PROCESS: bigzork(1) does op 9 then ____________
+(2463)READ at 427: bigzork(1), ____________
+(2483)PROCESS: bigzork(1) does op 9 then ____________
+(2484)READ at 427: bigzork(1), ____________
+(2504)PROCESS: bigzork(1) does op 9 then ____________
+(2505)READ at 427: bigzork(1), ____________
+(2525)PROCESS: bigzork(1) does op 9 then ____________
+(2526)READ at 427: bigzork(1), ____________
+(2546)PROCESS: bigzork(1) does op 9 then ____________
+(2547)READ at 427: bigzork(1), ____________
+(2567)PROCESS: bigzork(1) does op 9 then ____________
+(2568)READ at 427: bigzork(1), ____________
+(2588)PROCESS: bigzork(1) does op 9 then ____________
+(2589)READ at 427: bigzork(1), ____________
+(2609)PROCESS: bigzork(1) does op 9 then ____________
+(2610)READ at 427: bigzork(1), ____________
+(2630)PROCESS: bigzork(1) does op 9 then ____________
+(2631)READ at 427: bigzork(1), ____________
+(2651)PROCESS: bigzork(1) does op 9 then ____________
+(2652)READ at 427: bigzork(1), ____________
+(2672)PROCESS: bigzork(1) does op 9 then ____________
+(2673)READ at 427: bigzork(1), ____________
+(2693)PROCESS: bigzork(1) does op 9 then ____________
+(2694)READ at 427: bigzork(1), ____________
+(2714)PROCESS: bigzork(1) does op 9 then ____________
+(2715)READ at 427: bigzork(1), ____________
+(2735)PROCESS: bigzork(1) does op 9 then ____________
+(2736)READ at 427: bigzork(1), ____________
+(2756)PROCESS: bigzork(1) does op 9 then ____________
+(2757)READ at 427: bigzork(1), ____________
+(2777)PROCESS: bigzork(1) does op 9 then ____________
+(2778)READ at 427: bigzork(1), ____________
+(2798)PROCESS: bigzork(1) does op 9 then ____________
+(2799)READ at 427: bigzork(1), ____________
+(2819)PROCESS: bigzork(1) does op 9 then ____________
+(2820)READ at 427: bigzork(1), ____________
+(2840)PROCESS: bigzork(1) does op 9 then ____________
+(2841)READ at 427: bigzork(1), ____________
+(2861)PROCESS: bigzork(1) does op 9 then ____________
+(2862)READ at 427: bigzork(1), ____________
+(2882)PROCESS: bigzork(1) does op 9 then ____________
+(2883)READ at 427: bigzork(1), ____________
+(2903)PROCESS: bigzork(1) does op 9 then ____________
+(2904)READ at 427: bigzork(1), ____________
+(2924)PROCESS: bigzork(1) does op 9 then ____________
+(2925)READ at 427: bigzork(1), ____________
+(2945)PROCESS: bigzork(1) does op 9 then ____________
+(2946)READ at 427: bigzork(1), ____________
+(2966)PROCESS: bigzork(1) does op 9 then ____________
+(2967)READ at 427: bigzork(1), ____________
+(2987)PROCESS: bigzork(1) does op 9 then ____________
+(2988)READ at 427: bigzork(1), ____________
+(3008)PROCESS: bigzork(1) does op 9 then ____________
+(3009)READ at 427: bigzork(1), cycle to die 1486 done
+alive = 0
+cycle to die 1436 done
+cycle to die 1386 done
+cycle to die 1336 done
+cycle to die 1286 done
+cycle to die 1236 done
+cycle to die 1186 done
+cycle to die 1136 done
+cycle to die 1086 done
+cycle to die 1036 done
+cycle to die 986 done
+cycle to die 936 done
+cycle to die 886 done
+cycle to die 836 done
+cycle to die 786 done
+cycle to die 736 done
+cycle to die 686 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 636 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 586 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 536 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 486 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 436 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 386 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 336 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 286 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 236 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 186 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 136 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 86 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 36 done
+cycle to die 0 done
+alive = 0
+champ[bigzork]->last_live = 719 && ->process_live = 1
+winner[zork]->last_live = 68043 && ->process_live = 2
+le joueur 2(zork) à gagné

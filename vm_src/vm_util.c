@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 17:36:50 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:51:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 	while (i < size)
 	{
 		core->arena[(pos + i) % MEM_SIZE] = nb / div;
+
 		nb %= div;
 		div /= 256;
 		i++;
@@ -57,7 +58,6 @@ int		check_lives(t_core *core)
 	{
 		if (pr && !pr->alive)
 		{
-			ft_printf("alive = %d\n", pr->alive);
 			del_process(&prev, &pr);
 			core->sum_process--;
 		}

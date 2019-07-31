@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/30 17:38:09 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:51:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,13 @@ int main(int ac, char **av)
 	core->champs = 0;
 	core->proces = 0;
 	core->visu = 0;
-	ft_printf("on commence\n");
 	if (!(parcing_args(ac, av, core)))
 		return (0);
-	ft_printf("parcing good\n");
 	if (!(stock_champ(ac, av, core)))
 		return (0);
-	ft_printf("stockage good\n");
+	ft_printf("parsing ok\n");
 	//if (core->flag_v)
-		//init_visual(core);
+	//	init_visual(core);
 	vm(core);
 //	ft_printf("core->total cycle : %d\n", core->total_cycle);
 	free_core(core);

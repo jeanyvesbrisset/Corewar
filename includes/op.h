@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/30 17:06:01 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:51:06 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,6 +279,13 @@ int					get_indirect(t_core *core, t_proces *pr, int cursor);
 */
 
 void				init_visual(t_core *core);
+char				*get_hexa(int nb);
+void				visu_sti_st(t_core *core, t_proces *pr, int pos, int size);
+void				refresh_live(t_core *core);
+void				refresh_cycle_to_die(t_core *core);
+void				refresh_live_ctd(t_core *core);
+void				visual_every_cycle(t_core *core);
+void				refresh_process(t_core *core);
 
 /*
 ** op vm

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 15:35:10 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:51:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ t_champ	*get_winner(t_core *core)
 	t_champ	*winner;
 
 	winner = core->champs;
-	champ = core->champs->next;
+	champ = NULL;
+	if (core->champs->next)
+		champ = core->champs->next;
 	while (champ)
 	{
 		ft_printf("champ[%s]->last_live = %d && ->process_live = %d\n", champ->name, champ->last_live, champ->process_live);
-		ft_printf("winner[%s]->last_live = %d && ->process_live = %d\n", winner->name, winner->last_live, winner->process_live);
-		if (champ->last_live > winner->last_live
-			|| (champ->last_live == winner->last_live
-			&& champ->process_live < winner->process_live))
+		if (champ->last_live > winner->last_live || (champ->last_live == winner->last_live && champ->process_live < winner->process_live))
 			winner = champ;
 		champ = champ->next;
 	}
+	ft_printf("winner[%s]->last_live = %d && ->process_live = %d\n", winner->name, winner->last_live, winner->process_live);
 	return (winner);
 }
 

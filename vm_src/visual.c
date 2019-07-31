@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:51:33 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/30 16:52:08 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:51:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/op.h"
+#include "../includes/op.h" 
 
 /* CTD = cycle to die
 ** to refresh : 
@@ -24,8 +24,8 @@
 **		HUD		- Live breakdown for current period	--> chaque : live	/	CTD
 **		HUD		- Live breakdown for last period	--> chaque : CTD
 **		HUD		- CYCLE_TO_DIE						--> chaque : CTD
-**	recap :1 ft processes ✅ / 1 ft CTD qui appel la ft processes ✅ / 1 ft LIVE 
-** / 1 ft cycle ✅/ 1 ft sti_st
+**	recap :1 ft processes ✅ / 1 ft CTD qui appel la ft processes ✅ / 1 ft LIVE ✅
+** / 1 ft cycle ✅/ 1 ft sti_st ✅
 */
 
 char	*get_hexa(int nb)
@@ -154,13 +154,13 @@ void	init_color_vm(void)
 	start_color();
 	init_color(COLOR_WHITE, 300, 300, 300);
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
-	init_pair(2, COLOR_BLACK, COLOR_CYAN);
+	init_pair(2, COLOR_WHITE, COLOR_CYAN);
 	init_pair(3, COLOR_RED, COLOR_BLACK);
-	init_pair(4, COLOR_BLACK, COLOR_RED);
+	init_pair(4, COLOR_WHITE, COLOR_RED);
 	init_pair(5, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(6, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(6, COLOR_WHITE, COLOR_YELLOW);
 	init_pair(7, COLOR_BLUE, COLOR_BLACK);
-	init_pair(8, COLOR_BLACK, COLOR_BLUE);
+	init_pair(8, COLOR_WHITE, COLOR_BLUE);
 	init_pair(9, COLOR_WHITE, COLOR_BLACK);
 }
 
