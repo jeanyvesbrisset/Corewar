@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/31 12:51:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 17:46:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,17 @@ int		check_lives(t_core *core)
 void	reinit_cycle_lives(t_core *core)
 {
 	t_proces *pr;
+	t_champ *champ;
 
+	champ = core->champs;
 	core->tmp_cycle = 0;
 	core->nbr_live = 0;
 	pr = core->proces;
+	while (champ)
+	{
+		champ->live_by_ctd = 0;
+		champ = champ->next;
+	}
 	while (pr)
 	{
 		pr->alive = 0;

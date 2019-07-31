@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 16:38:52 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 17:51:29 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	refresh_live(t_core *core)
 		current = core->champs;
 		while (current->pos != i + 1)
 			current = current->next;
+		wattron(core->visu->hud, A_BOLD);
 		mvwprintw(core->visu->hud, 19 + (i * 4), 47, "by process ");
 		core->visu->str = ft_itoa(current->last_live);
 		mvwprintw(core->visu->hud, 19 + (i * 4), 40, core->visu->str);
@@ -92,6 +93,7 @@ void	refresh_live(t_core *core)
 		core->visu->str = ft_itoa(current->live_by_ctd);
 		mvwprintw(core->visu->hud, 20 + (i * 4), 40 , core->visu->str);
 		ft_strdel(&(core->visu->str));
+		wattroff(core->visu->hud, A_BOLD);
 		wattron(core->visu->hud, COLOR_PAIR(((i + 1) * 2) - 1));
 		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100) 
 				/ core->nbr_live && j < 100)
@@ -110,10 +112,12 @@ void	refresh_live(t_core *core)
 
 void	refresh_cycle_to_die(t_core *core)
 {
+	wattron(core->visu->hud, A_BOLD);
 	core->visu->str = ft_itoa(core->cycle_to_die);
 	mvwprintw(core->visu->hud, 26 + (core->champ_nb * 4), 20, core->visu->str);
 	mvwprintw(core->visu->hud, 26 + (core->champ_nb * 4)
 			, 20 + ft_strlen(core->visu->str), "    ");
+	wattroff(core->visu->hud, A_BOLD);
 	ft_strdel(&(core->visu->str));
 }
 
@@ -177,6 +181,7 @@ void	visual_every_cycle(t_core *core)
 		, 2 + ((pr->pc * 3) % 192), 2, A_NORMAL, (pr->champ * 2) - 1, 0);
 		pr = pr->next;
 	}
+	wattron(core->visu->hud, A_BOLD);
 	core->visu->str = ft_itoa(core->visu->cps);
 	mvwprintw(core->visu->hud, 11, 26, core->visu->str);
 	mvwprintw(core->visu->hud, 11, 26 + ft_strlen(core->visu->str), "    ");
@@ -184,6 +189,7 @@ void	visual_every_cycle(t_core *core)
 	core->visu->str = ft_itoa(core->total_cycle);
 	mvwprintw(core->visu->hud, 13, 13, core->visu->str);
 	ft_strdel(&(core->visu->str));
+	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
 	getch();
 }
