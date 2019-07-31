@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/29 14:50:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 17:34:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	get_indirect(t_core *core, t_proces *pr, int cursor)
 	int param;
 
 	if (pr->op != 13 || pr->op != 14 || pr->op != 15)
-		param = pr->pc + (ft_otoi(&(core->arena[cursor]), 2) % IDX_MOD);
+		param = ft_otoi(&(core->arena[cursor]), 2) % IDX_MOD;
 	else
-		param = pr->pc + (ft_otoi(&(core->arena[cursor]), 2));
+		param = ft_otoi(&(core->arena[cursor]), 2);
 	return (param);
 }
 

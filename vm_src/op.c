@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/31 12:51:56 by maginist         ###   ########.fr       */
+/*   Updated: 2019/07/31 17:37:00 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	vm_st(t_core *core, t_proces *pr)
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
+	param_2 %= IDX_MOD;
 	if (pr->params[0] != REG_CODE
 		&& (pr->params[1] != REG_CODE || pr->params[1] != IND_CODE))
 		return ;
@@ -194,10 +195,11 @@ void	vm_st(t_core *core, t_proces *pr)
 	}
 	else if (pr->params[1] == IND_CODE)
 	{
-		ft_itoo_vm(core, pr->pc + (param_2 % IDX_MOD), param_1, 4);
-		ft_printf("st ecrit ici : %d et il ecrit ca %d\n", pr->pc + (param_2 % IDX_MOD), param_1);
+		ft_itoo_vm(core, pr->pc + param_2, param_1, 4);
+		//ft_printf("Param_2 dans st = %d\n", param_2);
+		ft_printf("st ecrit ici : %d(pc : %d + p2 : %d) et il ecrit ca %d\n", pr->pc + param_2, pr->pc, param_2, param_1);
 		if (core->flag_v)
-			visu_sti_st(core, pr, pr->pc + (param_2 % IDX_MOD), 4);
+			visu_sti_st(core, pr, pr->pc + param_2, 4);
 	}
 }
 
