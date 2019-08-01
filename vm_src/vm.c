@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/01 11:50:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:48:33 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void	vm(t_core *core)
 	init_vm(core);
 	run_vm(core);
 	winner = get_winner(core);
+	if (core->flag_v)
+	{
+		wattron(core->visu->hud, COLOR_PAIR(winner->pos));
+		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40, winner->name);
+		wattroff(core->visu->hud, COLOR_PAIR(winner->pos));
+		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40 + ft_strlen(winner->name) + 1, "IS THE WINNER!!");
+		getch();
+		endwin();
+	}
 	// ft_printf("le joueur %d(%s) à gagné\n", winner->pos, winner->name);
 }
 
