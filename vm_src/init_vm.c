@@ -21,8 +21,6 @@ static void	cpy_champs(t_core *core)
 	champ = core->champs;
 	while (champ)
 	{
-		champ->last_live = 0;
-		champ->process_live = 0;
 		i = champ->byte_start;
 		j = 0;
 		while (j < champ->size)
@@ -66,6 +64,9 @@ void		init_vm(t_core *core)
 				champ->next->byte_start = champ->byte_start - gap;
 		}
 		init_pc(core, champ);
+		champ->live_by_ctd = 0;
+		champ->last_live = 0;
+		champ->process_live = 0;
 		champ = champ->next;
 	}
 	ft_bzero(core->arena, MEM_SIZE);

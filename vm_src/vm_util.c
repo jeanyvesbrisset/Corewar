@@ -56,7 +56,7 @@ int		check_lives(t_core *core)
 	res = 0;
 	while (pr)
 	{
-		if (pr && !pr->alive)
+		if (!pr->alive)
 		{
 			del_process(&prev, &pr);
 			core->sum_process--;
@@ -73,8 +73,8 @@ int		check_lives(t_core *core)
 
 void	reinit_cycle_lives(t_core *core)
 {
-	t_proces *pr;
-	t_champ *champ;
+	t_proces	*pr;
+	t_champ		*champ;
 
 	champ = core->champs;
 	core->tmp_cycle = 0;

@@ -202,6 +202,6 @@ void	visual_every_cycle(t_core *core)
 	ft_strdel(&(core->visu->str));
 	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
-	//usleep(10000);
+	// usleep(10000);
 	getch();
 }

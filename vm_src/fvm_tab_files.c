@@ -51,12 +51,8 @@ int		read_op(t_core *core, t_proces *pr)
 {
 	pr->op = core->arena[pr->pc];
 	if (pr->op < 1 || pr->op > 16)
-	{
-		// ft_printf("INVALID op\n");	
-		return (0); // to do, prendre en compte cette erreur
-	}
+		return (0);
 	pr->wait = core->total_cycle + g_fvm_tab[pr->op - 1].cycle_delay;
-	// ft_printf("op = %d, wait until = %d\n", pr->op, pr->wait);
     return (1);
 }
 

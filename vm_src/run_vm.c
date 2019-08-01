@@ -44,8 +44,8 @@ int		run_cycles_to_die(t_core *core)
 	{
 		if (!pr->wait || pr->wait < core->total_cycle)
 		{
-			// if (pr->champ == 1)
-				// ft_printf("____________\n(%d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
+			// ft_printf("____________\n(%d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
+			// ft_printf("cycle to die = %d, \n", core->cycle_to_die);
 			if (!read_op(core, pr))
 				pr->pc = (pr->pc + 1) % MEM_SIZE;
 			if (core->flag_v)
@@ -53,7 +53,6 @@ int		run_cycles_to_die(t_core *core)
 		}
 		else if (pr->wait == core->total_cycle)
 		{
-			// if (pr->champ == 1)
 			// ft_printf("____________\n(%d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
 			handle_proces(core, pr);
 		}
@@ -77,12 +76,12 @@ void	run_vm(t_core *core)
 		init_visual(core);
 	while (run_cycles_to_die(core) && core->cycle_to_die > 0)
 	{
+		// ft_printf("____ CYCLE TO DIE _____ \n");
+		// ft_printf("ndr live = %d, max check = %d \n", core->nbr_live, core->max_checks);
+		// ft_printf("____ +*+*+*+*+*+*+ _____ \n");
 		if (!check_lives(core))
-		{
-			// ft_printf("tout le monde est mort\n");
 			break ;
-		}
-		else if (core->nbr_live >= NBR_LIVE || core->max_checks >= MAX_CHECKS)
+		if (core->nbr_live >= NBR_LIVE || core->max_checks >= MAX_CHECKS)
 		{
 			core->cycle_to_die -= CYCLE_DELTA;
 			core->max_checks = 0;
@@ -95,5 +94,5 @@ void	run_vm(t_core *core)
 			refresh_live_ctd(core);
 		reinit_cycle_lives(core);
 	}
-	//check_lives(core);
+	check_lives(core);
 }

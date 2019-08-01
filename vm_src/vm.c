@@ -42,9 +42,9 @@ void	vm(t_core *core)
 	if (core->flag_v)
 	{
 		wattron(core->visu->hud, COLOR_PAIR(winner->pos));
-		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40, winner->name);
+		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40, (const char*)winner->name);
 		wattroff(core->visu->hud, COLOR_PAIR(winner->pos));
-		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40 + ft_strlen(winner->name) + 1, "IS THE WINNER!!");
+		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40 + ft_strlen((const char*)winner->name) + 1, "IS THE WINNER!!");
 		getch();
 		endwin();
 	}

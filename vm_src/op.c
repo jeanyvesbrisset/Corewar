@@ -36,14 +36,14 @@ void	vm_live(t_core *core, t_proces *pr)
 	pr->alive = 1;
 	if (champ && pr->params[0] == DIR_CODE)
 	{
+		core->nbr_live++;
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
-		//ft_printf("un processus dit que le joueur %d(%s) est en vie\n", champ_nb, champ->name);
-		core->nbr_live++;
+		// ft_printf("un processus dit que le joueur %d(%s) est en vie\n", champ_nb, champ->name);
 		champ->live_by_ctd++;
 		if (core->flag_v)
 			refresh_live(core);
-	}	
+	}			
 }
 
 /*
@@ -134,16 +134,15 @@ void	vm_sub(t_core *core, t_proces *pr)
 ** saute a l'adresse passee en param 1 si le carry est a 1
 */
 
-void	vm_zjmp(t_core *core, t_proces *pr) // ⚠️ si zjmp echou, reste bloque sur lui meme ⚠️
+void	vm_zjmp(t_core *core, t_proces *pr)
 {
 	int	param_1;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
 	if (pr->carry && pr->params[0] == DIR_CODE)
-	{
 		pr->pc = (pr->pc + param_1) % MEM_SIZE;
-		//// ft_printf("ZJMP execution\n");
-	}
+	else
+		pr->pc = (pr->pc + pr->pc_jump) % MEM_SIZE;
 }
 
 /*
