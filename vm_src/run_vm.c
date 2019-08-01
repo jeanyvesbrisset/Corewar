@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_vm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/31 12:55:17 by floblanc         ###   ########.fr       */
+/*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
+/*   Updated: 2019/08/01 11:53:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,16 @@ int		run_cycles_to_die(t_core *core)
 		if (!pr->wait || pr->wait < core->total_cycle)
 		{
 			// if (pr->champ == 1)
-				ft_printf("____________\n(%d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
+				// ft_printf("____________\n(%d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
 			if (!read_op(core, pr))
 				pr->pc = (pr->pc + 1) % MEM_SIZE;
+			if (core->flag_v)
+				refresh_pc(core);
 		}
 		else if (pr->wait == core->total_cycle)
 		{
 			// if (pr->champ == 1)
-			ft_printf("____________\n(%d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
+			// ft_printf("____________\n(%d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
 			handle_proces(core, pr);
 		}
 		if (pr->next)
@@ -77,7 +79,7 @@ void	run_vm(t_core *core)
 	{
 		if (!check_lives(core))
 		{
-			ft_printf("tout le monde est mort\n");
+			// ft_printf("tout le monde est mort\n");
 			break ;
 		}
 		else if (core->nbr_live >= NBR_LIVE || core->max_checks >= MAX_CHECKS)

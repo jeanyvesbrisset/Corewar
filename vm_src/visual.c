@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:51:33 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/01 01:40:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:35:48 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	create_player_hud(t_core *core, int *i)
 			current = current->next;
 		mvwprintw(core->visu->hud, 18 + ((*i) * 4), 5, "Player   :");
 		mvwprintw(core->visu->hud, 18 + ((*i) * 4), 12, core->visu->str);
-		wattron(core->visu->hud, COLOR_PAIR(((*i) + 1) * 2) - 1);
+		wattron(core->visu->hud, COLOR_PAIR((*i) + 1));
 		mvwprintw(core->visu->hud, 18 + ((*i) * 4), 18, (char*)current->name);
-		wattroff(core->visu->hud, COLOR_PAIR(((*i) + 1) * 2) - 1);
+		wattroff(core->visu->hud, COLOR_PAIR(((*i) + 1)));
 		mvwprintw(core->visu->hud, 19 + ((*i) * 4), 7, "Last live :\t\t\t0");
 		mvwprintw(core->visu->hud, 20 + ((*i) * 4), 7
 		, "live in current period :\t\t0");
@@ -127,10 +127,12 @@ void	init_champ_in_visu(t_core *core, int k)
 
 	while (k < 4096 * 3)
 	{
-		core->visu->color_arena[k / 3] = 0;
+		core->visu->color_arena[k / 3] = 9;
 		core->visu->str = get_hexa(core->arena[k / 3]);
 		mvwprintw(core->visu->arena, 1 + (k / 192), 2 + (k % 192)
 		, core->visu->str);
+		mvwchgat(core->visu->arena, 1 + (k / 192), 2 + (k % 192), 2
+		, A_BOLD, 9, 0);
 		mvwprintw(core->visu->arena, 1 + (k / 192), 4 + (k % 192), " ");
 		ft_strdel(&(core->visu->str));
 		k += 3;
@@ -144,7 +146,7 @@ void	init_champ_in_visu(t_core *core, int k)
 		{
 			core->visu->color_arena[i / 3] = current->pos;
 			mvwchgat(core->visu->arena, 1 + (i / 192), 2 + (i % 192)
-				, 2, 0, (current->pos * 2) - 1, 0);
+				, 2, 0, current->pos, 0);
 			i += 3;
 		}
 		current = current->next;
@@ -154,16 +156,15 @@ void	init_champ_in_visu(t_core *core, int k)
 void	init_color_vm(void)
 {
 	start_color();
-	init_color(COLOR_WHITE, 300, 300, 300);// a virer et initialiser les 0 a A_DIM (et c'est tout ca marche)
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
-	init_pair(2, COLOR_WHITE, COLOR_CYAN);
-	init_pair(3, COLOR_RED, COLOR_BLACK);
-	init_pair(4, COLOR_WHITE, COLOR_RED);
-	init_pair(5, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(6, COLOR_WHITE, COLOR_YELLOW);
-	init_pair(7, COLOR_BLUE, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(4, COLOR_BLUE, COLOR_BLACK);
+	init_pair(5, COLOR_WHITE, COLOR_CYAN);
+	init_pair(6, COLOR_WHITE, COLOR_RED);
+	init_pair(7, COLOR_WHITE, COLOR_YELLOW);
 	init_pair(8, COLOR_WHITE, COLOR_BLUE);
-	init_pair(9, COLOR_WHITE, COLOR_BLACK);
+	init_pair(9, COLOR_BLACK, COLOR_BLACK);
 }
 
 void	init_visual(t_core *core)
@@ -182,9 +183,7 @@ void	init_visual(t_core *core)
 	refresh();
 	box(core->visu->arena, 0, 0);
 	box(core->visu->hud, 0, 0);
-	wattron(core->visu->arena, COLOR_PAIR(9));
 	init_champ_in_visu(core, i);
-	wattroff(core->visu->arena, COLOR_PAIR(9));
 	wrefresh(core->visu->arena);
 	init_visual_hud(core);
 	getch();

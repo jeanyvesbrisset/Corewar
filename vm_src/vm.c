@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/31 12:51:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:50:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_champ	*get_winner(t_core *core)
 		champ = core->champs->next;
 	while (champ)
 	{
-		ft_printf("champ[%s]->last_live = %d && ->process_live = %d\n", champ->name, champ->last_live, champ->process_live);
+		// ft_printf("champ[%s]->last_live = %d && ->process_live = %d\n", champ->name, champ->last_live, champ->process_live);
 		if (champ->last_live > winner->last_live || (champ->last_live == winner->last_live && champ->process_live < winner->process_live))
 			winner = champ;
 		champ = champ->next;
 	}
-	ft_printf("winner[%s]->last_live = %d && ->process_live = %d\n", winner->name, winner->last_live, winner->process_live);
+	// ft_printf("winner[%s]->last_live = %d && ->process_live = %d\n", winner->name, winner->last_live, winner->process_live);
 	return (winner);
 }
 
@@ -39,7 +39,7 @@ void	vm(t_core *core)
 	init_vm(core);
 	run_vm(core);
 	winner = get_winner(core);
-	ft_printf("le joueur %d(%s) à gagné\n", winner->pos, winner->name);
+	// ft_printf("le joueur %d(%s) à gagné\n", winner->pos, winner->name);
 }
 
 /*

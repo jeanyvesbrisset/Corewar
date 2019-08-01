@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/31 12:51:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:35:49 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int main(int ac, char **av)
 		return (0);
 	if (!(stock_champ(ac, av, core)))
 		return (0);
-	ft_printf("parsing ok\n");
+	// ft_printf("parsing ok\n");
 	//if (core->flag_v)
 	//	init_visual(core);
 	vm(core);

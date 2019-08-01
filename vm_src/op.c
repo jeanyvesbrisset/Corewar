@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/31 17:37:00 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:35:49 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	vm_live(t_core *core, t_proces *pr)
 	{
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
-		ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
-			champ_nb, champ->name);
+		//ft_printf("un processus dit que le joueur %d(%s) est en vie\n", champ_nb, champ->name);
 		core->nbr_live++;
 		champ->live_by_ctd++;
 		if (core->flag_v)
@@ -135,7 +134,7 @@ void	vm_sub(t_core *core, t_proces *pr)
 ** saute a l'adresse passee en param 1 si le carry est a 1
 */
 
-void	vm_zjmp(t_core *core, t_proces *pr)
+void	vm_zjmp(t_core *core, t_proces *pr) // ⚠️ si zjmp echou, reste bloque sur lui meme ⚠️
 {
 	int	param_1;
 
@@ -143,7 +142,7 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 	if (pr->carry && pr->params[0] == DIR_CODE)
 	{
 		pr->pc = (pr->pc + param_1) % MEM_SIZE;
-		ft_printf("ZJMP execution\n");
+		//// ft_printf("ZJMP execution\n");
 	}
 }
 
@@ -197,7 +196,7 @@ void	vm_st(t_core *core, t_proces *pr)
 	{
 		ft_itoo_vm(core, pr->pc + param_2, param_1, 4);
 		//ft_printf("Param_2 dans st = %d\n", param_2);
-		ft_printf("st ecrit ici : %d(pc : %d + p2 : %d) et il ecrit ca %d\n", pr->pc + param_2, pr->pc, param_2, param_1);
+		//ft_printf("st ecrit ici : %d(pc : %d + p2 : %d) et il ecrit ca %d\n", pr->pc + param_2, pr->pc, param_2, param_1);
 		if (core->flag_v)
 			visu_sti_st(core, pr, pr->pc + param_2, 4);
 	}
@@ -257,7 +256,7 @@ void	vm_aff(t_core *core, t_proces *pr)
 	if (pr->params[0] != REG_CODE)
 		return ;
 	param %= 256;
-	ft_printf("%c\n", param);
+	//// ft_printf("%c\n", param);
 }
 
 void	vm_sub_fork(t_core *core, t_proces *pr, int l)
@@ -310,7 +309,7 @@ void	vm_and(t_core *core, t_proces *pr)
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
 	{
-		ft_printf("ZORK EST DANS AND\n");
+	//	// ft_printf("ZORK EST DANS AND\n");
 		pr->r[index_3 - 1] = param_1 & param_2;
 		pr->carry = (!pr->carry ? 1 : 0);
 	}
