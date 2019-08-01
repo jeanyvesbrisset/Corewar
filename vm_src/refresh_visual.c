@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/01 12:22:32 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:39:17 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,6 @@ void	visual_every_cycle(t_core *core)
 	ft_strdel(&(core->visu->str));
 	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
-	usleep(10000);
-	//getch();
+	//usleep(10000);
+	getch();
 }
