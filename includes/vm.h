@@ -14,7 +14,7 @@
 # define VM_H
 # include "op.h"
 
-//op , cycle_delay, param_nb, direct_size, function;
+//op , ocp, cycle_delay, param_nb, direct_size, function;
 
 t_fvm		g_fvm_tab[] =
 {

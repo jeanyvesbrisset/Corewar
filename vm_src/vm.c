@@ -45,6 +45,7 @@ void	vm(t_core *core)
 		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40, (const char*)winner->name);
 		wattroff(core->visu->hud, COLOR_PAIR(winner->pos));
 		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40 + ft_strlen((const char*)winner->name) + 1, "IS THE WINNER!!");
+		wrefresh(core->visu->hud);
 		getch();
 		endwin();
 	}

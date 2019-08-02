@@ -41,10 +41,9 @@ void	handle_proces(t_core *core, t_proces *pr)
 		ocp = core->arena[pr->pc + 1];
 	read_ocp(pr, ocp);
 	pr->pc_jump = get_pr_length(pr, pr->op);
-	g_fvm_tab[pr->op - 1].f(core, pr);//fonctions respectives a chaque instruction a coder
+	g_fvm_tab[pr->op - 1].f(core, pr);
 	if (pr->op != 9)
 		pr->pc = (pr->pc + pr->pc_jump) % MEM_SIZE;
-	// ft_printf("jump = %d, new pc = %d\n", pr->pc_jump, pr->pc);
 }
 
 int		read_op(t_core *core, t_proces *pr)

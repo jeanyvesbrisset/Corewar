@@ -37,10 +37,10 @@ void	read_ocp(t_proces *pr, int ocp)
 
 int		run_cycles_to_die(t_core *core)
 {
-	t_proces *pr;
+	t_proces	*pr;
 
 	pr = core->proces;
-	while (core->tmp_cycle < core->cycle_to_die)
+	while (core->tmp_cycle < core->cycle_to_die && pr)
 	{
 		if (!pr->wait || pr->wait < core->total_cycle)
 		{
@@ -55,6 +55,10 @@ int		run_cycles_to_die(t_core *core)
 		{
 			// ft_printf("____________\n(%d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
 			handle_proces(core, pr);
+			if (!read_op(core, pr))
+				pr->pc = (pr->pc + 1) % MEM_SIZE;
+			if (core->flag_v)
+				refresh_pc(core);
 		}
 		if (pr->next)
 			pr = pr->next;
@@ -77,14 +81,15 @@ void	run_vm(t_core *core)
 	while (run_cycles_to_die(core) && core->cycle_to_die > 0)
 	{
 		// ft_printf("____ CYCLE TO DIE _____ \n");
-		// ft_printf("ndr live = %d, max check = %d \n", core->nbr_live, core->max_checks);
+		// ft_printf("nbr live = %d, max check = %d \n", core->nbr_live, core->max_checks);
 		// ft_printf("____ +*+*+*+*+*+*+ _____ \n");
 		if (!check_lives(core))
 			break ;
-		if (core->nbr_live >= NBR_LIVE || core->max_checks >= MAX_CHECKS)
+		if (core->nbr_live >= NBR_LIVE || core->max_checks == MAX_CHECKS)
 		{
+			// ft_printf("cycle to die decrease %d\n", core->cycle_to_die);
 			core->cycle_to_die -= CYCLE_DELTA;
-			core->max_checks = 0;
+			core->max_checks = 1;
 			if (core->flag_v)
 				refresh_cycle_to_die(core);
 		}
@@ -92,7 +97,13 @@ void	run_vm(t_core *core)
 			core->max_checks++;
 		if (core->flag_v)
 			refresh_live_ctd(core);
+		// ft_printf("*+*++*+*+**+*+*+*+*+*+*+*+*++*+**+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+\n");
+		// ft_printf("(%d)\n", core->total_cycle);
+		// ft_printf("bigzork has done %d lives,", get_champ(core, 1)->live_by_ctd);
+		// ft_printf("zork has done %d lives \n",  get_champ(core, 2)->live_by_ctd);
+		// ft_printf("for a total of: %d \n",  core->nbr_live);
 		reinit_cycle_lives(core);
 	}
+	ft_printf("total cycle = %d\n", core->total_cycle);
 	check_lives(core);
 }
