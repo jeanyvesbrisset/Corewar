@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/01 12:48:33 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/02 16:45:59 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,17 @@ void	vm(t_core *core)
 	winner = get_winner(core);
 	if (core->flag_v)
 	{
+
 		wattron(core->visu->hud, COLOR_PAIR(winner->pos));
 		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40, (const char*)winner->name);
 		wattroff(core->visu->hud, COLOR_PAIR(winner->pos));
+		wattron(core->visu->hud, A_BOLD);
+		core->visu->str = ft_itoa(core->total_cycle);
+		mvwprintw(core->visu->hud, 13, 13, core->visu->str);
+		ft_strdel(&(core->visu->str));
 		mvwprintw(core->visu->hud, 40 + (core->champ_nb * 4), 40 + ft_strlen((const char*)winner->name) + 1, "IS THE WINNER!!");
+		mvwprintw(core->visu->hud, 26 + (core->champ_nb * 4), 20, "0       ");
+		wattron(core->visu->hud, A_BOLD);
 		wrefresh(core->visu->hud);
 		getch();
 		endwin();

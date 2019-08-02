@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/30 17:26:39 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/02 16:09:30 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void		init_vm(t_core *core)
 	core->nbr_live = 0;
 	core->total_cycle = 0;
 	core->cycle_to_die = CYCLE_TO_DIE;
-	core->max_checks = 0;
+	core->max_checks = 1;
 }
