@@ -6,11 +6,38 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/02 16:09:12 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/05 11:07:38 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+int		print_arena_dump(t_core *core)
+{
+	int i;
+	char *str;
+
+	i = 0;
+	while (i < 4096)
+	{
+		if (i == 0)
+			ft_printf("0x000%x : ", i);
+		str = get_hexa((int)(core->arena[i]));
+		ft_printf("%s ", str);
+		ft_strdel(&str);
+		if (i != 0 && (i % 64) == 63 && i != 4095)
+		{
+			if (i != 63 && i != 127 && i != 191) 
+				ft_printf("\n0x0%x : ", i + 1);
+			else
+				ft_printf("\n0x00%x : ", i + 1);
+		}
+		i++;
+	}
+	ft_printf("\n");
+	core->flag_d = -2;
+	return (0);
+}
 
 void	read_ocp(t_proces *pr, int ocp)
 {
@@ -66,6 +93,8 @@ int		run_cycles_to_die(t_core *core)
 		{
 			if (core->flag_v)
 				visual_every_cycle(core);
+			else if (core->flag_d >= 0 && core->flag_d == core->total_cycle)
+				return (print_arena_dump(core));
 			pr = core->proces;
 			core->total_cycle++;
 			core->tmp_cycle++;
