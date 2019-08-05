@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/07/31 17:46:09 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:41:20 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	del_process(t_proces **proces, int i)
 
 	pr = *proces;
 	j = 0;
-	prev = NULL;
+	tmp = 0;
+	prev = 0;
 	if (!i)
 	{
 		tmp = *proces;
@@ -71,7 +72,6 @@ void	del_process(t_proces **proces, int i)
 int		check_lives(t_core *core)
 {
 	t_proces	*pr;
-	t_proces	*prev;
 	int			i;
 
 	pr = core->proces;

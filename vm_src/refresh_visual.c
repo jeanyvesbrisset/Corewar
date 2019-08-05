@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/05 11:17:38 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:35:57 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	refresh_live(t_core *core)
 		ft_strdel(&(core->visu->str));
 		wattroff(core->visu->hud, A_BOLD);
 		wattron(core->visu->hud, COLOR_PAIR(i + 1));
-		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100)
+		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100) 
 				/ core->nbr_live && j < 100)
 			mvwprintw(core->visu->hud, 20 + (core->champ_nb * 4), 6 + j++, "-");
 		if ((((current->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
@@ -142,7 +142,7 @@ void	refresh_live_ctd(t_core *core)
 		, "live in current period :\t\t0       ");
 		wattroff(core->visu->hud, A_BOLD);
 		wattron(core->visu->hud, COLOR_PAIR(i + 1));
-		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100)
+		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100) 
 				/ core->nbr_live && j < 100)
 			mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + j++, "-");
 		if ((((current->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
@@ -166,7 +166,7 @@ void	refresh_live_ctd(t_core *core)
 void	refresh_pc(t_core *core)
 {
 	t_proces	*pr;
-
+	
 	pr = core->proces;
 	while (pr)
 	{
@@ -185,7 +185,7 @@ void	refresh_pc(t_core *core)
 			mvwchgat(core->visu->arena, 1 + ((pr->pc * 3) / 192)
 			, 2 + ((pr->pc * 3) % 192), 2, A_BOLD
 			, core->visu->color_arena[pr->pc], 0);
-
+		
 		pr = pr->next;
 	}
 }
@@ -193,15 +193,10 @@ void	refresh_pc(t_core *core)
 void	visual_every_cycle(t_core *core)
 {
 	wattron(core->visu->hud, A_BOLD);
-	core->visu->str = ft_itoa(core->visu->cps);
-	mvwprintw(core->visu->hud, 11, 26, core->visu->str);
-	mvwprintw(core->visu->hud, 11, 26 + ft_strlen(core->visu->str), "    ");
-	ft_strdel(&(core->visu->str));
 	core->visu->str = ft_itoa(core->total_cycle);
 	mvwprintw(core->visu->hud, 13, 13, core->visu->str);
 	ft_strdel(&(core->visu->str));
 	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
-	// usleep(10000);
-	//getch();
+	get_key(core);
 }

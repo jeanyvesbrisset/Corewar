@@ -6,7 +6,7 @@
 #    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/08/05 12:56:36 by jbrisset         ###   ########.fr        #
+#    Updated: 2019/08/05 13:38:52 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ OBJ_NAME1 = $(SRCS1:.c=.o)
 OBJ_NAME2 = $(SRCS2:.c=.o)
 LIB = libprintf/
 CC = gcc
-CFLAGS = #-Wall -Werror -Wextra -g3 #//////G3\\\\\\#
+CFLAGS = -Wall -Werror -Wextra -g3 #//////G3\\\\\\#
 INC = -I./includes
 SRC1 = $(addprefix $(SRC_PATH1)/,$(SRCS1))
 OBJ1 = $(addprefix $(OBJ_PATH1)/,$(OBJ_NAME1))

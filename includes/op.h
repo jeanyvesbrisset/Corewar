@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/01 12:35:49 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:37:32 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,7 @@ void				refresh_live_ctd(t_core *core);
 void				visual_every_cycle(t_core *core);
 void				refresh_process(t_core *core);
 void				refresh_pc(t_core *core);
+void				get_key(t_core *core);
 
 /*
 ** op vm

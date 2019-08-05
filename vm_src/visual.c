@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:51:33 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/05 11:19:53 by jbrisset         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:30:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,58 @@
 **	recap :1 ft processes ✅ / 1 ft CTD qui appel la ft processes ✅ / 1 ft LIVE ✅
 ** / 1 ft cycle ✅/ 1 ft sti_st ✅
 */
+
+void 	modif_cps(t_core *core, int to_add)
+{
+		core->visu->cps += to_add;
+		if (core->visu->cps > 1000)
+			core->visu->cps = 1000;
+		else if (core->visu->cps < 1)
+			core->visu->cps = 1;
+		wattron(core->visu->hud, A_BOLD);
+		core->visu->str = ft_itoa(core->visu->cps);
+		mvwprintw(core->visu->hud, 11, 26, core->visu->str);
+		mvwprintw(core->visu->hud, 11, 26 + ft_strlen(core->visu->str), "    ");
+		ft_strdel(&(core->visu->str));
+		wrefresh(core->visu->hud);
+}
+
+void	get_key(t_core *core)
+{
+	int	i;
+	static int pause = 1;
+	
+	while (1)
+	{
+		timeout(0);
+		if ((i = getch()) == ' ')
+		{
+			wattron(core->visu->hud, A_BOLD);
+			mvwprintw(core->visu->hud, 5, 45, "**   PAUSE   **");
+			wrefresh(core->visu->hud);
+			pause *= -1;
+			wattroff(core->visu->hud, A_BOLD);
+		}
+		else if (i == 'r' && core->visu->cps < 1000)
+			modif_cps(core, 10);
+		else if (i == 'e' && core->visu->cps < 1000)
+			modif_cps(core, 1);
+		else if (i == 'w' && core->visu->cps > 1)
+			modif_cps(core, -1);
+		else if (i == 'q' && core->visu->cps > 1)
+			modif_cps(core, -10);
+		if (pause == -1)
+		{
+			wattron(core->visu->hud, A_BOLD);
+			mvwprintw(core->visu->hud, 5, 45, "**  RUNNING  **");
+			wrefresh(core->visu->hud);	
+			wattroff(core->visu->hud, A_BOLD);
+			break;
+		}
+	}
+	timeout(500);
+	usleep(1000000 / core->visu->cps);
+}
 
 char	*get_hexa(int nb)
 {
@@ -100,7 +152,7 @@ void	init_visual_hud(t_core *core)
 
 	i = 0;
 	wattron(core->visu->hud, A_BOLD);
-	mvwprintw(core->visu->hud, 5, 45, "**  BETA_TEST  **");
+	mvwprintw(core->visu->hud, 5, 45, "**   PAUSE   **");
 	mvwprintw(core->visu->hud, 11, 5, "Cycle/second limit : 50");
 	mvwprintw(core->visu->hud, 13, 5, "Cycle : 0");
 	mvwprintw(core->visu->hud, 15, 5, "Processes :");
@@ -176,6 +228,7 @@ void	init_visual(t_core *core)
 		return ;
 	initscr();
 	noecho();
+	timeout(500);
 	curs_set(0);
 	init_color_vm();
 	core->visu->arena = newwin(66, 195, 0, 0);
@@ -183,8 +236,9 @@ void	init_visual(t_core *core)
 	refresh();
 	box(core->visu->arena, 0, 0);
 	box(core->visu->hud, 0, 0);
+	core->visu->cps = 50;
 	init_champ_in_visu(core, i);
 	wrefresh(core->visu->arena);
 	init_visual_hud(core);
-//	getch();
+	get_key(core);// a mettre en commentaire si tu veux que le visu soit rapide
 }
