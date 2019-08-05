@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/01 12:35:49 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:33:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,11 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	t_proces *new;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	new = (t_proces*)malloc(sizeof(t_proces) * 1);
+	if (!(new = (t_proces*)malloc(sizeof(t_proces) * 1)))
+		return ;
 	new->champ = pr->champ;
+	new->wait = 0;
+	new->alive = 0;
 	new->proces_nb = core->proces->proces_nb + 1;
 	core->sum_process++;
 	i = -1;

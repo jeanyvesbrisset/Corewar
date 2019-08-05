@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gest_champ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:40:16 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/25 16:57:51 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:31:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ int		init_process(t_proces **proce, int champ_nb, int pc, int *sum_process)
 	pro->proces_nb = champ_nb;
 	pro->carry = 0;
 	pro->pc = pc;
-	pro->alive = 1;
+	pro->alive = 0;
+	pro->wait = 0;
 	i = 0;
 	while (i < 16)
 		pro->r[i++] = 0;
