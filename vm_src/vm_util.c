@@ -34,14 +34,37 @@ void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 	}
 }
 
-void	del_process(t_proces **prev, t_proces **pr)
+void	del_process(t_proces **proces, int i)
 {
-	t_proces *tmp;
+	t_proces	*tmp;
+	t_proces	*pr;
+	t_proces	*prev;
+	int			j;
 
-	tmp = *pr;
-	if (*prev)
-		(*prev)->next = (*pr)->next;
-	*pr = (*pr)->next;
+	pr = *proces;
+	j = 0;
+	prev = NULL;
+	if (!i)
+	{
+		tmp = *proces;
+		tmp->next = 0;
+		*proces = (*proces)->next;
+	}
+	else
+	{
+		while (pr)
+		{
+			if (j == i)
+			{
+				tmp = pr;
+				prev->next = pr->next;
+				break ;
+			}
+			prev = pr;
+			pr = pr->next;
+			j++;
+		}
+	}
 	free(tmp);
 }
 
@@ -49,26 +72,23 @@ int		check_lives(t_core *core)
 {
 	t_proces	*pr;
 	t_proces	*prev;
-	int			res;
+	int			i;
 
 	pr = core->proces;
-	prev = NULL;
-	res = 0;
+	i = 0;
 	while (pr)
 	{
 		if (!pr->alive)
 		{
-			del_process(&prev, &pr);
+			del_process(&core->proces, i);
 			core->sum_process--;
 		}
-		else
-		{
-			res++;
-			prev = pr;
-			pr = pr->next;
-		}
+		i++;
+		pr = pr->next;
 	}
-	return (res);
+	if (core->proces)
+		return (1);
+	return (0);
 }
 
 void	reinit_cycle_lives(t_core *core)

@@ -67,7 +67,7 @@ int		run_cycles_to_die(t_core *core)
 	t_proces	*pr;
 
 	pr = core->proces;
-	while (core->tmp_cycle < core->cycle_to_die && pr)
+	while (core->tmp_cycle < core->cycle_to_die)
 	{
 		if (!pr->wait || pr->wait < core->total_cycle)
 		{
@@ -134,5 +134,5 @@ void	run_vm(t_core *core)
 		reinit_cycle_lives(core);
 	}
 	ft_printf("total cycle = %d\n", core->total_cycle);
-	check_lives(core);
+	// check_lives(core);
 }

@@ -265,7 +265,7 @@ void				read_ocp(t_proces *pr, int ocp);
 */
 
 int					get_pr_length(t_proces *pr, int op);
-void				del_process(t_proces **prev ,t_proces **pr);
+void				del_process(t_proces **proces, int i);
 int					check_lives(t_core *core);
 void				reinit_cycle_lives(t_core *core);
 void				ft_itoo_vm(t_core *core, int pos, unsigned long long int nb

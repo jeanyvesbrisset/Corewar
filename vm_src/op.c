@@ -268,7 +268,7 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	t_proces *new;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	new = (t_proces*)malloc(sizeof(t_proces));
+	new = (t_proces*)malloc(sizeof(t_proces) * 1);
 	new->champ = pr->champ;
 	new->proces_nb = core->proces->proces_nb + 1;
 	core->sum_process++;
@@ -277,9 +277,9 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 		new->r[i] = pr->r[i];
 	new->carry = pr->carry;
 	if (!l)
-		new->pc = pr->pc + (param_1 % IDX_MOD);
+		new->pc = (pr->pc + (param_1 % IDX_MOD)) % MEM_SIZE;
 	else
-		new->pc = pr->pc + param_1;
+		new->pc = (pr->pc + param_1) % MEM_SIZE;
 	new->next = core->proces;
 	core->proces = new;
 	if (core->flag_v)

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:51:33 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/01 12:35:51 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/05 11:19:53 by jbrisset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,5 @@ void	init_visual(t_core *core)
 	init_champ_in_visu(core, i);
 	wrefresh(core->visu->arena);
 	init_visual_hud(core);
-	getch();
-	endwin();
+//	getch();
 }
