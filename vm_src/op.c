@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/05 14:33:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/06 12:26:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
 	if (pr->carry && pr->params[0] == DIR_CODE)
 	{
-		pr->pc = (pr->pc + (param_1)) % MEM_SIZE;
+		pr->pc = (pr->pc + param_1) % MEM_SIZE;
 	}
 	else
 		pr->pc = (pr->pc + pr->pc_jump) % MEM_SIZE;
@@ -266,8 +266,8 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	int	param_1;
 	int	i;
 	t_proces *new;
-
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
+	
+	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
 	if (!(new = (t_proces*)malloc(sizeof(t_proces) * 1)))
 		return ;
 	new->champ = pr->champ;

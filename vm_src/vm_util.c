@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/05 13:41:20 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 13:40:58 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	del_process(t_proces **proces, int i)
 	if (!i)
 	{
 		tmp = *proces;
-		tmp->next = 0;
+		ft_printf("tmp->champ = %d && i = 0\n", tmp->champ);
 		*proces = (*proces)->next;
 	}
 	else
@@ -73,18 +73,27 @@ int		check_lives(t_core *core)
 {
 	t_proces	*pr;
 	int			i;
+	int j;
 
+	if (!(core->proces))
+		return (0);
 	pr = core->proces;
 	i = 0;
-	while (pr)
+	while (pr && pr->next)
 	{
-		if (!pr->alive)
+		j = 0;
+		if (pr && pr->next && !(pr->alive))
 		{
+			pr = pr->next;
 			del_process(&core->proces, i);
+			pr = core->proces;
+			while (j != i && pr)
+				pr = pr->next;
 			core->sum_process--;
 		}
+		else
+			pr = pr->next;
 		i++;
-		pr = pr->next;
 	}
 	if (core->proces)
 		return (1);

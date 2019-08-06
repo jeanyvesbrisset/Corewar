@@ -6,11 +6,28 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/05 11:07:38 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 13:48:33 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+void	ft_delete_proc(t_core *core)
+{
+	t_proces *current;
+	t_proces *before;
+
+	current = core->proces;
+	before = 0;
+	while (current)
+	{
+		before = current;
+		current = current->next;
+		free(before);
+		before = NULL;
+	}
+	free(before);
+}
 
 int		print_arena_dump(t_core *core)
 {
@@ -69,7 +86,7 @@ int		run_cycles_to_die(t_core *core)
 	pr = core->proces;
 	while (core->tmp_cycle < core->cycle_to_die)
 	{
-		if (!pr->wait || pr->wait < core->total_cycle)
+		if (pr && (!pr->wait || pr->wait < core->total_cycle))
 		{
 			// ft_printf("____________\n(%d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
 			// ft_printf("cycle to die = %d, \n", core->cycle_to_die);
@@ -78,7 +95,7 @@ int		run_cycles_to_die(t_core *core)
 			if (core->flag_v)
 				refresh_pc(core);
 		}
-		else if (pr->wait == core->total_cycle)
+		else if (pr && pr->wait == core->total_cycle)
 		{
 			// ft_printf("____________\n(%d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
 			handle_proces(core, pr);
@@ -104,7 +121,7 @@ int		run_cycles_to_die(t_core *core)
 }
 
 void	run_vm(t_core *core)
-{
+{	
 	if (core->flag_v == 1)
 		init_visual(core);
 	while (run_cycles_to_die(core) && core->cycle_to_die > 0)
@@ -134,5 +151,4 @@ void	run_vm(t_core *core)
 		reinit_cycle_lives(core);
 	}
 	ft_printf("total cycle = %d\n", core->total_cycle);
-	// check_lives(core);
 }

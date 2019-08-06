@@ -6,19 +6,22 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/01 12:35:49 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 13:47:12 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
 
-void	free_core(t_core *core)
+int		free_core(t_core *core)
 {
 	t_champ *current;
 	t_champ	*before;
 
-	if (!(core->champs))
-		return ;
+	if (!(core->champs) && !(core->proces))
+	{
+		free(core);
+		return (0);
+	}
 	before = core->champs;
 	current = before->next;
 	core->champs = 0;
@@ -39,6 +42,7 @@ void	free_core(t_core *core)
 		before = 0;
 	}
 	free(core);
+	return (0);
 }
 
 int		ft_error(char *error, int ret, void **to_free, int line)
@@ -87,14 +91,21 @@ int main(int ac, char **av)
 		return (0);
 	core->flag_d = -1;
 	core->flag_v = 0;
+	//core->flag_vb = 0;
 	core->champ_nb = 0;
 	core->champs = 0;
 	core->proces = 0;
 	core->visu = 0;
 	if (!(parcing_args(ac, av, core)))
-		return (0);
+	{
+		ft_printf("parcing fuck\n");
+		return (free_core(core));
+	}
 	if (!(stock_champ(ac, av, core)))
-		return (0);
+	{
+		ft_printf("stocking fuck\n");
+		return (free_core(core));
+	}
 	// ft_printf("parsing ok\n");
 	//if (core->flag_v)
 	//	init_visual(core);

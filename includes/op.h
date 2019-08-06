@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/05 13:37:32 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 13:49:26 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef	struct		s_visu
 typedef	struct 		s_core
 {
 	int				flag_v; //0 ou 1
+	int				flag_vb; //0 ou 1
 	int				flag_d; //-1 s'il n'y en a pas, sinon nombre de cycle
 	int				champ_nb;
 	int				sum_process;
@@ -259,6 +260,7 @@ void				run_vm(t_core *core);
 int					get_size(int op, int type);
 int 				get_param(t_core *core, t_proces *pr, int type, int cursor);
 void				read_ocp(t_proces *pr, int ocp);
+void				ft_delete_proc(t_core *core);
 
 /*
 ** vm util

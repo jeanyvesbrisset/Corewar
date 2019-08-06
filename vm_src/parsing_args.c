@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/01 11:50:21 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/06 13:46:52 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	parcing_args(int ac, char **av, t_core *core)
 			core->flag_d = ft_atoi(av[++i]);
 		else if (!(core->flag_v) && !(ft_strcmp(av[i], "-v")))
 			core->flag_v = 1;
+		//else if (!(core->flag_vb) && !(ft_strcmp(av[i], "-V")))
+		//	core->flag_vb = 1;
 		else if (is_dot_cor(av[i]))
 			(core->champ_nb)++;
 		else if (is_order_n(av, i, core))
