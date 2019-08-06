@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+         #
+#    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/08/05 13:38:52 by maginist         ###   ########.fr        #
+#    Updated: 2019/08/06 16:10:59 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ SRCS2 =	main.c\
 		init_vm.c\
 		gest_champ.c\
 		refresh_visual.c\
+		refresh_visual_live.c\
+		visual_cmd.c\
+		init_visual.c\
 		visual.c\
 		vm.c\
 		run_vm.c\

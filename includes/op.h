@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 13:49:26 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:10:19 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,6 @@
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
 # define COREWAR_EXEC_MAGIC	0xea83f3
-
-typedef char		t_arg_type;
-
-typedef struct		s_header
-{
-	unsigned int	magic;
-	char			prog_name[PROG_NAME_LENGTH + 1];
-	unsigned int	prog_size;
-	char			comment[COMMENT_LENGTH + 1];
-}					t_header;
 
 typedef struct		s_stock
 {
@@ -291,6 +281,7 @@ void				visual_every_cycle(t_core *core);
 void				refresh_process(t_core *core);
 void				refresh_pc(t_core *core);
 void				get_key(t_core *core);
+void				init_visual_hud(t_core *core);
 
 /*
 ** op vm

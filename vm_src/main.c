@@ -6,11 +6,21 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 14:50:34 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:29:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
+
+void	free_before(t_champ *before)
+{
+	before->next = 0;
+	ft_strdel((char**)(&((before->name))));
+	ft_strdel((char**)(&(before->bytecode)));
+	ft_strdel((char**)(&(before->comment)));
+	free(before);
+	before = 0;
+}
 
 int		free_core(t_core *core)
 {
@@ -34,12 +44,7 @@ int		free_core(t_core *core)
 	{
 		before = current;
 		current = current->next;
-		before->next = 0;
-		ft_strdel((char**)(&((before->name))));
-		ft_strdel((char**)(&(before->bytecode)));
-		ft_strdel((char**)(&(before->comment)));
-		free(before);
-		before = 0;
+		free_before(before);
 	}
 	free(core);
 	return (0);
@@ -83,7 +88,7 @@ int		ft_otoi(unsigned char *nb_str, int size)
 	return (res);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_core *core;
 

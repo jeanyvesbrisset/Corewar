@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 14:45:12 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 11:38:00 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:24:41 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		get_direct(t_core *core, t_proces *pr, int cursor)
 	return (ft_otoi(&(core->arena[cursor]), size));
 }
 
-int	    get_size(int op, int type)
+int		get_size(int op, int type)
 {
 	if (type == REG_CODE)
 		return (1);
@@ -52,7 +52,7 @@ int		read_op(t_core *core, t_proces *pr)
 	if (pr->op < 1 || pr->op > 16)
 		return (0);
 	pr->wait = core->total_cycle + g_fvm_tab[pr->op - 1].cycle_delay;
-    return (1);
+	return (1);
 }
 
 int		get_pr_length(t_proces *pr, int op)

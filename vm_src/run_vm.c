@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 13:48:33 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:59:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	ft_delete_proc(t_core *core)
 
 int		print_arena_dump(t_core *core)
 {
-	int i;
-	char *str;
+	int		i;
+	char	*str;
 
 	i = 0;
 	while (i < 4096)
@@ -44,7 +44,7 @@ int		print_arena_dump(t_core *core)
 		ft_strdel(&str);
 		if (i != 0 && (i % 64) == 63 && i != 4095)
 		{
-			if (i != 63 && i != 127 && i != 191) 
+			if (i != 63 && i != 127 && i != 191)
 				ft_printf("\n0x0%x : ", i + 1);
 			else
 				ft_printf("\n0x00%x : ", i + 1);
@@ -79,6 +79,16 @@ void	read_ocp(t_proces *pr, int ocp)
 		pr->params[i++] = 0;
 }
 
+void	handle_or_not(t_core *core, t_proces *pr, int h_or_n)
+{
+	if (h_or_n == 1)
+		handle_proces(core, pr);
+	if (!read_op(core, pr))
+		pr->pc = (pr->pc + 1) % MEM_SIZE;
+	if (core->flag_v)
+		refresh_pc(core);
+}
+
 int		run_cycles_to_die(t_core *core)
 {
 	t_proces	*pr;
@@ -87,23 +97,9 @@ int		run_cycles_to_die(t_core *core)
 	while (core->tmp_cycle < core->cycle_to_die)
 	{
 		if (pr && (!pr->wait || pr->wait < core->total_cycle))
-		{
-			// ft_printf("____________\n(%d)READ at pc %d: %s(%d), ", core->total_cycle, pr->pc, get_champ(core, pr->champ)->name, pr->proces_nb);
-			// ft_printf("cycle to die = %d, \n", core->cycle_to_die);
-			if (!read_op(core, pr))
-				pr->pc = (pr->pc + 1) % MEM_SIZE;
-			if (core->flag_v)
-				refresh_pc(core);
-		}
+			handle_or_not(core, pr, 0);
 		else if (pr && pr->wait == core->total_cycle)
-		{
-			// ft_printf("____________\n(%d)PROCESS: %s(%d) at pc %d does op %d then ", core->total_cycle, get_champ(core, pr->champ)->name, pr->proces_nb, pr->pc, pr->op);
-			handle_proces(core, pr);
-			if (!read_op(core, pr))
-				pr->pc = (pr->pc + 1) % MEM_SIZE;
-			if (core->flag_v)
-				refresh_pc(core);
-		}
+			handle_or_not(core, pr, 1);
 		if (pr->next)
 			pr = pr->next;
 		else
@@ -121,19 +117,15 @@ int		run_cycles_to_die(t_core *core)
 }
 
 void	run_vm(t_core *core)
-{	
+{
 	if (core->flag_v == 1)
 		init_visual(core);
 	while (run_cycles_to_die(core) && core->cycle_to_die > 0)
 	{
-		// ft_printf("____ CYCLE TO DIE _____ \n");
-		// ft_printf("nbr live = %d, max check = %d \n", core->nbr_live, core->max_checks);
-		// ft_printf("____ +*+*+*+*+*+*+ _____ \n");
 		if (!check_lives(core))
 			break ;
 		if (core->nbr_live >= NBR_LIVE || core->max_checks == MAX_CHECKS)
 		{
-			// ft_printf("cycle to die decrease %d\n", core->cycle_to_die);
 			core->cycle_to_die -= CYCLE_DELTA;
 			core->max_checks = 1;
 			if (core->flag_v)

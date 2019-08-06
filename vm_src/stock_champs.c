@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 14:41:25 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:37:52 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ int		init_champ(t_core *core, char *name, int *i, int n)
 		n_champ->tmp_n = 0;
 	}
 	if (!(add_champ_list(core, &n_champ, name)))
-		return (ft_error("invalid input for champion\n", 0, (void**)&n_champ
-		, 0));
+	{
+		return (ft_error("invalid input for champion\n", 0
+		, (void**)&n_champ, 0));
+	}
 	return (1);
 }
 
@@ -124,7 +126,7 @@ int		stock_champ(int ac, char **av, t_core *core)
 	i = 0;
 	while (++i <= core->champ_nb)
 		if (!(init_process(&(core->proces), i, 0
-		, &(core->sum_process))))
+			, &(core->sum_process))))
 			return (0);
 	return (1);
 }

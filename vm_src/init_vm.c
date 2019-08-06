@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/02 16:09:30 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:27:50 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static void	init_pc(t_core *core, t_champ *champ)
 		}
 		proces = proces->next;
 	}
+	champ->live_by_ctd = 0;
+	champ->last_live = 0;
+	champ->process_live = 0;
 }
 
 void		init_vm(t_core *core)
@@ -64,9 +67,6 @@ void		init_vm(t_core *core)
 				champ->next->byte_start = champ->byte_start - gap;
 		}
 		init_pc(core, champ);
-		champ->live_by_ctd = 0;
-		champ->last_live = 0;
-		champ->process_live = 0;
 		champ = champ->next;
 	}
 	ft_bzero(core->arena, MEM_SIZE);
