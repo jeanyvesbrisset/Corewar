@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/06 13:40:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 14:51:20 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	del_process(t_proces **proces, int i)
 	if (!i)
 	{
 		tmp = *proces;
-		ft_printf("tmp->champ = %d && i = 0\n", tmp->champ);
 		*proces = (*proces)->next;
 	}
 	else

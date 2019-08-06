@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/06 12:26:14 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 14:50:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	vm_live(t_core *core, t_proces *pr)
 		core->nbr_live++;
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
+		if (core->flag_vb)
+			ft_printf("P:%d (at cycle %d)| Player %d(%s) is said to be alive\n"
+			, pr->proces_nb, core->total_cycle, champ->pos, champ->name);
 		// ft_printf("un processus dit que le joueur %d(%s) est en vie\n", champ_nb, champ->name);
 		// ft_printf("LIVE of %d(%s} at cycle %d\n", champ_nb, champ->name, core->total_cycle);
 		if (core->flag_v)
@@ -67,7 +70,6 @@ void	vm_ld(t_core *core, t_proces *pr)
 		pr->carry = (!pr->carry ? 1 : 0);
 	}
 }
-
 
 /*
 ** Adds the value of the first and the second param (which are both registers) and loads this sum into the third params (which is also a register)
@@ -314,7 +316,6 @@ void	vm_and(t_core *core, t_proces *pr)
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
 	{
-	//	// ft_printf("ZORK EST DANS AND\n");
 		pr->r[index_3 - 1] = param_1 & param_2;
 		pr->carry = (!pr->carry ? 1 : 0);
 	}

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 13:47:12 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/06 14:50:34 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,26 +91,16 @@ int main(int ac, char **av)
 		return (0);
 	core->flag_d = -1;
 	core->flag_v = 0;
-	//core->flag_vb = 0;
+	core->flag_vb = 0;
 	core->champ_nb = 0;
 	core->champs = 0;
 	core->proces = 0;
 	core->visu = 0;
 	if (!(parcing_args(ac, av, core)))
-	{
-		ft_printf("parcing fuck\n");
 		return (free_core(core));
-	}
 	if (!(stock_champ(ac, av, core)))
-	{
-		ft_printf("stocking fuck\n");
 		return (free_core(core));
-	}
-	// ft_printf("parsing ok\n");
-	//if (core->flag_v)
-	//	init_visual(core);
 	vm(core);
-//	ft_printf("core->total cycle : %d\n", core->total_cycle);
 	free_core(core);
 	return (1);
 }

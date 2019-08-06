@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/05 15:49:46 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/06 14:41:25 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ int		init_champ(t_core *core, char *name, int *i, int n)
 		n_champ->tmp_n = 0;
 	}
 	if (!(add_champ_list(core, &n_champ, name)))
-		return (0);
+		return (ft_error("invalid input for champion\n", 0, (void**)&n_champ
+		, 0));
 	return (1);
 }
 
