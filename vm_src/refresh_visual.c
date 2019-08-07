@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 16:18:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:54:24 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,21 @@ char	*get_hexa(int nb)
 	return (str);
 }
 
-void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)
+void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)//a revoir
 {
 	int	i;
+	int	mem_s;
 
 	i = 0;
 	while (i < size)
 	{
-		core->visu->color_arena[pos + i] = (unsigned char)(pr->champ);
-		core->visu->str = get_hexa(core->arena[pos + i]);
-		mvwprintw(core->visu->arena, 1 + ((3 * (pos + i)) / 192)
-		, 2 + ((3 * (pos + i)) % 192), core->visu->str);
-		mvwchgat(core->visu->arena, 1 + ((3 * (pos + i)) / 192)
-		, 2 + ((3 * (pos + i)) % 192), 2, A_BOLD, pr->champ, 0);
+		mem_s = (pos + i) % MEM_SIZE;
+		core->visu->color_arena[mem_s] = (unsigned char)(pr->champ);
+		core->visu->str = get_hexa(core->arena[mem_s]);
+		mvwprintw(core->visu->arena, 1 + ((3 * (mem_s)) / 192)
+		, 2 + ((3 * (mem_s)) % 192), core->visu->str);
+		mvwchgat(core->visu->arena, 1 + ((3 * (mem_s)) / 192)
+		, 2 + ((3 * (mem_s)) % 192), 2, A_BOLD, pr->champ, 0);
 		i++;
 	}
 	wrefresh(core->visu->arena);

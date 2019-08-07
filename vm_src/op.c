@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/06 14:50:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:49:57 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,8 @@ void	vm_st(t_core *core, t_proces *pr)
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
-	param_2 %= IDX_MOD;
+	//if (pr->params[1] == IND_CODE)
+	//	param_2 %= IDX_MOD;
 	if (pr->params[0] != REG_CODE
 		&& (pr->params[1] != REG_CODE || pr->params[1] != IND_CODE))
 		return ;
@@ -284,7 +285,7 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 	if (!l)
 		new->pc = (pr->pc + (param_1 % IDX_MOD)) % MEM_SIZE;
 	else
-		new->pc = (pr->pc + param_1) % MEM_SIZE;
+		new->pc = (pr->pc + param_1);
 	new->next = core->proces;
 	core->proces = new;
 	if (core->flag_v)

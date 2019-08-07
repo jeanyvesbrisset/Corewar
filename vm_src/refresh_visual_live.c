@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:03:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/07 11:34:21 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:41:29 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,24 @@ void	refresh_live(t_core *core)
 	}
 }
 
-void	refresh_champion_ctd(t_core *core, int *j, int i, t_champ *current)
+void	refresh_champion_ctd(t_core *core, int *j, int i, t_champ **current)
 {
 	wattron(core->visu->hud, A_BOLD);
 	mvwprintw(core->visu->hud, 20 + (i * 4), 7
 	, "live in current period :\t\t0       ");
 	wattroff(core->visu->hud, A_BOLD);
-	wattron(core->visu->hud, COLOR_PAIR(i));
-	while ((*j) - core->visu->live_bd[i] < (current->live_by_ctd * 100)
+	wattron(core->visu->hud, COLOR_PAIR(i + 1));
+	while ((*j) - core->visu->live_bd[i] < ((*current)->live_by_ctd * 100)
 	/ core->nbr_live && (*j) < 100)
 		mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + (*j)++, "-");
-	if ((((current->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
+	if (((((*current)->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
 	&& (*j) < 100)
 		mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + (*j)++, "-");
 	if (i == core->champ_nb - 1)
 		while ((*j) < 100)
 			mvwprintw(core->visu->hud, 23 + (core->champ_nb * 4), 6 + (*j)++
 			, "-");
-	wattroff(core->visu->hud, COLOR_PAIR(i));
+	wattroff(core->visu->hud, COLOR_PAIR(i + 1));
 }
 
 void	refresh_live_ctd(t_core *core)
@@ -105,7 +105,7 @@ void	refresh_live_ctd(t_core *core)
 		current = core->champs;
 		while (current->pos != i + 1)
 			current = current->next;
-		refresh_champion_ctd(core, &j, i, current);
+		refresh_champion_ctd(core, &j, i, &current);
 		i++;
 		core->visu->live_bd[i] = j;
 	}

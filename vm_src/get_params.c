@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/06 16:25:35 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:31:58 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int			get_indirect(t_core *core, t_proces *pr, int cursor)
 	int param;
 
 	if (pr->op != 13 || pr->op != 14 || pr->op != 15)
-		param = ft_otoi(&(core->arena[cursor]), 2) % IDX_MOD;
+		param = ft_otoi(&(core->arena[cursor]), 2);
 	else
 		param = ft_otoi(&(core->arena[cursor]), 2);
+	//if (core->total_cycle > 1700 && core->total_cycle < 2100)
+	//	ft_printf("res = %d\n", param);
 	return (param);
 }
 
