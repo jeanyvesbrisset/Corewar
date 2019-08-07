@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 16:59:46 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/07 11:19:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	read_ocp(t_proces *pr, int ocp)
 	i = 0;
 	if (!ocp)
 		pr->params[i++] = DIR_CODE;
-	while ((exp /= 4) != 1 && ocp)
+	while (exp != 0 && (exp /= 4) != 1 && ocp)
 	{
 		extract = ocp / exp;
 		ocp -= extract * exp;
