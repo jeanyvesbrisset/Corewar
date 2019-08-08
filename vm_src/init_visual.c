@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_visual.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:08:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 16:16:50 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/08 11:50:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_champ_in_visu(t_core *core, int k)
 	t_champ	*current;
 	int		i;
 
-	while (k < 4096 * 3)
+	while (k < MEM_SIZE * 3)
 	{
 		print_arena(core, k);
 		k += 3;

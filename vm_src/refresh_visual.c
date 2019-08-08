@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refresh_visual.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/07 16:54:24 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/08 10:57:06 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_hexa(int nb)
 	return (str);
 }
 
-void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)//a revoir
+void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)
 {
 	int	i;
 	int	mem_s;
@@ -47,13 +47,6 @@ void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)//a revoir
 		i++;
 	}
 	wrefresh(core->visu->arena);
-	i = 0;
-	while (i < size)
-	{
-		mvwchgat(core->visu->arena, 1 + ((3 * (pos + i)) / 192)
-		, 2 + ((3 * (pos + i)) % 192), 2, A_NORMAL, pr->champ, 0);
-		i++;
-	}
 }
 
 void	refresh_cycle_to_die(t_core *core)
@@ -97,11 +90,25 @@ void	refresh_pc(t_core *core)
 
 void	visual_every_cycle(t_core *core)
 {
+	int	i;
+
 	wattron(core->visu->hud, A_BOLD);
 	core->visu->str = ft_itoa(core->total_cycle);
 	mvwprintw(core->visu->hud, 13, 13, core->visu->str);
 	ft_strdel(&(core->visu->str));
 	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
+	if ((core->total_cycle % 50) == 0)
+	{
+		i = 0;
+		while (i < MEM_SIZE)
+		{
+			if (core->visu->color_arena[i] != 9)
+				mvwchgat(core->visu->arena, 1 + ((3 * i) / 192) 
+				, 2 + ((3 * i) % 192), 2, A_NORMAL, core->visu->color_arena[i]
+				, 0);
+			i++;
+		}
+	}
 	get_key(core);
 }
