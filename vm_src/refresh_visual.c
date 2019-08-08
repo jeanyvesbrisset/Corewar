@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/08 10:57:06 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:11:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	visual_every_cycle(t_core *core)
 	ft_strdel(&(core->visu->str));
 	wattroff(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
-	if ((core->total_cycle % 50) == 0)
+	if ((core->total_cycle % 100) == 0)
 	{
 		i = 0;
 		while (i < MEM_SIZE)

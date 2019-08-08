@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/07 16:49:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/08 17:52:25 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,12 @@ void	vm_ld(t_core *core, t_proces *pr)
 		(pr->params[1] == REG_CODE))
 	{
 		pr->r[p2_index - 1] = param_1;
-		pr->carry = (!pr->carry ? 1 : 0);
+		if (!(param_1))
+			pr->carry = 1;
+		else
+			pr->carry = 0;
+		//if (core->total_cycle < 3000)
+			// ft_printf("le carry = %d du process %d apred un ld\n", pr->carry, pr->champ);
 	}
 }
 
@@ -83,8 +88,11 @@ void	vm_add(t_core *core, t_proces *pr)
 	int	sum;
 
 	i = 2;
-	if (pr->op + 1 == 132)
+//	ft_printf("op = %d\n", pr->op);
+	if (pr->params[0] == REG_CODE && pr->params[1] == REG_CODE
+	&& pr->params[2] == REG_CODE)
 	{
+		//ft_printf("ADD\n");
 		while (i < 4)
 		{
 		p_index = (int)(core->arena[pr->pc + i]);
@@ -98,7 +106,12 @@ void	vm_add(t_core *core, t_proces *pr)
 			return ;
 		sum = value[0] + value[1];
 		pr->r[p_index - 1] = sum;
-		pr->carry = (!pr->carry ? 1 : 0);
+		if (sum == 0)
+			pr->carry = 1;
+		else
+			pr->carry = 0;
+		//if (core->total_cycle < 3000)
+		//	ft_printf("le carry = %d du process %d apred un add\n", pr->carry, pr->champ);
 	}
 }
 
@@ -114,7 +127,8 @@ void	vm_sub(t_core *core, t_proces *pr)
 	int	sub;
 
 	i = 2;
-	if (pr->op + 1 == 132)
+	if (pr->params[0] == REG_CODE && pr->params[1] == REG_CODE
+	&& pr->params[2] == REG_CODE)
 	{
 		while (i < 4)
 		{
@@ -129,7 +143,12 @@ void	vm_sub(t_core *core, t_proces *pr)
 			return ;
 		sub = value[0] - value[1];
 		pr->r[p_index - 1] = sub;
-		pr->carry = (!pr->carry ? 1 : 0);
+		if (sub == 0)
+			pr->carry = 1;
+		else
+			pr->carry = 0;
+		//if (core->total_cycle < 3000)
+		//	ft_printf("le carry = %d du process %d apred un sub\n", pr->carry, pr->champ);
 	}
 }
 
@@ -246,7 +265,9 @@ void	vm_lld(t_core *core, t_proces *pr)
 void	vm_lldi(t_core *core, t_proces *pr)
 {
 	vm_ldi(core, pr);
-	pr->carry = (!pr->carry ? 1 : 0);
+	pr->carry = !(pr->carry);
+//	if (core->total_cycle < 3000)
+	//		ft_printf("le carry = %d du process %d apred un lldi\n", pr->carry, pr->champ);
 }
 
 /*
@@ -264,7 +285,7 @@ void	vm_aff(t_core *core, t_proces *pr)
 	//// ft_printf("%c\n", param);
 }
 
-void	vm_sub_fork(t_core *core, t_proces *pr, int l)
+void	vm_fork(t_core *core, t_proces *pr)
 {
 	int	param_1;
 	int	i;
@@ -275,31 +296,24 @@ void	vm_sub_fork(t_core *core, t_proces *pr, int l)
 		return ;
 	new->champ = pr->champ;
 	new->wait = 0;
-	new->alive = 0;
+	new->alive = pr->alive;
 	new->proces_nb = core->proces->proces_nb + 1;
 	core->sum_process++;
 	i = -1;
 	while (++i < REG_SIZE)
 		new->r[i] = pr->r[i];
 	new->carry = pr->carry;
-	if (!l)
-		new->pc = (pr->pc + (param_1 % IDX_MOD)) % MEM_SIZE;
-	else
-		new->pc = (pr->pc + param_1);
+	new->pc = (pr->pc + param_1) % MEM_SIZE;
+	//ft_printf("new->pc = %d\n", new->pc); 
 	new->next = core->proces;
 	core->proces = new;
 	if (core->flag_v)
 		refresh_process(core);
 }
 
-void	vm_fork(t_core *core, t_proces *pr)
-{
-	vm_sub_fork(core, pr, 0);
-}
-
 void	vm_lfork(t_core *core, t_proces *pr)
 {
-	vm_sub_fork(core, pr, 1);
+	vm_fork(core, pr);
 }
 
 void	vm_and(t_core *core, t_proces *pr)
@@ -318,7 +332,12 @@ void	vm_and(t_core *core, t_proces *pr)
 		pr->params[2] == REG_CODE)
 	{
 		pr->r[index_3 - 1] = param_1 & param_2;
-		pr->carry = (!pr->carry ? 1 : 0);
+		if (pr->r[index_3 - 1] == 0)
+			pr->carry = 1;
+		else
+			pr->carry = 0;
+	//	if (core->total_cycle < 3000)
+		//	ft_printf("le carry = %d du process %d apred un and\n", pr->carry, pr->champ);
 	}
 }
 
@@ -338,7 +357,13 @@ void	vm_or(t_core *core, t_proces *pr)
 		pr->params[2] == REG_CODE)
 	{
 		pr->r[index_3 - 1] = param_1 | param_2;
-		pr->carry = (!pr->carry ? 1 : 0);
+		pr->carry = !(pr->carry);
+		if (pr->r[index_3 - 1] == 0)
+			pr->carry = 1;
+		else
+			pr->carry = 0;
+	//	if (core->total_cycle < 3000)
+		//	ft_printf("le carry = %d du process %d apred un or\n", pr->carry, pr->champ);
 	}
 }
 
@@ -358,6 +383,12 @@ void	vm_xor(t_core *core, t_proces *pr)
 		pr->params[2] == REG_CODE)
 	{
 		pr->r[index_3 - 1] = param_1 ^ param_2;
-		pr->carry = (!pr->carry ? 1 : 0);
+		pr->carry = !(pr->carry);
+		if (pr->r[index_3 - 1] == 0)
+			pr->carry = 1;
+		else
+			pr->carry = 0;
+	//	if (core->total_cycle < 3000)
+			// ft_printf("le carry = %d du process %d apred un xor\n", pr->carry, pr->champ);
 	}
 }

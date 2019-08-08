@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/07 16:26:38 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/08 18:50:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 	}
 }
 
-void	del_process_loop(t_proces **tmp, t_proces *pr, t_proces *prev, int i)
+/* void	del_process_loop(t_proces **tmp, t_proces *pr, t_proces *prev, int i)
 {
 	int j;
 
@@ -69,35 +69,40 @@ void	del_process(t_proces **proces, int i)
 	else
 		del_process_loop(&tmp, pr, prev, i);
 	free(tmp);
-}
+}*/
 
 int		check_lives(t_core *core)
 {
-	t_proces	*pr;
-	int			i;
-	int j;
+	t_proces	*prev;
+	t_proces	*cur;
 
-	pr = core->proces;
-	i = 0;
-	while (pr && pr->next)
+	cur = core->proces;
+	prev = 0;
+	while (cur)
 	{
-		j = 0;
-		if (pr && pr->next && !(pr->alive))
+		if (!(cur->alive))
 		{
-			pr = pr->next;
-			del_process(&core->proces, i);
-			pr = core->proces;
-			while (j != i && pr)
-				pr = pr->next;
+			if (prev)
+				prev->next = cur->next;
+			else
+				core->proces = cur->next;
+			free (cur);
+			if (prev)
+				cur = prev->next;
+			else
+				cur = core->proces;
 			core->sum_process--;
 		}
 		else
-			pr = pr->next;
-		i++;
+		{
+			prev = cur;
+			cur = cur->next;
+		}
 	}
 	if (core->proces)
 		return (1);
-	return (0);
+
+ 	return (0);
 }
 
 void	reinit_cycle_lives(t_core *core)
