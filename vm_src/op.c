@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/09 15:41:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:22:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	vm_live(t_core *core, t_proces *pr)
 			, pr->proces_nb, core->total_cycle, champ->pos, champ->name);
 		// ft_printf("un processus dit que le joueur %d(%s) est en vie\n", champ_nb, champ->name);
 		// ft_printf("LIVE of %d(%s} at cycle %d\n", champ_nb, champ->name, core->total_cycle);
-		if (core->flag_v)
-				refresh_live(core);
 	}			
 }
 
@@ -71,8 +69,8 @@ void	vm_ld(t_core *core, t_proces *pr)
 			pr->carry = 1;
 		else
 			pr->carry = 0;
-		if (p2_index == 2)
-			ft_printf("LD champ %d : param1 = %d dans r%d, carry = %d\n", pr->champ, param_1, p2_index, pr->carry);
+		// if (p2_index == 2)
+			// ft_printf("LD champ %d : param1 = %d dans r%d, carry = %d\n", pr->champ, param_1, p2_index, pr->carry);
 		//if (core->total_cycle < 3000)
 			// ft_printf("le carry = %d du process %d apred un ld\n", pr->carry, pr->champ);
 	}
@@ -314,8 +312,6 @@ void	vm_fork(t_core *core, t_proces *pr)
 	//ft_printf("new->pc = %d\n", new->pc); 
 	new->next = core->proces;
 	core->proces = new;
-	if (core->flag_v)
-		refresh_process(core);
 }
 
 void	vm_lfork(t_core *core, t_proces *pr)

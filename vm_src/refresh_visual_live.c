@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:03:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/09 12:22:21 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:15:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	refresh_live(t_core *core)
 		current = core->champs;
 		refresh_live_by_champ(core, i, &current);
 		while (j - core->visu->live_bd[i] < (current->live_by_ctd * 100)
-			/ core->nbr_live && j < 100)
+			/ (core->nbr_live + 1) && j < 100)
 			mvwprintw(core->visu->hud, 20 + (core->champ_nb * 4), 6 + j++, "-");
-		if ((((current->live_by_ctd * 1000) / core->nbr_live) % 10) >= 5
+		if ((((current->live_by_ctd * 1000) / (core->nbr_live + 1)) % 10) >= 5
 			&& j < 100)
 			mvwprintw(core->visu->hud, 20 + (core->champ_nb * 4), 6 + j++, "-");
 		if (i == core->champ_nb - 1)
