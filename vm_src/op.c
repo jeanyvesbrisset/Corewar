@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/09 12:27:23 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/09 15:41:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	vm_ld(t_core *core, t_proces *pr)
 			pr->carry = 1;
 		else
 			pr->carry = 0;
+		if (p2_index == 2)
+			ft_printf("LD champ %d : param1 = %d dans r%d, carry = %d\n", pr->champ, param_1, p2_index, pr->carry);
 		//if (core->total_cycle < 3000)
 			// ft_printf("le carry = %d du process %d apred un ld\n", pr->carry, pr->champ);
 	}
@@ -237,7 +239,12 @@ void	vm_sti(t_core *core, t_proces *pr)
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
-	addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
+	if (param_2 + param_3 < MEM_SIZE - IDX_MOD)
+			addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
+	else
+		addr = pr->pc + (MEM_SIZE
+			+ ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1));
+	//addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
 		 || pr->params[1] == IND_CODE)

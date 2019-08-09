@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/08 18:50:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/09 15:12:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 	nb %= div * 256;
 	while (i < size)
 	{
-		core->arena[((pos + i) % MEM_SIZE)] = nb / div;
+		core->arena[((MEM_SIZE + pos + i) % MEM_SIZE)] = nb / div;
 		nb %= div;
 		div /= 256;
 		i++;
