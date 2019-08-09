@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/08 17:52:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/09 12:27:23 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	vm_live(t_core *core, t_proces *pr)
 		// ft_printf("un processus dit que le joueur %d(%s) est en vie\n", champ_nb, champ->name);
 		// ft_printf("LIVE of %d(%s} at cycle %d\n", champ_nb, champ->name, core->total_cycle);
 		if (core->flag_v)
-			refresh_live(core);
+				refresh_live(core);
 	}			
 }
 
@@ -325,8 +325,8 @@ void	vm_and(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]));
-	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1]));
+	index_3 = core->arena[pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[1])];
 	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
@@ -350,14 +350,13 @@ void	vm_or(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]));
-	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1]));
+	index_3 = core->arena[pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[1])];
 	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
 	{
 		pr->r[index_3 - 1] = param_1 | param_2;
-		pr->carry = !(pr->carry);
 		if (pr->r[index_3 - 1] == 0)
 			pr->carry = 1;
 		else
@@ -376,14 +375,13 @@ void	vm_xor(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]));
-	index_3 = get_param(core, pr, pr->params[2], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1]));
+	index_3 = core->arena[pr->pc + 2 + get_size(pr->op
+		, pr->params[0]) + get_size(pr->op, pr->params[1])];
 	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE) &&
 		pr->params[2] == REG_CODE)
 	{
 		pr->r[index_3 - 1] = param_1 ^ param_2;
-		pr->carry = !(pr->carry);
 		if (pr->r[index_3 - 1] == 0)
 			pr->carry = 1;
 		else

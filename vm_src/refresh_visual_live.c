@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:03:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/08 13:16:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/09 12:22:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	refresh_live_by_champ(t_core *core, int i, t_champ **current)
 	ft_strdel(&(core->visu->str));
 	core->visu->str = ft_itoa((*current)->process_live);
 	mvwprintw(core->visu->hud, 19 + (i * 4), 59, core->visu->str);
+	mvwprintw(core->visu->hud, 19 + (i * 4), 59 + ft_strlen(core->visu->str)
+	, "      ");
 	ft_strdel(&(core->visu->str));
 	core->visu->str = ft_itoa((*current)->live_by_ctd);
 	mvwprintw(core->visu->hud, 20 + (i * 4), 40, core->visu->str);
