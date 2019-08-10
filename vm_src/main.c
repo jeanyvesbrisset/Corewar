@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/10 11:04:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/10 15:40:13 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int		ft_otoi(unsigned char *nb_str, int size)
 	}
 	if (res < 0)
 		res--;
+	// ft_printf("FT_OTOI return %d    :     ", res);
 	return (res);
 }
 

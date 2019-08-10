@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/10 12:24:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/10 16:33:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	vm_ld(t_core *core, t_proces *pr)
 			pr->carry = 1;
 		else
 			pr->carry = 0;
-		// if (p2_index == 2)
-			// ft_printf("LD champ %d : param1 = %d dans r%d, carry = %d\n", pr->champ, param_1, p2_index, pr->carry);
+		//  if (p2_index == 4)
+			//  ft_printf("LD champ %d (pr %d) : param1 = %d dans r%d, carry = %d at cycle %d\n", pr->champ, pr->proces_nb, param_1, p2_index, pr->carry, core->total_cycle);
 		//if (core->total_cycle < 3000)
 			// ft_printf("le carry = %d du process %d apred un ld\n", pr->carry, pr->champ);
 	}
@@ -183,15 +183,26 @@ void	vm_ldi(t_core *core, t_proces *pr)
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr-> pc + 2 + get_size(pr->op
 		, pr->params[0]));
-	if (pr->params[0] < 1 || pr->params[0] > 3
-		|| pr->params[1] != DIR_CODE || pr->params[1] != REG_CODE
+	
+	if ((pr->params[0] < 1 && pr->params[0] > 3)
+		|| (pr->params[1] != DIR_CODE && pr->params[1] != REG_CODE)
 		|| pr->params[2] != REG_CODE)
 		return ;
-	sum = param_1 + param_2;
+	sum = (param_1 + param_2) % MEM_SIZE;
 	r_index = core->arena[pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[0])];
-	if (r_index > 0 && r_index >= REG_SIZE)
-		pr->r[r_index - 1] = pr->pc + (sum % IDX_MOD);
+		, pr->params[0]) + get_size(pr->op, pr->params[1])];
+	//ft_printf("r_index = %d : arena[pr->pc : %d + 2 + pr->params[0] %d + pr->param[1] %d\n", r_index, pr->pc, pr->params[0], pr->params[1]);
+	if (r_index > 0 && r_index <= REG_SIZE)
+	{
+		if (sum < MEM_SIZE - IDX_MOD)
+			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc
+			+ (sum % IDX_MOD))% MEM_SIZE]), 4);
+		else
+			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc + (MEM_SIZE
+			+ ((ft_abs(sum - MEM_SIZE) % IDX_MOD) * -1))) % MEM_SIZE]), 4);
+		// if (core->total_cycle == 2510)
+			// ft_printf("ldi by pr %d for champ %d, sum = %d( p1 %d + p2 %d), r%d = %d at cycle %d\n", pr->proces_nb, pr->champ, sum, param_1, param_2, r_index, pr->r[r_index - 1], core->total_cycle);
+	}
 }
 
 // Transfert direct Registre > RAM / Registre. 
@@ -236,11 +247,11 @@ void	vm_sti(t_core *core, t_proces *pr)
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
-	if (param_2 + param_3 < MEM_SIZE - IDX_MOD)
-			addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
+	if ((param_2 + param_3) < MEM_SIZE - IDX_MOD)
+			addr = (pr->pc + ((param_2 + param_3) % IDX_MOD)) % MEM_SIZE;
 	else
-		addr = pr->pc + (MEM_SIZE
-			+ ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1));
+		addr = (pr->pc + (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE)
+		% IDX_MOD) * -1))) % MEM_SIZE;
 	//addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
@@ -250,9 +261,10 @@ void	vm_sti(t_core *core, t_proces *pr)
 		ft_itoo_vm(core, addr, param_1, 4);
 		if (core->flag_v)
 			visu_sti_st(core, pr, addr, 4);
+		// if (core->total_cycle < 3500)
+			// ft_printf("pr %d for champ %d sti print %d from r%d at cycle %d\n", pr->proces_nb, pr->champ, param_1, core->arena[pr->pc + 2], core->total_cycle);
 	}
 }
-
 /*
 ** Like ld but without the adressing restriction (aka %IDX_MOD)
 */
