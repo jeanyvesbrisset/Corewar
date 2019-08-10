@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/10 16:33:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/10 18:02:00 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,8 +250,12 @@ void	vm_sti(t_core *core, t_proces *pr)
 	if ((param_2 + param_3) < MEM_SIZE - IDX_MOD)
 			addr = (pr->pc + ((param_2 + param_3) % IDX_MOD)) % MEM_SIZE;
 	else
+	{
 		addr = (pr->pc + (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE)
 		% IDX_MOD) * -1))) % MEM_SIZE;
+		if (pr->champ == 2)
+			ft_printf(" at time %d STI reverse print addr (%d) = (pr->pc (%d) + %d (MEM_SIZE + ((ft_abs(param_2 (%d) + param_3 (%d) - MEM_SIZE) (%d) %% IDX_MOD) (%d)* -1))) %% MEM_SIZE\n", core->total_cycle, addr, pr->pc, (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1)), param_2, param_3, ft_abs(param_2 + param_3 - MEM_SIZE), (ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD));
+	}
 	//addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE

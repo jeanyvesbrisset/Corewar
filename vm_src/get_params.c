@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/10 16:31:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/10 17:14:31 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 {
 	int param;
 
-	if (pr->op != 13 || pr->op != 14 || pr->op != 15)
+	if (pr->op != 10 || pr->op != 11 || pr->op != 13 || pr->op != 14
+	|| pr->op != 15)
 	{
 		param = ft_otoi(&(core->arena[cursor]), 2) % MEM_SIZE;
 		if (param < MEM_SIZE - IDX_MOD)
