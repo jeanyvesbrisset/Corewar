@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/09 16:22:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/10 12:24:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,6 @@ void	vm_st(t_core *core, t_proces *pr)
 	{
 		ft_itoo_vm(core, pr->pc + param_2, param_1, 4);
 		//ft_printf("Param_2 dans st = %d\n", param_2);
-		//ft_printf("st ecrit ici : %d(pc : %d + p2 : %d) et il ecrit ca %d\n", pr->pc + param_2, pr->pc, param_2, param_1);
 		if (core->flag_v)
 			visu_sti_st(core, pr, pr->pc + param_2, 4);
 	}
@@ -312,6 +311,7 @@ void	vm_fork(t_core *core, t_proces *pr)
 	//ft_printf("new->pc = %d\n", new->pc); 
 	new->next = core->proces;
 	core->proces = new;
+	read_op(core, new);
 }
 
 void	vm_lfork(t_core *core, t_proces *pr)
