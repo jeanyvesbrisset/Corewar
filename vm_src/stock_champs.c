@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/09 14:08:56 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/11 19:15:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		init_champ(t_core *core, char *name, int *i, int n)
 		n_champ->pos = n;
 		n_champ->tmp_n = n;
 		*i += 2;
+	//a mettre name = av[i]
 	}
 	else
 	{

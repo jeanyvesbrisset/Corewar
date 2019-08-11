@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/11 17:42:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/11 18:48:10 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void	vm_ldi(t_core *core, t_proces *pr)
 			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc + sum)
 			% MEM_SIZE]), 4);
 			if (pr->r[r_index - 1] < 0)
-				(pr->r[r_index - 1])--;
+				ft_printf("le REGISTRE = %d\n", pr->r[r_index - 1]);
 		}
 		// if (core->total_cycle == 2510)
 			// ft_printf("ldi by pr %d for champ %d, sum = %d( p1 %d + p2 %d), r%d = %d at cycle %d\n", pr->proces_nb, pr->champ, sum, param_1, param_2, r_index, pr->r[r_index - 1], core->total_cycle);
@@ -234,6 +234,8 @@ void	vm_st(t_core *core, t_proces *pr)
 	}
 	else if (pr->params[1] == IND_CODE)
 	{
+		if (param_1 < 0)
+			param_1--;
 		ft_itoo_vm(core, pr->pc + param_2, param_1, 4);
 		//ft_printf("Param_2 dans st = %d\n", param_2);
 		if (core->flag_v)
@@ -266,12 +268,14 @@ void	vm_sti(t_core *core, t_proces *pr)
 		 || pr->params[1] == IND_CODE)
 		&& (pr->params[2] == REG_CODE || pr->params[2] == DIR_CODE))
 	{
+		if (param_1 < 0)
+			param_1--;
 		ft_itoo_vm(core, addr, param_1, 4);
 		if (core->flag_v)
 			visu_sti_st(core, pr, addr, 4);
-		if (core->arena[pr->pc + 2] == 4 && core->total_cycle < 0)
+		if (core->arena[pr->pc + 2] == 4 && param_1 < 0)
 		{
-			ft_printf("dans STI param2 = %d et r2 = %d at cycle : %d\n", param_2, param_3, core->total_cycle);
+			//ft_printf("dans STI param2 = %d et r2 = %d et il ecrit %d at cycle : %d\n", param_2, param_3, param_1, core->total_cycle);
 		}
 			// ft_printf("pr %d for champ %d sti print %d from r%d at cycle %d\n", pr->proces_nb, pr->champ, param_1, core->arena[pr->pc + 2], core->total_cycle);
 	}
