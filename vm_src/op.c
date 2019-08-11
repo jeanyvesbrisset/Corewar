@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/10 18:02:00 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/11 15:24:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,20 +175,21 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 
 void	vm_ldi(t_core *core, t_proces *pr)
 {
-	int param_1;
-	int param_2;
+	int	param_1;
+	int	param_2;
 	int	r_index;
-	int sum;
+	int	sum;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
 	param_2 = get_param(core, pr, pr->params[1], pr-> pc + 2 + get_size(pr->op
 		, pr->params[0]));
 	
-	if ((pr->params[0] < 1 && pr->params[0] > 3)
+	if ((pr->params[0] != REG_CODE && pr->params[0] != DIR_CODE
+		&& pr->params[0] != IND_CODE)
 		|| (pr->params[1] != DIR_CODE && pr->params[1] != REG_CODE)
 		|| pr->params[2] != REG_CODE)
 		return ;
-	sum = (param_1 + param_2) % MEM_SIZE;
+	sum = ((unsigned int)(param_1 + param_2)) % MEM_SIZE;
 	r_index = core->arena[pr->pc + 2 + get_size(pr->op
 		, pr->params[0]) + get_size(pr->op, pr->params[1])];
 	//ft_printf("r_index = %d : arena[pr->pc : %d + 2 + pr->params[0] %d + pr->param[1] %d\n", r_index, pr->pc, pr->params[0], pr->params[1]);
@@ -199,7 +200,7 @@ void	vm_ldi(t_core *core, t_proces *pr)
 			+ (sum % IDX_MOD))% MEM_SIZE]), 4);
 		else
 			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc + (MEM_SIZE
-			+ ((ft_abs(sum - MEM_SIZE) % IDX_MOD) * -1))) % MEM_SIZE]), 4);
+			+ (((MEM_SIZE - sum) % IDX_MOD) * -1))) % MEM_SIZE]), 4);
 		// if (core->total_cycle == 2510)
 			// ft_printf("ldi by pr %d for champ %d, sum = %d( p1 %d + p2 %d), r%d = %d at cycle %d\n", pr->proces_nb, pr->champ, sum, param_1, param_2, r_index, pr->r[r_index - 1], core->total_cycle);
 	}
@@ -247,14 +248,14 @@ void	vm_sti(t_core *core, t_proces *pr)
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	param_3 = get_param(core, pr, pr->params[2], pr->pc + 3 + get_size(pr->op
 		, pr->params[1]));
-	if ((param_2 + param_3) < MEM_SIZE - IDX_MOD)
-			addr = (pr->pc + ((param_2 + param_3) % IDX_MOD)) % MEM_SIZE;
+	addr = ((unsigned int)(param_2 + param_3)) % MEM_SIZE;
+	if (addr < MEM_SIZE - IDX_MOD)
+		addr = (pr->pc + (addr % IDX_MOD)) % MEM_SIZE;
 	else
 	{
-		addr = (pr->pc + (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE)
-		% IDX_MOD) * -1))) % MEM_SIZE;
-		if (pr->champ == 2)
-			ft_printf(" at time %d STI reverse print addr (%d) = (pr->pc (%d) + %d (MEM_SIZE + ((ft_abs(param_2 (%d) + param_3 (%d) - MEM_SIZE) (%d) %% IDX_MOD) (%d)* -1))) %% MEM_SIZE\n", core->total_cycle, addr, pr->pc, (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1)), param_2, param_3, ft_abs(param_2 + param_3 - MEM_SIZE), (ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD));
+		addr = (pr->pc + (MEM_SIZE - ((MEM_SIZE - addr) % IDX_MOD))) % MEM_SIZE;
+		// if (pr->champ == 2)
+			// ft_printf(" at time %d STI reverse print addr (%d) = (pr->pc (%d) + %d (MEM_SIZE + ((ft_abs(param_2 (%d) + param_3 (%d) - MEM_SIZE) (%d) %% IDX_MOD) (%d)* -1))) %% MEM_SIZE\n", core->total_cycle, addr, pr->pc, (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1)), param_2, param_3, ft_abs(param_2 + param_3 - MEM_SIZE), (ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD));
 	}
 	//addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
 	if (pr->params[0] == REG_CODE &&

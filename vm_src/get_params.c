@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/10 17:14:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/11 15:15:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 		if (param < MEM_SIZE - IDX_MOD)
 			param = param % IDX_MOD;
 		else
-			param = MEM_SIZE + ((ft_abs(param - MEM_SIZE) % IDX_MOD) * -1);
+			param = MEM_SIZE - ((MEM_SIZE - (param % MEM_SIZE)) % IDX_MOD);
+		ft_printf("param = %d at cycle %d\n", param, core->total_cycle);
 	}
 	else
 		param = ft_otoi(&(core->arena[cursor]), 2);
