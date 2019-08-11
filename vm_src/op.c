@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/11 15:24:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:42:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,10 +197,14 @@ void	vm_ldi(t_core *core, t_proces *pr)
 	{
 		if (sum < MEM_SIZE - IDX_MOD)
 			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc
-			+ (sum % IDX_MOD))% MEM_SIZE]), 4);
+			+ (sum % IDX_MOD)) % MEM_SIZE]), 4);
 		else
-			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc + (MEM_SIZE
-			+ (((MEM_SIZE - sum) % IDX_MOD) * -1))) % MEM_SIZE]), 4);
+		{
+			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc + sum)
+			% MEM_SIZE]), 4);
+			if (pr->r[r_index - 1] < 0)
+				(pr->r[r_index - 1])--;
+		}
 		// if (core->total_cycle == 2510)
 			// ft_printf("ldi by pr %d for champ %d, sum = %d( p1 %d + p2 %d), r%d = %d at cycle %d\n", pr->proces_nb, pr->champ, sum, param_1, param_2, r_index, pr->r[r_index - 1], core->total_cycle);
 	}
@@ -253,11 +257,10 @@ void	vm_sti(t_core *core, t_proces *pr)
 		addr = (pr->pc + (addr % IDX_MOD)) % MEM_SIZE;
 	else
 	{
-		addr = (pr->pc + (MEM_SIZE - ((MEM_SIZE - addr) % IDX_MOD))) % MEM_SIZE;
+		addr = (pr->pc + addr + 1) % MEM_SIZE;
 		// if (pr->champ == 2)
 			// ft_printf(" at time %d STI reverse print addr (%d) = (pr->pc (%d) + %d (MEM_SIZE + ((ft_abs(param_2 (%d) + param_3 (%d) - MEM_SIZE) (%d) %% IDX_MOD) (%d)* -1))) %% MEM_SIZE\n", core->total_cycle, addr, pr->pc, (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1)), param_2, param_3, ft_abs(param_2 + param_3 - MEM_SIZE), (ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD));
 	}
-	//addr = pr->pc + ((param_2 + param_3) % IDX_MOD);
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
 		 || pr->params[1] == IND_CODE)
@@ -266,7 +269,10 @@ void	vm_sti(t_core *core, t_proces *pr)
 		ft_itoo_vm(core, addr, param_1, 4);
 		if (core->flag_v)
 			visu_sti_st(core, pr, addr, 4);
-		// if (core->total_cycle < 3500)
+		if (core->arena[pr->pc + 2] == 4 && core->total_cycle < 0)
+		{
+			ft_printf("dans STI param2 = %d et r2 = %d at cycle : %d\n", param_2, param_3, core->total_cycle);
+		}
 			// ft_printf("pr %d for champ %d sti print %d from r%d at cycle %d\n", pr->proces_nb, pr->champ, param_1, core->arena[pr->pc + 2], core->total_cycle);
 	}
 }
