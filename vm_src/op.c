@@ -181,21 +181,22 @@ void	vm_ldi(t_core *core, t_proces *pr)
 	int	sum;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[1], pr-> pc + 2 + get_size(pr->op
+	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
 		, pr->params[0]));
-	
 	if ((pr->params[0] != REG_CODE && pr->params[0] != DIR_CODE
 		&& pr->params[0] != IND_CODE)
 		|| (pr->params[1] != DIR_CODE && pr->params[1] != REG_CODE)
 		|| pr->params[2] != REG_CODE)
 		return ;
 	sum = ((unsigned int)(param_1 + param_2)) % MEM_SIZE;
+	if (pr->op == 14)
+		pr->carry = (sum ? 1 : 0);
 	r_index = core->arena[pr->pc + 2 + get_size(pr->op
 		, pr->params[0]) + get_size(pr->op, pr->params[1])];
 	//ft_printf("r_index = %d : arena[pr->pc : %d + 2 + pr->params[0] %d + pr->param[1] %d\n", r_index, pr->pc, pr->params[0], pr->params[1]);
 	if (r_index > 0 && r_index <= REG_SIZE)
 	{
-		if (sum < MEM_SIZE - IDX_MOD)
+		if (sum < MEM_SIZE - IDX_MOD && pr->op != 14)
 			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc
 			+ (sum % IDX_MOD)) % MEM_SIZE]), 4);
 		else
@@ -296,7 +297,6 @@ void	vm_lld(t_core *core, t_proces *pr)
 void	vm_lldi(t_core *core, t_proces *pr)
 {
 	vm_ldi(core, pr);
-	pr->carry = !(pr->carry);
 //	if (core->total_cycle < 3000)
 	//		ft_printf("le carry = %d du process %d apred un lldi\n", pr->carry, pr->champ);
 }
