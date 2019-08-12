@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/11 19:15:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:22:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		add_champ_list(t_core *core, t_champ **champ, char *file)
 	return (1);
 }
 
-int		init_champ(t_core *core, char *name, int *i, int n)
+int		init_champ(t_core *core, char **av, int *i, int n)
 {
 	t_champ		*n_champ;
 	static int	champ_order = 0;
@@ -89,14 +89,13 @@ int		init_champ(t_core *core, char *name, int *i, int n)
 		n_champ->pos = n;
 		n_champ->tmp_n = n;
 		*i += 2;
-	//a mettre name = av[i]
 	}
 	else
 	{
 		n_champ->pos = champ_order;
 		n_champ->tmp_n = 0;
 	}
-	if (!(add_champ_list(core, &n_champ, name)))
+	if (!(add_champ_list(core, &n_champ, av[*i])))
 	{
 		return (ft_error("invalid input for champion\n", 0
 		, (void**)&n_champ, 0));
@@ -113,17 +112,17 @@ int		stock_champ(int ac, char **av, t_core *core)
 	{
 		if (is_dot_cor(av[i]))
 		{
-			if (!(init_champ(core, av[i], &i, 0)))
+			if (!(init_champ(core, av, &i, 0)))
 				return (0);
 		}
 		else if (!(ft_strcmp(av[i], "-n")))
 		{
-			if (!(init_champ(core, av[i], &i, ft_atoi(av[i + 1]))))
+			if (!(init_champ(core, av, &i, ft_atoi(av[i + 1]))))
 				return (0);
 		}
 	}
 	ajust_champ_pos(core);
-	sort_champ_list(&(core->champs));
+	sort_champ_list(&(core->champs), core);
 	i = 0;
 	while (++i <= core->champ_nb)
 		if (!(init_process(&(core->proces), i, 0

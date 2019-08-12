@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gest_champ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:40:16 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/09 11:23:19 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:10:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ajust_champ_pos(t_core *core)
 	ajust_champ_pos2(core);
 }
 
-void	sort_champ_list(t_champ **champ)
+void	sort_champ_list(t_champ **champ, t_core *core)
 {
 	t_champ *current;
 	t_champ *before;
@@ -91,12 +91,15 @@ void	sort_champ_list(t_champ **champ)
 
 	current = *champ;
 	after = current->next;
+	before = 0;
 	while (after)
 	{
 		if (current->pos < after->pos)
 		{
 			if (before)
 				before->next = after;
+			else
+				core->champs = after;
 			current->next = after->next;
 			after->next = current;
 			current = *champ;

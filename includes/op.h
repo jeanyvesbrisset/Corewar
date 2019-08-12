@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/09 14:09:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:05:27 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ int					stock_champ(int ac, char **av, t_core *core);
 int					is_dot_cor(char *av);
 int					init_process(t_proces **proce, int champ_nb, int pc
 	, int *sum_process);
-void				sort_champ_list(t_champ **champ);
+void				sort_champ_list(t_champ **champ, t_core *core);
 void				ajust_champ_pos(t_core *core);
 /*
 ** vm

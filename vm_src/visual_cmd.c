@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visual_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:06:37 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/10 11:41:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 13:43:55 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	handle_pause(t_core *core, int *pause, int p_or_r)
 	{
 		mvwprintw(core->visu->hud, 5, 45, "**   PAUSE   **");
 		(*pause) *= -1;
+		wrefresh(core->visu->hud);
 	}
 	else
 		mvwprintw(core->visu->hud, 5, 45, "**  RUNNING  **");
-	wrefresh(core->visu->hud);
 	wattroff(core->visu->hud, A_BOLD);
 }
 
