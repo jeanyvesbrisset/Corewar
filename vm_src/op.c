@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/11 18:48:10 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 17:14:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,17 @@ void	vm_ld(t_core *core, t_proces *pr)
 		(pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE))
 	{
-		pr->r[p2_index - 1] = param_1;
+		if (pr->params[0] == DIR_CODE)
+			pr->r[p2_index - 1] = param_1;
+		else
+			pr->r[p2_index - 1] = ft_otoi(&(core->arena[(pr->pc
+			+ param_1) % MEM_SIZE]), 4);
 		if (!(param_1))
 			pr->carry = 1;
 		else
 			pr->carry = 0;
-		//  if (p2_index == 4)
-			//  ft_printf("LD champ %d (pr %d) : param1 = %d dans r%d, carry = %d at cycle %d\n", pr->champ, pr->proces_nb, param_1, p2_index, pr->carry, core->total_cycle);
+		// if (p2_index == 5 && core->total_cycle < 3700 && core->total_cycle > 0)
+			// ft_printf("LD champ %d (pr %d) : param1 = %d dans r%d, carry = %d at cycle %d by %d\n", pr->champ, pr->proces_nb, param_1, p2_index, pr->carry, core->total_cycle, pr->proces_nb);
 		//if (core->total_cycle < 3000)
 			// ft_printf("le carry = %d du process %d apred un ld\n", pr->carry, pr->champ);
 	}
@@ -260,7 +264,7 @@ void	vm_sti(t_core *core, t_proces *pr)
 		addr = (pr->pc + (addr % IDX_MOD)) % MEM_SIZE;
 	else
 	{
-		addr = (pr->pc + addr + 1) % MEM_SIZE;
+		addr = (pr->pc + addr) % MEM_SIZE;
 		// if (pr->champ == 2)
 			// ft_printf(" at time %d STI reverse print addr (%d) = (pr->pc (%d) + %d (MEM_SIZE + ((ft_abs(param_2 (%d) + param_3 (%d) - MEM_SIZE) (%d) %% IDX_MOD) (%d)* -1))) %% MEM_SIZE\n", core->total_cycle, addr, pr->pc, (MEM_SIZE + ((ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD) * -1)), param_2, param_3, ft_abs(param_2 + param_3 - MEM_SIZE), (ft_abs(param_2 + param_3 - MEM_SIZE) % IDX_MOD));
 	}
@@ -331,8 +335,10 @@ void	vm_fork(t_core *core, t_proces *pr)
 	new->proces_nb = core->proces->proces_nb + 1;
 	core->sum_process++;
 	i = -1;
-	while (++i < REG_SIZE)
+	while (++i < REG_NUMBER)
 		new->r[i] = pr->r[i];
+	// if (core->total_cycle < 3700 && core->total_cycle > 0)
+		// ft_printf("FORK : R5 = %d et %d\n", new->r[4], pr->r[4]);
 	new->carry = pr->carry;
 	new->pc = (pr->pc + param_1) % MEM_SIZE;
 	//ft_printf("new->pc = %d\n", new->pc); 
@@ -412,6 +418,8 @@ void	vm_xor(t_core *core, t_proces *pr)
 		pr->params[2] == REG_CODE)
 	{
 		pr->r[index_3 - 1] = param_1 ^ param_2;
+		// if (core->total_cycle < 3700 && core->total_cycle > 3000)
+			// ft_printf("XOR r%d = %d (r%d (%d) ^ r%d (%d) at cycle %d by %d\n", index_3, pr->r[index_3 - 1],core->arena[pr->pc+2], param_1, core->arena[pr->pc+2 + get_size(pr->op, pr->params[0])],param_2, core->total_cycle, pr->proces_nb);
 		if (pr->r[index_3 - 1] == 0)
 			pr->carry = 1;
 		else
