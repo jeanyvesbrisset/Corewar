@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/11 18:54:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 11:01:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 	if (pr->op != 10 || pr->op != 11 || pr->op != 13 || pr->op != 14
 	|| pr->op != 15)
 	{
-		param = ft_otoi(&(core->arena[cursor]), 2) % MEM_SIZE;
+		param = ft_otoi(&(core->arena[cursor % MEM_SIZE]), 2) % MEM_SIZE;
 		if (param < MEM_SIZE - IDX_MOD)
 			param = param % IDX_MOD;
 		//else
@@ -41,7 +41,7 @@ static int	get_reg(t_core *core, t_proces *pr, int cursor)
 	int p_index;
 	int param;
 
-	p_index = (int)(core->arena[cursor]);
+	p_index = (int)(core->arena[cursor % MEM_SIZE]);
 	if (p_index > 0 && p_index <= REG_NUMBER)
 		param = pr->r[p_index - 1];
 	else

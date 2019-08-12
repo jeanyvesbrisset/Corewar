@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 14:45:12 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/09 14:08:47 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/12 11:01:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		get_direct(t_core *core, t_proces *pr, int cursor)
 	int	size;
 
 	size = g_fvm_tab[pr->op - 1].direct_size;
-	return (ft_otoi(&(core->arena[cursor]), size));
+	return (ft_otoi(&(core->arena[cursor % MEM_SIZE]), size));
 }
 
 int		get_size(int op, int type)
@@ -38,7 +38,7 @@ void	handle_proces(t_core *core, t_proces *pr)
 
 	ocp = 0;
 	if (g_fvm_tab[pr->op - 1].ocp)
-		ocp = core->arena[pr->pc + 1];
+		ocp = core->arena[(pr->pc + 1) % MEM_SIZE];
 	read_ocp(pr, ocp);
 	pr->pc_jump = get_pr_length(pr, pr->op);
 	g_fvm_tab[pr->op - 1].f(core, pr);
