@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/12 14:22:46 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:09:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		read_champ2(t_champ *champ, int fd)
 		return (0);
 	if ((ret = read(fd, champ->bytecode, champ->size)) != champ->size)
 		return (0);
-	if (champ->size == CHAMP_MAX_SIZE && (ret = read(fd, str, 4)) != -1)
-		return (0);
+	// if (champ->size == CHAMP_MAX_SIZE && (ret = read(fd, str, 4)) != -1)
+		// return (0);
 	return (1);
 }
 
