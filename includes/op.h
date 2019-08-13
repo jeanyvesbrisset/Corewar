@@ -245,7 +245,7 @@ void				ajust_champ_pos(t_core *core);
 */
 void				vm(t_core *core);
 void				init_vm(t_core *core);
-int					ft_otoi(unsigned char *nb_str, int size);
+int					ft_otoi(unsigned char *nb_str, int addr, int size);
 void				run_vm(t_core *core);
 int					get_size(int op, int type);
 int 				get_param(t_core *core, t_proces *pr, int type, int cursor);

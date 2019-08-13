@@ -18,7 +18,7 @@ int		get_direct(t_core *core, t_proces *pr, int cursor)
 	int	size;
 
 	size = g_fvm_tab[pr->op - 1].direct_size;
-	return (ft_otoi(&(core->arena[cursor]), size));
+	return (ft_otoi(&(core->arena[0]), cursor, size));
 }
 
 int		get_size(int op, int type)

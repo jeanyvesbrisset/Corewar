@@ -40,7 +40,7 @@ int		read_champ(t_champ *champ, char *file)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if (ft_otoi(str, 4) != COREWAR_EXEC_MAGIC)
+	if (ft_otoi(str, 0, 4) != COREWAR_EXEC_MAGIC)
 		return (ft_error("Not the right magic number\n", 0, 0, 0));
 	if (!(champ->name = (unsigned char*)malloc(PROG_NAME_LENGTH)))
 		return (0);
@@ -50,7 +50,7 @@ int		read_champ(t_champ *champ, char *file)
 		return (0);
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
-	if ((champ->size = ft_otoi(str, 4)) > CHAMP_MAX_SIZE)
+	if ((champ->size = ft_otoi(str, 0, 4)) > CHAMP_MAX_SIZE)
 		return (0);
 	if (!(champ->comment = (unsigned char*)malloc(COMMENT_LENGTH)))
 		return (0);

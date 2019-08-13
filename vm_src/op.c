@@ -67,8 +67,8 @@ void	vm_ld(t_core *core, t_proces *pr)
 		if (pr->params[0] == DIR_CODE)
 			pr->r[p2_index - 1] = param_1;
 		else
-			pr->r[p2_index - 1] = ft_otoi(&(core->arena[(pr->pc
-			+ param_1) % MEM_SIZE]), 4);
+			pr->r[p2_index - 1] = ft_otoi(&(core->arena[0]),
+			(pr->pc + param_1) % MEM_SIZE, 4);
 		if (!(param_1))
 			pr->carry = 1;
 		else
@@ -198,15 +198,15 @@ void	vm_ldi(t_core *core, t_proces *pr)
 	r_index = core->arena[pr->pc + 2 + get_size(pr->op
 		, pr->params[0]) + get_size(pr->op, pr->params[1])];
 	//ft_printf("r_index = %d : arena[pr->pc : %d + 2 + pr->params[0] %d + pr->param[1] %d\n", r_index, pr->pc, pr->params[0], pr->params[1]);
-	if (r_index > 0 && r_index <= REG_SIZE)
+	if (r_index > 0 && r_index <= REG_NUMBER)
 	{
 		if (sum < MEM_SIZE - IDX_MOD && pr->op != 14)
-			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc
-			+ (sum % IDX_MOD)) % MEM_SIZE]), 4);
+			pr->r[r_index - 1] = ft_otoi(&(core->arena[0]), 
+			(pr->pc + (sum % IDX_MOD)) % MEM_SIZE, 4);
 		else
 		{
-			pr->r[r_index - 1] = ft_otoi(&(core->arena[(pr->pc + sum)
-			% MEM_SIZE]), 4);
+			pr->r[r_index - 1] = ft_otoi(&(core->arena[0]),
+			(pr->pc + sum) % MEM_SIZE, 4);
 			if (pr->r[r_index - 1] < 0)
 				ft_printf("le REGISTRE = %d\n", pr->r[r_index - 1]);
 		}

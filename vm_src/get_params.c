@@ -24,7 +24,7 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 	if (pr->op != 10 || pr->op != 11 || pr->op != 13 || pr->op != 14
 	|| pr->op != 15)
 	{	
-		param = ft_otoi(&(core->arena[cursor]), 2) % MEM_SIZE;
+		param = ft_otoi(&(core->arena[0]), cursor, 2) % MEM_SIZE;
 		if (param < MEM_SIZE - IDX_MOD)
 			param = param % IDX_MOD;
 		//else
@@ -32,7 +32,7 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 		//ft_printf("param = %d at cycle %d\n", param, core->total_cycle);
 	}
 	else
-		param = ft_otoi(&(core->arena[cursor]), 2);
+		param = ft_otoi(&(core->arena[0]), cursor, 2);
 	return (param);
 }
 

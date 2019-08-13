@@ -69,7 +69,7 @@ int		ft_error(char *error, int ret, void **to_free, int line)
 	return (ret);
 }
 
-int		ft_otoi(unsigned char *nb_str, int size)
+int		ft_otoi(unsigned char *nb_str, int addr, int size)
 {
 	int	i;
 	int	res;
@@ -82,7 +82,7 @@ int		ft_otoi(unsigned char *nb_str, int size)
 		div *= 256;
 	while (++i < size)
 	{
-		res += ((int)(nb_str[i]) * div);
+		res += ((int)(nb_str[(i + addr) % MEM_SIZE] * div));
 		div /= 256;
 	}
 //	if (res < 0)
