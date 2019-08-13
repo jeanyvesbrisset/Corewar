@@ -59,7 +59,7 @@ void	vm_ld(t_core *core, t_proces *pr)
 	int	p2_index;
 
 	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	p2_index = (int)(core->arena[pr->pc + 2 + get_size(pr->op, pr->params[0])]);
+	p2_index = (int)(core->arena[(pr->pc + 2 + get_size(pr->op, pr->params[0])) % MEM_SIZE]);
 	if ((p2_index > 0 && p2_index <= REG_NUMBER) &&
 		(pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
 		(pr->params[1] == REG_CODE))

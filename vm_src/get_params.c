@@ -23,8 +23,8 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 
 	if (pr->op != 10 || pr->op != 11 || pr->op != 13 || pr->op != 14
 	|| pr->op != 15)
-	{
-		param = ft_otoi(&(core->arena[cursor % MEM_SIZE]), 2) % MEM_SIZE;
+	{	
+		param = ft_otoi(&(core->arena[cursor]), 2) % MEM_SIZE;
 		if (param < MEM_SIZE - IDX_MOD)
 			param = param % IDX_MOD;
 		//else
@@ -41,7 +41,7 @@ static int	get_reg(t_core *core, t_proces *pr, int cursor)
 	int p_index;
 	int param;
 
-	p_index = (int)(core->arena[cursor % MEM_SIZE]);
+	p_index = (int)(core->arena[cursor]);
 	if (p_index > 0 && p_index <= REG_NUMBER)
 		param = pr->r[p_index - 1];
 	else
@@ -54,6 +54,8 @@ static int	get_reg(t_core *core, t_proces *pr, int cursor)
 
 int			get_param(t_core *core, t_proces *pr, int type, int cursor)
 {
+	cursor %= MEM_SIZE;
+
 	if (type == REG_CODE)
 		return (get_reg(core, pr, cursor));
 	else if (type == IND_CODE)
