@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 09:54:53 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/05 11:35:55 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:02:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_three_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	}
 	else if (str[(*(tab[0]))] == 'r')
 	{
-		if (*(tab[1]) >= CHAMP_MAX_SIZE)
+		if (*(tab[1]) > CHAMP_MAX_SIZE)
 			return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);
@@ -58,7 +58,7 @@ int		ft_two_choices(char *str, int **tab, t_cdata **start, t_label **lab)
 	}
 	else if (str[(*(tab[0]))] == 'r')
 	{
-		if (*(tab[1]) >= CHAMP_MAX_SIZE)
+		if (*(tab[1]) > CHAMP_MAX_SIZE)
 			return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 		if (!((*start)->str[(*(tab[1]))++] = is_register(str, tab[0])))
 			return (0);

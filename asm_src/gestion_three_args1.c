@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 10:51:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 18:55:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:02:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		gest_add(char *str, t_cdata **start, t_label **lab, int *index)
 
 	i = 0;
 	(void)lab;
-	if (*index + 5 >= CHAMP_MAX_SIZE)
+	if (*index + 5 > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 4;
 	(*start)->str[(*index)] = 84;
@@ -46,7 +46,7 @@ int		gest_sub(char *str, t_cdata **start, t_label **lab, int *index)
 
 	i = 0;
 	(void)lab;
-	if (*index + 5 >= CHAMP_MAX_SIZE)
+	if (*index + 5 > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 5;
 	(*start)->str[(*index)] = 84;
@@ -87,7 +87,7 @@ int		gest_and(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
-	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
+	if ((*((int*)(tab[1]))) > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
@@ -116,7 +116,7 @@ int		gest_or(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
-	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
+	if ((*((int*)(tab[1]))) > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);
@@ -145,7 +145,7 @@ int		gest_xor(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);
 	if (!(ft_three_choices(str, (int**)tab, start, lab)))
 		return (0);
-	if ((*((int*)(tab[1]))) >= CHAMP_MAX_SIZE)
+	if ((*((int*)(tab[1]))) > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*index)++] = is_register(str, &i)))
 		return (0);

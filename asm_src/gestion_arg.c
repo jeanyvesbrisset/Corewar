@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:41:29 by maginist          #+#    #+#             */
-/*   Updated: 2019/07/05 11:25:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 14:42:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		is_index(char *str, int *i, t_label **lab, int index)
 		while (str[j] && ft_strsearch(LABEL_CHARS, str[j]))
 			j++;
 		tmp = str[j];
-		if (j == 2)
+		if (j == 1)
 			return (0);
 		str[j] = 0;
 		str_cpy = ft_strdup(str + 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_find_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 17:37:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/10 15:26:02 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:02:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_itoo(unsigned char *str, char *str_nb, unsigned long long int size
 
 	i = size;
 	div = 1;
-	if (*index + (int)size >= CHAMP_MAX_SIZE)
+	if (*index + (int)size > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	nb = (9223372036854775807 + (str_nb[0] == '-'
 	? ft_atoll(str_nb) + 1 : ft_atoll(str_nb)));

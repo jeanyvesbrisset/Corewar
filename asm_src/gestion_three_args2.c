@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:11:01 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/05 14:18:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:02:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		end_ldi_and_lldi(int **tab, t_cdata **start, char *str)
 {
 	static char	*error = "Champion size too long, Max length : ";
 
-	if (*((int*)(tab[1])) >= CHAMP_MAX_SIZE)
+	if (*((int*)(tab[1])) > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*((int*)(tab[1])))++] = is_register(str, tab[0])))
 		return (0);

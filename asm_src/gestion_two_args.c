@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 19:19:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:02:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		gest_ld2(char *str, t_cdata **start, int **tab)
 
 	if (!(ft_good_transi(str, tab[0])))
 		return (0);
-	if ((*tab[1]) >= CHAMP_MAX_SIZE)
+	if ((*tab[1]) > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*tab[1])++] = is_register(str, tab[0])))
 		return (0);
@@ -83,7 +83,7 @@ int		gest_st(char *str, t_cdata **start, t_label **lab, int *index)
 		return (0);
 	if (str[i] == 'r')
 	{
-		if ((*index) >= CHAMP_MAX_SIZE)
+		if ((*index) > CHAMP_MAX_SIZE)
 			return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 		if (!((*start)->str[(*index)++] = is_register(str, &i)))
 			return (0);

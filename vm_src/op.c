@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/12 17:14:50 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 14:26:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,8 +207,8 @@ void	vm_ldi(t_core *core, t_proces *pr)
 		{
 			pr->r[r_index - 1] = ft_otoi(&(core->arena[0]),
 			(pr->pc + sum) % MEM_SIZE, 4);
-			if (pr->r[r_index - 1] < 0)
-				ft_printf("le REGISTRE = %d\n", pr->r[r_index - 1]);
+			// if (pr->r[r_index - 1] < 0)
+				// ft_printf("le REGISTRE = %d\n", pr->r[r_index - 1]);
 		}
 		// if (core->total_cycle == 2510)
 			// ft_printf("ldi by pr %d for champ %d, sum = %d( p1 %d + p2 %d), r%d = %d at cycle %d\n", pr->proces_nb, pr->champ, sum, param_1, param_2, r_index, pr->r[r_index - 1], core->total_cycle);

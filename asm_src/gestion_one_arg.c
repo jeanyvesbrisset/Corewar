@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 10:19:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/07/04 19:05:20 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:02:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
-	if (*index + 5 >= CHAMP_MAX_SIZE)
+	if (*index + 5 > CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 1;
 	if (!(fct_separator(str, 0, index, 0)))
@@ -37,14 +37,17 @@ int		gest_live(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	void	*tab[3];
-	int		int_size;
+	int			i;
+	void		*tab[3];
+	int			int_size;
+	static char	*error = "Champion size too long, Max length : ";
 
 	int_size = 2;
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
+	if (*index + 3 > CHAMP_MAX_SIZE)
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	(*start)->str[(*index)++] = 9;
 	if (!(fct_separator(str, 0, index, 0)))
 		return (0);
@@ -57,15 +60,18 @@ int		gest_zjmp(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_fork(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	void	*tab[3];
-	int		int_size;
+	int			i;
+	void		*tab[3];
+	int			int_size;
+	static char	*error = "Champion size too long, Max length : ";
 
 	int_size = 2;
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
 	(*start)->str[(*index)++] = 12;
+	if (*index + 3 > CHAMP_MAX_SIZE)
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!(fct_separator(str, 0, index, 0)))
 		return (0);
 	i = 0;
@@ -77,15 +83,18 @@ int		gest_fork(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_lfork(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
-	void	*tab[3];
-	int		int_size;
+	int			i;
+	void		*tab[3];
+	int			int_size;
+	static char	*error = "Champion size too long, Max length : ";
 
 	int_size = 2;
 	tab[0] = &i;
 	tab[1] = index;
 	tab[2] = &int_size;
 	(*start)->str[(*index)++] = 15;
+	if (*index + 3 > CHAMP_MAX_SIZE)
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!(fct_separator(str, 0, index, 0)))
 		return (0);
 	i = 0;
@@ -97,11 +106,14 @@ int		gest_lfork(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_aff(char *str, t_cdata **start, t_label **lab, int *index)
 {
-	int		i;
+	int			i;
+	static char	*error = "Champion size too long, Max length : ";
 
 	(*start)->str[(*index)++] = 16;
 	(*start)->str[(*index)++] = 64;
 	(void)lab;
+	if (*index + 3 > CHAMP_MAX_SIZE)
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!(fct_separator(str, 0, index, 0)))
 		return (0);
 	i = 0;
