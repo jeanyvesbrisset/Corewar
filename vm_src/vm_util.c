@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/14 14:30:19 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:41:41 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 	}
 }
 
+void	del_cur(t_core *core, t_proces *prev, t_proces **cur)
+{
+	if (prev)
+		prev->next = (*cur)->next;
+	else
+		core->proces = (*cur)->next;
+	free (*cur);
+	if (prev)
+		*cur = prev->next;
+	else
+		*cur = core->proces;
+	core->sum_process--;
+}
+
 int		check_lives(t_core *core)
 {
 	t_proces	*prev;
@@ -43,18 +57,7 @@ int		check_lives(t_core *core)
 	while (cur)
 	{
 		if (!(cur->alive))
-		{
-			if (prev)
-				prev->next = cur->next;
-			else
-				core->proces = cur->next;
-			free (cur);
-			if (prev)
-				cur = prev->next;
-			else
-				cur = core->proces;
-			core->sum_process--;
-		}
+			del_cur(core, prev, &cur);
 		else
 		{
 			prev = cur;
@@ -63,7 +66,6 @@ int		check_lives(t_core *core)
 	}
 	if (core->proces)
 		return (1);
-
  	return (0);
 }
 

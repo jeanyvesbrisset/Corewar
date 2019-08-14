@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/06 16:47:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:35:23 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	parcing_args(int ac, char **av, t_core *core)
 		else if (is_order_n(av, i, core))
 			i += 2;
 		else
-			return (0);
+			return (ft_error("No valid argument at : ", 0, 0, i));
 	}
 	if (core->champ_nb < 2)
 		return (ft_error("Not enough champion in the Arena\n", 0, 0, 0));

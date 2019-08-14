@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/14 14:27:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:13:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,6 @@ void				run_vm(t_core *core);
 int					get_size(int op, int type);
 int 				get_param(t_core *core, t_proces *pr, int type, int cursor);
 void				read_ocp(t_proces *pr, int ocp);
-void				ft_delete_proc(t_core *core);
 
 /*
 ** vm util
@@ -306,7 +305,5 @@ void				vm_aff(t_core *core, t_proces *pr);
 void				vm_sub_fork(t_core *core, t_proces *pr, int l);
 void				vm_fork(t_core *core, t_proces *pr);
 void				vm_lfork(t_core *core, t_proces *pr);
-
-
 
 #endif
