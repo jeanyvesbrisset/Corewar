@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/12 14:05:27 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:27:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef	struct 		s_core
 	int				total_cycle;
 	int				tmp_cycle;
 	int				cycle_to_die;
+	int				live_champ;
 	int				max_checks;
 	int				nbr_live;
 	t_champ			*champs; // trié par ordre inverse

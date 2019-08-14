@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/11 16:59:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:10:39 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ int		ft_otoi(unsigned char *nb_str, int addr, int size)
 		res += ((int)(nb_str[(i + addr) % MEM_SIZE] * div));
 		div /= 256;
 	}
-//	if (res < 0)
-//		res--;
-	// ft_printf("FT_OTOI return %d    :     ", res);
 	return (res);
 }
 
@@ -104,6 +101,7 @@ int		main(int ac, char **av)
 	core->champs = 0;
 	core->proces = 0;
 	core->visu = 0;
+	core->live_champ = 0;
 	if (!(parcing_args(ac, av, core)))
 		return (free_core(core));
 	if (!(stock_champ(ac, av, core)))

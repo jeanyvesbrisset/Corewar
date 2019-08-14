@@ -6,7 +6,7 @@
 /*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/09 15:12:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:30:19 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,6 @@ void	ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
 		i++;
 	}
 }
-
-/* void	del_process_loop(t_proces **tmp, t_proces *pr, t_proces *prev, int i)
-{
-	int j;
-
-	j = 0;
-	while (pr)
-	{
-		if (j == i)
-		{
-			*tmp = pr;
-			prev->next = pr->next;
-			return ;
-		}
-		prev = pr;
-		pr = pr->next;
-		j++;
-	}
-}
-
-void	del_process(t_proces **proces, int i)
-{
-	t_proces	*tmp;
-	t_proces	*pr;
-	t_proces	*prev;
-
-	pr = *proces;
-	tmp = 0;
-	prev = 0;
-	if (!i)
-	{
-		tmp = *proces;
-		*proces = (*proces)->next;
-	}
-	else
-		del_process_loop(&tmp, pr, prev, i);
-	free(tmp);
-}*/
 
 int		check_lives(t_core *core)
 {
@@ -113,6 +75,7 @@ void	reinit_cycle_lives(t_core *core)
 	champ = core->champs;
 	core->tmp_cycle = 0;
 	core->nbr_live = 0;
+	core->live_champ = 0;
 	pr = core->proces;
 	while (champ)
 	{

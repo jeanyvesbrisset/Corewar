@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/13 14:26:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 15:48:31 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void	vm_live(t_core *core, t_proces *pr)
 	champ_nb = get_param(core, pr, DIR_CODE, pr->pc + 1);
 	champ = get_champ(core, champ_nb);
 	pr->alive = 1;
+	core->nbr_live++;
 	if (champ && pr->params[0] == DIR_CODE)
 	{
 		champ->live_by_ctd++;
-		core->nbr_live++;
+		core->live_champ++;
 		champ->last_live = core->total_cycle;
 		champ->process_live = pr->proces_nb;
 		if (core->flag_vb)
@@ -69,10 +70,12 @@ void	vm_ld(t_core *core, t_proces *pr)
 		else
 			pr->r[p2_index - 1] = ft_otoi(&(core->arena[0]),
 			(pr->pc + param_1) % MEM_SIZE, 4);
-		if (!(param_1))
+		if (!(pr->r[p2_index - 1]))
 			pr->carry = 1;
 		else
 			pr->carry = 0;
+	//	if (core->total_cycle < 1200)
+	//		ft_printf("r4 = %d\n", pr->r[3]);
 		// if (p2_index == 5 && core->total_cycle < 3700 && core->total_cycle > 0)
 			// ft_printf("LD champ %d (pr %d) : param1 = %d dans r%d, carry = %d at cycle %d by %d\n", pr->champ, pr->proces_nb, param_1, p2_index, pr->carry, core->total_cycle, pr->proces_nb);
 		//if (core->total_cycle < 3000)
@@ -228,6 +231,8 @@ void	vm_st(t_core *core, t_proces *pr)
 	param_2 = get_param(core, pr, pr->params[1], pr->pc + 3);
 	//if (pr->params[1] == IND_CODE)
 	//	param_2 %= IDX_MOD;
+	//if (core->total_cycle < 1200)
+	//		ft_printf("sti = %d\n", param_1);
 	if (pr->params[0] != REG_CODE
 		&& (pr->params[1] != REG_CODE || pr->params[1] != IND_CODE))
 		return ;

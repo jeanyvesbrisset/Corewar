@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_champs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/13 15:09:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:10:45 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		read_champ2(t_champ *champ, int fd)
 		return (0);
 	if ((ret = read(fd, champ->bytecode, champ->size)) != champ->size)
 		return (0);
-	// if (champ->size == CHAMP_MAX_SIZE && (ret = read(fd, str, 4)) != -1)
-		// return (0);
+	if (champ->size == CHAMP_MAX_SIZE && (ret = read(fd, str, 4)) > 0)
+		return (ft_error("Champion is to big (682 bytes max)\n", 0, 0, 0));
 	return (1);
 }
 
@@ -51,7 +51,8 @@ int		read_champ(t_champ *champ, char *file)
 	if ((ret = read(fd, str, 4)) != 4)
 		return (0);
 	if ((champ->size = ft_otoi(str, 0, 4)) > CHAMP_MAX_SIZE)
-		return (0);
+		return (ft_error("Champion is to big : 682 (max bytes) < ", 0
+		, 0, champ->size));
 	if (!(champ->comment = (unsigned char*)malloc(COMMENT_LENGTH)))
 		return (0);
 	return (read_champ2(champ, fd));

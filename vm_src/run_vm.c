@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_vm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/13 15:22:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/14 12:56:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,10 @@ void	run_vm(t_core *core)
 		init_visual(core);
 	while (run_cycles_to_die(core) && core->cycle_to_die > 0)
 	{
+		//ft_printf("max_check = %d\n", core->max_checks);
 		if (!check_lives(core))
 			break ;
-		if (core->nbr_live >= NBR_LIVE || core->max_checks == MAX_CHECKS)
+		if (core->nbr_live >= NBR_LIVE || core->max_checks >= MAX_CHECKS)
 		{
 			core->cycle_to_die -= CYCLE_DELTA;
 			core->max_checks = 1;
@@ -139,11 +140,11 @@ void	run_vm(t_core *core)
 			core->max_checks++;
 		if (core->flag_v)
 			refresh_live_ctd(core);
-		// ft_printf("*+*++*+*+**+*+*+*+*+*+*+*+*++*+**+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+\n");
-		// ft_printf("(%d)\n", core->total_cycle);
-		// ft_printf("bigzork has done %d lives,", get_champ(core, 1)->live_by_ctd);
-		// ft_printf("zork has done %d lives \n",  get_champ(core, 2)->live_by_ctd);
-		// ft_printf("for a total of: %d \n",  core->nbr_live);
+		/*ft_printf("*+*++*+*+**+*+*+*+*+*+*+*+*++*+**+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+\n");
+		ft_printf("(%d)\n", core->total_cycle);
+		ft_printf("JUMPER has done %d lives,", get_champ(core, 1)->live_by_ctd);
+		ft_printf("ULTIMA has done %d lives \n",  get_champ(core, 2)->live_by_ctd);
+		ft_printf("for a total of: %d \n",  core->nbr_live);*/
 		reinit_cycle_lives(core);
 	}
 	ft_printf("total cycle = %d\n", core->total_cycle);
