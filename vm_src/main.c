@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/14 16:53:59 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:02:44 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		ft_otoi(unsigned char *nb_str, int addr, int size)
 int		main(int ac, char **av)
 {
 	t_core *core;
+	int i;//
 	t_champ *cur;
 
 	if (!(core = (t_core*)malloc(sizeof(t_core) * 1)))
@@ -109,10 +110,18 @@ int		main(int ac, char **av)
 		return (free_core(core));
 	cur = core->champs;
 	ft_printf("WELCOME!\nIntroducing contestants...\n");
-	while (cur)
+	i = 1;
+	while (i <= core->champ_nb)
 	{
-		ft_printf("Player %d, weigthing %d bytes, \"%s\", (\"%s\") !\n", cur->pos, cur->size, cur->name, cur->comment);
-		cur = cur->next;
+		if (cur->pos == i)
+		{
+			ft_printf("Player %d, weigthing %d bytes, \"%s\", (\"%s\") !\n"
+			,cur->pos, cur->size, cur->name, cur->comment);
+			cur = core->champs;
+			i++;
+		}
+		else
+			cur = cur->next;
 	}
 	vm(core);
 	free_core(core);
