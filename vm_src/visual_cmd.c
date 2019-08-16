@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:06:37 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/12 13:43:55 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:49:58 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	get_key(t_core *core)
 			break ;
 		}
 	}
-	timeout(500);
+	timeout(1);
 	usleep(1000000 / core->visu->cps);
 }

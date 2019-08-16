@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:03:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/14 16:12:36 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:50:09 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	refresh_process(t_core *core)
 {
 	wattron(core->visu->hud, A_BOLD);
+	mvwprintw(core->visu->hud, 15, 17, "      ");
 	core->visu->str = ft_itoa(core->sum_process);
 	mvwprintw(core->visu->hud, 15, 17, core->visu->str);
 	wattroff(core->visu->hud, A_BOLD);

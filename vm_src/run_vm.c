@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/15 15:48:36 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:50:26 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	handle_or_not(t_core *core, t_proces *pr, int h_or_n)
 {
 	if (h_or_n == 1)
 		handle_proces(core, pr);
-	if (!read_op(core, pr) && !pr->next)// c'est changer
+	if (!read_op(core, pr) && !h_or_n)
 		pr->pc = (pr->pc + 1) % MEM_SIZE;
 	if (core->flag_v && h_or_n)
 	{
