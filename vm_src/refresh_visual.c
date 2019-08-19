@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/12 13:53:24 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:39:25 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	visu_sti_st(t_core *core, t_proces *pr, int pos, int size)
 		, 2 + ((3 * (mem_s)) % 192), core->visu->str);
 		mvwchgat(core->visu->arena, 1 + ((3 * (mem_s)) / 192)
 		, 2 + ((3 * (mem_s)) % 192), 2, A_BOLD, pr->champ, 0);
+		ft_strdel(&(core->visu->str));
 		i++;
 	}
 	wrefresh(core->visu->arena);

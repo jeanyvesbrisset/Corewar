@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_visual.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:08:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/10 11:40:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:29:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	init_visual(t_core *core)
 	init_color_vm();
 	core->visu->arena = newwin(66, 195, 0, 0);
 	core->visu->hud = newwin(66, 111, 0, 195);
+	core->visu->str = 0;
+	core->visu->cps = 1;
 	refresh();
 	box(core->visu->arena, 0, 0);
 	box(core->visu->hud, 0, 0);

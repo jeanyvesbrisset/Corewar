@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/14 17:09:22 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:38:06 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	vm(t_core *core)
 	run_vm(core);
 	winner = get_winner(core);
 	if (core->flag_v)
+	{
 		visual_winner(core, winner);
+		free(core->visu);
+	}
 	ft_delete_proc(core);
 	ft_printf("AND THE WINNER IS...\n");
 	sleep(1);

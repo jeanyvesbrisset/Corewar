@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/14 16:44:08 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:31:40 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int		add_champ_list(t_core *core, t_champ **champ, char *file)
 	if (current)
 		if (current->tmp_n != 0 && (*champ)->tmp_n != 0)
 			return (0);
+	(*champ)->last_live = 0;
+	(*champ)->process_live = 0;
+	(*champ)->live_by_ctd = 0;
 	(*champ)->next = core->champs;
 	core->champs = *champ;
 	return (1);

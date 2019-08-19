@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/15 16:02:44 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:36:40 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		ft_otoi(unsigned char *nb_str, int addr, int size)
 int		main(int ac, char **av)
 {
 	t_core *core;
-	int i;//
+	int i;
 	t_champ *cur;
 
 	if (!(core = (t_core*)malloc(sizeof(t_core) * 1)))
@@ -104,6 +104,11 @@ int		main(int ac, char **av)
 	core->proces = 0;
 	core->visu = 0;
 	core->live_champ = 0;
+	core->sum_process = 0;
+	core->total_cycle = 0;
+	core->cycle_to_die = 0;
+	core->max_checks = 0;
+	core->nbr_live = 0;
 	if (!(parcing_args(ac, av, core)))
 		return (free_core(core));
 	if (!(stock_champ(ac, av, core)))

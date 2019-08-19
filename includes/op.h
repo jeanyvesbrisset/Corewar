@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/14 17:13:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:24:16 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ typedef	struct		s_visu
 {
 	WINDOW			*arena;
 	WINDOW			*hud;
-	int				ch;
 	int				cps;
 	int				live_bd[3];
 	char			*str;
