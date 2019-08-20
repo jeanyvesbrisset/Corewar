@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/19 12:24:16 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:09:15 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_f
 	char			*name;
 	int				(*f)(char *str, t_cdata **start, t_label **lab
 		, int *index);
+	int				size_min;
 }					t_f;
 
 typedef struct 		s_proces

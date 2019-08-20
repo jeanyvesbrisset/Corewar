@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_stock_first_half.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/08/13 14:54:20 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:57:18 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 		tabi++;
 	(*line)[s_name + i] = tmp;
 	start_to_command(start);
+	if ((tabi != 16 && g_f_tab[tabi].size_min + index >= CHAMP_MAX_SIZE))
+		return (ft_error("Champion size too long, Max length : "
+		, 0, 0, CHAMP_MAX_SIZE));
 	if (tabi != 16 && g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);
 	return (ft_error("Problem with instuction \n", 0, 0, 0));
@@ -138,7 +141,7 @@ int		line_is_correct(char **line, t_cdata **sta, t_label **lab, int *reader)
 	if (step < 2 && (ret = is_name(line, sta, reader)))
 	{
 		if (ret == -1)
-			return (ft_error("Error in .name\n", 0, 0, 0));
+			return (ft_error("Error in .name\n", 0, (void**)line, 0));
 		step += 1;
 	}
 	else if (step < 2 && is_comment(line, sta, reader))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stock_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 13:55:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/08/13 15:03:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:57:08 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		read_n_stock(char *file, t_stock **beg, t_cdata **st, t_label **lab)
 	if (!(reader = (int*)malloc(sizeof(int) * 2)))
 		return (0);
 	if ((reader[0] = open(file, O_RDONLY)) == -1)
-		return (0);
+		return (ft_error("Can't open file\n", 0, (void**)&reader, 0));
 	line = 0;
 	while ((reader[1] = get_next_line_mod(reader[0], &line)) > 0)
 	{

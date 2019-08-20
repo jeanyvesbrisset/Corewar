@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gestion_two_args.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 11:35:21 by floblanc          #+#    #+#             */
-/*   Updated: 2019/08/13 15:02:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/20 14:57:10 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		gest_ld2(char *str, t_cdata **start, int **tab)
 
 	if (!(ft_good_transi(str, tab[0])))
 		return (0);
-	if ((*tab[1]) > CHAMP_MAX_SIZE)
+	if ((*tab[1]) + 1 >= CHAMP_MAX_SIZE)
 		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*tab[1])++] = is_register(str, tab[0])))
 		return (0);
@@ -57,9 +57,13 @@ int		gest_ld(char *str, t_cdata **start, t_label **lab, int *index)
 
 int		gest_st2(char *str, int **tab, t_cdata **start)
 {
+	static char	*error = "Champion size too long, Max length : ";
+	
 	if (!(fct_separator(str, 1, tab[1], 1)))
 		return (0);
 	ft_jump_white_spaces(str, tab[0]);
+	if ((*tab[1]) + 1 >= CHAMP_MAX_SIZE)
+		return (ft_error(error, 0, 0, CHAMP_MAX_SIZE));
 	if (!((*start)->str[(*tab[1])++] = is_register(str, tab[0])))
 		return (0);
 	ocp_adder((void*)(tab[2]), REG_CODE);
