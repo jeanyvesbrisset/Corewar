@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/19 12:31:40 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:47:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int		add_champ_list(t_core *core, t_champ **champ, char *file)
 	t_champ	*current;
 
 	current = core->champs;
+	(*champ)->name = 0;
+	(*champ)->comment = 0;
+	(*champ)->bytecode = 0;
 	if (!(read_champ(*champ, file)))
 		return (0);
 	if ((*champ)->tmp_n != 0 && (*champ)->tmp_n > core->champ_nb)
@@ -100,6 +103,7 @@ int		init_champ(t_core *core, char **av, int *i, int n)
 	}
 	if (!(add_champ_list(core, &n_champ, av[*i])))
 	{
+		free_champ(n_champ);
 		return (ft_error("invalid input for champion\n", 0
 		, (void**)&n_champ, 0));
 	}

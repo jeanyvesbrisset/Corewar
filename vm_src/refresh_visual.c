@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 16:50:14 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/19 12:39:25 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:47:55 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	visual_every_cycle(t_core *core)
 		while (i < MEM_SIZE)
 		{
 			if (core->visu->color_arena[i] != 9)
-				mvwchgat(core->visu->arena, 1 + ((3 * i) / 192) 
+				mvwchgat(core->visu->arena, 1 + ((3 * i) / 192)
 				, 2 + ((3 * i) % 192), 2, A_NORMAL, core->visu->color_arena[i]
 				, 0);
 			i++;

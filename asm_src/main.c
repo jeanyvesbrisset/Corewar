@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 15:09:38 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 14:57:06 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:06:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 		return (ft_error(" <sourcefile.s>\n", 0, 0, 0));
 	}
 	i = ft_strlen(av[ac - 1]);
-	if (i < 3  || (!(av[ac - 1][i - 1] == 's' && av[ac - 1][i - 2] == '.')))
+	if (i < 3 || (!(av[ac - 1][i - 1] == 's' && av[ac - 1][i - 2] == '.')))
 		return (ft_error("Can't read source file\n", 0, 0, 0));
 	name = ft_strdup(av[ac - 1]);
 	if (read_n_stock(av[ac - 1], &begin, &start, &lab))

@@ -6,25 +6,11 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/19 12:15:46 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:55:56 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-t_champ	*get_champ(t_core *core, int pos)
-{
-	t_champ *champ;
-
-	champ = core->champs;
-	while (champ)
-	{
-		if (champ->pos == pos)
-			return (champ);
-		champ = champ->next;
-	}
-	return (NULL);
-}
 
 void	vm_live(t_core *core, t_proces *pr)
 {
@@ -44,91 +30,6 @@ void	vm_live(t_core *core, t_proces *pr)
 		if (core->flag_vb)
 			ft_printf("P:%d (at cycle %d)| Player %d(%s) is said to be alive\n"
 			, pr->proces_nb, core->total_cycle, champ->pos, champ->name);
-	}			
-}
-
-void	vm_ld(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	p2_index;
-
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	p2_index = (int)(core->arena[(pr->pc + 2 + get_size(pr->op, pr->params[0])) % MEM_SIZE]);
-	if ((p2_index > 0 && p2_index <= REG_NUMBER) &&
-		(pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE) &&
-		(pr->params[1] == REG_CODE))
-	{
-		if (pr->params[0] == DIR_CODE)
-			pr->r[p2_index - 1] = param_1;
-		else
-			pr->r[p2_index - 1] = ft_otoi(&(core->arena[0]),
-			(pr->pc + param_1) % MEM_SIZE, 4);
-		if (!(pr->r[p2_index - 1]))
-			pr->carry = 1;
-		else
-			pr->carry = 0;
-	}
-}
-
-void	vm_add(t_core *core, t_proces *pr)
-{
-	int value[2];
-	int	p_index;
-	int	i;
-	int	sum;
-
-	i = 2;
-	if (pr->params[0] == REG_CODE && pr->params[1] == REG_CODE
-	&& pr->params[2] == REG_CODE)
-	{
-		while (i < 4)
-		{
-		p_index = (int)(core->arena[pr->pc + i]);
-		if (p_index < 1 && p_index > REG_NUMBER)
-			return ;
-		value[i - 2] = pr->r[p_index - 1];
-		i++;
-		}
-		p_index = (int)(core->arena[pr->pc + 4]);
-		if (p_index < 1 && p_index > REG_NUMBER)
-			return ;
-		sum = value[0] + value[1];
-		pr->r[p_index - 1] = sum;
-		if (sum == 0)
-			pr->carry = 1;
-		else
-			pr->carry = 0;
-	}
-}
-
-void	vm_sub(t_core *core, t_proces *pr)
-{
-	int value[2];
-	int	p_index;
-	int	i;
-	int	sub;
-
-	i = 2;
-	if (pr->params[0] == REG_CODE && pr->params[1] == REG_CODE
-	&& pr->params[2] == REG_CODE)
-	{
-		while (i < 4)
-		{
-			p_index = (int)(core->arena[pr->pc + i]);
-			if (p_index < 1 && p_index > REG_NUMBER)
-				return ;
-			value[i - 2] = pr->r[p_index - 1];
-			i++;
-		}
-		p_index = (int)(core->arena[pr->pc + 4]);
-		if (p_index < 1 && p_index > REG_NUMBER)
-			return ;
-		sub = value[0] - value[1];
-		pr->r[p_index - 1] = sub;
-		if (sub == 0)
-			pr->carry = 1;
-		else
-			pr->carry = 0;
 	}
 }
 
@@ -143,39 +44,6 @@ void	vm_zjmp(t_core *core, t_proces *pr)
 	}
 	else
 		pr->pc = (pr->pc + pr->pc_jump) % MEM_SIZE;
-}
-
-void	vm_ldi(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	r_index;
-	int	sum;
-
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]));
-	if ((pr->params[0] != REG_CODE && pr->params[0] != DIR_CODE
-		&& pr->params[0] != IND_CODE)
-		|| (pr->params[1] != DIR_CODE && pr->params[1] != REG_CODE)
-		|| pr->params[2] != REG_CODE)
-		return ;
-	sum = ((unsigned int)(param_1 + param_2)) % MEM_SIZE;
-	if (pr->op == 14)
-		pr->carry = (sum ? 1 : 0);
-	r_index = core->arena[pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1])];
-	if (r_index > 0 && r_index <= REG_NUMBER)
-	{
-		if (sum < MEM_SIZE - IDX_MOD && pr->op != 14)
-			pr->r[r_index - 1] = ft_otoi(&(core->arena[0]), 
-			(pr->pc + (sum % IDX_MOD)) % MEM_SIZE, 4);
-		else
-		{
-			pr->r[r_index - 1] = ft_otoi(&(core->arena[0]),
-			(pr->pc + sum) % MEM_SIZE, 4);
-		}
-	}
 }
 
 void	vm_st(t_core *core, t_proces *pr)
@@ -223,7 +91,7 @@ void	vm_sti(t_core *core, t_proces *pr)
 		addr = (pr->pc + addr) % MEM_SIZE;
 	if (pr->params[0] == REG_CODE &&
 		(pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE
-		 || pr->params[1] == IND_CODE)
+		|| pr->params[1] == IND_CODE)
 		&& (pr->params[2] == REG_CODE || pr->params[2] == DIR_CODE))
 	{
 		if (param_1 < 0)
@@ -234,16 +102,6 @@ void	vm_sti(t_core *core, t_proces *pr)
 	}
 }
 
-void	vm_lld(t_core *core, t_proces *pr)
-{
-	vm_ld(core, pr);
-}
-
-void	vm_lldi(t_core *core, t_proces *pr)
-{
-	vm_ldi(core, pr);
-}
-
 void	vm_aff(t_core *core, t_proces *pr)
 {
 	int param;
@@ -252,103 +110,6 @@ void	vm_aff(t_core *core, t_proces *pr)
 	if (pr->params[0] != REG_CODE)
 		return ;
 	param %= 256;
-	//ft_printf("%c\n", param);
-}
-
-void	vm_fork(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	i;
-	t_proces *new;
-	
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 1);
-	if (!(new = (t_proces*)malloc(sizeof(t_proces) * 1)))
-		return ;
-	new->champ = pr->champ;
-	new->wait = 0;
-	new->alive = pr->alive;
-	new->proces_nb = core->proces->proces_nb + 1;
-	core->sum_process++;
-	i = -1;
-	while (++i < REG_NUMBER)
-		new->r[i] = pr->r[i];
-	new->carry = pr->carry;
-	new->pc = (pr->pc + param_1) % MEM_SIZE;
-	new->next = core->proces;
-	core->proces = new;
-	read_op(core, new);
-}
-
-void	vm_lfork(t_core *core, t_proces *pr)
-{
-	vm_fork(core, pr);
-}
-
-void	vm_and(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	index_3;
-
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]));
-	index_3 = core->arena[pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1])];
-	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE)
-		&& (pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE)
-		&& pr->params[2] == REG_CODE && index_3 > 0 && index_3 <= REG_NUMBER)
-	{
-		pr->r[index_3 - 1] = param_1 & param_2;
-		if (pr->r[index_3 - 1] == 0)
-			pr->carry = 1;
-		else
-			pr->carry = 0;
-	}
-}
-
-void	vm_or(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	index_3;
-
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]));
-	index_3 = core->arena[pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1])];
-	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE)
-		&& (pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE)
-		&& pr->params[2] == REG_CODE && index_3 > 0 && index_3 <= REG_NUMBER)
-	{
-		pr->r[index_3 - 1] = param_1 | param_2;
-		if (pr->r[index_3 - 1] == 0)
-			pr->carry = 1;
-		else
-			pr->carry = 0;
-	}
-}
-
-void	vm_xor(t_core *core, t_proces *pr)
-{
-	int	param_1;
-	int	param_2;
-	int	index_3;
-
-	param_1 = get_param(core, pr, pr->params[0], pr->pc + 2);
-	param_2 = get_param(core, pr, pr->params[1], pr->pc + 2 + get_size(pr->op
-		, pr->params[0]));
-	index_3 = core->arena[pr->pc + 2 + get_size(pr->op
-		, pr->params[0]) + get_size(pr->op, pr->params[1])];
-	if ((pr->params[0] == REG_CODE || pr->params[0] == DIR_CODE || pr->params[0] == IND_CODE)
-		&& (pr->params[1] == REG_CODE || pr->params[1] == DIR_CODE || pr->params[1] == IND_CODE)
-		&& pr->params[2] == REG_CODE && index_3 > 0 && index_3 <= REG_NUMBER)
-	{
-		pr->r[index_3 - 1] = param_1 ^ param_2;
-		if (pr->r[index_3 - 1] == 0)
-			pr->carry = 1;
-		else
-			pr->carry = 0;
-	}
+	if (!(core->flag_v))
+		ft_printf("Aff : %c\n", param);
 }

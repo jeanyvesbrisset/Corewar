@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/16 13:50:34 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:47:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	del_cur(t_core *core, t_proces *prev, t_proces **cur)
 		prev->next = (*cur)->next;
 	else
 		core->proces = (*cur)->next;
-	free (*cur);
+	free(*cur);
 	if (prev)
 		*cur = prev->next;
 	else
@@ -66,7 +66,7 @@ int		check_lives(t_core *core)
 	}
 	if (core->proces)
 		return (1);
- 	return (0);
+	return (0);
 }
 
 void	reinit_cycle_lives(t_core *core)

@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/12 11:01:26 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:04:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-/*
-** cursor : index of the PC + the lenght you need to travel to reach
-the memory case you want
-*/
 
 int			get_index(t_core *core, t_proces *pr, int cursor)
 {
@@ -23,13 +18,10 @@ int			get_index(t_core *core, t_proces *pr, int cursor)
 
 	if (pr->op != 10 || pr->op != 11 || pr->op != 13 || pr->op != 14
 	|| pr->op != 15)
-	{	
+	{
 		param = ft_otoi(&(core->arena[0]), cursor, 2) % MEM_SIZE;
 		if (param < MEM_SIZE - IDX_MOD)
 			param = param % IDX_MOD;
-		//else
-		//	param++;
-		//ft_printf("param = %d at cycle %d\n", param, core->total_cycle);
 	}
 	else
 		param = ft_otoi(&(core->arena[0]), cursor, 2);
@@ -55,7 +47,6 @@ static int	get_reg(t_core *core, t_proces *pr, int cursor)
 int			get_param(t_core *core, t_proces *pr, int type, int cursor)
 {
 	cursor %= MEM_SIZE;
-
 	if (type == REG_CODE)
 		return (get_reg(core, pr, cursor));
 	else if (type == IND_CODE)

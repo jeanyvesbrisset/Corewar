@@ -6,68 +6,11 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/19 12:36:40 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:48:11 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/op.h"
-
-void	free_before(t_champ *before)
-{
-	before->next = 0;
-	ft_strdel((char**)(&((before->name))));
-	ft_strdel((char**)(&(before->bytecode)));
-	ft_strdel((char**)(&(before->comment)));
-	free(before);
-	before = 0;
-}
-
-int		free_core(t_core *core)
-{
-	t_champ *current;
-	t_champ	*before;
-
-	if (!(core->champs) && !(core->proces))
-	{
-		free(core);
-		return (0);
-	}
-	before = core->champs;
-	current = before->next;
-	core->champs = 0;
-	before->next = 0;
-	ft_strdel((char**)(&((before->name))));
-	ft_strdel((char**)(&(before->bytecode)));
-	ft_strdel((char**)(&(before->comment)));
-	free(before);
-	while (current)
-	{
-		before = current;
-		current = current->next;
-		free_before(before);
-	}
-	free(core);
-	return (0);
-}
-
-int		ft_error(char *error, int ret, void **to_free, int line)
-{
-	char *nb;
-
-	if (to_free && *to_free)
-		free(*to_free);
-	ft_putstr("\033[31m");
-	write(2, error, ft_strlen(error));
-	if (line > 0)
-	{
-		nb = ft_itoa(line);
-		write(2, nb, ft_strlen(nb));
-		write(2, "\n", 1);
-		free(nb);
-	}
-	ft_putstr("\033[00m");
-	return (ret);
-}
 
 int		ft_otoi(unsigned char *nb_str, int addr, int size)
 {
@@ -88,14 +31,8 @@ int		ft_otoi(unsigned char *nb_str, int addr, int size)
 	return (res);
 }
 
-int		main(int ac, char **av)
+void	init_core(t_core *core)
 {
-	t_core *core;
-	int i;
-	t_champ *cur;
-
-	if (!(core = (t_core*)malloc(sizeof(t_core) * 1)))
-		return (0);
 	core->flag_d = -1;
 	core->flag_v = 0;
 	core->flag_vb = 0;
@@ -109,10 +46,13 @@ int		main(int ac, char **av)
 	core->cycle_to_die = 0;
 	core->max_checks = 0;
 	core->nbr_live = 0;
-	if (!(parcing_args(ac, av, core)))
-		return (free_core(core));
-	if (!(stock_champ(ac, av, core)))
-		return (free_core(core));
+}
+
+void	default_aff(t_core *core)
+{
+	int		i;
+	t_champ	*cur;
+
 	cur = core->champs;
 	ft_printf("WELCOME!\nIntroducing contestants...\n");
 	i = 1;
@@ -121,13 +61,28 @@ int		main(int ac, char **av)
 		if (cur->pos == i)
 		{
 			ft_printf("Player %d, weigthing %d bytes, \"%s\", (\"%s\") !\n"
-			,cur->pos, cur->size, cur->name, cur->comment);
+			, cur->pos, cur->size, cur->name, cur->comment);
 			cur = core->champs;
 			i++;
 		}
 		else
 			cur = cur->next;
 	}
+}
+
+int		main(int ac, char **av)
+{
+	t_core *core;
+
+	if (!(core = (t_core*)malloc(sizeof(t_core) * 1)))
+		return (0);
+	init_core(core);
+	if (!(parcing_args(ac, av, core)))
+		return (free_core(core));
+	if (!(stock_champ(ac, av, core)))
+		return (free_core(core));
+	if (!(core->flag_v))
+		default_aff(core);
 	vm(core);
 	free_core(core);
 	return (1);

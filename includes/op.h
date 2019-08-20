@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 14:09:15 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 17:04:31 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,28 @@ typedef struct		s_f
 	int				size_min;
 }					t_f;
 
-typedef struct 		s_proces
+typedef struct		s_proces
 {
 	unsigned char	op;
-	int				champ;//1, 2,3 ou 4
-	int				proces_nb;//le combientieme process dont il est question
-	int				r[16]; //16 registres par process, a mettre dans ce tableau
+	int				champ;
+	int				proces_nb;
+	int				r[16];
 	int				carry;
-	int				alive;//0 ou 1
+	int				alive;
 	int				pc;
 	int				wait;
 	int				pc_jump;
-	int				params[4]; // 1 = 01 = reg, 2 = 10 = dir, 3 = 11 = indir, 0 = 00 = NULL
+	int				params[4];
 	struct s_proces	*next;
 }					t_proces;
 
 typedef	struct		s_champ
 {
-	int				pos;//1, 2, 3 ou 4
+	int				pos;
 	int				tmp_n;
 	int				size;
-	int				last_live; // a quel cycle le joueur a ete declare en vie 
-	int				process_live;// quel processus a declare en vie le champion
+	int				last_live;
+	int				process_live;
 	int				live_by_ctd;
 	unsigned char	*name;
 	unsigned char	*comment;
@@ -116,14 +116,14 @@ typedef	struct		s_visu
 	int				cps;
 	int				live_bd[3];
 	char			*str;
-	unsigned char 	color_arena[MEM_SIZE];
+	unsigned char	color_arena[MEM_SIZE];
 }					t_visu;
 
-typedef	struct 		s_core
+typedef	struct		s_core
 {
-	int				flag_v; //0 ou 1
-	int				flag_vb; //0 ou 1
-	int				flag_d; //-1 s'il n'y en a pas, sinon nombre de cycle
+	int				flag_v;
+	int				flag_vb;
+	int				flag_d;
 	int				champ_nb;
 	int				sum_process;
 	int				total_cycle;
@@ -132,20 +132,20 @@ typedef	struct 		s_core
 	int				live_champ;
 	int				max_checks;
 	int				nbr_live;
-	t_champ			*champs; // trié par ordre inverse
-	t_proces		*proces;  // trié au depart, par ordre inverse
+	t_champ			*champs;
+	t_proces		*proces;
 	t_visu			*visu;
 	unsigned char	arena[MEM_SIZE];
 }					t_core;
 
-typedef struct		 s_fvm
+typedef struct		s_fvm
 {
 	unsigned char	op;
 	int				ocp;
 	int				cycle_delay;
 	int				param_nb;
 	int				direct_size;
-	void			(*f)(t_core *core, t_proces *pr);	
+	void			(*f)(t_core *core, t_proces *pr);
 }					t_fvm;
 
 void				start_to_command(t_cdata **start);
@@ -216,7 +216,6 @@ int					champ_exist(t_cdata **start);
 int					len_digit(char *str);
 void				add_by_used(t_label **lab, char **str, t_label **new
 	, t_label **current);
-
 int					used_s_begin(t_cdata **st, int used);
 int					verif_index(char *str, int **tab, t_cdata **start
 	, t_label **lab);
@@ -229,11 +228,6 @@ int					add_used_label(char **str, t_label **lab, int index);
 int					is_commentary(char *line);
 void				check_s_name_len(char **line, int *s_name, int i);
 int					write_the_magic(t_cdata **start, int nb);
-
-/*
-** parsing vm
-*/
-
 int					parcing_args(int ac, char **av, t_core *core);
 int					stock_champ(int ac, char **av, t_core *core);
 int					is_dot_cor(char *av);
@@ -241,36 +235,27 @@ int					init_process(t_proces **proce, int champ_nb, int pc
 	, int *sum_process);
 void				sort_champ_list(t_champ **champ, t_core *core);
 void				ajust_champ_pos(t_core *core);
-/*
-** vm
-*/
+void				free_champ(t_champ *champ);
+int					free_core(t_core *core);
 void				vm(t_core *core);
 void				init_vm(t_core *core);
 int					ft_otoi(unsigned char *nb_str, int addr, int size);
 void				run_vm(t_core *core);
 int					get_size(int op, int type);
-int 				get_param(t_core *core, t_proces *pr, int type, int cursor);
+int					get_param(t_core *core, t_proces *pr, int type, int cursor);
 void				read_ocp(t_proces *pr, int ocp);
-
-/*
-** vm util
-*/
-
+void				chwap(t_champ *before, t_champ *current, t_champ *after
+	, t_core *core);
 int					get_pr_length(t_proces *pr, int op);
 void				del_process(t_proces **proces, int i);
 int					check_lives(t_core *core);
 void				reinit_cycle_lives(t_core *core);
 void				ft_itoo_vm(t_core *core, int pos, unsigned long long int nb
-	,unsigned long long int size);
+	, unsigned long long int size);
 void				handle_proces(t_core *core, t_proces *pr);
 int					read_op(t_core *core, t_proces *pr);
 int					get_direct(t_core *core, t_proces *pr, int cursor);
 int					get_indirect(t_core *core, t_proces *pr, int cursor);
-
-/*
-** vm visual
-*/
-
 void				init_visual(t_core *core);
 char				*get_hexa(int nb);
 void				visu_sti_st(t_core *core, t_proces *pr, int pos, int size);
@@ -282,11 +267,6 @@ void				refresh_process(t_core *core);
 void				refresh_pc(t_core *core);
 void				get_key(t_core *core);
 void				init_visual_hud(t_core *core);
-
-/*
-** op vm
-*/
-
 t_champ				*get_champ(t_core *core, int pos);
 void				vm_live(t_core *core, t_proces *pr);
 void				vm_ld(t_core *core, t_proces *pr);

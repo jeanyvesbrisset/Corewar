@@ -6,7 +6,7 @@
 #    By: maginist <maginist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 11:45:22 by maginist          #+#    #+#              #
-#    Updated: 2019/08/06 16:10:59 by maginist         ###   ########.fr        #
+#    Updated: 2019/08/20 17:03:59 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,11 @@ SRCS2 =	main.c\
 		vm_util.c\
 		get_params.c\
 		fvm_tab_files.c\
-		op.c
+		op.c\
+		op_fork_and_other.c\
+		op_ld.c\
+		op_logic.c\
+		free_files.c
 
 
 OBJ_NAME1 = $(SRCS1:.c=.o)

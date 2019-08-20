@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/19 12:38:06 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/20 16:48:16 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ void	visual_winner(t_core *core, t_champ *winner)
 		+ ft_strlen((const char*)winner->name) + 1, "IS THE WINNER!!");
 	mvwprintw(core->visu->hud, 26 + (core->champ_nb * 4), 20, "0       ");
 	mvwprintw(core->visu->hud, 45 + (core->champ_nb * 4), 40
-		, "Press any key to quit visual"); 
+		, "Press any key to quit visual");
 	wattron(core->visu->hud, A_BOLD);
 	wrefresh(core->visu->hud);
 	timeout(-1);
 	getch();
 	endwin();
-
 }
 
 t_champ	*get_winner(t_core *core)
@@ -63,7 +62,9 @@ t_champ	*get_winner(t_core *core)
 		champ = core->champs->next;
 	while (champ)
 	{
-		if (champ->last_live > winner->last_live || (champ->last_live == winner->last_live && champ->process_live < winner->process_live))
+		if (champ->last_live > winner->last_live
+		|| (champ->last_live == winner->last_live
+		&& champ->process_live < winner->process_live))
 			winner = champ;
 		champ = champ->next;
 	}
@@ -85,6 +86,6 @@ void	vm(t_core *core)
 	ft_delete_proc(core);
 	ft_printf("AND THE WINNER IS...\n");
 	sleep(1);
-	ft_printf("%s (player %d)! (%d)\n!!!!!CONGRATULATIONS!!!!\n", winner->name
-	, winner->pos, core->total_cycle);
+	ft_printf("%s (player %d)! (%d)\n!!!!!CONGRATULATIONS!!!!\n"
+	, winner->name, winner->pos, core->total_cycle);
 }
