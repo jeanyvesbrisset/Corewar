@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:53:52 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 16:57:20 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 15:54:16 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ t_champ	*get_champ(t_core *core, int pos)
 	return (NULL);
 }
 
-void	chwap(t_champ *before, t_champ *current, t_champ *after, t_core *core)
+void	chwap(t_champ **before, t_champ **current, t_champ **after
+, t_core *core)
 {
-	if (before)
-		before->next = after;
+	if (*before)
+		(*before)->next = *after;
 	else
-		core->champs = after;
-	current->next = after->next;
-	after->next = current;
-	current = core->champs;
-	after = current->next;
-	before = 0;
+		core->champs = *after;
+	(*current)->next = (*after)->next;
+	(*after)->next = *current;
+	(*current) = core->champs;
+	*after = (*current)->next;
+	*before = 0;
 }
 
 void	vm_fork(t_core *core, t_proces *pr)

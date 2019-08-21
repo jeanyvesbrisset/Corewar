@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:39:17 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 17:04:31 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 15:47:25 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ void				run_vm(t_core *core);
 int					get_size(int op, int type);
 int					get_param(t_core *core, t_proces *pr, int type, int cursor);
 void				read_ocp(t_proces *pr, int ocp);
-void				chwap(t_champ *before, t_champ *current, t_champ *after
+void				chwap(t_champ **before, t_champ **current, t_champ **after
 	, t_core *core);
 int					get_pr_length(t_proces *pr, int op);
 void				del_process(t_proces **proces, int i);

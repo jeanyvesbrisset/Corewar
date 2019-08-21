@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 16:20:58 by ndelhomm          #+#    #+#             */
-/*   Updated: 2019/08/20 16:48:16 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 15:44:41 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ void	vm(t_core *core)
 		free(core->visu);
 	}
 	ft_delete_proc(core);
-	ft_printf("AND THE WINNER IS...\n");
-	sleep(1);
-	ft_printf("%s (player %d)! (%d)\n!!!!!CONGRATULATIONS!!!!\n"
-	, winner->name, winner->pos, core->total_cycle);
+	if (core->flag_d == -1 && !(core->flag_v))
+	{
+		ft_printf("AND THE WINNER IS...\n");
+		sleep(1);
+		ft_printf("%s (player %d)! (%d)\n!!!!!CONGRATULATIONS!!!!\n"
+		, winner->name, winner->pos, core->total_cycle);
+	}
 }

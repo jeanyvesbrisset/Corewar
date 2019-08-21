@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 14:30:51 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 16:48:11 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 16:01:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ int		main(int ac, char **av)
 	init_core(core);
 	if (!(parcing_args(ac, av, core)))
 		return (free_core(core));
+	if (core->champ_nb > 4)
+	{
+		free_core(core);
+		return (ft_error("Too many champions for the arena!\n", 0, 0, 0));
+	}
 	if (!(stock_champ(ac, av, core)))
 		return (free_core(core));
 	if (!(core->flag_v))

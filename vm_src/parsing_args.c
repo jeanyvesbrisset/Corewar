@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/19 12:21:52 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 16:06:19 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	is_dot_cor(char *av)
 	return (1);
 }
 
-int	is_order_n(char **av, int i, t_core *core)
+int	is_order_n(char **av, int i, t_core *core, int ac)
 {
 	int champ_n;
 	int	j;
 
 	j = 0;
-	if (ft_strcmp(av[i], "-n"))
+	if (ft_strcmp(av[i], "-n") || i + 2 >= ac)
 		return (0);
 	while (av[i + 1][j])
 		if (!(ft_isdigit(av[i + 1][j++])))
@@ -66,14 +66,14 @@ int	write_help(char *str)
 	return (0);
 }
 
-int	is_d_dump(char **av, int i)
+int	is_d_dump(char **av, int i, int ac)
 {
 	int	j;
 	int	d_or_dump;
 
 	d_or_dump = 0;
 	j = 0;
-	if (ft_strcmp(av[i], "-d") && ft_strcmp(av[i], "-dump"))
+	if ((ft_strcmp(av[i], "-d") && ft_strcmp(av[i], "-dump")) || i + 1 >= ac)
 		return (0);
 	while (av[i + 1][j])
 		if (!(ft_isdigit(av[i + 1][j++])))
@@ -92,7 +92,7 @@ int	parcing_args(int ac, char **av, t_core *core)
 	{
 		if (!(ft_strcmp(av[i], "-h")) || !(ft_strcmp(av[i], "-help")))
 			return (write_help(av[0]));
-		else if (core->flag_d == -1 && is_d_dump(av, i))
+		else if (core->flag_d == -1 && is_d_dump(av, i, ac))
 			core->flag_d = ft_atoi(av[++i]);
 		else if (!(core->flag_v) && !(ft_strcmp(av[i], "-v")))
 			core->flag_v = 1;
@@ -100,7 +100,7 @@ int	parcing_args(int ac, char **av, t_core *core)
 			core->flag_vb = 1;
 		else if (is_dot_cor(av[i]))
 			(core->champ_nb)++;
-		else if (is_order_n(av, i, core))
+		else if (is_order_n(av, i, core, ac))
 			i += 2;
 		else
 			return (ft_error("No valid argument at : ", 0, 0, i));

@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 16:40:16 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 16:56:42 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 15:53:25 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	sort_champ_list(t_champ **champ, t_core *core)
 	while (after)
 	{
 		if (current->pos < after->pos)
-			chwap(before, current, after, core);
+			chwap(&before, &current, &after, core);
 		else
 		{
 			before = current;
