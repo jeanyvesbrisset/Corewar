@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_logic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: floblanc <floblanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 16:51:20 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/20 16:52:45 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/21 12:05:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	vm_add(t_core *core, t_proces *pr)
 		while (i < 4)
 		{
 			p_index = (int)(core->arena[pr->pc + i]);
-			if (p_index < 1 && p_index > REG_NUMBER)
+			if (p_index < 1 || p_index > REG_NUMBER)
 				return ;
 			value[i - 2] = pr->r[p_index - 1];
 			i++;
 		}
 		p_index = (int)(core->arena[pr->pc + 4]);
-		if (p_index < 1 && p_index > REG_NUMBER)
+		if (p_index < 1 || p_index > REG_NUMBER)
 			return ;
 		sum = value[0] + value[1];
 		pr->r[p_index - 1] = sum;
@@ -54,13 +54,13 @@ void	vm_sub(t_core *core, t_proces *pr)
 		while (i < 4)
 		{
 			p_index = (int)(core->arena[pr->pc + i]);
-			if (p_index < 1 && p_index > REG_NUMBER)
+			if (p_index < 1 || p_index > REG_NUMBER)
 				return ;
 			value[i - 2] = pr->r[p_index - 1];
 			i++;
 		}
 		p_index = (int)(core->arena[pr->pc + 4]);
-		if (p_index < 1 && p_index > REG_NUMBER)
+		if (p_index < 1 || p_index > REG_NUMBER)
 			return ;
 		sub = value[0] - value[1];
 		pr->r[p_index - 1] = sub;
