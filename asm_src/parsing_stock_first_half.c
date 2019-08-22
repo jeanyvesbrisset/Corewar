@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 14:38:17 by floblanc          #+#    #+#             */
-/*   Updated: 2019/08/20 16:06:18 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/22 15:57:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		stock_command(char **line, t_cdata **start, t_label **lab, char tmp)
 	(*line)[s_name + i] = tmp;
 	start_to_command(start);
 	if ((tabi != 16 && g_f_tab[tabi].size_min + index >= CHAMP_MAX_SIZE))
-		return (ft_error("Champion size too long", 0, 0, 0));
+		return (ft_error("Champion size too long\n", 0, 0, 0));
 	if (tabi != 16 && g_f_tab[tabi].f(*line + i + s_name, start, lab, &index))
 		return (1);
 	return (ft_error("Problem with instuction \n", 0, 0, 0));
