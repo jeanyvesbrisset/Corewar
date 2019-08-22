@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:51:00 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/16 13:50:26 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/22 10:34:51 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,7 @@ void	run_vm(t_core *core)
 			refresh_live_ctd(core);
 		reinit_cycle_lives(core);
 	}
+	if ((core->flag_d < -2 || (core->flag_d > 0
+		&& core->flag_d > core->total_cycle)))
+		ft_error("Dump cycle is too big\n", 0, 0, 0);
 }
