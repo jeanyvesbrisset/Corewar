@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:52:24 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/21 15:53:12 by maginist         ###   ########.fr       */
+/*   Updated: 2019/08/23 10:25:56 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		read_champ2(t_champ *champ, int fd)
 		return (ft_error("Champion is too big (682 bytes max)\n", 0, 0, 0));
 	if (champ->size == CHAMP_MAX_SIZE && (ret = read(fd, str, 4)) > 0)
 		return (ft_error("Champion is too big (682 bytes max)\n", 0, 0, 0));
+	close(fd);
 	return (1);
 }
 
