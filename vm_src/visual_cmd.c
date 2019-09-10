@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 16:06:37 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/16 13:49:58 by maginist         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:38:26 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	get_key(t_core *core)
 
 	while (1)
 	{
-		timeout(0);
 		if ((i = getch()) == ' ')
 			handle_pause(core, &pause, 1);
 		else if (i == 'r' && core->visu->cps < 1000)
@@ -66,5 +65,7 @@ void	get_key(t_core *core)
 		}
 	}
 	timeout(1);
-	usleep(1000000 / core->visu->cps);
+	if (!((core->visu->cps == 1 && (i == 'w' || i == 'q'))
+		|| (core->visu->cps == 1000 && (i == 'e' || i == 'r'))))
+		usleep(1000000 / core->visu->cps);
 }
