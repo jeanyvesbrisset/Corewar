@@ -6,7 +6,7 @@
 /*   By: maginist <maginist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 17:02:22 by maginist          #+#    #+#             */
-/*   Updated: 2019/08/21 16:06:19 by maginist         ###   ########.fr       */
+/*   Updated: 2019/09/10 11:56:47 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_dot_cor(char *av)
 	if (ft_strcmp(av + i, ".cor") != 0)
 	{
 		i++;
-		while (ft_isalnum(av[i]) || av[i] == '-' || av[i] == '_')
+		while (i < len && (ft_isalnum(av[i]) || av[i] == '-' || av[i] == '_'))
 			i++;
 	}
 	if (ft_strcmp(av + i, ".cor") != 0)
