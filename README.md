@@ -16,6 +16,7 @@ This project can be broken down into three distinctive parts:
 __The assembler__: this is the program that will compile champions and translate them from the language written them in (assembly language) into “Bytecode”. Bytecode is a machine code, which will be directly interpreted by the virtual machine.  
 __The virtual machine__: It’s the “arena” in which champions will be executed. It offers various functions, all of which will be useful for the battle of the champions. Obviously, the virtual machine should allow for numerous simultaneous processes.  
 __The champion__: It's necessary to create a simple champion just to prove the program functionality.  
+  
 __How to run__:
 make
 ./asm <sourcefile.s>
